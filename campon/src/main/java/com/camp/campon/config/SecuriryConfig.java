@@ -75,8 +75,8 @@ public class SecuriryConfig extends WebSecurityConfigurerAdapter {
                                 .antMatchers("/css/**","/js/**","/img/**").permitAll()          // static/~ 정적자원 인가 처리                      
                                 //url 경로
                              //   .antMatchers("/admin/**").hasAnyRole("ADMIN", "SELL")
-                               // .antMatchers("/**").permitAll()                        
-                                // .antMatchers("/user/order").permitAll()
+                            //    .antMatchers("/**").permitAll()                        
+                            //     .antMatchers("/user/order").permitAll()
                                 // .antMatchers("/admin/**").hasRole("ADMIN")
                                 // anyRequest()         : 모든 요청을 지정
                                 // authenticated()      : 인증된 사용자만 허용
@@ -136,7 +136,7 @@ public class SecuriryConfig extends WebSecurityConfigurerAdapter {
 
 
         // CSRF 방지 기능 비활성화 설정
-        // http.csrf().disable(); // 기본값 enable();
+        http.csrf().disable(); // 기본값 enable();
     }
 
     
