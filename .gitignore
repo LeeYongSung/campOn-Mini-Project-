@@ -28,6 +28,11 @@ replay_pid*
 ./vscode/
 
 
+#
+.build/
+./build/
+
+
 # gradle 확장 설정 파일 무시
 .gradle/
 
