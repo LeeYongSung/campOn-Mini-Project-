@@ -27,18 +27,16 @@ public class BoardApiController {
     private UserService userService;
 
     @PostMapping(value="/boardinsert")
-    public ResponseEntity<?> create(@RequestBody Board board) {
+    public ResponseEntity<?> create(@RequestBody Board board) throws Exception {
         int result = boardService.crinsert(board);
-        if (result > 0)
         try {
-            return new ResponseEntity<>(body:"게시글 등록완료", HttpStatus.CREATED);
+            if (result > 0)
+                return new ResponseEntity<>("게시글 등록완료", HttpStatus.CREATED);
             else
-            return new ResponseEntity<>(body:"게시글 등록", HttpStatus.OK);
+                return new ResponseEntity<>("게시글 등록", HttpStatus.OK);
         } catch (Exception e) {
-            return new ResponseEntity
+            return new ResponseEntity<>("Error", HttpStatus.OK);
         }
-        
-        return entity;
     }
     
     
