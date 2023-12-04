@@ -387,16 +387,16 @@ public class CampController {
     @GetMapping(value="/campSearch2")
     public String campSearch2(Model model, Camp camp) throws Exception {
 
-        log.info("keywordValue : " + camp.getKeyword());
-        log.info("dateValue : " + camp.getSearchDate());
-        log.info("regionNoValue : " + camp.getRegionNo());
-        log.info("checkBoxList : " + camp.getCheckBoxList());
+        log.info("키워드값 : " + camp.getKeyword());
+        log.info("데이터값 : " + camp.getSearchDate());
+        log.info("지역번호값 : " + camp.getRegionNo());
+        log.info("체크박스 : " + camp.getCheckBoxList());
         List<String> checkBoxList = camp.getCheckBoxList();
 
         if( checkBoxList != null )
         for(int i = 0; i < checkBoxList.size(); i++) {
             // Integer[] campTypeNo = checkBoxList.get(i).split(',');
-            log.info("campTypeNo : " + checkBoxList.get(i));
+            log.info("캠프타입번호 : " + checkBoxList.get(i));
         }
 
         if( checkBoxList == null )  {
@@ -407,6 +407,7 @@ public class CampController {
 
         camp.setSearchDate(new Date());
         List<Camp> campList = campService.campSearch(camp);
+        log.info("캠프리스트 : " + campList);
 
         model.addAttribute("campselect", campList);
         // return "camp/campproducts";
