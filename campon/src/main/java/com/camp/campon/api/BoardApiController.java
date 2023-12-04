@@ -1,4 +1,4 @@
-package com.camp.campon.apis;
+package com.camp.campon.api;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
