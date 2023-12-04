@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import * as camps from '../../apis/camp'
-import CampSearch from '../components/CampSearch'
+import CampSearch from '../../components/camp/CampSearch'
 
 const CampProducts = () => {
     const [campList, setCampList] = useState([])

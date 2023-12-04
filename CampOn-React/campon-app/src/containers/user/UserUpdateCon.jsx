@@ -1,5 +1,5 @@
 import React from 'react'
-import UserUpdate from '../components/UserUpdate'
+import UserUpdate from '../../components/UserUpdate'
 
 const UserUpdateCon = () => {
   return (

@@ -1,5 +1,5 @@
 import React from 'react'
-import AdminProductAdd from '../components/AdminProductAdd'
+import AdminProductAdd from '../../components/AdminProductAdd'
 
 const AdminProductAddCon = () => {
   return (

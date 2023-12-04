@@ -1,5 +1,5 @@
 import React from 'react'
-import UserMypage from '../components/UserMypage'
+import UserMypage from '../../components/UserMypage'
 const UserMypageCon = () => {
   return (
     <>

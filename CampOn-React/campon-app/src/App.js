@@ -1,9 +1,9 @@
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './App.css';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
-import AdminProductList from './containers/AdminProductList';
-import CampMain from './camp/containers/CampMain';
-import CampProducts from './camp/containers/CampProducts';
+import AdminProductList from './containers/admin/AdminProductList';
+import CampMain from './containers/camp/CampMain';
+import CampProducts from './containers/camp/CampProducts';
 import AdminProductList from './container/AdminProductList';
 import UserLoginCon from './container/UserLoginCon';
 import UserJoinCon from './container/UserJoinCon';
@@ -11,7 +11,7 @@ import UserUpdateCon from './container/UserUpdateCon';
 import UserMypageCon from './container/UserMypageCon';
 import AdminProductAddCon from './container/AdminProductAddCon';
 import Index from './pages/Index';
-import AdminProductList from './containers/AdminProductList';
+import AdminProductList from './containers/admin/AdminProductList';
 import ProductIndexContainer from './containers/product/ProductIndexContainer';
 
 function App() {

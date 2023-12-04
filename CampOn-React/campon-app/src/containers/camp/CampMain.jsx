@@ -1,13 +1,13 @@
 import React, { useEffect, useState } from 'react'
 import * as camps from '../../apis/camp'
 import {Link} from 'react-router-dom'
-import CampHotList from '../components/CampHotList'
-import CampnewList from '../components/CampnewList'
-import CampReviewList from '../components/CampReviewList'
-import CamptypeList from '../components/CamptypeList'
-import HeadAd from '../components/HeadAd'
-import MiddelAd from '../components/MiddelAd'
-import CampSearch from '../components/CampSearch'
+import CampHotList from '../../components/camp/CampHotList'
+import CampnewList from '../../components/camp/CampnewList'
+import CampReviewList from '../../components/camp/CampReviewList'
+import CamptypeList from '../../components/camp/CamptypeList'
+import HeadAd from '../../components/camp/HeadAd'
+import MiddelAd from '../../components/camp/MiddelAd'
+import CampSearch from '../../components/camp/CampSearch'
 
 const CampMain = () => {
     const [camptype, setCamptype] = useState([])

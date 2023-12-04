@@ -1,5 +1,5 @@
 import React from 'react'
-import UserJoin from '../components/UserJoin'
+import UserJoin from '../../components/UserJoin'
 
 const UserJoinCon = () => {
   return (
