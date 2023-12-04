@@ -1,23 +1,18 @@
 package com.camp.campon.apis;
-import java.io.FileInputStream;
+import java.util.HashMap;
 import java.util.List;
-
-import javax.servlet.ServletOutputStream;
-import javax.servlet.http.HttpServletResponse;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.ui.Model;
-import org.springframework.util.FileCopyUtils;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+
 import com.camp.campon.dto.Product;
+import com.camp.campon.dto.Users;
 import com.camp.campon.service.AdService;
 import com.camp.campon.service.BoardService;
 import com.camp.campon.service.CampService;
@@ -59,28 +54,52 @@ public class AdminApiController {
         return new ResponseEntity<>(result, HttpStatus.OK);
     }
 
-    // 상품 수정 페이지
-    @GetMapping(value = "/productupdate", params = "productNo")
-    public String productUpdate(@RequestParam String productNo, Model model) throws Exception {
-        Product product = productService.selectUpd(Integer.parseInt(productNo));
-        model.addAttribute("product", product);
-        return "admin/productupdate";
+    // // 상품 수정 페이지
+    // @GetMapping(value = "/productupdate", params = "productNo")
+    // public ResponseEntity<?> productUpdate(@RequestParam String productNo, Model model) throws Exception {
+    //     Product product = productService.selectUpd(Integer.parseInt(productNo));
+    //     model.addAttribute("product", product);
+    //     return "admin/productupdate";
+    //     return new ResponseEntity<>(result, HttpStatus.OK);
+    // }
+
+    // // 상품 수정 pro
+    // @PostMapping(value = "/productUpdate")
+    // public ResponseEntity<?> productUpdate(Product product) throws Exception {
+    //     log.info("썸네일 있냐?" + product.getProductThmFile().size());
+    //     int result = productService.productUpdate(product);
+    //     log.info("상품수정 성공여부 : " + result);
+    //     return "redirect:/admin/productlist";
+    //     return new ResponseEntity<>(result, HttpStatus.OK);
+    // }
+
+    // // 상품 삭제 pro
+    // @GetMapping(value = "/delete", params = "productNo")
+    // public ResponseEntity<?> productDelete(@RequestParam String productNo) throws NumberFormatException, Exception {
+    //     int result = productService.deleteProduct(Integer.parseInt(productNo));
+    //     return "redirect:/admin/productlist";
+    //     return new ResponseEntity<>(result, HttpStatus.OK);
+    // }
+
+    // 멤버 관리 페이지
+    @GetMapping(value = "/memberList")
+    public ResponseEntity<?> memberList() throws Exception {
+        List<Users> userList = userService.memberList("ROLE_USER");
+        List<Users> sellList = userService.memberList("ROLE_SELL");
+        Map<String, Object> map = new HashMap<>();
+        map.put("userList", userList) ;
+        map.put("sellList", sellList) ;
+        return new ResponseEntity<>(map, HttpStatus.OK);
     }
 
-    // 상품 수정 pro
-    @PostMapping(value = "/productUpdate")
-    public String productUpdate(Product product) throws Exception {
-        log.info("썸네일 있냐?" + product.getProductThmFile().size());
-        int result = productService.productUpdate(product);
-        log.info("상품수정 성공여부 : " + result);
-        return "redirect:/admin/productlist";
-    }
+    //@PreAuthorize("hasRole('ROLE_ADMIN')")
+    // @GetMapping(value = "/memberDelete")
+    // public ResponseEntity<?> memberDelete(String userId) throws Exception {
+    //     int result = userService.delete(userId);
+    //     log.info("회원 삭제 여부 : " + result);
+    //     return "redirect:/admin/memberList";
+    //     return new ResponseEntity<>(result, HttpStatus.OK);
+    // }
 
-    // 상품 삭제 pro
-    @GetMapping(value = "/delete", params = "productNo")
-    public String productDelete(@RequestParam String productNo) throws NumberFormatException, Exception {
-        int result = productService.deleteProduct(Integer.parseInt(productNo));
-        return "redirect:/admin/productlist";
-    }
 
 }

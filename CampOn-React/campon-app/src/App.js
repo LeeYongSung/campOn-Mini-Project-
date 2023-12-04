@@ -11,6 +11,7 @@ import AdminProductAddCon from './containers/admin/AdminProductAddCon';
 import Index from './pages/Index';
 import AdminProductList from './containers/admin/AdminProductList';
 import ProductIndexContainer from './containers/product/ProductIndexContainer';
+import AdminMemberListCon from './containers/admin/AdminMemberListCon';
 
 function App() {
   return (
@@ -36,6 +37,7 @@ function App() {
         {/* 관리자 */}
         <Route path="/admin/productlist" element={<AdminProductList />} />
         <Route path="/admin/productadd" element={<AdminProductAddCon />} />
+        <Route path="/admin/memberList" element={<AdminMemberListCon />} />
       </Routes>
     </BrowserRouter>
   );
