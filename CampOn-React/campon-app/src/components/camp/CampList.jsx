@@ -8,18 +8,18 @@ const CampList = ({campList}) => {
             <div className="camp_box pb-3"> 
                 <Link to={`/api/camp/campproduct/${camp.campNo}`}>
                     <div>
-                        <img src="|/img?file=${camp.cpiUrl}|" className="w-100"/>
+                        <img src={`img?file=${camp.cpiUrl}`} className="w-100"/>
                     </div>
                     <div className="py-2">
-                        <h3 text="${camp.campName}" className="ps-2"></h3>
+                        <h3 className="ps-2">{camp.campName}</h3>
                     </div>
                     <div className="d-flex justify-content-between px-3">
                         <div>
-                            <p text="${camp.campTypeName}"></p>
-                            <p text="${camp.campAddress}"></p>
+                            <p>{camp.campTypeName}</p>
+                            <p>{camp.campAddress}</p>
                         </div>
                         <div>
-                            <h4 text="|${camp.cpdtPrice}원|"></h4>
+                            <h4>{camp.cpdtPrice}원</h4>
                         </div>
                     </div>
                 </Link>
