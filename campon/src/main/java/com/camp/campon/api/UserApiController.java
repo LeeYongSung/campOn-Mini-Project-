@@ -4,13 +4,11 @@ import java.security.Principal;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
-import org.apache.http.HttpStatus;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -18,7 +16,9 @@ import org.springframework.security.web.authentication.logout.SecurityContextLog
 import org.springframework.security.web.authentication.rememberme.PersistentTokenRepository;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.CookieValue;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -28,7 +28,7 @@ import com.camp.campon.service.UserService;
 
 import lombok.extern.slf4j.Slf4j;
 @Slf4j
-//@RestController
+@RestController
 @RequestMapping("/user")
 public class UserApiController {
     @Autowired
@@ -52,7 +52,7 @@ public class UserApiController {
         Map<String, Object> response = new HashMap<>();
         response.put("userId", userId);
         response.put("rememberId", rememberId);
-        return new ResponseEntity<>(response, org.springframework.http.HttpStatus.OK);
+        return new ResponseEntity<>(response, HttpStatus.OK);
     }
 
 
@@ -71,21 +71,20 @@ public class UserApiController {
         if (result > 0) {
             userService.login(user, request);
             log.info("회원가입 성공 시 바로 로그인 되었나?");
-            
         }
-        return "redirect:/";
-        return new ResponseEntity<>(response, org.springframework.http.HttpStatus.OK);
+        //return "redirect:/";
+        return new ResponseEntity<>(result, HttpStatus.OK);
     }
 
-    // 회원정보 수정
-    @GetMapping(value = "/update")
-    public ResponseEntity<?> userUpdate(Model model, Principal principal) throws Exception {
-        String loginId = principal != null ? principal.getName() : null;
-        Users user = userService.selectById(loginId);
-        model.addAttribute("user", user);
-        return "user/update";
-        return new ResponseEntity<>(response, org.springframework.http.HttpStatus.OK);
-    }
+    // // 회원정보 수정
+    // @GetMapping(value = "/update")
+    // public ResponseEntity<?> userUpdate(Model model, Principal principal) throws Exception {
+    //     String loginId = principal != null ? principal.getName() : null;
+    //     Users user = userService.selectById(loginId);
+    //     model.addAttribute("user", user);
+    //     return "user/update";
+    //     return new ResponseEntity<>(response, org.springframework.http.HttpStatus.OK);
+    // }
 
     /**
      * 회원정보 수정 처리
@@ -97,12 +96,13 @@ public class UserApiController {
     @PostMapping(value = "/update")
     public ResponseEntity<?> updateUpdatePro(Users user, HttpServletRequest request, HttpServletResponse response)
             throws Exception {
+        String responseText = "";
         log.info("user : " + user);
         int result = userService.update(user);
         log.info("회원정보 수정여부 : " + result);
         // 회원정보 수정 실패
         if (result == 0) {
-            return "redirect:/user/update";
+            responseText="회원정보 수정 실패";
         }
         // 시큐리티 강제 로그아웃
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
@@ -115,17 +115,19 @@ public class UserApiController {
         // 토큰 삭제
         persistentTokenRepository.removeUserTokens(user.getUserId());
         // 로그아웃 후 ➡ 로그인 페이지
-        return "redirect:/user/login";
-        return new ResponseEntity<>(response, org.springframework.http.HttpStatus.OK);
+        responseText="회원정보 수정 성공";
+        return new ResponseEntity<>(responseText, HttpStatus.OK);
     }
 
     //회원정보 삭제
-    @GetMapping(value="/delete")
-    public ResponseEntity<?> delete(String userId, HttpServletRequest request, HttpServletResponse response) throws Exception {
+    @DeleteMapping(value="/delete/{userId}")
+    public ResponseEntity<?> delete(@PathVariable String userId, HttpServletRequest request, HttpServletResponse response) throws Exception {
+        String responseText = "";
         log.info("삭제할 아이디 : " + userId);
         int result = userService.delete(userId);
         log.info("유저 삭제 여부 : "+ result);
         if (result > 0){
+            responseText = "회원정보삭제성공";
             // 시큐리티 강제 로그아웃
             Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
             new SecurityContextLogoutHandler().logout(request, response, authentication);
@@ -136,11 +138,12 @@ public class UserApiController {
             response.addCookie(cookie);
             // 토큰 삭제
             persistentTokenRepository.removeUserTokens(userId);
-            return "redirect:/";
-            return new ResponseEntity<>(response, org.springframework.http.HttpStatus.OK);
+            //return "redirect:/";
+            return new ResponseEntity<>(responseText, HttpStatus.OK);
         } else {
-            return "redirect:/user/update";
-            return new ResponseEntity<>(response, org.springframework.http.HttpStatus.OK);
+            //return "redirect:/user/update";
+            responseText = "회원정보 삭제 실패";
+            return new ResponseEntity<>(response, HttpStatus.OK);
         }
     }
 

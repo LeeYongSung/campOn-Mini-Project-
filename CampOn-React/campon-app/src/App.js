@@ -4,6 +4,7 @@ import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import AdminProductList from './container/AdminProductList';
 import UserLoginCon from './container/UserLoginCon';
 import UserJoinCon from './container/UserJoinCon';
+import UserUpdateCon from './container/UserUpdateCon';
 
 function App() {
   return (
@@ -12,6 +13,7 @@ function App() {
         <Route path="/admin/productlist" element={<AdminProductList />} />
         <Route path="/user/login" element={<UserLoginCon />} />
         <Route path="/user/join" element={<UserJoinCon />} />
+        <Route path="/user/update" element={<UserUpdateCon />} />
       </Routes>
     </BrowserRouter>
   );
