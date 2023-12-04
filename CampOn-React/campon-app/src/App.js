@@ -14,6 +14,9 @@ import ProductIndexContainer from './containers/product/ProductIndexContainer';
 import ProductListContainer from './containers/product/ProductListContainer';
 import { category } from './apis/product';
 import { CategoryProvider } from './apis/CategoryContext';
+import CampProduct from './containers/camp/CampProduct';
+import CampDetail from './containers/camp/CampDetail';
+import Favorites from './containers/camp/Favorites';
 
 function App() {
   return (
@@ -29,7 +32,10 @@ function App() {
 
           {/* 캠핑 */}
           <Route path="/api/camp/index" element={<CampMain />} />
-          <Route path="/api/camp/campproducts" element={<CampProducts />} />
+          <Route path="/api/camp/campproducts/:campTypeNo" element={<CampProducts />} />
+          <Route path="/api/camp/campproduct/:no" element={<CampProduct />} />
+          <Route path="/api/camp/campdetail/:no" element={<CampDetail />} />
+          <Route path="/api/camp/favorites" element={<Favorites />} />
 
           {/* 유저 */}
           <Route path="/user/login" element={<UserLoginCon />} />

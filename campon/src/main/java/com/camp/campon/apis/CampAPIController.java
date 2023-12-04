@@ -114,8 +114,8 @@ public class CampAPIController {
     }    
 
     //캠핑장 목록 페이지
-    @GetMapping(value="/campproducts")
-    public ResponseEntity<?> campproducts(Integer campTypeNo, Integer[] campTypeNos, Camp camp){
+    @GetMapping(value="/campproducts/{campTypeNo}")
+    public ResponseEntity<?> campproducts(@PathVariable Integer campTypeNo, Integer[] campTypeNos, Camp camp){
         try{
         List<Camp> campselect = null;
         campTypeNo = campTypeNo == null ? 0 : campTypeNo;
