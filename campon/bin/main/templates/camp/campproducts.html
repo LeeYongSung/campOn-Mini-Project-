@@ -164,12 +164,12 @@
             }
 
             const url = 'campSearch2'
-
+            console.log(data);
             $.ajax({
                 url     : url,
                 data    : data,
                 success : function (response) {
-                    console.log(response);      // 서버로부터 받은 데이터를 콘솔에 출력
+                    console.log("response : " + response);      // 서버로부터 받은 데이터를 콘솔에 출력
                     let campList = response
 
                     $('#camplist').html(campList)

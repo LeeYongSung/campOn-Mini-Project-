@@ -66,21 +66,21 @@ public class BoardController {
         return "board/prread";
     }
     
-    // 캠핑 리뷰 등록
-    @GetMapping(value="/crinsert")
-    public String crinsert(Model model, int reservationNo) throws Exception{
-        Camp reservation = boardService.reservation(reservationNo);
-        model.addAttribute("reservation", reservation);
-        return "board/crinsert";
-    }
+    // // 캠핑 리뷰 등록
+    // @GetMapping(value="/crinsert")
+    // public String crinsert(Model model, int reservationNo) throws Exception{
+    //     Camp reservation = boardService.reservation(reservationNo);
+    //     model.addAttribute("reservation", reservation);
+    //     return "board/crinsert";
+    // }
 
-    @PostMapping(value="/crinsert")
-    public String crinsertPro(@ModelAttribute Board board) throws Exception {
-        int result = boardService.crinsert(board);
-        int reservationNo = board.getReservationNo();
-        if(result == 0) return "board/crinsert?reservationNo=" + reservationNo;
-        return "redirect:/board/index";
-    }
+    // @PostMapping(value="/crinsert")
+    // public String crinsertPro(@ModelAttribute Board board) throws Exception {
+    //     int result = boardService.crinsert(board);
+    //     int reservationNo = board.getReservationNo();
+    //     if(result == 0) return "board/crinsert?reservationNo=" + reservationNo;
+    //     return "redirect:/board/index";
+    // }
     
     // 상품 리뷰 등록
     @GetMapping(value="/prinsert")
@@ -98,33 +98,33 @@ public class BoardController {
         return "redirect:/board/index";
     }
 
-    // 캠핑 리뷰 수정
-    @GetMapping(value="/crupdate")
-    public String crupdate(int reviewNo, Model model) throws Exception {
-        Board crread = boardService.crread(reviewNo);
-        model.addAttribute("review", crread);
-        return "board/crupdate";
-    }
-    @PostMapping(value="/crupdate")
-    public String crupdatePro(Board board) throws Exception {
-        int result = boardService.crupdate(board);
-        int reviewNo = board.getReviewNo();
-        if(result == 0) return "board/crupdate?reviewNo=" + reviewNo;
-        return "redirect:/board/boardlist";
-    }
-    //캠핑리뷰 삭제
-    @PostMapping(value="/crdelete")
-    public String crdelete(int reviewNo) throws Exception {
-        int result = boardService.crdelete(reviewNo);
-        if(result == 0) return "board/crupdate?reviewNo=" + reviewNo;
-        return "redirect:/board/boardlist";
-    }
-    @GetMapping(value="/crdelete")
-    public String crdeletePro(int reviewNo) throws Exception {
-        int result = boardService.crdelete(reviewNo);
-        if(result == 0) return "board/crupdate?reviewNo=" + reviewNo;
-        return "redirect:/board/boardlist";
-    }
+    // // 캠핑 리뷰 수정
+    // @GetMapping(value="/crupdate")
+    // public String crupdate(int reviewNo, Model model) throws Exception {
+    //     Board crread = boardService.crread(reviewNo);
+    //     model.addAttribute("review", crread);
+    //     return "board/crupdate";
+    // }
+    // @PostMapping(value="/crupdate")
+    // public String crupdatePro(Board board) throws Exception {
+    //     int result = boardService.crupdate(board);
+    //     int reviewNo = board.getReviewNo();
+    //     if(result == 0) return "board/crupdate?reviewNo=" + reviewNo;
+    //     return "redirect:/board/boardlist";
+    // }
+    // //캠핑리뷰 삭제
+    // @PostMapping(value="/crdelete")
+    // public String crdelete(int reviewNo) throws Exception {
+    //     int result = boardService.crdelete(reviewNo);
+    //     if(result == 0) return "board/crupdate?reviewNo=" + reviewNo;
+    //     return "redirect:/board/boardlist";
+    // }
+    // @GetMapping(value="/crdelete")
+    // public String crdeletePro(int reviewNo) throws Exception {
+    //     int result = boardService.crdelete(reviewNo);
+    //     if(result == 0) return "board/crupdate?reviewNo=" + reviewNo;
+    //     return "redirect:/board/boardlist";
+    // }
     
 
 
@@ -243,5 +243,4 @@ public class BoardController {
 
         return "board/boardlist";
     }
-    
 }
