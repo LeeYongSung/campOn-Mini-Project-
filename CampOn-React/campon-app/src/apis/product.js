@@ -1,3 +1,3 @@
 import axios from 'axios';
 
-export const index = () => axios.get("/index");
+export const Index = () => axios.get("/api/product/index");
