@@ -1,12 +1,16 @@
 import React, { useEffect, useState } from 'react'
 import * as camps from '../../apis/camp'
 import CampSearch from '../components/CampSearch'
+import CampList from '../components/CampList'
+import { useParams } from 'react-router-dom'
 
 const CampProducts = () => {
+    const {campTypeNo} = useParams()
     const [campList, setCampList] = useState([])
 
     const getCampList = async () => {
-        const response = await camps.campproducts();
+        console.log(campTypeNo)
+        const response = await camps.campproducts(campTypeNo);
         const data = await response.data;
         setCampList(data);
     }

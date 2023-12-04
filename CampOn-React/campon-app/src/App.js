@@ -13,7 +13,7 @@ function App() {
 
         {/* 캠핑 */}
         <Route path="/api/camp/index" element={<CampMain />} />
-        <Route path="/api/camp/campproducts" element={<CampProducts />} />
+        <Route path="/api/camp/campproducts/:campTypeNo" element={<CampProducts />} />
 
       </Routes>
     </BrowserRouter>
