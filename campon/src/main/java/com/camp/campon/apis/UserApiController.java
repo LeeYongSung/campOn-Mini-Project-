@@ -1,4 +1,4 @@
-package com.camp.campon.api;
+package com.camp.campon.apis;
 
 import java.util.HashMap;
 import java.util.Map;
