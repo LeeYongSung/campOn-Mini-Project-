@@ -11,6 +11,7 @@ import AdminProductAddCon from './containers/admin/AdminProductAddCon';
 import Index from './pages/Index';
 import AdminProductList from './containers/admin/AdminProductList';
 import ProductIndexContainer from './containers/product/ProductIndexContainer';
+import ProductListContainer from './containers/product/ProductListContainer';
 
 function App() {
   return (
@@ -22,6 +23,7 @@ function App() {
 
         {/* 상품 */}
         <Route path="/product" element={<ProductIndexContainer />} />
+        <Route path="/productList" element={<ProductListContainer />} />
 
         {/* 캠핑 */}
         <Route path="/api/camp/index" element={<CampMain />} />

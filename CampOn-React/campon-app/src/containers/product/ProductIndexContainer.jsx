@@ -8,15 +8,16 @@ import FooterAdvertisement from '../../components/product/FooterAdvertisement'
 import ProductReview from '../../components/product/ProductReview'
 import CampOnFooter from '../../components/footer/CampOnFooter'
 import UserFooter from '../../components/menu/UserFooter'
-import * as products from '../../apis/product'
 import Recommendedproducts from '../../components/product/Recommendedproducts'
+import * as products from '../../apis/product'
 
 
 
 const ProductIndexContainer = () => {
   // state
   const [ productReview, setProductReview ] = useState();
-  const [ productHotList, setProductHotList ] = useState();
+  const [ productHotList, setProductHotList ] = useState([]);
+  const [ category, setCategory ] =useState();
 
   const getProductReview = async () => {
     const response = await products.Index();
@@ -24,12 +25,19 @@ const ProductIndexContainer = () => {
     console.log(proReview);
     setProductReview(proReview);
   };
+
   const getProductHotList = async () => {
     const response = await products.Index();
     const productHot = await response.data.productHotList;
     console.log(productHot);
     setProductHotList(productHot);
-  }
+  };
+
+  const handleCategoryClick = async (category) => {
+    const response = await products.category(category);
+    console.log(response);
+    setCategory(response.data);
+  };
 
   useEffect(() => {
     getProductReview();
@@ -45,7 +53,7 @@ const ProductIndexContainer = () => {
       <ProductBanner />
 
       {/* 상품 메뉴 */}
-      <ProductMenu />
+      <ProductMenu onCategoryClick={handleCategoryClick} />
 
       {/* 추천 상품 */}
       <Recommendedproducts productHotList={productHotList}/>
