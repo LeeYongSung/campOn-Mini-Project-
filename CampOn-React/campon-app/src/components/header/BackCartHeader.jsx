@@ -1,9 +1,7 @@
 import React from 'react'
-import Linkscript from '../fragment/link';
 const BackCartHeader = () => {
   return (
     <>
-      <Linkscript />
       <header>
           <nav>
               <ul class="main_header">
