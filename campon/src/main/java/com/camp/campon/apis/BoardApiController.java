@@ -65,8 +65,19 @@ public class BoardApiController {
         }
     }
 
+    // 게시글 읽기
+    @GetMapping(value = "/crread/{no}")
+    public ResponseEntity<?> crread(@PathVariable Integer no) throws Exception {
+        try {
+            Board board = boardService.crread(no);
+            return new ResponseEntity<>(board, HttpStatus.OK);
+        } catch (Exception e) {
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
     // 게시글 삭제
-    @DeleteMapping(value = "/crdelete")
+    @DeleteMapping(value = "/crread")
     public ResponseEntity<?> crdelete(@PathVariable Integer no) throws Exception {
         int result = boardService.crdelete(no);
         try {
