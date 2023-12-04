@@ -8,6 +8,8 @@ import CamptypeList from '../../components/camp/CamptypeList'
 import HeadAd from '../../components/camp/HeadAd'
 import MiddelAd from '../../components/camp/MiddelAd'
 import CampSearch from '../../components/camp/CampSearch'
+import CampOnFooter from '../../components/footer/CampOnFooter'
+import OpenSearchHeader from '../../components/header/OpenSearchHeader'
 
 const CampMain = () => {
     const [camptype, setCamptype] = useState([])
@@ -33,7 +35,7 @@ const CampMain = () => {
 
     return(
         <div>
-            {/* <Header /> */}
+            <OpenSearchHeader />
             <HeadAd />
             <CamptypeList camptypeList={camptype} />
             <CampSearch />
@@ -44,7 +46,7 @@ const CampMain = () => {
             <CampnewList newList={newList} />
             <CampHotList hotList={hotList} />
             <CampReviewList newReviewList={newReviewList} />
-            {/* <Footer /> */}
+            <CampOnFooter />
         </div>
     );
 
