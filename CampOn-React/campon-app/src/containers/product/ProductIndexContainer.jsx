@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState, useContext } from 'react'
 import BackCartHeader from '../../components/header/BackCartHeader'
 import ProductBanner from '../../components/product/ProductBanner'
 import ProductMenu from '../../components/product/ProductMenu'
@@ -10,6 +10,7 @@ import CampOnFooter from '../../components/footer/CampOnFooter'
 import UserFooter from '../../components/menu/UserFooter'
 import Recommendedproducts from '../../components/product/Recommendedproducts'
 import * as products from '../../apis/product'
+import { CategoryContext } from '../../apis/CategoryContext'
 
 
 
@@ -17,26 +18,28 @@ const ProductIndexContainer = () => {
   // state
   const [ productReview, setProductReview ] = useState();
   const [ productHotList, setProductHotList ] = useState([]);
-  const [ category, setCategory ] =useState();
+  const [ category ] = useState();
+  const { setCategory } = useContext(CategoryContext);
 
   const getProductReview = async () => {
     const response = await products.Index();
     const proReview = await response.data.proReviewList;
-    console.log(proReview);
+    // console.log(proReview);
     setProductReview(proReview);
   };
 
   const getProductHotList = async () => {
     const response = await products.Index();
     const productHot = await response.data.productHotList;
-    console.log(productHot);
+    // console.log(productHot);
     setProductHotList(productHot);
   };
 
   const handleCategoryClick = async (category) => {
     const response = await products.category(category);
-    console.log(response);
-    setCategory(response.data);
+    const data = await response.data;
+    // console.log(data);
+    setCategory(data);
   };
 
   useEffect(() => {
@@ -53,7 +56,7 @@ const ProductIndexContainer = () => {
       <ProductBanner />
 
       {/* 상품 메뉴 */}
-      <ProductMenu onCategoryClick={handleCategoryClick} />
+      <ProductMenu onCategoryClick={handleCategoryClick} category={category} />
 
       {/* 추천 상품 */}
       <Recommendedproducts productHotList={productHotList}/>

@@ -12,34 +12,37 @@ import Index from './pages/Index';
 import AdminProductList from './containers/admin/AdminProductList';
 import ProductIndexContainer from './containers/product/ProductIndexContainer';
 import ProductListContainer from './containers/product/ProductListContainer';
+import { category } from './apis/product';
+import { CategoryProvider } from './apis/CategoryContext';
 
 function App() {
   return (
-    
-    <BrowserRouter>
-      <Routes>
-        {/* 캠프온 메인 (추후 캠프 index랑 연결) */}
-        <Route path="/" element={<Index />} />
+    <CategoryProvider>
+      <BrowserRouter>
+        <Routes>
+          {/* 캠프온 메인 (추후 캠프 index랑 연결) */}
+          <Route path="/" element={<Index />} />
 
-        {/* 상품 */}
-        <Route path="/product" element={<ProductIndexContainer />} />
-        <Route path="/productList" element={<ProductListContainer />} />
+          {/* 상품 */}
+          <Route path="/product" element={<ProductIndexContainer />} />
+          <Route path="/productList" params={category} element={<ProductListContainer />} />
 
-        {/* 캠핑 */}
-        <Route path="/api/camp/index" element={<CampMain />} />
-        <Route path="/api/camp/campproducts" element={<CampProducts />} />
+          {/* 캠핑 */}
+          <Route path="/api/camp/index" element={<CampMain />} />
+          <Route path="/api/camp/campproducts" element={<CampProducts />} />
 
-        {/* 유저 */}
-        <Route path="/user/login" element={<UserLoginCon />} />
-        <Route path="/user/join" element={<UserJoinCon />} />
-        <Route path="/user/update" element={<UserUpdateCon />} />
-        <Route path="/user/mypage" element={<UserMypageCon />} />
+          {/* 유저 */}
+          <Route path="/user/login" element={<UserLoginCon />} />
+          <Route path="/user/join" element={<UserJoinCon />} />
+          <Route path="/user/update" element={<UserUpdateCon />} />
+          <Route path="/user/mypage" element={<UserMypageCon />} />
 
-        {/* 관리자 */}
-        <Route path="/admin/productlist" element={<AdminProductList />} />
-        <Route path="/admin/productadd" element={<AdminProductAddCon />} />
-      </Routes>
-    </BrowserRouter>
+          {/* 관리자 */}
+          <Route path="/admin/productlist" element={<AdminProductList />} />
+          <Route path="/admin/productadd" element={<AdminProductAddCon />} />
+        </Routes>
+      </BrowserRouter>
+    </CategoryProvider>
   );
 }
 
