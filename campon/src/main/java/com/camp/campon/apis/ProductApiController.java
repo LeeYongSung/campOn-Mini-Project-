@@ -68,8 +68,9 @@ public class ProductApiController {
         }
     }
     
-    @GetMapping(value={"", "/"}, params="category")
-    public ResponseEntity<?> getCategoryList(@RequestParam("category") String category) {
+    @GetMapping(value={"/productList"})
+    public ResponseEntity<?> getCategoryList(String category) {
+        log.info(category);
         try {
             List<Product> productList = productService.getCategoryList(category);
             log.info("카테고리 : " + category);
