@@ -50,6 +50,7 @@ public class ProductApiController {
     
     @GetMapping("/index")
     public ResponseEntity<?> productMain() {
+        log.info("/api/product/index");
         try {
             //상품 후기 불러오기
             List<Productreview> proReviewList =  productService.getReviewListLimit();

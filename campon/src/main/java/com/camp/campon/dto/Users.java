@@ -2,7 +2,6 @@ package com.camp.campon.dto;
 
 import java.io.Serializable;
 import java.util.Date;
-import java.util.List;
 
 import lombok.Data;
 
