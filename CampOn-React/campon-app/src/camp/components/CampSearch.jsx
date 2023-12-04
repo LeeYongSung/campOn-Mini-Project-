@@ -3,7 +3,7 @@ import React from 'react'
 const CampSearch = () => {
   return (
     <div class="container-sm search_box">
-        <form action="/camp/campproducts" method="get" class="w-100" >
+        <form action="/api/camp/campproducts" method="get" class="w-100" >
 
             <div class="form-floating my-2">
                 <input type="text" id="keyword" name="keyword" class="form-control" placeholder="검색명"/>
@@ -40,6 +40,59 @@ const CampSearch = () => {
                 <button type="submit"  class="btn btn-outline-secondary btn-lg w-100 py-3 rounded-0" >검색</button>
             </div>
         </form>
+        <div class="regionBox none position-fixed">
+        <div>
+            <a href="javascript:;" class="reginon_close w-100 d-block text-center px-3 py-1 bg-danger">닫기</a>
+        </div>
+        <div>
+            <a href="javascript:;" class="w-100 region_btn w-100 py-3 text-center d-block border my-2">
+                <input type="hidden"  value="서울"/>
+                서울
+            </a>
+        </div>
+        <div>
+            <a href="javascript:;" class="w-100 region_btn w-100 py-3 text-center d-block border my-2">
+                <input type="hidden" value="인천"/>
+                인천
+            </a>
+        </div>
+        <div>
+            <a href="javascript:;" class="w-100 region_btn w-100 py-3 text-center d-block border my-2">
+                <input type="hidden" value="경기도"/>
+                경기도
+            </a>
+        </div>
+        <div>
+            <a href="javascript:;" class="w-100 region_btn w-100 py-3 text-center d-block border my-2">
+                <input type="hidden" value="강원도"/>
+                강원도
+            </a>
+        </div>
+        <div>
+            <a href="javascript:;" class="w-100 region_btn w-100 py-3 text-center d-block border my-2">
+                <input type="hidden" value="전라도"/>
+                전라도
+            </a>
+        </div>
+        <div>
+            <a href="javascript:;" class="w-100 region_btn w-100 py-3 text-center d-block border my-2">
+                <input type="hidden" value="충청도"/>
+                충청도
+            </a>
+        </div>
+        <div>
+            <a href="javascript:;" class="w-100 region_btn w-100 py-3 text-center d-block border my-2">
+                <input type="hidden" value="경상도"/>
+                경상도
+            </a>
+        </div>
+        <div>
+            <a href="javascript:;" class="w-100 region_btn w-100 py-3 text-center d-block">
+                <input type="hidden" value="제주도"/>
+                제주도
+            </a>
+        </div>
+    </div>
     </div>
   )
 }
