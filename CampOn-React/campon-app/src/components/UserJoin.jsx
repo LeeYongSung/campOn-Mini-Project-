@@ -4,17 +4,17 @@ import { useNavigate } from 'react-router-dom'
 const UserJoin = () => {
     const navigate = useNavigate()
     const [auth, setAuth] = useState('')
-    const [id, setId] = useState('')
+    const [userId, setUserId] = useState('')
     const [userName, setUserName] = useState('')
     const [userEmail, setUserEmail] = useState('')
     const [userTel, setUserTel] = useState('')
     const [userAddress, setUserAddress] = useState('')
-    const [password, setPassword] = useState('')
+    const [userPw, setUserPw] = useState('')
     const [passwordCheck, setPasswordCheck] = useState('')
     const [companyName, setCompanyName] = useState('')
     const [companyNumber, setCompanyNumber] = useState(0)
     const handlesetId = (event) => {
-        setId(event.target.value);
+        setUserId(event.target.value);
     }
     const handlesetUserName = (event) => {
         setUserName(event.target.value);
@@ -29,7 +29,7 @@ const UserJoin = () => {
         setUserAddress(event.target.value);
     }
     const handlesetPassword = (event) => {
-        setPassword(event.target.value);
+        setUserPw(event.target.value);
     }
     const handlesetPasswordCheck = (event) => {
         setPasswordCheck(event.target.value);
@@ -52,7 +52,7 @@ const UserJoin = () => {
 
     let handleUserBtnClick = () => {
         setAuth('ROLE_USER')
-        console.log('auth는', auth)
+        // console.log('auth는', auth)
         const typeButtons = document.querySelectorAll('.typeBtn');
         const typeBtn = document.getElementById('typeBtn');
         const authSell = document.getElementById('authSell');
@@ -105,30 +105,32 @@ const UserJoin = () => {
     }
 
 
-    const handleSubmit = async (auth, id, userName, userEmail, userTel, userAddress, password, companyName, companyNumber) => {
-        console.log(auth, id, userName, userEmail, userTel, userAddress, password, companyName, companyNumber)
+    const handleSubmit = async () => {
+        console.log('auth는', auth)
+        console.log(auth, userId, userName, userEmail, userTel, userAddress, userPw, companyName, companyNumber)
         try {
-            const response = await users.join(auth, id, userName, userEmail, userTel, userAddress, password, companyName, companyNumber)
+            const response = await users.join(auth, userId, userName, userEmail, userTel, userAddress, userPw, companyName, companyNumber)
             alert('회원가입 성공')
             console.log(response.data)
-            // navigate('')
+            navigate('')
         } catch (error) {
-            console.log(auth, id, userName, userEmail, userTel, userAddress, password, companyName, companyNumber)
+            console.log(auth, userId, userName, userEmail, userTel, userAddress, userPw, companyName, companyNumber)
             console.log(error)
         }
     }
 
     useEffect(() => {
-       // handleUserBtnClick()
-       // handleSellBtnClick()
-        joincloseClick()
-        handleSubmit()
-    }, [auth])
+    //    handleUserBtnClick()
+    //    handleSellBtnClick()
+        // joincloseClick()
+        // handleSubmit()
+    }, [])
 
 
 
     return (
         <>
+            <h1>auth : {auth}</h1>
             <div className="container" id="typeBtn">
                 <div className="w-100 text-center py-5">
                     <h3>회원가입</h3>
@@ -156,7 +158,7 @@ const UserJoin = () => {
                         <input type="hidden" id="authSell" name="auth" value="ROLE_SELL" readOnly />
 
                         <div className="form-floating">
-                            <input type="text" id="id" name="userId" placeholder="" className="form-control my-3" value={id} onChange={handlesetId} />
+                            <input type="text" id="id" name="userId" placeholder="" className="form-control my-3" value={userId} onChange={handlesetId} />
                             <label htmlFor="id">아이디는 영문과 숫자 조합만 가능합니다.</label>
                         </div>
                         <div className="form-floating">
@@ -176,7 +178,7 @@ const UserJoin = () => {
                             <label htmlFor="address">주소</label>
                         </div>
                         <div className="form-floating">
-                            <input type="password" id="password" name="userPw" placeholder="8자 이상, 숫자와 영문 필수 포함" className="form-control my-3" value={password} onChange={handlesetPassword} />
+                            <input type="password" id="password" name="userPw" placeholder="8자 이상, 숫자와 영문 필수 포함" className="form-control my-3" value={userPw} onChange={handlesetPassword} />
                             <label htmlFor="password">비밀번호</label>
                         </div>
                         <div className="form-floating">

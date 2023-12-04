@@ -5,17 +5,17 @@ import { useNavigate } from 'react-router-dom'
 const UserUpdate = () => {
 
     const navigate = useNavigate()
-    const [id, setId] = useState('')
+    const [userId, setUserId] = useState('')
     const [userName, setUserName] = useState('')
     const [userEmail, setUserEmail] = useState('')
     const [userTel, setUserTel] = useState('')
     const [userAddress, setUserAddress] = useState('')
-    const [password, setPassword] = useState('')
+    const [userPw, setUserPw] = useState('')
     const [passwordCheck, setPasswordCheck] = useState('')
     const [companyName, setCompanyName] = useState('')
     const [companyNumber, setCompanyNumber] = useState(0)
     const handlesetId = (event) => {
-        setId(event.target.value);
+        setUserId(event.target.value);
     }
     const handlesetUserName = (event) => {
         setUserName(event.target.value);
@@ -30,7 +30,7 @@ const UserUpdate = () => {
         setUserAddress(event.target.value);
     }
     const handlesetPassword = (event) => {
-        setPassword(event.target.value);
+        setUserPw(event.target.value);
     }
     const handlesetPasswordCheck = (event) => {
         setPasswordCheck(event.target.value);
@@ -42,10 +42,10 @@ const UserUpdate = () => {
         setCompanyNumber(event.target.value);
     }
 
-    const handleSubmit = async (id, userName, userEmail,userTel,userAddress,password, companyName, companyNumber, auth) => {
+    const handleSubmit = async () => {
         try {
-            console.log(id);
-            const response = await users.update(id, userName, userEmail, userTel, userAddress, password, companyName, companyNumber,auth)
+            console.log(userId);
+            const response = await users.update(userId, userName, userEmail, userTel, userAddress, userPw, companyName, companyNumber)
             alert('회원정보 수정 성공')
             console.log(response.data)
             //  navigate('')
@@ -53,9 +53,9 @@ const UserUpdate = () => {
             console.log(error)
         }
     }
-    const handleDel = async (id) => {
+    const handleDel = async () => {
         try {
-            const response = await users.deletee(id)
+            const response = await users.deletee(userId)
             alert('회원탈퇴 성공')
             console.log(response.data)
             //  navigate('')
@@ -76,7 +76,7 @@ const UserUpdate = () => {
                     <h3>회원정보를 수정해주세요.</h3>
                     <form name="joinForm">
                         <div className="form-floating">
-                            <input type="text" id="id" name="userId" placeholder="" className="form-control my-3" value={id} onChange={handlesetId} />
+                            <input type="text" id="id" name="userId" placeholder="" className="form-control my-3" value={userId} onChange={handlesetId} />
                             <label htmlFor="id">아이디</label>
                         </div>
                         <div className="form-floating">
@@ -96,7 +96,7 @@ const UserUpdate = () => {
                             <label htmlFor="address">주소</label>
                         </div>
                         <div className="form-floating">
-                            <input type="password" id="password" name="userPw" placeholder="8자 이상, 숫자와 영문 필수 포함" className="form-control my-3" value={password} onChange={handlesetPassword} />
+                            <input type="password" id="password" name="userPw" placeholder="8자 이상, 숫자와 영문 필수 포함" className="form-control my-3" value={userPw} onChange={handlesetPassword} />
                             <label htmlFor="password">비밀번호</label>
                         </div>
                         <div className="form-floating">

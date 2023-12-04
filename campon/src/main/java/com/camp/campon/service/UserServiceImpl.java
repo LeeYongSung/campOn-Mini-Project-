@@ -35,6 +35,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public int insert(Users user) throws Exception {
+        log.info("user : " + user);
         // 비밀번호 암호화
         String userPw = user.getUserPw();
         String encodedPw = passwordEncoder.encode(userPw);

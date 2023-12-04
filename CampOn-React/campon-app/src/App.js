@@ -5,6 +5,8 @@ import AdminProductList from './container/AdminProductList';
 import UserLoginCon from './container/UserLoginCon';
 import UserJoinCon from './container/UserJoinCon';
 import UserUpdateCon from './container/UserUpdateCon';
+import UserMypageCon from './container/UserMypageCon';
+import AdminProductAddCon from './container/AdminProductAddCon';
 
 function App() {
   return (
@@ -14,6 +16,8 @@ function App() {
         <Route path="/user/login" element={<UserLoginCon />} />
         <Route path="/user/join" element={<UserJoinCon />} />
         <Route path="/user/update" element={<UserUpdateCon />} />
+        <Route path="/user/mypage" element={<UserMypageCon />} />
+        <Route path="/admin/productadd" element={<AdminProductAddCon />} />
       </Routes>
     </BrowserRouter>
   );

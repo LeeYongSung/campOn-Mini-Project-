@@ -1,12 +1,12 @@
 package com.camp.campon.api;
 
-import java.security.Principal;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
+
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -14,12 +14,12 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.web.authentication.logout.SecurityContextLogoutHandler;
 import org.springframework.security.web.authentication.rememberme.PersistentTokenRepository;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.CookieValue;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -27,6 +27,9 @@ import com.camp.campon.dto.Users;
 import com.camp.campon.service.UserService;
 
 import lombok.extern.slf4j.Slf4j;
+
+
+
 @Slf4j
 @RestController
 @RequestMapping("/user")
@@ -64,12 +67,15 @@ public class UserApiController {
 
     // 회원 가입 처리
     @PostMapping(value = "/join")
-    public ResponseEntity<?> joinPro(Users user, HttpServletRequest request) throws Exception {
+    public ResponseEntity<?> joinPro(@RequestBody Users user, HttpServletRequest request) throws Exception {
+        log.info(request.getParameter("userPw"));
+        log.info("user : #############################");
+        log.info(user.toString());
         int result = userService.insert(user);
         log.info(result + "회원가입성공");
         // 회원 가입 성공 시, 바로 로그인
         if (result > 0) {
-            userService.login(user, request);
+            // userService.login(user, request);
             log.info("회원가입 성공 시 바로 로그인 되었나?");
         }
         //return "redirect:/";
@@ -94,7 +100,7 @@ public class UserApiController {
      * @throws Exception
      */
     @PostMapping(value = "/update")
-    public ResponseEntity<?> updateUpdatePro(Users user, HttpServletRequest request, HttpServletResponse response)
+    public ResponseEntity<?> updateUpdatePro(@RequestBody Users user, HttpServletRequest request, HttpServletResponse response)
             throws Exception {
         String responseText = "";
         log.info("user : " + user);
