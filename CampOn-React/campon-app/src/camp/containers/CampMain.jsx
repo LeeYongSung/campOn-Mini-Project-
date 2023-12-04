@@ -38,7 +38,9 @@ const CampMain = () => {
             <CamptypeList camptypeList={camptype} />
             <CampSearch />
             <MiddelAd />
-            <Link to="#">안내페이지</Link>
+            <div className='w-100 info_btn'>
+            <Link to="#" className='btn btn-warning btn-lg w-100 py-3'>캠프온이 처음이신가요? 캠프온 이용안내</Link>
+            </div>
             <CampnewList newList={newList} />
             <CampHotList hotList={hotList} />
             <CampReviewList newReviewList={newReviewList} />
