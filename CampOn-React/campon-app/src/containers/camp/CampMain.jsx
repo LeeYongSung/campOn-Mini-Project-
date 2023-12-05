@@ -10,6 +10,7 @@ import MiddelAd from '../../components/camp/MiddelAd'
 import CampSearch from '../../components/camp/CampSearch'
 import CampOnFooter from '../../components/footer/CampOnFooter'
 import OpenSearchHeader from '../../components/header/OpenSearchHeader'
+import UserFooter from '../../components/menu/UserFooter'
 
 const CampMain = () => {
     const [camptype, setCamptype] = useState([])
@@ -27,6 +28,8 @@ const CampMain = () => {
         setNewList(campnewList);
         setHotList(campHotList);
         setNewReviewList(newReviewList);
+
+        
     };
 
     useEffect(()=>{
@@ -47,6 +50,7 @@ const CampMain = () => {
             <CampHotList hotList={hotList} />
             <CampReviewList newReviewList={newReviewList} />
             <CampOnFooter />
+            <UserFooter />
         </div>
     );
 

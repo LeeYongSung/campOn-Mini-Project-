@@ -1,20 +1,32 @@
 import React from 'react'
+import { Navigation, Pagination, A11y } from 'swiper/modules';
+import { Swiper, SwiperSlide } from 'swiper/react';
+import 'swiper/css';
+import 'swiper/css/navigation';
+import 'swiper/css/pagination';
+import $ from 'jquery'
 
 const CampProductintro = ({productsimg,productsenvironment,productsreserve,productsfacility,productsproducts}) => {
+    $('#camp_info_more').on('click', function(){
+        $('.camp_info').css('height', 'auto')
+    })
+
   return (
     <div>
-      <div className="swiper mySwiper">
-        <div className="swiper-wrapper">
-          <div className="swiper-slide">
+      <Swiper
+            modules={[Navigation, Pagination, A11y]}
+            spaceBetween={0}
+            slidesPerView={1}
+            navigation
+            pagination={{ clickable: true }}
+            onSwiper={(swiper) => console.log(swiper)}
+            onSlideChange={() => console.log('slide change')}
+            >
             {productsimg.map((img) => (
-              <img src={`/img?file=${img.cpiUrl}`}/>
+                <SwiperSlide><img src={img.cpiUrl} /></SwiperSlide>
             ))}
-          </div>
-        </div>
-        <div className="swiper-button-next"></div>
-        <div className="swiper-button-prev"></div>
-        <div className="swiper-pagination"></div>
-      </div>
+      </Swiper>
+
       <div className="py-2 ps-2">
         {productsenvironment.map((type) => (
               <span>{type.environmentTypeName}</span>
@@ -64,7 +76,7 @@ const CampProductintro = ({productsimg,productsenvironment,productsreserve,produ
               <h5>캠핑장소개</h5>
           </div>
           <span>{productsproducts.campIntroduction}</span>
-          <div className="position-absolute w-100 bottom-0 text-center"><a href="javascript:;" className="w-100 d-block" id="camp_info_more"/>더보기<span className="material-symbols-outlined expandmore">expand_more</span><span className="material-symbols-outlined expandless none">expand_less</span></div>
+          <div className="position-absolute w-100 bottom-0 text-center"><a href="javascript:;" className="w-100 d-block" id="camp_info_more">더보기<span className="material-symbols-outlined expandmore">expand_more</span><span className="material-symbols-outlined expandless none">expand_less</span></a></div>
       </div>
       <div className="container-sm campfacility w-100 py-2 border-bottom">
         <div className="pt-2"><h5>캠핑장시설</h5></div>
@@ -88,7 +100,7 @@ const CampProductintro = ({productsimg,productsenvironment,productsreserve,produ
       </div>
       <div className="container-sm w-100 py-2 border-bottom">
           <div><h5>캠핑장배치도</h5></div>
-          <div><img src={`/img?file=${productsproducts.campLayout}`} className="w-100"/></div>
+          <div><img src={productsproducts.campLayout} className="w-100"/></div>
       </div>
     </div>
   )

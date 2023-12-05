@@ -4,6 +4,7 @@ import { useParams } from 'react-router-dom'
 import BackPinckHeader from '../../components/header/BackPinckHeader';
 import CampOnFooter from '../../components/footer/CampOnFooter';
 import CampDetailintro from '../../components/camp/CampDetailintro';
+import UserFooter from '../../components/menu/UserFooter'
 
 const CampDetail = () => {
     const {no} = useParams();
@@ -27,6 +28,7 @@ const CampDetail = () => {
         <BackPinckHeader />
         <CampDetailintro detailimg={detailimg} detail={detail} />
         <CampOnFooter />
+        <UserFooter />
     </div>
   )
 }
