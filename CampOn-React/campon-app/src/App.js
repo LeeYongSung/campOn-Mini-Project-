@@ -12,11 +12,15 @@ import Index from './pages/Index';
 import AdminProductList from './containers/admin/AdminProductList';
 import ProductIndexContainer from './containers/product/ProductIndexContainer';
 import ProductListContainer from './containers/product/ProductListContainer';
-import { category } from './apis/product';
 import { CategoryProvider } from './apis/CategoryContext';
 import CampProduct from './containers/camp/CampProduct';
 import CampDetail from './containers/camp/CampDetail';
 import Favorites from './containers/camp/Favorites';
+import ProductDetailContainer from './containers/product/ProductDetailContainer';
+import ProductCartContainer from './containers/product/ProductCartContainer';
+import ProductWishListContainer from './containers/product/ProductWishListContainer';
+import ProductPaymentContainer from './containers/product/ProductPaymentContainer';
+import ProductDepositCompContainer from './containers/product/ProductDepositCompContainer';
 
 function App() {
   return (
@@ -28,7 +32,12 @@ function App() {
 
           {/* 상품 */}
           <Route path="/product" element={<ProductIndexContainer />} />
-          <Route path="/productList" params={category} element={<ProductListContainer />} />
+          <Route path="/product/productList" element={<ProductListContainer />} />
+          <Route path="/product/productDetaile" element={<ProductDetailContainer />} />
+          <Route path="/product/cart" element={<ProductCartContainer />} />
+          <Route path="/product/wishlist" element={<ProductWishListContainer />} />
+          <Route path="/product/payment" element={<ProductPaymentContainer /> } />
+          <Route path="/product/complete" element={<ProductDepositCompContainer /> } />
 
           {/* 캠핑 */}
           <Route path="/api/camp/index" element={<CampMain />} />

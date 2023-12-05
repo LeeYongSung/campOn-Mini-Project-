@@ -318,6 +318,7 @@ input[type="checkbox"] {
 .productListImg {height: 250px; background-color: #aaa; overflow: hidden; object-fit: cover;}
 .productListImg {height: 250px;}
 .productList_Con>div:nth-of-type(3)>span {font-size: 0.6em;}
+.product_slide_image {left: 0!important; }
 
 
 /* 대여상품 상세 */

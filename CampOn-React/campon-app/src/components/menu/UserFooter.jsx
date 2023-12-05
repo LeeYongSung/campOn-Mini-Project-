@@ -1,41 +1,42 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
 
 const UserFooter = () => {
   return (
     <>
-      <div class="menu">
-      <ul class="main_menu">
+      <div className="menu">
+      <ul className="main_menu">
         <li>
-          <a href="/camp/index">
-            <ul class="sub_menu">
-              <li><i class="material-symbols-outlined">home</i></li>
+          <Link to={"/api/camp/index"}>
+            <ul className="sub_menu">
+              <li><i className="material-symbols-outlined">home</i></li>
               <li>홈</li>
             </ul>
-          </a>
+          </Link>
         </li>
         <li>
-          <a href="/product/index">
-            <ul class="sub_menu">
-              <li><i class="material-symbols-outlined">store</i></li>
+          <Link to={"/product"}>
+            <ul className="sub_menu">
+              <li><i className="material-symbols-outlined">store</i></li>
               <li>스토어</li>
             </ul>
-          </a>
+          </Link>
         </li>
         <li>
-          <a href="/board/index">
-            <ul class="sub_menu">
-              <li><i class="material-symbols-outlined">dashboard</i></li>
+          <Link to={"/board/index"}>
+            <ul className="sub_menu">
+              <li><i className="material-symbols-outlined">dashboard</i></li>
               <li>게시판</li>
             </ul>
-          </a>
+          </Link>
         </li>
         <li>
-          <a href="/user/mypage">
-            <ul class="sub_menu">
-              <li><i class="material-symbols-outlined">person</i></li>
+          <Link to={"/user/mypage"}>
+            <ul className="sub_menu">
+              <li><i className="material-symbols-outlined">person</i></li>
               <li>마이</li>
             </ul>
-          </a>
+          </Link>
         </li>
       </ul>
     </div>

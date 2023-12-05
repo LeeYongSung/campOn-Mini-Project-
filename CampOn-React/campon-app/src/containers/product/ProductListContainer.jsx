@@ -1,5 +1,4 @@
 import React, { useEffect, useState, useContext } from 'react';
-import { useLocation } from 'react-router-dom';
 import ProductListCategory from '../../components/product/ProductListCategory';
 import ProductListItem from '../../components/product/ProductListItem';
 import BackCartHeader from '../../components/header/BackCartHeader';
@@ -10,15 +9,35 @@ import { CategoryContext } from '../../apis/CategoryContext';
 
 const ProductListContainer = () => {
 
-  const { category } = useContext(CategoryContext);
+  const { category, setCategory } = useContext(CategoryContext);
+  
+  // const { productNo } = useState();
+  const { setProductNo } = useContext(CategoryContext);
+
+
+  const handleCategoryClick = async (category) => {
+    // categoryData 변수를 제거하고, 직접 category를 전달합니다.
+    const response = await products.category(category);
+    const data = await response.data;
+    console.log(data);
+    setCategory(data);
+  }
+
+  const handleProductClick = async (productNo) => {
+    setProductNo(productNo);
+  }
+  
+  useEffect(() => {
+    handleCategoryClick(category);
+  }, []);
 
   console.log("리스트컨테이너 : " + category);
 
   return (
     <>
         <BackCartHeader />
-        <ProductListCategory />
-        <ProductListItem category={category} />
+        <ProductListCategory OnCategoryClick={handleCategoryClick} />
+        <ProductListItem category={category} onProductClick={handleProductClick} />
         <CampOnFooter />
         <UserFooter />
     </>
