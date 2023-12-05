@@ -257,24 +257,33 @@ public class ProductApiController {
      * 결제완료
      */
     @GetMapping(value="/depositcomp")
-    public ResponseEntity<?> depositcomp(String orderNumber) {
+    public ResponseEntity<?> depositcomp(@RequestParam String orderNumber) {
         try {
-            orderNumber = "3";
-            Order order = orderService.selectOrder(orderNumber);
-            log.info("order : " + order);
-            Order orderpay = orderService.paymentsByOrNo(orderNumber);
-            String pmType = orderpay.getPmType();
-            String paytotal = orderpay.getPmPrice();
-            String userName = userService.select(order.getUserNo()).getUserName();
-            log.info(userName + "userName");
-            log.info(order.toString());
+            // orderNumber = "3";
+            log.info(orderNumber);
+            Map<String, Object> deposit = null;
+            try {
+                Order order = orderService.selectOrder(orderNumber);
+                log.info("order : " + order);
+                Order orderpay = orderService.paymentsByOrNo(orderNumber);
+                String pmType = orderpay.getPmType();
+                String paytotal = orderpay.getPmPrice();
+                String userName = userService.select(order.getUserNo()).getUserName();
+                log.info(userName + "userName");
+                log.info(order.toString());
+                log.info(paytotal);
+                deposit = new HashMap<>();
+    
+                deposit.put("order", order);
+                deposit.put("paytotal", paytotal);
+                deposit.put("userName", userName);
+                deposit.put("pmType", pmType);
+                
+            } catch (Exception e) {
+                System.err.println("에러발생");
+                e.printStackTrace();
+            }
 
-            Map<String, Object> deposit = new HashMap<>();
-
-            deposit.put("order", order);
-            deposit.put("paytotal", paytotal);
-            deposit.put("userName", userName);
-            deposit.put("pmType", pmType);
 
             return new ResponseEntity<>(deposit, HttpStatus.OK);
         } catch (Exception e) {

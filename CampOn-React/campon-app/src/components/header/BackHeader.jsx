@@ -1,8 +1,21 @@
 import React from 'react'
-
+import { Link, useNavigate } from 'react-router-dom';
 const BackHeader = () => {
+
+  let navigate = useNavigate();
+
   return (
-    <div>BackHeader</div>
+    <>
+      <header>
+          <nav>
+              <ul className="main_header">
+                  <li><Link to="#" onClick={ (e) => { e.preventDefault(); navigate(-1); } } ><i className="material-symbols-outlined">chevron_left</i></Link></li>
+                  <li><Link to="#" onClick={ (e) => { e.preventDefault(); navigate("/"); } } ><img src="/img/header_logo.png" alt="로고" /></Link> </li>
+                  <li><Link to={""}><i className="material-symbols-outlined"></i></Link></li>
+              </ul>
+          </nav>
+      </header>
+    </>
   )
 }
 
