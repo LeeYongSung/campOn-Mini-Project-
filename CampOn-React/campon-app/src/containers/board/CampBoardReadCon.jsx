@@ -1,29 +1,19 @@
 import React, { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
+import * as boardApi from '../../apis/board'
+import CampBoardRead from '../../components/board/CampBoardRead';
 
-// 👩‍💻 게시글 조회
-const CampBoardReadCon = () => {
-    const { no } = useParams()
-    const [board, setBoard] = useState({});
-    const getBoard = async () => {
-        try {
-            const response = await boards.boardCrread(no);
-            const data = response.data;
-            console.log(data);
-            setBoard(data);
-        }
-        catch (e) {
-            console.log(e);
-        }
-    }
+const CampBoardReadCon = ({ reviewNo }) => {
+  const [review, setReview] = useState(null);
 
-    useEffect(() => {
-        getBoard()
-    }, [])
+  useEffect(() => {
+    const fetchReview = async () => {
+      const data = await boardApi.getCrread(reviewNo);
+      setReview(data);
+    };
+    fetchReview();
+  }, [reviewNo]);
 
-    return (<BoardRead no={no}
-        board={board}
-    />)
-}
+  return review ? <CampBoardRead review={review}/> : <div>Loading...</div>;
+};
 
-export default CampBoardReadCon
+export default CampBoardReadCon;
