@@ -6,6 +6,7 @@ import CampReview from '../../components/camp/CampReview'
 import { useParams } from 'react-router'
 import CampDetailList from '../../components/camp/CampDetailList'
 import CampProductintro from '../../components/camp/CampProductintro'
+import UserFooter from '../../components/menu/UserFooter'
 
 const CampProduct = () => {
     const {no} = useParams();
@@ -74,6 +75,7 @@ const CampProduct = () => {
             <li>사업주 : <span>{productsseller.userName}</span></li>
         </div>
         <CampOnFooter />
+        <UserFooter />
     </div>
   )
 }

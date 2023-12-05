@@ -8,7 +8,7 @@ const CamptypeList = ({camptypeList}) => {
             {camptypeList.map((camp) => (
                 <Link to={`/api/camp/campproducts/${camp.campTypeNo}`} >
                     <ul>
-                        <li><img src={`${camp.campTypeImg}`} alt="" /></li>
+                        <li><img src={camp.campTypeImg} alt="" /></li>
                         <li><span>{camp.campTypeName}</span></li>
                     </ul>
                 </Link>

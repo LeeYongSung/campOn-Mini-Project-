@@ -1,21 +1,27 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
+import { Navigation, Pagination, A11y } from 'swiper/modules';
+import { Swiper, SwiperSlide } from 'swiper/react';
+import 'swiper/css';
+import 'swiper/css/navigation';
+import 'swiper/css/pagination';
 
 const CampDetailintro = ({detailimg, detail}) => {
   return (
     <form>
-        <div class="swiper mySwiper">
-            <div class="swiper-wrapper">
-            <div class="swiper-slide">
-                {detailimg.map((img) => (
-                    <img src={`/img?file=${img.cpdiUrl}`}/>
-                ))}
-                </div>
-            </div>
-            <div class="swiper-button-next"></div>
-            <div class="swiper-button-prev"></div>
-            <div class="swiper-pagination"></div>
-        </div>
+        <Swiper
+            modules={[Navigation, Pagination, A11y]}
+            spaceBetween={0}
+            slidesPerView={1}
+            navigation
+            pagination={{ clickable: true }}
+            onSwiper={(swiper) => console.log(swiper)}
+            onSlideChange={() => console.log('slide change')}
+            >
+            {detailimg.map((img) => (
+                <SwiperSlide><img src={img.cpdiUrl}/></SwiperSlide>
+            ))}
+        </Swiper>
         <div class="w-100 campdetail_productBox pt-2">
             <ul>
                 <li class="w-100 text-center">

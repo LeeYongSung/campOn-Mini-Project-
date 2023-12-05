@@ -1,7 +1,13 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
+import $ from 'jquery'
 
 const CampDetailList = ({productsproductlist}) => {
+    
+    $('.campdetail_btn').on('click', function() {
+        $('.campdetail').css('height' , 'auto')
+    })
+
   return (
     <div class="campdetail container-sm w-100 py-2 position-relative mb-2">
         <div><h5>캠핑상품</h5></div>
@@ -10,7 +16,7 @@ const CampDetailList = ({productsproductlist}) => {
                 <Link to={`/api/camp/campdetail/${detail.cpdtNo}`}>
                     <div className="campdetail_product d-flex justify-content-between">
                         <div className="rounded px-2">
-                            <img src={`/img?file=${detail.cpdiUrl}`} className="w-100"/>
+                            <img src={detail.cpdiUrl} className="w-100"/>
                         </div>
                         <div>
                             <div><span>{detail.campTypeName}</span></div>

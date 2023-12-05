@@ -13,7 +13,7 @@ const CampReviewList = ({newReviewList}) => {
             {newReviewList.map((board) => (
                 <Link to={`/api/board/crread/${board.reviewNo}`} className='d-flex justify-content-between'>
                 <div class="review_imgbox px-2 py-2">
-                    <img src={`/img?file=${board.reviewImg}`} />
+                    <img src={board.reviewImg} />
                 </div>
                 <div class="review_conbox py-2">
                     <div>
@@ -21,7 +21,6 @@ const CampReviewList = ({newReviewList}) => {
                             <p>{board.reviewTitle}</p>
                         </div>
                         <div>
-                            {/* <span text={`${ #dates.format( board.regDate, 'yyyy-MM-dd') }`}></span> */}
                             <span>{Moment(board.regDate).format('YYYY-MM-DD')}</span>
                         </div>
                         <div>

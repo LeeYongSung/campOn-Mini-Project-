@@ -4,6 +4,7 @@ import BackHeader from '../../components/header/BackHeader';
 import CampOnFooter from '../../components/footer/CampOnFooter';
 import FavoritesList from '../../components/camp/FavoritesList';
 import { useNavigate } from 'react-router-dom';
+import UserFooter from '../../components/menu/UserFooter'
 
 const Favorites = () => {
     const [list, setList] = useState([]);
@@ -20,8 +21,8 @@ const Favorites = () => {
     }, [])
 
     const onDelete = async (no) => {
+      alert('삭제 완료' + no);
       const response = await camps.favoriteDelete(no);
-      alert('삭제 완료');
       navigate('/api/camp/favorites')
     }
   return (
@@ -29,6 +30,7 @@ const Favorites = () => {
         <BackHeader />
         <FavoritesList list={list} onDelete={onDelete} />
         <CampOnFooter />
+        <UserFooter />
     </div>
   )
 }

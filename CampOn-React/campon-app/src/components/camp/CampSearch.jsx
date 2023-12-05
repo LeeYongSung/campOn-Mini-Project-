@@ -1,6 +1,14 @@
 import React from 'react'
+import $ from 'jquery'
 
 const CampSearch = () => {
+    $('#region').on('click', function() {
+        $('.regionBox').fadeIn();
+    })
+
+    $('.reginon_close').on('click', function() {
+        $('.regionBox').fadeOut();
+    })
   return (
     <div class="container-sm search_box">
         <form action="/api/camp/campproducts" method="get" class="w-100" >
