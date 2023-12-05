@@ -1,21 +1,40 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
+import * as admins from '../../apis/admin'
+import AdminMemberSell from './AdminMemberSell'
 
-const AdminMemberListSell = () => {
+const AdminMemberListSell = ({ sellList, deleteBtn }) => {
+  const [moreList, setMoreList] = useState(sellList.map(() => false))
+  const [more, setMore] = useState(false)
+  const morebtn = (index) => {
+    console.log(index)
+    const updatedMoreList = [...moreList];
+    updatedMoreList[index] = true;
+    setMoreList(updatedMoreList);
+    setMore(true)
+  }
+  const lessbtn = (index) => {
+    console.log(index, '접기')
+    const updatedMoreList = [...moreList];
+    updatedMoreList[index] = false;
+    setMoreList(updatedMoreList);
+    setMore(false)
+  }
+
   return (
     <>
       <div id="tab02">
-        <div>
+      <div className="py-3">
           <h5>기업 회원 리스트</h5>
         </div>
-        
-          <div className="container">
+        {sellList.map((user, index) => (
+          <div className="container" key={user.userNo}>
             <div className="border rounded-top py-4 position-relative">
               <div className="d-flex justify-content-between py-1 mt-4">
                 <div className="ps-2">
-                  <span>아이디</span>
+                  <span>{user.userId}</span>
                 </div>
                 <div className="pe-2">
-                  <span  text="{member.userId}"></span>
+                  <span>{user.userName}</span>
                 </div>
               </div>
               <div className="d-flex justify-content-between py-1">
@@ -23,7 +42,7 @@ const AdminMemberListSell = () => {
                   <span>이메일</span>
                 </div>
                 <div className="pe-2">
-                  <span  text="{member.userEmail}"></span>
+                  <span>{user.userEmail}</span>
                 </div>
               </div>
               <div className="d-flex justify-content-between py-1">
@@ -31,46 +50,24 @@ const AdminMemberListSell = () => {
                   <span>가입일자</span>
                 </div>
                 <div className="pe-2">
-                  <span  text="{ #dates.format(member.regDate, 'yyyy-MM-dd')}"></span>
+                  <span>{user.regDate}</span>
                 </div>
               </div>
               <div className="position-absolute top-0 end-0 pe-1 pt-1">
-                <a className="delbtn btn btn-outline-danger"  href="|/admin/memberDelete?userId={member.userId}|">회원 삭제</a>
+                <button className="delbtn btn btn-outline-danger" onClick={() => { deleteBtn(user.userId) }}>회원 삭제</button>
               </div>
               <div className="position-absolute bottom-0 end-0 pe-1 memberlist_more_box">
-                <a className="commemberlist_more">더보기<span className="material-symbols-outlined">expand_more</span></a>
-                <a className="commemberlist_less none">접기<span className="material-symbols-outlined">expand_less</span></a>
+                {
+                  more ? <a className="commemberlist_less" onClick={() => lessbtn(index)}>접기<span className="material-symbols-outlined">expand_less</span></a> : <a className="commemberlist_more" onClick={() => morebtn(index)}>더보기<span className="material-symbols-outlined">expand_more</span></a>
+                }
               </div>
             </div>
-            <div className="w-100 border-bottom border-start border-end rounded-bottom mb-2 commemberlist_detail none">
-              <div className="py-3">
-                <div className="d-flex justify-content-between py-1">
-                  <div className="ps-2">
-                    <span>회원유형</span>
-                  </div>
-                  <div className="pe-2">
-                    <span>기업 회원</span>
-                  </div>
-                </div>
-                <div className="d-flex justify-content-between py-1">
-                  <div className="ps-2">
-                    <span>연락처</span>
-                  </div>
-                  <div className="pe-2">
-                    <span text="{member.userTel}"></span>
-                  </div>
-                </div>
-                <div className="d-flex justify-content-between py-1">
-                  <div className="ps-2">
-                    <span>수정일자</span>
-                  </div>
-                  <div className="pe-2">
-                    <span  text="{ #dates.format(member.updDate, 'yyyy-MM-dd')}"></span>
-                  </div>
-                </div>
-              </div>
-            </div>
+            {
+              moreList[index] ? <AdminMemberSell user={user} active={'active'} /> : <AdminMemberSell user={user} />
+            }
           </div>
+
+        ))}
       </div>
     </>
   )

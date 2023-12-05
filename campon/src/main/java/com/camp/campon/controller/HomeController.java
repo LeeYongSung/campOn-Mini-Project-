@@ -27,7 +27,7 @@ import com.camp.campon.service.UserService;
 
 
 @Slf4j
-@Controller
+//@Controller
 @RequestMapping(value = {"", "/"})
 public class HomeController {
 

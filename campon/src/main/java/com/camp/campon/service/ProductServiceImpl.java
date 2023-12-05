@@ -30,7 +30,7 @@ public class ProductServiceImpl implements ProductService {
     public int productInsert(Product product) throws Exception {
         // * 썸네일 이미지
          List<MultipartFile> productThmFile =  product.getProductThmFile();
-        if( !productThmFile.isEmpty() )
+        if( productThmFile!=null && !productThmFile.isEmpty() )
         for (MultipartFile file : productThmFile) {
         if( file.isEmpty() ) continue;
         String fileName = UUID.randomUUID().toString()+"_"+ file.getOriginalFilename();
@@ -42,7 +42,7 @@ public class ProductServiceImpl implements ProductService {
         }
         // * 상품 상세 설명
         List<MultipartFile> productConFile =  product.getProductConFile();
-        if( !productConFile.isEmpty() )
+        if( productConFile!=null && !productConFile.isEmpty() )
         for (MultipartFile file : productConFile) {
         if( file.isEmpty() ) continue;
         String fileName = UUID.randomUUID().toString()+"_"+ file.getOriginalFilename();
@@ -60,7 +60,7 @@ public class ProductServiceImpl implements ProductService {
         product.setProductNo(productMaxNo);
         // * 상세이미지들
         List<MultipartFile> productImgs = product.getProductImgs();
-        if( !productImgs.isEmpty() )
+        if( productImgs!=null && !productImgs.isEmpty() )
         for (MultipartFile file : productImgs) {
             if( file.isEmpty() ) continue;
             String originName = file.getOriginalFilename();
@@ -82,7 +82,7 @@ public class ProductServiceImpl implements ProductService {
         Product oldProduct = productMapper.select(product.getProductNo());
         // * 썸네일 이미지
         List<MultipartFile> productThmFile =  product.getProductThmFile();
-        if( !productThmFile.isEmpty() )
+        if( productThmFile!=null && !productThmFile.get(0).isEmpty() )
         for (MultipartFile file : productThmFile) {
             log.info(""+file.isEmpty()); //true
             if( file.isEmpty() ) {
@@ -99,16 +99,18 @@ public class ProductServiceImpl implements ProductService {
         
         // * 상품 상세 설명
         List<MultipartFile> productConFile =  product.getProductConFile();
-        for (MultipartFile file : productConFile) {
-            if( file.isEmpty() ) {
-                product.setProductCon(oldProduct.getProductCon());
-            } else {
-            String fileName = UUID.randomUUID().toString()+"_"+ file.getOriginalFilename();
-            String filepath = uploadPath+"/"+fileName;
-            File uploadfile = new File(uploadPath, fileName);
-            byte[] filedata = file.getBytes();
-            FileCopyUtils.copy(filedata, uploadfile);
-            product.setProductCon(filepath);
+        if (productConFile != null && !productConFile.get(0).isEmpty()){
+            for (MultipartFile file : productConFile) {
+                if( file!=null && file.isEmpty() ) {
+                    product.setProductCon(oldProduct.getProductCon());
+                } else {
+                String fileName = UUID.randomUUID().toString()+"_"+ file.getOriginalFilename();
+                String filepath = uploadPath+"/"+fileName;
+                File uploadfile = new File(uploadPath, fileName);
+                byte[] filedata = file.getBytes();
+                FileCopyUtils.copy(filedata, uploadfile);
+                product.setProductCon(filepath);
+                }
             }
         }
         //product 테이블 수정
@@ -118,7 +120,7 @@ public class ProductServiceImpl implements ProductService {
 
         // * 상세이미지들
         List<MultipartFile> productImgs = product.getProductImgs();
-        if( ! productImgs.get(0).isEmpty() ){
+        if(productImgs!=null && ! productImgs.get(0).isEmpty() ){
             int result2 = productMapper.deleteImgs(product.getProductNo());
             log.info("수정중인 productimg 테이블 삭제 여부 : " +result2);
             for (MultipartFile file : productImgs) {

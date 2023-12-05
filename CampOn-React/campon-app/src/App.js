@@ -12,6 +12,12 @@ import Index from './pages/Index';
 import AdminProductList from './containers/admin/AdminProductList';
 import ProductIndexContainer from './containers/product/ProductIndexContainer';
 import AdminMemberListCon from './containers/admin/AdminMemberListCon';
+import AdminProductUpdCon from './containers/admin/AdminProductUpdCon';
+import AdminCampListCon from './containers/admin/AdminCampListCon';
+import AdminCampAddCon from './containers/admin/AdminCampAddCon';
+import AdminCampUpdCon from './containers/admin/AdminCampUpdCon';
+import AdminCampDAddCon from './containers/admin/AdminCampDAddCon';
+import AdminCampDUpdCon from './containers/admin/AdminCampDUpdCon';
 
 function App() {
   return (
@@ -37,7 +43,13 @@ function App() {
         {/* 관리자 */}
         <Route path="/admin/productlist" element={<AdminProductList />} />
         <Route path="/admin/productadd" element={<AdminProductAddCon />} />
+        <Route path="/admin/productupdate/:productNo" element={<AdminProductUpdCon />} />
         <Route path="/admin/memberList" element={<AdminMemberListCon />} />
+        <Route path="/admin/campproductlist" element={<AdminCampListCon />} />
+        <Route path="/admin/campproductadd" element={<AdminCampAddCon />} />
+        <Route path="/admin/campproductupdate" element={<AdminCampUpdCon />} />
+        <Route path="/admin/campdetailinsert" element={<AdminCampDAddCon />} />
+        <Route path="/admin/campdetailupdate" element={<AdminCampDUpdCon />} />
       </Routes>
     </BrowserRouter>
   );

@@ -31,7 +31,7 @@ import lombok.extern.slf4j.Slf4j;
 
 
 @Slf4j
-//@RestController
+@RestController
 @RequestMapping("/user")
 public class UserApiController {
     @Autowired

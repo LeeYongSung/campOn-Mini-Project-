@@ -48,7 +48,7 @@ const UserUpdate = () => {
             const response = await users.update(userId, userName, userEmail, userTel, userAddress, userPw, companyName, companyNumber)
             alert('회원정보 수정 성공')
             console.log(response.data)
-            //  navigate('')
+            navigate('')
         } catch (error) {
             console.log(error)
         }
@@ -58,7 +58,7 @@ const UserUpdate = () => {
             const response = await users.deletee(userId)
             alert('회원탈퇴 성공')
             console.log(response.data)
-            //  navigate('')
+            navigate('')
         } catch (error) {
             console.log(error)
         }

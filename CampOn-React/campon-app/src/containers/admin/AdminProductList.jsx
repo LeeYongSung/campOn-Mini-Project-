@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-
+import { Link } from 'react-router-dom'
 const AdminProductList = () => {
     const [productList, setProductList] = useState([]);
 
@@ -50,8 +50,8 @@ const AdminProductList = () => {
                                         <h5>{product.productPrice}</h5>
                                     </div>
                                     <div className="position-absolute bottom-0 end-0 py-1 px-1">
-                                        <a href={`/admin/productupdate?productNo=${product.productNo}`} className="btn btn-warning">상품 수정</a>
-                                        <a href={`/admin/delete?productNo=${product.productNo}`} className="btn btn-danger">상품 삭제</a>
+                                        <Link to={`/admin/productupdate/${product.productNo}`} className="btn btn-warning" productNo={product.productNo}>상품 수정</Link>
+                                        <a href={`/admin/delete/${product.productNo}`} className="btn btn-danger">상품 삭제</a>
                                     </div>
                                 </div>
                             </div>
