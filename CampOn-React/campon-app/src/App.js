@@ -19,6 +19,15 @@ import UserLoginCon from './containers/user/UserLoginCon';
 import UserMypageCon from './containers/user/UserMypageCon';
 import UserUpdateCon from './containers/user/UserUpdateCon';
 import Index from './pages/Index';
+import { category } from './apis/product';
+import { CategoryProvider } from './apis/CategoryContext';
+import CampProduct from './containers/camp/CampProduct';
+import CampDetail from './containers/camp/CampDetail';
+import Favorites from './containers/camp/Favorites';
+import Reservate from './containers/camp/Reservate';
+import Complete from './containers/camp/Complete';
+import Reservation from './containers/camp/Reservation';
+import Schedule from './containers/camp/Schedule';
 
 function App() {
   return (
@@ -38,6 +47,10 @@ function App() {
           <Route path="/api/camp/campproduct/:no" element={<CampProduct />} />
           <Route path="/api/camp/campdetail/:no" element={<CampDetail />} />
           <Route path="/api/camp/favorites" element={<Favorites />} />
+          <Route path="/api/camp/reservate/:no" element={<Reservate />} />
+          <Route path="/api/camp/complete" element={<Complete />} />
+          <Route path="/api/camp/reservation" element={<Reservation />} />
+          <Route path="/api/camp/schedule" element={<Schedule />} />
 
           {/* 유저 */}
           <Route path="/user/login" element={<UserLoginCon />} />

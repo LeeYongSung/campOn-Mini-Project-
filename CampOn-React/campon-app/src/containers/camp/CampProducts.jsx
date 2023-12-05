@@ -5,6 +5,7 @@ import { useParams } from 'react-router-dom'
 import CampSearch from '../../components/camp/CampSearch'
 import CampOnFooter from '../../components/footer/CampOnFooter'
 import BackHeader from '../../components/header/BackHeader'
+import UserFooter from '../../components/menu/UserFooter'
 
 const CampProducts = () => {
     const {campTypeNo} = useParams()
@@ -29,6 +30,7 @@ const CampProducts = () => {
         </div>
         <CampList campList={campList} />
         <CampOnFooter />
+        <UserFooter />
     </div>
   )
 }

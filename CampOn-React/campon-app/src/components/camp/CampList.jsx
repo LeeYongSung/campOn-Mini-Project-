@@ -8,7 +8,7 @@ const CampList = ({campList}) => {
             <div className="camp_box pb-3"> 
                 <Link to={`/api/camp/campproduct/${camp.campNo}`}>
                     <div>
-                        <img src={`img?file=${camp.cpiUrl}`} className="w-100"/>
+                        <img src={camp.cpiUrl} className="w-100"/>
                     </div>
                     <div className="py-2">
                         <h3 className="ps-2">{camp.campName}</h3>

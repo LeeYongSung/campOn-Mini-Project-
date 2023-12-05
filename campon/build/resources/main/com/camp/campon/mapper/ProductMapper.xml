@@ -188,8 +188,13 @@ WHERE p.product_no = #{productNo} ORDER BY r.reg_date DESC LIMIT 5;
 </select>
 
 <select id="reservedProduct" resultType="Product">
+<<<<<<< HEAD
 SELECT o.order_no, o.user_no, o.order_cnt, p.* FROM `order` o JOIN product p ON p.product_no = o.product_no 
 WHERE user_no = #{userNo}
+=======
+SELECT o.start_date, o.end_date, o.order_no, o.user_no, o.order_cnt, p.* FROM `order` o JOIN product p ON p.product_no = o.product_no 
+WHERE user_no = #{userNo} order by o.order_date desc
+>>>>>>> 99b9be1ce38ea67cec5297d529cab9599e8c274c
 </select>
 
 </mapper>

@@ -38,7 +38,7 @@ const CampReview = ({productsreview}) => {
                                         </li>
                                         <li className="pe-3">
                                             <div className="review_img">
-                                                <img src={`/img?file=${productsreview.reviewImg}`}/>
+                                                <img src={productsreview.reviewImg}/>
                                             </div>
                                         </li>
                                     </ul>

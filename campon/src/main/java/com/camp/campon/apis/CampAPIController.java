@@ -35,12 +35,15 @@ import com.camp.campon.service.CampService;
 import com.camp.campon.service.ProductService;
 import com.camp.campon.service.SMSService;
 import com.camp.campon.service.UserService;
+
+import lombok.extern.slf4j.Slf4j;
+
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.PostMapping;
 
 
-
+@Slf4j
 @RestController
 @RequestMapping("/api/camp")
 public class CampAPIController {
@@ -100,7 +103,7 @@ public class CampAPIController {
         }
     }
     //즐겨찾기 항목 삭제
-    @DeleteMapping(value="/favoriteDelete/{no}")
+    @DeleteMapping(value="/favorites/{no}")
     public ResponseEntity<?> favoriteDelete(@PathVariable Integer no) throws Exception {
         try{
             int result = campService.favoriteDelete(no);
@@ -195,7 +198,8 @@ public class CampAPIController {
         try{
             Camp camp = campService.reservate(no);
             Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-            String userId = auth.getName();
+            // String userId = auth.getName();
+            String userId = "user";
             // if(userId.equals("anonymousUser")) return "redirect:/user/login";
             Users user = userService.selectById(userId);
 
@@ -308,6 +312,7 @@ public class CampAPIController {
     //예약현황 삭제
     @DeleteMapping("/reservation/{no}")
     public ResponseEntity<?> reservationdelete(@PathVariable Integer no) {
+        log.info("주소 : /reservation/{no}");
         try {
             int result = campService.reservationdelete(no);
             int result1 = boardService.crdeletelist(no);
