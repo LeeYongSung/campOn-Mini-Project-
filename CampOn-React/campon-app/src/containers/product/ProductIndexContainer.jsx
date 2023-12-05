@@ -20,6 +20,7 @@ const ProductIndexContainer = () => {
   const [ productHotList, setProductHotList ] = useState([]);
   const [ category ] = useState();
   const { setCategory } = useContext(CategoryContext);
+  const { setProductNo } = useContext(CategoryContext);
 
   const getProductReview = async () => {
     const response = await products.Index();
@@ -42,9 +43,14 @@ const ProductIndexContainer = () => {
     setCategory(data);
   };
 
+  const handleProductClick = async (productNo) => {
+    setProductNo(productNo);
+  }
+
   useEffect(() => {
     getProductReview();
     getProductHotList();
+    handleCategoryClick(category);
   }, []);
 
   return (
@@ -59,7 +65,7 @@ const ProductIndexContainer = () => {
       <ProductMenu onCategoryClick={handleCategoryClick} category={category} />
 
       {/* 추천 상품 */}
-      <Recommendedproducts productHotList={productHotList}/>
+      <Recommendedproducts productHotList={productHotList} onProductClick={handleProductClick}/>
 
       {/* 중단 광고 */}
       <MiddleAdvertisement />

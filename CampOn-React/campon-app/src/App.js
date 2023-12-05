@@ -1,33 +1,40 @@
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import './App.css';
+// 메인페이지
+import Index from './pages/Index';
+// 상태 관리 
 import { CategoryProvider } from './apis/CategoryContext';
 import { category } from './apis/product';
+// 관리자
 import AdminProductAddCon from './containers/admin/AdminProductAddCon';
 import AdminProductList from './containers/admin/AdminProductList';
-import CampBoardMainCon from './containers/board/CampBoardMainCon';
-import CampBoardReadCon from './containers/board/CampBoardReadCon';
-import CampDetail from './containers/camp/CampDetail';
-import CampMain from './containers/camp/CampMain';
-import CampProduct from './containers/camp/CampProduct';
-import CampProducts from './containers/camp/CampProducts';
-import Favorites from './containers/camp/Favorites';
-import ProductIndexContainer from './containers/product/ProductIndexContainer';
-import ProductListContainer from './containers/product/ProductListContainer';
+// 유저
 import UserJoinCon from './containers/user/UserJoinCon';
 import UserLoginCon from './containers/user/UserLoginCon';
 import UserMypageCon from './containers/user/UserMypageCon';
 import UserUpdateCon from './containers/user/UserUpdateCon';
-import Index from './pages/Index';
-import { category } from './apis/product';
-import { CategoryProvider } from './apis/CategoryContext';
+// 게시판
+import CampBoardMainCon from './containers/board/CampBoardMainCon';
+import CampBoardReadCon from './containers/board/CampBoardReadCon';
+// 캠프
+import CampMain from './containers/camp/CampMain';
 import CampProduct from './containers/camp/CampProduct';
-import CampDetail from './containers/camp/CampDetail';
+import CampProducts from './containers/camp/CampProducts';
 import Favorites from './containers/camp/Favorites';
+import CampDetail from './containers/camp/CampDetail';
 import Reservate from './containers/camp/Reservate';
 import Complete from './containers/camp/Complete';
 import Reservation from './containers/camp/Reservation';
 import Schedule from './containers/camp/Schedule';
+// 상품
+import ProductIndexContainer from './containers/product/ProductIndexContainer';
+import ProductListContainer from './containers/product/ProductListContainer';
+import ProductDetailContainer from './containers/product/ProductDetailContainer';
+import ProductCartContainer from './containers/product/ProductCartContainer';
+import ProductWishListContainer from './containers/product/ProductWishListContainer';
+import ProductPaymentContainer from './containers/product/ProductPaymentContainer';
+import ProductDepositCompContainer from './containers/product/ProductDepositCompContainer';
 
 function App() {
   return (
@@ -39,7 +46,12 @@ function App() {
 
           {/* 상품 */}
           <Route path="/product" element={<ProductIndexContainer />} />
-          <Route path="/productList" params={category} element={<ProductListContainer />} />
+          <Route path="/product/productList" element={<ProductListContainer />} />
+          <Route path="/product/productDetaile" element={<ProductDetailContainer />} />
+          <Route path="/product/cart" element={<ProductCartContainer />} />
+          <Route path="/product/wishlist" element={<ProductWishListContainer />} />
+          <Route path="/product/payment" element={<ProductPaymentContainer /> } />
+          <Route path="/product/complete" element={<ProductDepositCompContainer /> } />
 
           {/* 캠핑 */}
           <Route path="/api/camp/indpex" element={<CampMain />} />
