@@ -1,7 +1,7 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 
-const ProductList = ( { category, onProductClick } ) => {
+const ProductList = ( { category, onProductClick, addCart } ) => {
   return (
     <>
       <div className="container">

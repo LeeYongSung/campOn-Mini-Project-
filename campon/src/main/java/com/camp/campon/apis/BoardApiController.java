@@ -22,7 +22,7 @@ import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
 @RestController
-@RequestMapping("/board")
+@RequestMapping("/api/board")
 public class BoardApiController {
 
     @Autowired

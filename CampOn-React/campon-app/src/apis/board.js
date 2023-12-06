@@ -18,3 +18,7 @@ export const postPrinsert = (board) => axios.post('/board/prinsert', board);
 export const postPrupdate = (board) => axios.post('/board/prupdate', board);
 // 상품 리뷰 삭제
 export const deletePrdelete = (prNo) => axios.delete(`/board/prdelete/${prNo}`);
+// 조회
+export const boardMain = (no) => axios.get("/api/boards/index")
+// 읽기
+export const boardCrread = (no) => axios.get(`/api/boards/crread/${no}`)

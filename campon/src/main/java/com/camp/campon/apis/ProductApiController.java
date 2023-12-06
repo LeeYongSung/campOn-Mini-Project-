@@ -173,7 +173,6 @@ public class ProductApiController {
         }
     }
 
-    @ResponseBody
     @GetMapping(value="/addProductsaveAjax")
     public ResponseEntity<?> addCart(Product product) {
         try {
