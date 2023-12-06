@@ -43,7 +43,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.RequestBody;
 
 @Slf4j
-//@Controller
+@Controller
 @RequestMapping("/admin")
 @RequiredArgsConstructor
 public class AdminController {
