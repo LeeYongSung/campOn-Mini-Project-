@@ -68,6 +68,8 @@ public class Camp {
     private int facilitytypeNo;
     private String facilitytypeName;
     private String facilitytypeImg;
+    //추가
+    List<String> facilityTypeNoList;
     
     // 예약
     // 유저

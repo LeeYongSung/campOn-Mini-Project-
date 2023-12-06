@@ -133,9 +133,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         cd.reg_date AS regDate,
         cd.upd_date AS updDate
         FROM campdetail AS cd
-        JOIN campdetailimg AS cdi ON cd.cp_dt_no = cdi.cp_dt_no
-        JOIN (SELECT min(cpdi_no) no FROM campdetailimg GROUP BY cp_dt_no) imgno ON cdi.cpdi_no = imgno.no
-        JOIN camptype AS ct ON (cd.camptype_no = ct.camptype_no)
+        LEFT OUTER JOIN campdetailimg AS cdi ON cd.cp_dt_no = cdi.cp_dt_no
+        LEFT OUTER JOIN (SELECT min(cpdi_no) no FROM campdetailimg GROUP BY cp_dt_no) imgno ON cdi.cpdi_no = imgno.no
+        LEFT OUTER JOIN camptype AS ct ON (cd.camptype_no = ct.camptype_no)
         WHERE cd.camp_no = #{campNo}
         ORDER BY cd.camp_no DESC
     </select>

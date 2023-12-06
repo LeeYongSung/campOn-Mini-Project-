@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping(value = {"/", ""})
+@RequestMapping(value = "/api")
 public class HomeApiController {
     @GetMapping(value="/img", params="file")
     public void img(@RequestParam("file") String file, HttpServletResponse response) throws Exception  {

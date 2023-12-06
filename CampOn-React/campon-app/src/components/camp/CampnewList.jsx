@@ -9,7 +9,7 @@ const CampnewList = ({newList}) => {
             {newList.map((camp) => (
                 <div className="col-4">
                     <Link to={`/api/camp/campproduct/${camp.campNo}`}>
-                        <li className="mx-1"><img src={`/img?file=${camp.cpiUrl}`} /></li>
+                        <li className="mx-1"><img src={`/api/img?file=${camp.cpiUrl}`} /></li>
                         <li className="w-100 text-center">{camp.campName}</li>
                     </Link>
                 </div>

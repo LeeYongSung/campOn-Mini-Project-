@@ -1,8 +1,11 @@
 import React from 'react'
+import AdminCampAdd from '../../components/admin/AdminCampAdd'
 
 const AdminCampAddCon = () => {
   return (
-    <div>AdminCampAddCon</div>
+    <>
+    <AdminCampAdd/>
+    </>
   )
 }
 

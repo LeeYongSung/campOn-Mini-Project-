@@ -17,7 +17,8 @@ import AdminCampListCon from './containers/admin/AdminCampListCon';
 import AdminCampAddCon from './containers/admin/AdminCampAddCon';
 import AdminCampUpdCon from './containers/admin/AdminCampUpdCon';
 import AdminCampDAddCon from './containers/admin/AdminCampDAddCon';
-import AdminCampDUpdCon from './containers/admin/AdminCampDUpdCon';
+import AdminDCampUpdCon from './containers/admin/AdminDCampUpdCon';
+import AdminAdApplyCon from './containers/admin/AdminAdApplyCon';
 
 function App() {
   return (
@@ -47,9 +48,11 @@ function App() {
         <Route path="/admin/memberList" element={<AdminMemberListCon />} />
         <Route path="/admin/campproductlist" element={<AdminCampListCon />} />
         <Route path="/admin/campproductadd" element={<AdminCampAddCon />} />
-        <Route path="/admin/campproductupdate" element={<AdminCampUpdCon />} />
-        <Route path="/admin/campdetailinsert" element={<AdminCampDAddCon />} />
-        <Route path="/admin/campdetailupdate" element={<AdminCampDUpdCon />} />
+        <Route path="/admin/campproductupdate/:campNo" element={<AdminCampUpdCon />} />
+        <Route path="/admin/campdetailinsert/:campNo/:userNo" element={<AdminCampDAddCon />} />
+        <Route path="/admin/adinsert/:campNo" element={<AdminAdApplyCon />} />
+        {/* 유저넘버 넘기는건 확인해봐야 함  */}
+        <Route path="/admin/campdetailupdate/:cpdtNo" element={<AdminDCampUpdCon />} />
       </Routes>
     </BrowserRouter>
   );

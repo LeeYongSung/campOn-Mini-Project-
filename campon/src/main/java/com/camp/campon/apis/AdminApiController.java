@@ -7,8 +7,6 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -20,7 +18,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.camp.campon.dto.Camp;
-import com.camp.campon.dto.CustomUser;
 import com.camp.campon.dto.Product;
 import com.camp.campon.dto.Users;
 import com.camp.campon.service.AdService;
@@ -33,7 +30,7 @@ import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
 @RestController
-@RequestMapping("/admin")
+@RequestMapping("/api/admin")
 public class AdminApiController {
     // private final UserService userService;
     @Autowired
@@ -108,9 +105,10 @@ public class AdminApiController {
     }
 
     /* 캠핑장 crud */
+    // 하는중
     @GetMapping(value = "/campproductlist")
     public ResponseEntity<?> campList() throws Exception {
-        int userNo = 3; //하드코딩
+        int userNo = 3; // 하드코딩
         List<Camp> camp = campService.campproductUser(userNo);
         List<Camp> camp1 = campService.campproductadmin();
         log.info(camp.toString());
@@ -118,26 +116,27 @@ public class AdminApiController {
         Map map = new HashMap<>();
         map.put("campList", camp);
         map.put("campListadmin", camp1);
-        return new ResponseEntity<>(map, HttpStatus.OK); 
+        return new ResponseEntity<>(map, HttpStatus.OK);
     }
 
     // @GetMapping(value = "/campproductadd")
-    // public ResponseEntity<?> campInsert(@ModelAttribute Camp camp) throws Exception {
-    //     Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+    // public ResponseEntity<?> campInsert(@ModelAttribute Camp camp) throws
+    // Exception {
+    // Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 
-    //     String userId = auth.getName();
-    //     Users user = userService.selectById(userId);
-    //     int userNo = user.getUserNo();
-    //     camp.setUserNo(userNo);
-    //     // log.info("camp : " + camp.getUserNo());
-    //     // model.addAttribute("camp", camp);
-    //     // return "admin/campproductadd";
-    //     return new ResponseEntity<>(HttpStatus.OK);
+    // String userId = auth.getName();
+    // Users user = userService.selectById(userId);
+    // int userNo = user.getUserNo();
+    // camp.setUserNo(userNo);
+    // // log.info("camp : " + camp.getUserNo());
+    // // model.addAttribute("camp", camp);
+    // // return "admin/campproductadd";
+    // return new ResponseEntity<>(HttpStatus.OK);
     // }
 
     @PostMapping(value = "/campproductadd")
-    public ResponseEntity<?> campInsertPro(@ModelAttribute Camp camp, @RequestParam List<String> facilityTypeNo)
-            throws Exception {
+    public ResponseEntity<?> campInsertPro(Camp camp) throws Exception {
+        List<String> facilityTypeNo = camp.getFacilityTypeNoList();
         int result = campService.campInsert(camp, facilityTypeNo);
         if (result == 0)
             // return "admin/campproductadd";
@@ -146,36 +145,27 @@ public class AdminApiController {
         return new ResponseEntity<>(result, HttpStatus.OK);
     }
 
-    @GetMapping(value = "/campproductupdate")
-    public ResponseEntity<?> campUpdate(Model model, int campNo) throws Exception {
-        Camp camp = campService.productsproducts(campNo);
-        List<Camp> campfacility = campService.productsfacility(campNo);
-        model.addAttribute("camp", camp);
-        model.addAttribute("campfacility", campfacility);
-        // return "admin/campproductupdate";
-        return new ResponseEntity<>(HttpStatus.OK);
+    @GetMapping(value = "/campproductupdate/{campNo}")
+    public ResponseEntity<?> campUpdate(@PathVariable String campNo) throws Exception {
+        Camp camp = campService.productsproducts(Integer.parseInt(campNo));
+        List<Camp> campfacility = campService.productsfacility(Integer.parseInt(campNo));
+        Map<String, Object> map = new HashMap<>();
+        map.put("camp", camp);
+        map.put("campfacility", campfacility);
+        return new ResponseEntity<>(map, HttpStatus.OK);
     }
 
     @PostMapping(value = "/campproductupdatePro")
-    public ResponseEntity<?> campUpdatePro(@ModelAttribute Camp camp, @RequestParam List<String> facilityTypeNo)
+    public ResponseEntity<?> campUpdatePro(@ModelAttribute Camp camp)
             throws Exception {
+        List<String> facilityTypeNo = camp.getFacilityTypeNoList();
         int campNo = camp.getCampNo();
         int result1 = campService.campFacilityDelete(campNo);
         int result2 = campService.campEnvironmentDelete(campNo);
         int result3 = campService.campImgDelete(campNo);
         int result4 = campService.campUpdate(camp, facilityTypeNo);
-        // return "redirect:/admin/campproductlist";
-        return new ResponseEntity<>(HttpStatus.OK);
-    }
-
-    // 캠핑상품 등록
-    @GetMapping(value = "/campdetailinsert")
-    public ResponseEntity<?> campdetailinsert(Model model, Integer campNo, Integer userNo, @ModelAttribute Camp camp)
-            throws Exception {
-        model.addAttribute("userNo", userNo);
-        model.addAttribute("campNo", campNo);
-        // return "admin/campdetailinsert";
-        return new ResponseEntity<>(HttpStatus.OK);
+        String result = "캠핑장 수정" + result1 + ", " + result2 + result3 + ", " + result4;
+        return new ResponseEntity<>(result, HttpStatus.OK);
     }
 
     // 캠핑상품 등록처리
@@ -184,35 +174,30 @@ public class AdminApiController {
         int result = campService.detailinsert(camp);
         int campNo = camp.getCampNo();
         int userNo = camp.getUserNo();
-
-        if (result == 0)
-            // return "redirect:/admin/campdetailinsert?campNo=" + campNo + "& userNo=" +
-            // userNo;
-            return new ResponseEntity<>(result, HttpStatus.OK);
-
-        // return "redirect:/admin/campproductlist";
-        return new ResponseEntity<>(HttpStatus.OK);
+        String resultString = "D캠핑장 등록" + result + ", " + campNo + ", " + userNo;
+        return new ResponseEntity<>(resultString, HttpStatus.OK);
     }
 
     // 캠핑상품 수정
-    @GetMapping(value = "/campdetailupdate")
-    public ResponseEntity<?> campdetailupdate(Model model, int cpdtNo) throws Exception {
+    @GetMapping(value = "/campdetailupdate/{cpdtNo}")
+    public ResponseEntity<?> campdetailupdate(@PathVariable int cpdtNo) throws Exception {
         Camp camp = campService.productintro(cpdtNo);
-        model.addAttribute("camp", camp);
-        // return "admin/campdetailupdate";
-        return new ResponseEntity<>(HttpStatus.OK);
+        return new ResponseEntity<>(camp, HttpStatus.OK);
     }
 
     // 캠핑상품 수정처리
     @PostMapping(value = "/campdetailupdate")
     public ResponseEntity<?> campdetailupdatePro(Camp camp) throws Exception {
-        log.info("cpdtPriceStr : " + camp.getCpdtPriceStr());
         log.info("cpdtPrice : " + camp.getCpdtPrice());
-
         log.info(camp.getCpdtPrice() + "");
-
-        // return "redirect:/admin/campproductlist";
-        return new ResponseEntity<>(HttpStatus.OK);
+        //String cpdtPriceStr = camp.getCpdtPriceStr();
+       // Integer cpdtPrice = cpdtPriceStr == null ? 0 : Integer.parseInt(cpdtPriceStr);
+       // camp.setCpdtPrice(cpdtPrice);
+        int filedelete = campService.cpdidelete(camp.getCpdtNo());
+        int result = campService.detailupdate(camp);
+        int cpdtNo = camp.getCpdtNo();
+        String resultString = "D캠핑장 수정" + result + ", " + filedelete + ", " + cpdtNo;
+        return new ResponseEntity<>(resultString, HttpStatus.OK);
     }
 
     // 캠핑상품 삭제처리
@@ -231,15 +216,15 @@ public class AdminApiController {
 
     // @GetMapping(value = "/campdetaildelete")
     // public ResponseEntity<?> campdetaildeletepro(int cpdtNo) throws Exception {
-    //     log.info("숫자 : " + cpdtNo);
-    //     int filedelete = campService.cpdidelete(cpdtNo);
-    //     int result1 = boardService.crdeletecpdtNo(cpdtNo);
-    //     int result = campService.detaildelete(cpdtNo);
-    //     if (result == 0)
-    //         // return "redirect:/admin/campdetailupdate?cpdtNo=" + cpdtNo;
-    //         return new ResponseEntity<>(HttpStatus.OK);
-    //     // return "redirect:/admin/campproductlist";
-    //     return new ResponseEntity<>(HttpStatus.OK);
+    // log.info("숫자 : " + cpdtNo);
+    // int filedelete = campService.cpdidelete(cpdtNo);
+    // int result1 = boardService.crdeletecpdtNo(cpdtNo);
+    // int result = campService.detaildelete(cpdtNo);
+    // if (result == 0)
+    // // return "redirect:/admin/campdetailupdate?cpdtNo=" + cpdtNo;
+    // return new ResponseEntity<>(HttpStatus.OK);
+    // // return "redirect:/admin/campproductlist";
+    // return new ResponseEntity<>(HttpStatus.OK);
     // }
 
     // 캠핑장 삭제
@@ -252,8 +237,10 @@ public class AdminApiController {
         int result7 = campService.campEnvironmentDelete(campNo);
         int result4 = campService.cpdelete(campNo);
         int result5 = boardService.crdeletecampNo(campNo);
+        String result = result1 + ", " + result2 + ", " + result3 + ", " + result6 + ", " + result7 + ", " + result4
+                + ", " + result5;
         // return "redirect:/admin/campproductlist";
-        return new ResponseEntity<>(HttpStatus.OK);
+        return new ResponseEntity<>(result, HttpStatus.OK);
     }
 
 }

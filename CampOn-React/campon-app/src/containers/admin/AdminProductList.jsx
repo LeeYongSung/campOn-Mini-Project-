@@ -25,7 +25,7 @@ const AdminProductList = () => {
                     <div className="container w-100">
                         <div className="border rounded my-2 position-relative AdminProduct">
                             <div className="AdminProductImg w-100 border-bottom">
-                                <img src={`http://localhost:8081/img?file=${product.productThumnail}`} alt="상품썸네일" className="w-100" />
+                                <img src={`/api/img?file=${product.productThumnail}`} alt="상품썸네일" className="w-100" />
                             </div>
                             <div className="w-100 d-flex justify-content-between pb-5 pt-2">
                                 <div className="ps-3">
