@@ -1,24 +1,24 @@
 import axios from 'axios';
 
 // 캠핑 리뷰 조회
-export const getNewReviewList = () => axios.get("/board/index");
+export const getNewReviewList = () => axios.get("/api/board/index");
 // 캠핑 리뷰 읽기
-export const getCrread = (reviewNo) => axios.get(`/board/crread/${reviewNo}`);
+export const getCrread = (reviewNo) => axios.get(`/api/board/crread/${reviewNo}`);
 // 캠핑 리뷰 등록
-export const postCrinsert = (board) => axios.post('/board/crinsert', board);
+export const postCrinsert = (board) => axios.post('/api/board/crinsert', board);
 // 캠핑 리뷰 수정
-export const postCrupdate = (board) => axios.post('/board/crupdate', board);
+export const postCrupdate = (board) => axios.post('/api/board/crupdate', board);
 // 캠핑 리뷰 삭제
-export const deleteCrdelete = (reviewNo) => axios.delete(`/board/crdelete/${reviewNo}`);
+export const deleteCrdelete = (reviewNo) => axios.delete(`/api/board/crdelete/${reviewNo}`);
 // 상품 리뷰 읽기
-export const getPrread = (prNo) => axios.get(`/board/prread/${prNo}`);
+export const getPrread = (prNo) => axios.get(`/api/board/prread/${prNo}`);
 // 상품 리뷰 등록
-export const postPrinsert = (board) => axios.post('/board/prinsert', board);
+export const postPrinsert = (board) => axios.post('/api/board/prinsert', board);
 // 상품 리뷰 수정
-export const postPrupdate = (board) => axios.post('/board/prupdate', board);
+export const postPrupdate = (board) => axios.post('/api/board/prupdate', board);
 // 상품 리뷰 삭제
-export const deletePrdelete = (prNo) => axios.delete(`/board/prdelete/${prNo}`);
-// 조회
-export const boardMain = (no) => axios.get("/api/boards/index")
+export const deletePrdelete = (prNo) => axios.delete(`/api/board/prdelete/${prNo}`);
+// 조회 
+export const getBoardlist = () => axios.get("/api/board/index")
 // 읽기
-export const boardCrread = (no) => axios.get(`/api/boards/crread/${no}`)
+export const getboardCrread = (no) => axios.get(`/api/board/crread/${no}`)

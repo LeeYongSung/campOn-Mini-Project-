@@ -75,8 +75,8 @@ function App() {
           <Route path="/admin/productadd" element={<AdminProductAddCon />} />
 
           {/* 게시판 */}
-          <Route path="/board/index" element={<CampBoardMainCon />} />
-          <Route path="/board/crread" element={<CampBoardReadCon />} />
+          <Route path="/api/board/index" element={<CampBoardMainCon />} />
+          <Route path="/api/board/crread/:reviewNo" element={<CampBoardReadCon />} />
         </Routes>
       </BrowserRouter>
     </CategoryProvider>

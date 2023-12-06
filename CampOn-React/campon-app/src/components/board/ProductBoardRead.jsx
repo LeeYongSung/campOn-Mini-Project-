@@ -1,6 +1,6 @@
 import React from 'react';
 
-const CampBoardRead = ({ boardData }) => {
+const ProductBoardRead = ({ boardData }) => {
     const { reviewNo, reviewTitle, regDate, campName, cpdtName, reservationStart, reservationEnd, userId, reviewCon, reviewImg } = boardData;
     return (
         <div>
@@ -47,4 +47,4 @@ const CampBoardRead = ({ boardData }) => {
     );
 }
 
-export default CampBoardRead
+export default ProductBoardRead
