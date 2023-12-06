@@ -27,7 +27,8 @@ const Reservation = () => {
     const onDelete = async (no) => {
       const response = await camps.reservationdelete(no);
       alert('삭제완료')
-      navigate('api/camps/reservation')
+      // navigate('/api/camp/reservation')
+      getList();
     }
 
   return (

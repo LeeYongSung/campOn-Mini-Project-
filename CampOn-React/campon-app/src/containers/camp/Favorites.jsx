@@ -13,18 +13,20 @@ const Favorites = () => {
     const getList = async () => {
         const response = await camps.favorites();
         const data = response.data;
+        console.log("실행~!~!~!~!~!~!");
         setList(data);
+    };
+    const onDelete = async (no) => {
+      const response = await camps.favoriteDelete(no);
+      alert('삭제 완료' );
+      // navigate('/api/camp/favorites')
+      getList();
     }
 
     useEffect(() => {
         getList();
     }, [])
 
-    const onDelete = async (no) => {
-      alert('삭제 완료' + no);
-      const response = await camps.favoriteDelete(no);
-      navigate('/api/camp/favorites')
-    }
   return (
     <div>
         <BackHeader />

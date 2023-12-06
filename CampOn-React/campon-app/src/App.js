@@ -54,7 +54,7 @@ function App() {
           <Route path="/product/complete" element={<ProductDepositCompContainer /> } />
 
           {/* 캠핑 */}
-          <Route path="/api/camp/indpex" element={<CampMain />} />
+          <Route path="/api/camp/index" element={<CampMain />} />
           <Route path="/api/camp/campproducts/:campTypeNo" element={<CampProducts />} />
           <Route path="/api/camp/campproduct/:no" element={<CampProduct />} />
           <Route path="/api/camp/campdetail/:no" element={<CampDetail />} />

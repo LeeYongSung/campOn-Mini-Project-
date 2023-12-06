@@ -168,9 +168,9 @@ input[type="checkbox"] {
 
 
 /* 지역 검색 창 */
-.regionBox {width: 500px; background-color: white; bottom: 70px; left: 134px;}
-.regionBox>div>a {transition: all 0.5s;}
-.regionBox>div>a:focus, .regionBox>div>a:hover {background-color: #FFC700;}
+.regionBox {width: 500px; background-color: white; }
+.regionBox>div>button {transition: all 0.5s; background-color: white;}
+.regionBox>div>button:focus, .regionBox>div>button:hover {background-color: #FFC700;}
 
 /* 캠프/검색 목록 */
 #camplist {width: 100%; }
@@ -218,8 +218,8 @@ input[type="checkbox"] {
 .checkoutBox {width: 40%;}
 .daycount {width: 20%;}
 .daycount>input {border: none; text-align: center;}
-.reservationNop_box {border: 1px solid gray; width: 110px;}
-#reservationNop, .plus, .minus {padding-top: 0.625rem!important;}
+.reservationNop_box {border: 1px solid gray; width: 130px;}
+#reservationNop, .plus, .minus {padding-top: 0.625rem!important; text-align: center; width:58px;}
 .plus, .minus {background-color: #f2f2f2;}
 .reservate_user_box p {margin-bottom: 0!important;}
 
