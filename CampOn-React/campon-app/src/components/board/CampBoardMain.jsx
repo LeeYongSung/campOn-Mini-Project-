@@ -74,7 +74,7 @@ const CampBoardMain = ({ newReviewList, crlist, newprlist, currentTab, onTabChan
 
   // 상품 리뷰 
   const renderProductReviews = (list) => {
-    return list.map((item) => (
+    return list != null && list.map((item) => (
       <tr key={item.prNo} className="hoverr">
         <td className="tdd">{item.prNo}</td>
         <td className="tdd"><a href={`/api/board/prread/${item.prNo}`}>{item.prTitle}</a></td>

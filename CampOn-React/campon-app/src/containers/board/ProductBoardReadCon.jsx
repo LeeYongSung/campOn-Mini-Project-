@@ -1,30 +1,33 @@
 import React, { useState, useEffect } from 'react';
-import { useParams } from 'react-router-dom';
-import * as boardApi from '../../apis/board'
-import CampBoardRead from '../../components/board/CampBoardRead';
+import { useParams, useNavigate  } from 'react-router-dom';
+import * as boardApi from '../../apis/board';
+import ProductBoardRead from '../../components/board/ProductBoardRead';
 
-const CampBoardReadCon = () => {
-    const { reviewNo } = useParams();
-    const [boardData, setBoardData] = useState([]);
+const ProductBoardReadCon = () => {
+  const { prNo } = useParams();
+  const [boardData, setBoardData] = useState({});
+  const navigate = useNavigate();
 
-    const getCrread = async () => {
-        try {
-          const response = await boardApi.getCrread(reviewNo);
-          const data = response.data;
-;          console.log(data);
-          setBoardData(data);
-        } catch (e) {
-            console.log(e);
-        }
-    };
+  const getPrread = async () => {
+    try {
+      const response = await boardApi.getPrread(prNo);
+      const data = response.data;
+      console.log(data);
+      setBoardData(data);
+    } catch (e) {
+      console.log(e);
+    }
+  };
 
-    useEffect(() => {
-      getCrread();
-    }, []);
+  useEffect(() => {
+    getPrread();
+  }, []);
 
-  return <CampBoardRead
-    boardData={boardData}
-  />;
+  return (<ProductBoardRead
+      boardData={boardData}
+      navigate={navigate}
+    />
+  );
 };
 
-export default CampBoardReadCon;
+export default ProductBoardReadCon;

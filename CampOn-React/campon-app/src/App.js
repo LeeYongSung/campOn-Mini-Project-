@@ -17,6 +17,7 @@ import UserUpdateCon from './containers/user/UserUpdateCon';
 // 게시판
 import CampBoardMainCon from './containers/board/CampBoardMainCon';
 import CampBoardReadCon from './containers/board/CampBoardReadCon';
+import ProductBoardReadCon from './containers/board/ProductBoardReadCon';
 // 캠프
 import CampMain from './containers/camp/CampMain';
 import CampProduct from './containers/camp/CampProduct';
@@ -77,6 +78,7 @@ function App() {
           {/* 게시판 */}
           <Route path="/api/board/index" element={<CampBoardMainCon />} />
           <Route path="/api/board/crread/:reviewNo" element={<CampBoardReadCon />} />
+          <Route path="/api/board/prread/:prNo" element={<ProductBoardReadCon />} />
         </Routes>
       </BrowserRouter>
     </CategoryProvider>

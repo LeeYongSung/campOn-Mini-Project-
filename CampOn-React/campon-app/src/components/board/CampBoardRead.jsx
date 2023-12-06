@@ -1,9 +1,12 @@
 import React from 'react';
 
-const CampBoardRead = ({ boardData }) => {
+const CampBoardRead = ({ boardData, navigate }) => {
     const { reviewNo, reviewTitle, regDate, campName, cpdtName, reservationStart, reservationEnd, userId, reviewCon, reviewImg } = boardData;
     return (
         <div>
+            <div className="w-100 d-flex justify-content-between py-3">
+                <button type="button" onClick={() => navigate(-1)} className="btn btn-warning ms-2">목록</button>
+            </div>
             <div className="d-flex justify-content-between border-bottom border-top py-3">
                 <div className="ps-2">
                     <span>{reviewNo}</span>
