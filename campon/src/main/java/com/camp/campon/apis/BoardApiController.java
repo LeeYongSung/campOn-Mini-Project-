@@ -20,7 +20,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 
 @Slf4j
 @RestController
-@RequestMapping("/board")
+@RequestMapping("/api/board")
 public class BoardApiController {
 
     @Autowired

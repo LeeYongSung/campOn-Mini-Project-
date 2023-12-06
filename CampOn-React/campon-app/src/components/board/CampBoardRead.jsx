@@ -50,5 +50,6 @@ const CampBoardRead = () => {
       </div>
     </div>
   );
+}
 
   export default CampBoardRead
