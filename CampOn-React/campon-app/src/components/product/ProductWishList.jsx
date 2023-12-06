@@ -1,7 +1,7 @@
 import React from 'react'
 import { Link } from 'react-router-dom';
 
-const ProductWishList = ( { wishList } ) => {
+const ProductWishList = ( { wishList, onProductClick, addCart, removeWishList, addCartAll } ) => {
     // 임시 값
     let userNo = 2;
   return (
@@ -10,9 +10,9 @@ const ProductWishList = ( { wishList } ) => {
             <h5>찜 목록</h5> 
         </div>
         <div className="wishlistTotal position-fixed text-center">
-            <Link className="d-block w-100 btn btn-lg btn-warning rounded-0" to={"/product/addcartAll"}>
+            <button className="d-block w-100 btn btn-lg btn-warning rounded-0" onClick={ () => addCartAll()}>
                     <span>전체 장바구니에 담기</span>
-            </Link>
+            </button>
         </div>
         <div className="container">
             {/* 반복문 시작 */}
@@ -47,19 +47,15 @@ const ProductWishList = ( { wishList } ) => {
                     <div className="position-absolute d-flex bottom-0 end-0 wishlistBtn pb-1 pe-2">
                         <div>
                             {/* 상세설명 */}
-                            <Link className="btn btn-outline-warning font08em" to={`/product/productdetail?productNo=${product.productNo}`}>상세정보</Link>
+                            <Link className="btn btn-outline-warning font08em" to={{ pathname: "/product/productDetaile", state: {productNo: product.productNo}}} onClick={ () => onProductClick(product.productNo)}>상세정보</Link>
                         </div>
                         <div className="ps-2">
                             {/* 장바구니 담기 */}
-                            <Link className="btn btn-outline-success font08em" to={`/product/addcart?productNo=${product.productNo}&userNo=${userNo}`}>장바구니 담기</Link>
+                            <button type='button' className="btn btn-outline-success font08em" onClick={ () => addCart(product.productNo)}>장바구니 담기</button>
                         </div>
                         <div className="ps-2">
                             {/* 찜 삭제 */}
-                            <form action="/product/wishlistDelete" method="post">
-                                {/* <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" /> */}
-                                <input type="hidden" value={product.productsaveNo} name="productsaveNo" />
-                                <button type="submit" className="btn btn-outline-danger font08em" onClick={"confirm('찜 목록에서 삭제하시겠습니까?')"}>삭제</button>
-                            </form>
+                            <button type="button" onClick={() => removeWishList(product.productsaveNo)} className="btn btn-danger font08em">삭제</button>
                         </div>
                     </div>
                     <br />

@@ -1,13 +1,13 @@
 import React from 'react'
 
-const ProductDetail = ( { product, reviewCount } ) => {
+const ProductDetail = ( { product, reviewCount, addProductsave } ) => {
   if (!product) {
     return null;  
   }
   return (
     <>
       
-      <button type="button" onclick="addProductsave()">찜</button>
+      <button type="button" onClick={() => addProductsave(product.productNo)}>찜</button>
     
       <div>
         <div className="swiper mySwiper">

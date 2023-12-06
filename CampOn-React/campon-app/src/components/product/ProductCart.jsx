@@ -1,7 +1,7 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 
-const ProductCart = ( { cartList } ) => {
+const ProductCart = ( { cartList, removeCart, onProductClick } ) => {
   return (
     <>
         <div className="text-center w-100 py-4">
@@ -37,15 +37,11 @@ const ProductCart = ( { cartList } ) => {
                 <div className="position-absolute bottom-0 end-0 d-flex mb-1 me-1">
                     <div>
                         {/* 상세설명 */}
-                        <Link to={`/product/productdetail?productNo=${cart.productNo}`} className="btn btn-success font08em">상세정보</Link>
+                        <Link to={{ pathname: "/product/productDetaile", state: {productNo: cart.productNo}}} className="btn btn-success font08em" onClick={() => onProductClick(cart.productNo)}>상세정보</Link>
                     </div>
                     <div className="ms-2">
                         {/* 장바구니 삭제 */}
-                        <form action="/product/cartDelete" method="post">
-                            {/* <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" /> */}
-                            <input type="hidden" value={cart.cartNo} name="cartNo" />
-                            <button type="submit" onclick="confirm('장바구니에서 삭제하시겠습니까?')" className="btn btn-danger font08em">삭제</button>
-                        </form>
+                        <button type="button" onClick={() => removeCart(cart.cartNo)} className="btn btn-danger font08em">삭제</button>
                     </div>
                 </div>
             </div>
@@ -53,7 +49,7 @@ const ProductCart = ( { cartList } ) => {
     ))}
     <div>
         <div className="cartTotal position-fixed">
-            <a href="/order/payment" className="w-100 d-block btn btn-warning rounded-0 py-3">대여하기</a>
+            <Link to={"/product/payment"} className="w-100 d-block btn btn-warning rounded-0 py-3">대여하기</Link>
         </div>
     </div>
 

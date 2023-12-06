@@ -19,7 +19,7 @@ const ProductListContainer = () => {
     // categoryData 변수를 제거하고, 직접 category를 전달합니다.
     const response = await products.category(category);
     const data = await response.data;
-    console.log(data);
+    // console.log(data);
     setCategory(data);
   }
 
@@ -28,7 +28,6 @@ const ProductListContainer = () => {
   }
 
   const addCart = ( async (productNo) => {
-    alert('들어옴');
     let userNo = 2;
     let pNo = productNo;
     const response = await products.addProductsave(pNo, userNo);
@@ -41,7 +40,7 @@ const ProductListContainer = () => {
     handleCategoryClick(category);
   }, []);
 
-  console.log("리스트컨테이너 : " + category);
+  // console.log("리스트컨테이너 : " + category);
 
 
   return (

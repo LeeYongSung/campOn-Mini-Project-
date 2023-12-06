@@ -135,13 +135,19 @@ public class ProductApiController {
     public ResponseEntity<?> addProductsave(int productNo) {
         try {
             String userId = "user";
+            String state = "";
             Users users = userService.selectById(userId);
             int userNo = users.getUserNo();
             Product product = new Product();
             product.setProductNo(productNo);
             product.setUserNo(userNo);
             int result = productService.addProductsave(product);
-            return new ResponseEntity<>(product, HttpStatus.OK);
+
+            if(result == 1) state = "SUCCESS";
+            else state = "FAIL";
+
+
+            return new ResponseEntity<>(state, HttpStatus.OK);
         } catch (Exception e) {
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
@@ -177,12 +183,17 @@ public class ProductApiController {
     public ResponseEntity<?> addCart(Product product) {
         try {
             String state = "";
-            int result = productService.addCart(product);
-            log.info("장바구니에 넣기 성공여부 : "+ result);
-            if(result == 0) {
-                state = "FAIL";
-            } else {
+            int result = 0;
+            int productNo = product.getProductNo();
+            log.info(productNo + "");
+            int cnt = productService.dupliCateTest(productNo);
+            if(cnt == 0) {
+                result = productService.addCart(product);
+                log.info("장바구니에 넣기 성공여부 : "+ result);
                 state = "SUCCESS";
+            } else {
+                log.info("장바구니에 넣기 성공여부 : "+ result);
+                state = "FAIL";
             }
             return new ResponseEntity<>(state, HttpStatus.OK);
         } catch (Exception e) {
@@ -259,7 +270,6 @@ public class ProductApiController {
     @GetMapping(value="/depositcomp")
     public ResponseEntity<?> depositcomp(@RequestParam String orderNumber) {
         try {
-            // orderNumber = "3";
             log.info(orderNumber);
             Map<String, Object> deposit = null;
             try {
@@ -294,7 +304,7 @@ public class ProductApiController {
     /**
      * 결제 폼 제출
      */
-    @PostMapping(value = "/paymentpro")
+    @PostMapping("/paymentpro")
     public ResponseEntity<?> paymentpro(Order order) {
         try {
             int userNo = 0;
@@ -384,6 +394,7 @@ public class ProductApiController {
 
             return new ResponseEntity<>(orderNumber, HttpStatus.OK);
         } catch (Exception e) {
+            e.printStackTrace();
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
