@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import CampBoardMain from '../../components/board/CampBoardMain';
 import * as boardApi from '../../apis/board'
+import { useLocation } from 'react-router-dom';
 
 const CampBoardMainCon = () => {
   const [currentTab, setCurrentTab] = useState('camp');
@@ -8,6 +9,7 @@ const CampBoardMainCon = () => {
   const [crlist, setCrlist] = useState([]);
   const [newprlist, setNewprlist] = useState([]);
   const [prlist, setPrlist] = useState([]);
+  const location = useLocation();
 
   const fetchData = async () => {
     try {
@@ -25,7 +27,7 @@ const CampBoardMainCon = () => {
 
   useEffect(() => {
     fetchData();
-  }, []);
+  }, [location]);
 
   return (
     <CampBoardMain
