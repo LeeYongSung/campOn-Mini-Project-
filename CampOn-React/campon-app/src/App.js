@@ -14,14 +14,6 @@ import UserJoinCon from './containers/user/UserJoinCon';
 import UserLoginCon from './containers/user/UserLoginCon';
 import UserMypageCon from './containers/user/UserMypageCon';
 import UserUpdateCon from './containers/user/UserUpdateCon';
-<<<<<<< HEAD
-import Index from './pages/Index';
-// import { category } from './apis/product';
-// import { CategoryProvider } from './apis/CategoryContext';
-// import CampProduct from './containers/camp/CampProduct';
-// import CampDetail from './containers/camp/CampDetail';
-// import Favorites from './containers/camp/Favorites';
-=======
 // 게시판
 import CampBoardMainCon from './containers/board/CampBoardMainCon';
 import CampBoardReadCon from './containers/board/CampBoardReadCon';
@@ -31,7 +23,6 @@ import CampProduct from './containers/camp/CampProduct';
 import CampProducts from './containers/camp/CampProducts';
 import Favorites from './containers/camp/Favorites';
 import CampDetail from './containers/camp/CampDetail';
->>>>>>> 4a067fbbfbbca54b8431f6e65d2c37de5b43b9cf
 import Reservate from './containers/camp/Reservate';
 import Complete from './containers/camp/Complete';
 import Reservation from './containers/camp/Reservation';
