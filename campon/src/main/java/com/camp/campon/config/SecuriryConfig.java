@@ -68,13 +68,13 @@ public class SecuriryConfig extends WebSecurityConfigurerAdapter {
         // 람다식
         http.authorizeRequests((authorize) -> authorize                                    // 인가 설정
                                 // anMatchers("자원 경로")                   - 인가에 대한 URL 경로를 설정
-                                // permitAll()                              - 모든 사용자 허용
+                                 //permitAll()                            //  - 모든 사용자 허용
                                 // hasAnyRole()                             - 여러 권한에 대한 허용
                                 // hasRole()                                - 단일 권한에 대한 허용
                                 // static 밑에 경로
                                 .antMatchers("/css/**","/js/**","/img/**").permitAll()          // static/~ 정적자원 인가 처리                      
                                 //url 경로
-                             //   .antMatchers("/admin/**").hasAnyRole("ADMIN", "SELL")
+                                //.antMatchers("/admin/**").hasAnyRole("ADMIN", "SELL")
                                 // .antMatchers("/**").permitAll()                        
                                 // .antMatchers("/user/order").permitAll()
                                 // .antMatchers("/admin/**").hasRole("ADMIN")
@@ -136,7 +136,7 @@ public class SecuriryConfig extends WebSecurityConfigurerAdapter {
 
 
         // CSRF 방지 기능 비활성화 설정
-        // http.csrf().disable(); // 기본값 enable();
+        http.csrf().disable(); // 기본값 enable();
     }
 
     

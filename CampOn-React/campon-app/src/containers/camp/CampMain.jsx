@@ -28,8 +28,6 @@ const CampMain = () => {
         setNewList(campnewList);
         setHotList(campHotList);
         setNewReviewList(newReviewList);
-
-        
     };
 
     useEffect(()=>{
@@ -41,7 +39,7 @@ const CampMain = () => {
             <OpenSearchHeader />
             <HeadAd />
             <CamptypeList camptypeList={camptype} />
-            <CampSearch />
+            <CampSearch camptypeList={camptype} />
             <MiddelAd />
             <div className='w-100 info_btn'>
             <Link to="#" className='btn btn-warning btn-lg w-100 py-3'>캠프온이 처음이신가요? 캠프온 이용안내</Link>

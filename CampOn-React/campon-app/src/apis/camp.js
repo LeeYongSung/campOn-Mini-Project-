@@ -20,7 +20,7 @@ export const campdetail = (no) => axios.get(`/api/camp/campdetail/${no}`)
 //캠핑예약페이지
 export const campReservate = (no) => axios.get(`/api/camp/reservate/${no}`)
 //캠핑예약 처리
-export const campReservatePay = (campNo, cpdtNo, userNo, reservationNop, reservationStart, reservationEnd, reservationDate, campPaymentType) => axios.post("api/camp/reservate", {campNo, cpdtNo, userNo, reservationNop, reservationStart, reservationEnd, reservationDate, campPaymentType})
+export const campReservatePay = (campNo, cpdtNo, userNo, reservationNop, reservationStart, reservationEnd, reservationDate, campPaymentType) => axios.post("/api/camp/reservate", {campNo, cpdtNo, userNo, reservationNop, reservationStart, reservationEnd, reservationDate, campPaymentType})
 //캠핑예약 완료페이지
 export const complete = () => axios.get("/api/camp/complete")
 //예약현황 페이지
