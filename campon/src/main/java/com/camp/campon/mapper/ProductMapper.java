@@ -41,13 +41,16 @@ public interface ProductMapper {
 
     // 찜 목록
     public List<Product> wishList(int userNo) throws Exception;
-    //찜 등록
+    // 찜 등록
     public int addProductsave(Product product) throws Exception;
     // 찜 삭제
     public int wishListDelete(int wishlistNo) throws Exception;
     // 장바구니 목록
     public List<Product> cartList(int userNo) throws Exception;
-        //장바구니 등록
+    
+    // 중복 검사
+    public int dupliCateTest(int productNo) throws Exception;
+    //장바구니 등록
     public int addCart(Product product) throws Exception;
     //장바구니 업뎃
     public int cartUpdate(Product product) throws Exception;

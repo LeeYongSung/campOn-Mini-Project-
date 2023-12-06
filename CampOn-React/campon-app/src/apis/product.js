@@ -15,3 +15,13 @@ export const payment = () => axios.get("/api/product/payment")
 export const deposit = (orderNumber) => axios.get(`/api/product/depositcomp?orderNumber=${orderNumber}`)
 
 export const addProductsave = (productNo, userNo) => axios.get(`/api/product/addProductsaveAjax?productNo=${productNo}&userNo=${userNo}`)
+
+export const addCartAll = () => axios.get("/api/product/addcartAll")
+
+export const wishListAdd = (productNo) => axios.get(`/api/product/addProductsave?productNo=${productNo}`)
+
+export const removeCart = (cartNo) => axios.delete(`/api/product/cartDelete?cartNo=${cartNo}`)
+
+export const removeWishList = (productSaveNo) => axios.delete(`/api/product/wishlistDelete?productsaveNo=${productSaveNo}`)
+
+export const payMentPro = (Cnt, No) => axios.post("/api/product/paymentpro", { cartCnt: Cnt, productNo: No })

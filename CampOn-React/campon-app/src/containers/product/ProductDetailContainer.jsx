@@ -30,8 +30,16 @@ const ProductDetailContainer = () => {
         setProduct(product);
         setProductReview(productReview);
         serReviewCount(reviewCount)
-
     }
+
+    const addProductsave = ( async (productNo) => {
+      console.log(productNo);
+      const response = await products.wishListAdd(productNo);
+      const data = await response.data;
+      console.log(data);
+      if(data === 'SUCCESS') alert('찜에 등록되었습니다.')
+      else alert('이미 찜에 등록된 상품입니다.')
+    })
 
     useEffect(() => {
         getPrdocut();
@@ -40,7 +48,7 @@ const ProductDetailContainer = () => {
   return (
     <>
         <BackCartHeader />
-        <ProductDetail product={product} reviewCount={reviewCount} />
+        <ProductDetail product={product} reviewCount={reviewCount} addProductsave={addProductsave}/>
         <ProductDetailReview productReview={productReview} />
         <ProductInformation />
         <CampOnFooter />
