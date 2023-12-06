@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import * as camps from '../../apis/camp'
 import { useParams } from 'react-router-dom'
-import BackPinckHeader from '../../components/header/BackPinckHeader';
+import BackPickHeader from '../../components/header/BackPickHeader';
 import CampOnFooter from '../../components/footer/CampOnFooter';
 import CampDetailintro from '../../components/camp/CampDetailintro';
 import UserFooter from '../../components/menu/UserFooter'
@@ -25,7 +25,7 @@ const CampDetail = () => {
 
   return (
     <div>
-        <BackPinckHeader />
+        <BackPickHeader />
         <CampDetailintro detailimg={detailimg} detail={detail} />
         <CampOnFooter />
         <UserFooter />

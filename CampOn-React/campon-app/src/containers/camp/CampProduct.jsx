@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import * as camps from '../../apis/camp'
-import BackPinckHeader from '../../components/header/BackPinckHeader'
+import BackPickHeader from '../../components/header/BackPickHeader'
 import CampOnFooter from '../../components/footer/CampOnFooter'
 import CampReview from '../../components/camp/CampReview'
 import { useParams } from 'react-router'
@@ -39,7 +39,7 @@ const CampProduct = () => {
 
   return (
     <div>
-        <BackPinckHeader />
+        <BackPickHeader />
         <CampProductintro productsimg={productsimg} productsenvironment={productsenvironment} productsreserve={productsreserve} productsfacility={productsfacility} productsproducts={productsproducts} />
         <CampDetailList productsproductlist={productsproductlist} />
         <CampReview productsreview={productsreview} />
