@@ -1,7 +1,9 @@
 import React, { useState } from 'react'
 import * as admins from '../apis/admin'
+import { useNavigate } from 'react-router';
 
 const AdminProductAdd = () => {
+    const nav = useNavigate()
     const [productName, setProductName] = useState('');
     const [productThmFile, setProductThmFile] = useState(null);
     const [productCategory, setProductCategory] = useState('');
@@ -79,6 +81,7 @@ const AdminProductAdd = () => {
             const response = await admins.productAdd(formData, headers)
             alert('등록 완료');
             console.log(response.data);
+            nav('/admin/productlist')
         } catch (error) {
             console.log(error)
         }

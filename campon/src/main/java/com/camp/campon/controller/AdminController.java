@@ -413,6 +413,7 @@ public class AdminController {
     public String adlist(Model model) throws Exception {
         List<Ad> adlist = adService.adlist();
         model.addAttribute("adlist", adlist);
+        log.info("광고는? "+adlist);
         return "admin/adlist";
     }
 

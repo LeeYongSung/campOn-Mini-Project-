@@ -136,7 +136,7 @@ public class SecuriryConfig extends WebSecurityConfigurerAdapter {
 
 
         // CSRF 방지 기능 비활성화 설정
-        http.csrf().disable(); // 기본값 enable();
+      http.csrf().disable(); // 기본값 enable();
     }
 
     
@@ -186,7 +186,7 @@ public class SecuriryConfig extends WebSecurityConfigurerAdapter {
             return super.authenticationManagerBean();
         }
         
-        // 접근 거부 처리자 - 빈 등록
+        //접근 거부 처리자 - 빈 등록
         @Bean
         public AccessDeniedHandler accessDeniedHandler() {
             return new CustomAccessDeniedHandler();

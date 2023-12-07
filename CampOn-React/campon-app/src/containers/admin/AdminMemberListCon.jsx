@@ -2,6 +2,9 @@ import React, { useState } from 'react'
 import AdminMemberList from '../../components/admin/AdminMemberList'
 import AdminMemberListSell from '../../components/admin/AdminMemberListSell'
 import AdminMemberListUser from '../../components/admin/AdminMemberListUser'
+import BackHeader from '../../components/header/BackHeader'
+import CampOnFooter from '../../components/footer/CampOnFooter'
+import AdminFooter from '../../components/menu/AdminFooter'
 import { useEffect } from 'react'
 import * as admins from '../../apis/admin'
 import { useNavigate } from 'react-router-dom'
@@ -15,6 +18,7 @@ const AdminMemberListCon = () => {
   const [tab, setTab] = useState('')
   const [clickkUser, setclickkUser] = useState('')
   const [clickkSell, setclickkSell] = useState('')
+
   const getmemberlist = async () => {
     const memberList = await admins.memberlist()
     const data = await memberList.data
@@ -30,8 +34,8 @@ const AdminMemberListCon = () => {
     try {
       const response = await admins.memberdel(userId)
       console.log(response.data)
+      getmemberlist()
       navigate('/admin/memberList')
-      console.log('네비게이트가 안됨')
     } catch (error) {
       console.log(error)
     }
@@ -58,11 +62,15 @@ const AdminMemberListCon = () => {
   },[])
 
   return (
+    
     <>
+    <BackHeader />
       <AdminMemberList handleuserBtnn={handleuserBtnn} handlesellBtnn={handlesellBtnn} clickkUser={clickkUser} clickkSell={clickkSell}/>
       {
         tab ? <AdminMemberListUser userList={userList} deleteBtn={deleteBtn}/> : <AdminMemberListSell sellList={sellList} deleteBtn={deleteBtn}/>
       }
+      <CampOnFooter />
+<AdminFooter />
     </>
   )
 }

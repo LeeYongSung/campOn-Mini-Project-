@@ -17,4 +17,11 @@ export const dcampAdd = (formData, headers)=>{return axios.post('/api/admin/camp
 export const getdcampUpd = (cpdtNo)=>{return axios.get(`/api/admin/campdetailupdate/${cpdtNo}`)}
 export const dcampUpd = (formData, headers)=>{return axios.post('/api/admin/campdetailupdate', formData, headers)}
 export const dcampDel = (cpdtNo)=>{return axios.delete(`/api/admin/campdetaildelete/${cpdtNo}`)}
+//광고
+export const getAd = ()=>{return axios.get(`/api/admin/adlist`)}
+export const getAdSeller = ()=>{return axios.get(`/api/admin/adlistseller`)}
+export const AdAdd = (formData, headers)=>{return axios.post('/api/admin/adinsertpro', formData, headers)}
+export const adSign = (adNo)=>{return axios.get(`/api/admin/adcheck/${adNo}`)}
+
+
 

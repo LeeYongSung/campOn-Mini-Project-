@@ -13,7 +13,7 @@ const AdminCampAdd = () => {
     const [regionNo, setregionNo] = useState('')
     const [environmentTypeNo, setenvironmentTypeNo] = useState('')
     const [campTel, setcampTel] = useState('')
-   // const [facilityTypeNo, setfacilityTypeNo] = useState('')
+    // const [facilityTypeNo, setfacilityTypeNo] = useState('')
     const [facilityTypeNoList, setfacilityTypeNoList] = useState([])
     const [campOpen, setcampOpen] = useState('')
     const [campClose, setcampClose] = useState('')
@@ -49,16 +49,20 @@ const AdminCampAdd = () => {
                 break;
         }
     }
-    const handlefac = (e)=>{
+    const handlefac = (e) => {
         // const updateFacList = 
         //     e.target.checked ? [...facilityTypeNoList, value] : facilityTypeNoList.filter((facility)=>{facility !== e.target.value}) 
-        setfacilityTypeNoList(e.target.checked ? [...facilityTypeNoList, e.target.value] : facilityTypeNoList.filter((facility)=>facility !== e.target.value))
-       //이렇게 하면 안됨 setfacilityTypeNoList(e.target.checked ? [...facilityTypeNoList, e.target.value] : facilityTypeNoList.filter((facility)=>{facility !== e.target.value}))
+        setfacilityTypeNoList(e.target.checked ? [...facilityTypeNoList, e.target.value] : facilityTypeNoList.filter((facility) => facility !== e.target.value))
+        //이렇게 하면 안됨 setfacilityTypeNoList(e.target.checked ? [...facilityTypeNoList, e.target.value] : facilityTypeNoList.filter((facility)=>{facility !== e.target.value}))
     }
 
     //등록 버튼
     const formSubmit = async () => {
         const formData = new FormData();
+        console.log(campAddress)
+    console.log(campTel)
+    console.log(placeName)
+    console.log(regionNo)
         formData.append("campName", campName)
         if (file) {
             for (let i = 0; i < file.length; i++) {
@@ -91,13 +95,13 @@ const AdminCampAdd = () => {
             placeName: placeName,
             regionNo: regionNo,
             environmentTypeNo: environmentTypeNo,
-            campTel : campTel, 
+            campTel: campTel,
             campOpen: campOpen,
             campClose: campClose,
-            campIntroduction: campIntroduction, 
-            userNo: userNo, 
-            facilityTypeNoList : facilityTypeNoList, 
-            campCaution : campCaution
+            campIntroduction: campIntroduction,
+            userNo: userNo,
+            facilityTypeNoList: facilityTypeNoList,
+            campCaution: campCaution
         };
         console.log(camp, 'camp는?')
         try {
@@ -111,10 +115,15 @@ const AdminCampAdd = () => {
 
     }
     //지도
-    const search = () => { }
+    const [campLocation, setCampLocation] = useState()
+    const [campLatitude, setCampLatitude] = useState()
+    const [campLongitude, setCampLongitude] = useState()
+    
+    const search = () => { 
+    }
 
-    useEffect(()=>{
-        
+    useEffect(() => {
+
     }, [])
 
     return (
@@ -123,7 +132,6 @@ const AdminCampAdd = () => {
                 <div className="w-100 text-center my-3">
                     <h5>캠핑장 등록</h5>
                 </div>
-                {/* <form th: action="|/admin/campproductadd?${_csrf.parameterName}=${_csrf.token}|" method="post" enctype="multipart/form-data"> */}
                 <input type="hidden" name="userNo" id="userNo" value={userNo} />
                 <div className="form-floating my-2">
                     <input type="text" id="campName" name="campName" className="form-control" onChange={handleset} />
@@ -149,12 +157,13 @@ const AdminCampAdd = () => {
                     <label htmlFor="placeName">장소명을 입력해 주세요</label>
                 </div>
                 <div className="form-floating my-2 d-flex">
-                    <input type="text" name="campLocation" id="campLocation" className="form-control" />
+                    <input type="text" name="campLocation" id="campLocation" className="form-control" onChange={(e) => { setCampLocation(e.target.value) }} />
                     <label htmlFor="campLocation">지도검색을 위한 주소를 입력해주세요</label>
                     <button type="button" onClick={search}>검색</button>
                 </div>
-                <input type="hidden" id="campLatitude" name="campLatitude" placeholder="위도(latitude)" />
-                <input type="hidden" id="campLongitude" name="campLongitude" placeholder="경도(longitude)" />
+                <input type="hidden" id="campLatitude" name="campLatitude" placeholder="위도(latitude)" value={campLatitude}/>
+                <input type="hidden" id="campLongitude" name="campLongitude" placeholder="경도(longitude)"  value={campLongitude}/>
+                {/* api 지도 출력 부분 */}
                 <div id="map" style={{ width: "100%", height: "600px" }}>
                 </div>
                 <div className="form-floating my-2">
@@ -239,7 +248,6 @@ const AdminCampAdd = () => {
                 <div>
                     <input type="button" value="캠핑장등록" className="btn btn-warning btn-lg w-100 my-3 py-3" onClick={formSubmit} />
                 </div>
-                {/* </form> */}
             </div>
 
 

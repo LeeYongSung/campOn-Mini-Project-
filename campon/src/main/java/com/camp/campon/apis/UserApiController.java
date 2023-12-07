@@ -1,6 +1,7 @@
 package com.camp.campon.apis;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.Cookie;
@@ -14,6 +15,7 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.web.authentication.logout.SecurityContextLogoutHandler;
 import org.springframework.security.web.authentication.rememberme.PersistentTokenRepository;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.CookieValue;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -58,12 +60,12 @@ public class UserApiController {
         return new ResponseEntity<>(response, HttpStatus.OK);
     }
 
-
      // 회원 가입 화면
-    // @GetMapping(value = "/join")
-    // public ResponseEntity<?> join() throws Exception {
-    //     return new ResponseEntity<>(response, org.springframework.http.HttpStatus.OK);
-    // }
+    @GetMapping(value = "/join")
+    public ResponseEntity<?> join() throws Exception {
+        List<String> userIdList = userService.userIds();
+        return new ResponseEntity<>(userIdList, HttpStatus.OK);
+    }
 
     // 회원 가입 처리
     @PostMapping(value = "/join")
@@ -82,15 +84,13 @@ public class UserApiController {
         return new ResponseEntity<>(result, HttpStatus.OK);
     }
 
-    // // 회원정보 수정
-    // @GetMapping(value = "/update")
-    // public ResponseEntity<?> userUpdate(Model model, Principal principal) throws Exception {
-    //     String loginId = principal != null ? principal.getName() : null;
-    //     Users user = userService.selectById(loginId);
-    //     model.addAttribute("user", user);
-    //     return "user/update";
-    //     return new ResponseEntity<>(response, org.springframework.http.HttpStatus.OK);
-    // }
+    // 회원정보 수정
+    @GetMapping(value = "/update/{userId}")
+    public ResponseEntity<?> userUpdate(@PathVariable String userId) throws Exception {
+        Users user = userService.selectById(userId);
+        log.info(user+"user정보");
+        return new ResponseEntity<>(user, HttpStatus.OK);
+    }
 
     /**
      * 회원정보 수정 처리

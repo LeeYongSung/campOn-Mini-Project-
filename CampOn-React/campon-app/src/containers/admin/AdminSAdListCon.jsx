@@ -1,18 +1,18 @@
 import React from 'react'
-import AdminCampUpd from '../../components/admin/AdminCampUpd'
+import AdminSAdList from '../../components/admin/AdminSAdList'
 import BackHeader from '../../components/header/BackHeader'
 import CampOnFooter from '../../components/footer/CampOnFooter'
 import SellerFooter from '../../components/menu/SellerFooter'
 
-const AdminCampUpdCon = () => {
+const AdminSAdListCon = () => {
   return (
     <>
-    <BackHeader />
-    <AdminCampUpd/>
+     <BackHeader />
+    <AdminSAdList/>
     <CampOnFooter />
-    <SellerFooter />
+<SellerFooter />
     </>
   )
 }
 
-export default AdminCampUpdCon
+export default AdminSAdListCon

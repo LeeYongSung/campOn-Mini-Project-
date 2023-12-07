@@ -1,9 +1,9 @@
 import React from 'react'
 
-const AdminMemberUser = ({user, active}) => {
+const AdminMemberUser = ({user}) => {
   return (
     <>
-      <div className={`w-100 border-bottom border-start border-end rounded-bottom mb-2 commemberlist_detail ${active}`}>
+      <div className={`w-100 border-bottom border-start border-end rounded-bottom mb-2 commemberlist_detail`}>
             <div className="py-3">
               <div className="d-flex justify-content-between py-1">
                 <div className="ps-2">

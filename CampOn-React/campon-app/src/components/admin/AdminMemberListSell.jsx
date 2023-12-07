@@ -58,12 +58,12 @@ const AdminMemberListSell = ({ sellList, deleteBtn }) => {
               </div>
               <div className="position-absolute bottom-0 end-0 pe-1 memberlist_more_box">
                 {
-                  more ? <a className="commemberlist_less" onClick={() => lessbtn(index)}>접기<span className="material-symbols-outlined">expand_less</span></a> : <a className="commemberlist_more" onClick={() => morebtn(index)}>더보기<span className="material-symbols-outlined">expand_more</span></a>
+                   moreList[index] ? <a className="commemberlist_less" onClick={() => lessbtn(index)}>접기<span className="material-symbols-outlined">expand_less</span></a> : <a className="commemberlist_more" onClick={() => morebtn(index)}>더보기<span className="material-symbols-outlined">expand_more</span></a>
                 }
               </div>
             </div>
             {
-              moreList[index] ? <AdminMemberSell user={user} active={'active'} /> : <AdminMemberSell user={user} />
+              moreList[index] ? <AdminMemberSell user={user} /> : <></>
             }
           </div>
 
