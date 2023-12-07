@@ -6,6 +6,7 @@ import CampSearch from '../../components/camp/CampSearch'
 import CampOnFooter from '../../components/footer/CampOnFooter'
 import BackHeader from '../../components/header/BackHeader'
 import UserFooter from '../../components/menu/UserFooter'
+import CampList from '../../components/camp/CampList'
 
 const CampProducts = () => {
     const {campTypeNo} = useParams()

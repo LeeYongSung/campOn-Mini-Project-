@@ -9,6 +9,14 @@ import { category } from './apis/product';
 // 관리자
 import AdminProductAddCon from './containers/admin/AdminProductAddCon';
 import AdminProductList from './containers/admin/AdminProductList';
+import AdminMemberListCon from './containers/admin/AdminMemberListCon';
+import AdminProductUpdCon from './containers/admin/AdminProductUpdCon';
+import AdminCampListCon from './containers/admin/AdminCampListCon';
+import AdminCampAddCon from './containers/admin/AdminCampAddCon';
+import AdminCampUpdCon from './containers/admin/AdminCampUpdCon';
+import AdminCampDAddCon from './containers/admin/AdminCampDAddCon';
+import AdminDCampUpdCon from './containers/admin/AdminDCampUpdCon';
+import AdminAdApplyCon from './containers/admin/AdminAdApplyCon';
 // 유저
 import UserJoinCon from './containers/user/UserJoinCon';
 import UserLoginCon from './containers/user/UserLoginCon';
@@ -37,6 +45,7 @@ import ProductWishListContainer from './containers/product/ProductWishListContai
 import ProductPaymentContainer from './containers/product/ProductPaymentContainer';
 import ProductDepositCompContainer from './containers/product/ProductDepositCompContainer';
 
+
 function App() {
   return (
     <CategoryProvider>
@@ -44,16 +53,14 @@ function App() {
         <Routes>
           {/* 캠프온 메인 (추후 캠프 index랑 연결) */}
           <Route path="/" element={<Index />} />
-
           {/* 상품 */}
           <Route path="/product" element={<ProductIndexContainer />} />
           <Route path="/product/productList" element={<ProductListContainer />} />
           <Route path="/product/productDetaile" element={<ProductDetailContainer />} />
           <Route path="/product/cart" element={<ProductCartContainer />} />
           <Route path="/product/wishlist" element={<ProductWishListContainer />} />
-          <Route path="/product/payment" element={<ProductPaymentContainer /> } />
-          <Route path="/product/complete" element={<ProductDepositCompContainer /> } />
-
+          <Route path="/product/payment" element={<ProductPaymentContainer />} />
+          <Route path="/product/complete" element={<ProductDepositCompContainer />} />
           {/* 캠핑 */}
           <Route path="/api/camp/index" element={<CampMain />} />
           <Route path="/api/camp/campproducts/:campTypeNo" element={<CampProducts />} />
@@ -64,7 +71,6 @@ function App() {
           <Route path="/api/camp/complete" element={<Complete />} />
           <Route path="/api/camp/reservation" element={<Reservation />} />
           <Route path="/api/camp/schedule" element={<Schedule />} />
-
           {/* 유저 */}
           <Route path="/user/login" element={<UserLoginCon />} />
           <Route path="/user/join" element={<UserJoinCon />} />
@@ -74,15 +80,23 @@ function App() {
           {/* 관리자 */}
           <Route path="/admin/productlist" element={<AdminProductList />} />
           <Route path="/admin/productadd" element={<AdminProductAddCon />} />
-
+          <Route path="/admin/productupdate/:productNo" element={<AdminProductUpdCon />} />
+          <Route path="/admin/memberList" element={<AdminMemberListCon />} />
+          <Route path="/admin/campproductlist" element={<AdminCampListCon />} />
+          <Route path="/admin/campproductadd" element={<AdminCampAddCon />} />
+          <Route path="/admin/campproductupdate/:campNo" element={<AdminCampUpdCon />} />
+          <Route path="/admin/campdetailinsert/:campNo/:userNo" element={<AdminCampDAddCon />} />
+          <Route path="/admin/adinsert/:campNo" element={<AdminAdApplyCon />} />
           {/* 게시판 */}
           <Route path="/api/board/index" element={<CampBoardMainCon />} />
           <Route path="/api/board/crread/:reviewNo" element={<CampBoardReadCon />} />
           <Route path="/api/board/prread/:prNo" element={<ProductBoardReadCon />} />
+          {/* 유저넘버 넘기는건 확인해봐야 함  */}
+          <Route path="/admin/campdetailupdate/:cpdtNo" element={<AdminDCampUpdCon />} />
         </Routes>
       </BrowserRouter>
     </CategoryProvider>
-  );
-}
 
+  )
+}
 export default App;
