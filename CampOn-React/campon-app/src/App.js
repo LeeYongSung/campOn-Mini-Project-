@@ -27,20 +27,16 @@ function App() {
       <Routes>
         {/* 캠프온 메인 (추후 캠프 index랑 연결) */}
         <Route path="/" element={<Index />} />
-
         {/* 상품 */}
         <Route path="/product" element={<ProductIndexContainer />} />
-
         {/* 캠핑 */}
         <Route path="/api/camp/index" element={<CampMain />} />
         <Route path="/api/camp/campproducts" element={<CampProducts />} />
-
         {/* 유저 */}
         <Route path="/user/login" element={<UserLoginCon />} />
         <Route path="/user/join" element={<UserJoinCon />} />
         <Route path="/user/update" element={<UserUpdateCon />} />
         <Route path="/user/mypage" element={<UserMypageCon />} />
-
         {/* 관리자 */}
         <Route path="/admin/productlist" element={<AdminProductList />} />
         <Route path="/admin/productadd" element={<AdminProductAddCon />} />
