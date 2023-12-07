@@ -4,7 +4,7 @@ import * as boardApi from '../../apis/board'
 import CampBoardRead from '../../components/board/CampBoardRead';
 import UserFooter from '../../components/menu/UserFooter'
 import CampOnFooter from '../../components/footer/CampOnFooter';
-import OpenSearchHeader from '../../components/header/OpenSearchHeader';
+import BackHeader from '../../components/header/BackHeader';
 
 const CampBoardReadCon = () => {
   const { reviewNo } = useParams();
@@ -28,7 +28,7 @@ const CampBoardReadCon = () => {
 
   return (
     <>
-      <OpenSearchHeader />
+      <BackHeader />
       <CampBoardRead
         boardData={boardData}
         navigate={navigate}

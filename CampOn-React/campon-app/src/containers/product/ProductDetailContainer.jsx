@@ -46,17 +46,19 @@ const ProductDetailContainer = () => {
     })
 
     const moreBtn = () => {
-      // console.log('들어옴');
-      // console.log(moreState);
       setMoreState(true);
     }
     const rentInfoClick = () => {
-      console.log('들어옴')
       setRentInfo(true);
     }
+    const closeBtn = () => {
+      setRentInfo(false);
+    }
     const productInfoClick = () => {
-      console.log('들어옴')
       setProductInfo(true);
+    }
+    const closeProductBtn = () => {
+      setProductInfo(false);
     }
 
     useEffect(() => {
@@ -68,7 +70,9 @@ const ProductDetailContainer = () => {
         <BackCartHeader />
         <ProductDetail product={product} reviewCount={reviewCount} addProductsave={addProductsave} moreBtn={moreBtn} moreState={moreState}/>
         <ProductDetailReview productReview={productReview} />
-        <ProductInformation rentInfo={rentInfo} rentInfoClick={rentInfoClick} productInfoClick={productInfoClick} productInfo={productInfo} />
+        <ProductInformation rentInfo={rentInfo} rentInfoClick={rentInfoClick} 
+                            productInfoClick={productInfoClick} productInfo={productInfo} 
+                            closeBtn={closeBtn} closeProductBtn={closeProductBtn} />
         <CampOnFooter />
         <UserFooter />
     </>

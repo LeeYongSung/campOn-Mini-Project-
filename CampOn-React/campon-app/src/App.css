@@ -168,7 +168,7 @@ input[type="checkbox"] {
 
 
 /* 지역 검색 창 */
-.regionBox {width: 500px; background-color: white; }
+.regionBox {width: 500px; background-color: white; z-index: 10; bottom: 70px;}
 .regionBox>div>button {transition: all 0.5s; background-color: white;}
 .regionBox>div>button:focus, .regionBox>div>button:hover {background-color: #FFC700;}
 
@@ -332,6 +332,8 @@ input[type="checkbox"] {
 .productsaveBtn {position: fixed; top: 100px; z-index: 100; margin-left: 420px; width: 60px; height: 60px;}
 .productsaveBtn>button {width: 60px; height: 60px;}
 .product_more {border: none; background-color: inherit;}
+.rentInfo_box {position: fixed; width: 500px; height: 500px; top: 50%; left: 50%; transform: translate(-50%, -50%); background-color: white; z-index: 100;}
+.productInfo_box {position: fixed; width: 500px; height: 500px; top: 50%; left: 50%; transform: translate(-50%, -50%); background-color: white; z-index: 100;}
 
 /* 찜 */
 .wishlistImg {height: 200px; overflow: hidden;}
