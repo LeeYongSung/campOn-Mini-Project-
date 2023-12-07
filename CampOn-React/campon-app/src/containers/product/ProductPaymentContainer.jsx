@@ -72,14 +72,14 @@ const ProductPaymentContainer = () => {
     }    
 
     const requestPay = (totalPrice) => {
-      IMP.init('imp48458232');
+      window.IMP.init('imp48458232');
       var today = new Date();
       var hours = today.getHours(); // 시
       var minutes = today.getMinutes();  // 분
       var seconds = today.getSeconds();  // 초
       var milliseconds = today.getMilliseconds();
       var makeMerchantUid = hours + minutes + seconds + milliseconds;
-      IMP.request_pay({
+      window.IMP.request_pay({
           pg: 'kcp',
           pay_method: 'card',
           merchant_uid: "IMP" + makeMerchantUid,

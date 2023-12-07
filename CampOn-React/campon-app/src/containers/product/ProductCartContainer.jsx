@@ -20,7 +20,7 @@ const ProductCartContainer = () => {
 
     const removeCart = ( async (cartNo) => {
 
-      let ProductCart = confirm('상품을 삭제하겠습니까?');
+      let ProductCart = window.confirm('상품을 삭제하겠습니까?');
 
       if(ProductCart) {
         const response = await Products.removeCart(cartNo);
