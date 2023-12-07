@@ -24,4 +24,4 @@ export const removeCart = (cartNo) => axios.delete(`/api/product/cartDelete?cart
 
 export const removeWishList = (productSaveNo) => axios.delete(`/api/product/wishlistDelete?productsaveNo=${productSaveNo}`)
 
-export const payMentPro = (Cnt, No) => axios.post("/api/product/paymentpro", { cartCnt: Cnt, productNo: No })
+export const payMentPro = (Cnt, No) => axios.post("/api/product/paymentpro", { cartCnts: Cnt, productNos: No })

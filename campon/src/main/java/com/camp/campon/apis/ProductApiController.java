@@ -307,6 +307,7 @@ public class ProductApiController {
     @PostMapping("/paymentpro")
     public ResponseEntity<?> paymentpro(Order order) {
         try {
+
             int userNo = 0;
             String userTel = "01000000000";
             String userName = "이용자";
@@ -318,7 +319,7 @@ public class ProductApiController {
             userName = users.getUserName();
             
             order.setUserNo(userNo);
-            log.info("order 객체에 어떻게 담겨있는지 확인 : "+order);   
+            log.info("order 객체에 어떻게 담겨있는지 확인 : "+order);
             //(reservationNo=2, pmType=카드,cartCnts=[2, 3, 4, 5], productNos=[1, 2, 11, 1])
             //카트 업뎃
             int[] cartCnts = order.getCartCnts();
@@ -331,7 +332,7 @@ public class ProductApiController {
 
                 product.setUserNo(userNo);
                 int result = productService.cartUpdate(product);
-                log.info("카트업뎃여부 : "+result);
+                log.info("카트업뎃여부 : "+ result);
             }
             //orderNumber 생성
             int createNum = 0;

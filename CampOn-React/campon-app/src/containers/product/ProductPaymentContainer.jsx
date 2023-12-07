@@ -42,7 +42,7 @@ const ProductPaymentContainer = () => {
     }
 
     const productNos = cartList.map(product => product.productNo);
-    const cartCnts = cartList.map(product => product.productNo);
+    const cartCnts = cartList.map(product => quantities[product.productNo] || 1);
 
     const getPaymentPro = ( async (cartCnts, productNos) => {
       console.log(cartCnts);
@@ -54,9 +54,9 @@ const ProductPaymentContainer = () => {
     });
     
       const processPayment = (paymentType, camp, totalPrice) => {
-        if(camp == null) {
-          alert('배송받을 캠핑장을 선택해 주세요.')
-        } else {
+        // if(camp === '') {
+        //   alert('배송받을 캠핑장을 선택해 주세요.')
+        // } else {
           if (paymentType === "카드") {
               console.log(totalPrice);
               console.log("카드 결제");
@@ -68,7 +68,7 @@ const ProductPaymentContainer = () => {
           } else {
               console.log("결제 방법을 선택해주세요.");
           }
-        }
+        // }
     }    
 
     const requestPay = (totalPrice) => {
@@ -92,11 +92,11 @@ const ProductPaymentContainer = () => {
               console.log(rsp);
           }
       });
-  }
+    }
 
   useEffect(() => {
     getPayList();
-  }, []); // cartList를 제거하고 빈 배열을 설정합니다.
+  }, []);
 
   useEffect(() => {
     const initialQuantities = {};
@@ -106,7 +106,7 @@ const ProductPaymentContainer = () => {
       });
       setQuantities(initialQuantities);
     }
-  }, [cartList]); // cartList가 변경될 때마다
+  }, [cartList]); 
   
 
   return (
