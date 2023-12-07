@@ -2,6 +2,8 @@ package com.camp.campon.service;
 
 import java.util.List;
 
+import org.springframework.web.bind.annotation.RequestBody;
+
 import com.camp.campon.dto.Camp;
 
 public interface CampService {
@@ -92,4 +94,8 @@ public interface CampService {
     public int campFacilityDelete(int campNo) throws Exception;
     public int campImgDelete(int campNo) throws Exception;
     public int campEnvironmentDelete(int campNo) throws Exception;
+
+
+    //추가
+    public int campUpdate(@RequestBody Camp camp) throws Exception;
 }

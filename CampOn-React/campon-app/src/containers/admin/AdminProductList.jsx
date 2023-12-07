@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-
+import { Link } from 'react-router-dom'
 const AdminProductList = () => {
     const [productList, setProductList] = useState([]);
 
@@ -25,7 +25,7 @@ const AdminProductList = () => {
                     <div className="container w-100">
                         <div className="border rounded my-2 position-relative AdminProduct">
                             <div className="AdminProductImg w-100 border-bottom">
-                                <img src={`http://localhost:8081/img?file=${product.productThumnail}`} alt="상품썸네일" className="w-100" />
+                                <img src={`/api/img?file=${product.productThumnail}`} alt="상품썸네일" className="w-100" />
                             </div>
                             <div className="w-100 d-flex justify-content-between pb-5 pt-2">
                                 <div className="ps-3">
@@ -50,8 +50,8 @@ const AdminProductList = () => {
                                         <h5>{product.productPrice}</h5>
                                     </div>
                                     <div className="position-absolute bottom-0 end-0 py-1 px-1">
-                                        <a href={`/admin/productupdate?productNo=${product.productNo}`} className="btn btn-warning">상품 수정</a>
-                                        <a href={`/admin/delete?productNo=${product.productNo}`} className="btn btn-danger">상품 삭제</a>
+                                        <Link to={`/admin/productupdate/${product.productNo}`} className="btn btn-warning" productNo={product.productNo}>상품 수정</Link>
+                                        <a href={`/admin/delete/${product.productNo}`} className="btn btn-danger">상품 삭제</a>
                                     </div>
                                 </div>
                             </div>

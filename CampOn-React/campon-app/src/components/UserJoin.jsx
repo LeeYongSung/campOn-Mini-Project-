@@ -41,8 +41,6 @@ const UserJoin = () => {
         setCompanyNumber(event.target.value);
     }
     
-
-
     const typeButtons = document.querySelectorAll('.typeBtn');
     const typeBtn = document.getElementById('typeBtn');
     const authSell = document.getElementById('authSell');

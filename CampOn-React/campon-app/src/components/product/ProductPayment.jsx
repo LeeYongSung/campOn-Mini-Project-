@@ -1,22 +1,22 @@
 import React, { useEffect, useState } from 'react'
 
 const ProductPayment = ( { cartList, campList, onPayment, onIncrease, onDecrease, quantities } ) => {
-    if(campList == null ) {
-        return 
-    }
-    
     const [ paymentType, setPaymentType ] = useState("");
     const [ camp, setCamp ] = useState("");
-
+    
     const handlePayment = () => {
         onPayment(paymentType, camp, totalPrice);
     }
     
-
+    
     
     
     const totalPrice = cartList.reduce((total, product) => total + product.productPrice * quantities[product.productNo], 0);
-
+    
+    if(campList == null ) {
+        return 
+    }
+    
 
   return (
     <>

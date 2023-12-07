@@ -39,7 +39,7 @@ const ProductWishListContainer = () => {
         alert(data + '개의 상품이 장바구니에 담겼습니다.')
       } else {
         alert('이미 장바구니에 있는 상품입니다.');
-        let moveCart = confirm('장바구니로 이동하시겠습니까?');
+        let moveCart = window.confirm('장바구니로 이동하시겠습니까?');
         if(moveCart) {
           
         } else {
@@ -50,7 +50,7 @@ const ProductWishListContainer = () => {
 
     const removeWishList = ( async (prductSaveNo) => {
       console.log(prductSaveNo);
-      let ProductWish = confirm('상품을 삭제하겠습니까?');
+      let ProductWish = window.confirm('상품을 삭제하겠습니까?');
 
       if(ProductWish) {
         const response = await products.removeWishList(prductSaveNo);
