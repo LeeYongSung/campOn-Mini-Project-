@@ -6,6 +6,7 @@ import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -13,11 +14,15 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestPart;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.camp.campon.dto.Board;
+import com.camp.campon.dto.Camp;
 import com.camp.campon.service.BoardService;
 import com.camp.campon.service.UserService;
+import com.fasterxml.jackson.databind.ObjectMapper;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -33,7 +38,7 @@ public class BoardApiController {
     private UserService userService;
 
     // 메인페이지
-    @GetMapping(value="/index")
+    @GetMapping(value = "/index")
     public ResponseEntity<?> index() throws Exception {
         try {
             List<Board> newReviewList = boardService.newReviewList();
@@ -48,14 +53,14 @@ public class BoardApiController {
             map.put("prlist", prlist);
 
             return new ResponseEntity<>(map, HttpStatus.OK);
-            
+
         } catch (Exception e) {
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
 
     // 캠핑 리뷰 읽기
-    @GetMapping(value="/crread/{reviewNo}")
+    @GetMapping(value = "/crread/{reviewNo}")
     public ResponseEntity<?> crread(@PathVariable int reviewNo) throws Exception {
         try {
             Board crread = boardService.crread(reviewNo);
@@ -66,14 +71,31 @@ public class BoardApiController {
     }
 
     // 캠핑 리뷰 등록
-    @PostMapping(value="/crinsert")
-    public ResponseEntity<?> crinsertPro(@RequestBody Board board) throws Exception {
+    @PostMapping(value = "/crinsert", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
+    public ResponseEntity<?> crinsertPro(@RequestPart("board") String boardStr,
+            @RequestPart("reviewImgfile") MultipartFile file) throws Exception {
         try {
+            ObjectMapper mapper = new ObjectMapper();
+            Board board = mapper.readValue(boardStr, Board.class);
+            board.setReviewImgfile(file);
             int result = boardService.crinsert(board);
             if (result > 0)
                 return new ResponseEntity<>("게시글 등록 완료", HttpStatus.CREATED);
             else
                 return new ResponseEntity<>("게시글 등록 실패", HttpStatus.OK);
+        } catch (Exception e) {
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
+    @GetMapping(value = "/crinsert/{reservationNo}")
+    public ResponseEntity<?> crinsert(@PathVariable int reservationNo) throws Exception {
+        try {
+            Camp reservation = boardService.reservation(reservationNo);
+            if (reservation != null)
+                return new ResponseEntity<>(reservation, HttpStatus.OK);
+            else
+                return new ResponseEntity<>("예약 정보를 찾을 수 없습니다", HttpStatus.NOT_FOUND);
         } catch (Exception e) {
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
@@ -94,7 +116,7 @@ public class BoardApiController {
     }
 
     // 캠핑 리뷰 수정
-    @PostMapping(value="/crupdate")
+    @PostMapping(value = "/crupdate")
     public ResponseEntity<?> crupdatePro(@RequestBody Board board) throws Exception {
         try {
             int result = boardService.crupdate(board);
@@ -108,7 +130,7 @@ public class BoardApiController {
     }
 
     // 상품 리뷰 읽기
-    @GetMapping(value="/prread/{prNo}")
+    @GetMapping(value = "/prread/{prNo}")
     public ResponseEntity<?> prread(@PathVariable int prNo) throws Exception {
         try {
             Board prread = boardService.prread(prNo);
@@ -119,7 +141,7 @@ public class BoardApiController {
     }
 
     // 상품 리뷰 등록
-    @PostMapping(value="/prinsert")
+    @PostMapping(value = "/prinsert")
     public ResponseEntity<?> prinsertPro(@RequestBody Board board) throws Exception {
         try {
             int result = boardService.prinsert(board);
@@ -147,7 +169,7 @@ public class BoardApiController {
     }
 
     // 상품 리뷰 수정
-    @PostMapping(value="/prupdate")
+    @PostMapping(value = "/prupdate")
     public ResponseEntity<?> prupdatePro(@RequestBody Board board) throws Exception {
         try {
             int result = boardService.prupdate(board);

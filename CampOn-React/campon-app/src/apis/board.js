@@ -6,6 +6,8 @@ export const getNewReviewList = () => axios.get("/api/board/index");
 export const getCrread = (reviewNo) => axios.get(`/api/board/crread/${reviewNo}`);
 // 캠핑 리뷰 등록
 export const postCrinsert = (board) => axios.post('/api/board/crinsert', board);
+// 예약 정보 조회
+export const getReservation = (reservationNo) => axios.get(`/api/board/crinsert/${reservationNo}`);
 // 캠핑 리뷰 수정
 export const postCrupdate = (board) => axios.post('/api/board/crupdate', board);
 // 캠핑 리뷰 삭제

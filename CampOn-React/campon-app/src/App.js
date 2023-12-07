@@ -26,6 +26,7 @@ import UserUpdateCon from './containers/user/UserUpdateCon';
 import CampBoardMainCon from './containers/board/CampBoardMainCon';
 import CampBoardReadCon from './containers/board/CampBoardReadCon';
 import ProductBoardReadCon from './containers/board/ProductBoardReadCon';
+import CampBoardInsertCon from './containers/board/CampBoardInsertCon';
 // 캠프
 import CampMain from './containers/camp/CampMain';
 import CampProduct from './containers/camp/CampProduct';
@@ -91,6 +92,7 @@ function App() {
           <Route path="/api/board/index" element={<CampBoardMainCon />} />
           <Route path="/api/board/crread/:reviewNo" element={<CampBoardReadCon />} />
           <Route path="/api/board/prread/:prNo" element={<ProductBoardReadCon />} />
+          <Route path="/api/board/crinsert/:reservationNo" element={<CampBoardInsertCon />} />
           {/* 유저넘버 넘기는건 확인해봐야 함  */}
           <Route path="/admin/campdetailupdate/:cpdtNo" element={<AdminDCampUpdCon />} />
         </Routes>

@@ -2,6 +2,9 @@ import React, { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import * as boardApi from '../../apis/board'
 import CampBoardRead from '../../components/board/CampBoardRead';
+import UserFooter from '../../components/menu/UserFooter'
+import CampOnFooter from '../../components/footer/CampOnFooter';
+import OpenSearchHeader from '../../components/header/OpenSearchHeader';
 
 const CampBoardReadCon = () => {
   const { reviewNo } = useParams();
@@ -23,10 +26,17 @@ const CampBoardReadCon = () => {
     getCrread();
   }, []);
 
-  return <CampBoardRead
-    boardData={boardData}
-    navigate={navigate}
-  />;
+  return (
+    <>
+      <OpenSearchHeader />
+      <CampBoardRead
+        boardData={boardData}
+        navigate={navigate}
+      />
+      <CampOnFooter />
+      <UserFooter />
+    </>
+  )
 };
 
 export default CampBoardReadCon;
