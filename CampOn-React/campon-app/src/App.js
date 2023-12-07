@@ -60,7 +60,7 @@ function App() {
           <Route path="/product/cart" element={<ProductCartContainer />} />
           <Route path="/product/wishlist" element={<ProductWishListContainer />} />
           <Route path="/product/payment" element={<ProductPaymentContainer />} />
-          <Route path="/product/complete" element={<ProductDepositCompContainer />} />
+          <Route path="/product/complete/:orderNumber" element={<ProductDepositCompContainer />} />
           {/* 캠핑 */}
           <Route path="/api/camp/index" element={<CampMain />} />
           <Route path="/api/camp/campproducts/:campTypeNo" element={<CampProducts />} />

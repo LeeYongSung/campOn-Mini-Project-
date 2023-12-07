@@ -7,7 +7,7 @@ const ProductList = ( { category, onProductClick, addCart } ) => {
       <div className="container">
         {category != null && category.map( (product) => (
           <div className="border rounded position-relative mb-3 pb-4 mt-2">
-              <div className="productListImg">
+              <div className="productListImg imgCenter">
                   <img src={product.productThumnail} alt="상품썸네일" className="w-100" />
               </div>
               <div className="">
@@ -24,7 +24,7 @@ const ProductList = ( { category, onProductClick, addCart } ) => {
                   </div>
                   <div className="ps-3">
                       <div className="pt-3 pe-2">
-                          <h5>{product.productPrice}원</h5>
+                          <h5>{product.productPrice.toLocaleString()}원</h5>
                       </div>
                   </div>
               </div>

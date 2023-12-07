@@ -4,9 +4,16 @@ import ProductDeposit from '../../components/product/ProductDeposit'
 import CampOnFooter from '../../components/footer/CampOnFooter'
 import UserFooter from '../../components/menu/UserFooter'
 import * as products from '../../apis/product'
+import { useParams } from 'react-router-dom'
 
 const ProductDepositCompContainer = () => {
 
+    const { orderNumber } = useParams();
+
+    // const params = new URLSearchParams(window.location.search);
+    // let id = params.get('id');
+    
+    // const [ setOrderNumber ] = useState();
     const [ order, setOrder ] = useState();
     const [ productList, setProductList ] = useState();
     const [ campList, setCampList ] = useState();
@@ -14,8 +21,10 @@ const ProductDepositCompContainer = () => {
     const [ userName, setUserName ] = useState();
     const [ paytotal, setPaytotal ] = useState();
 
+    console.log("orderNumber : " + orderNumber);
+
     const getProductList = ( async () => {
-        let orderNumber = "022204";
+        // let orderNumber = "022204";
         const response = await products.deposit(orderNumber);
         const data = response.data;
         const order = response.data.order;

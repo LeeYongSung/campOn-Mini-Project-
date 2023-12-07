@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useContext } from 'react';
+import React, { useEffect, useState, useContext, useRef } from 'react';
 import ProductListCategory from '../../components/product/ProductListCategory';
 import ProductListItem from '../../components/product/ProductListItem';
 import BackCartHeader from '../../components/header/BackCartHeader';
@@ -13,14 +13,20 @@ const ProductListContainer = () => {
 
   const { category, setCategory } = useContext(CategoryContext);
   const { setProductNo } = useContext(CategoryContext);
-  
+  const prevCategoryRef = useRef();
+
+  useEffect(() => {
+    prevCategoryRef.current = category;
+  });
+
+  const prevCategory = prevCategoryRef.current;
 
   const handleCategoryClick = async (category) => {
-    // categoryData 변수를 제거하고, 직접 category를 전달합니다.
-    const response = await products.category(category);
-    const data = await response.data;
-    // console.log(data);
-    setCategory(data);
+    if (prevCategory !== category) {
+      const response = await products.category(category);
+      const data = await response.data;
+      setCategory(data);
+    }
   }
 
   const handleProductClick = async (productNo) => {
@@ -37,8 +43,10 @@ const ProductListContainer = () => {
   })
   
   useEffect(() => {
-    handleCategoryClick(category);
-  }, []);
+    if (category !== prevCategoryRef.current) {
+      handleCategoryClick(category);
+    }
+  }, [category]);
 
   // console.log("리스트컨테이너 : " + category);
 

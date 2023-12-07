@@ -19,7 +19,7 @@ const ProductWishList = ( { wishList, onProductClick, addCart, removeWishList, a
             {wishList != null && wishList.map( (product) => (
                 <div className="border position-relative wishlist w-100 rounded mb-3">
                     <div>
-                        <div className="wishlistImg border-bottom">
+                        <div className="wishlistImg border-bottom imgCenter">
                             {/* 썸네일 */}
                             <img src={product.productThumnail} className="w-100" />
                         </div>
@@ -40,7 +40,7 @@ const ProductWishList = ( { wishList, onProductClick, addCart, removeWishList, a
                             </div>
                             <div className="pt-4 pe-3">
                                 {/* 금액 */}
-                                <span>{product.productPrice}원</span>
+                                <span>{product.productPrice.toLocaleString()}원</span>
                             </div>
                         </div>
                     </div>

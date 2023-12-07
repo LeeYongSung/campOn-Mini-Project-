@@ -4,17 +4,17 @@ const ProductDetailReview = ( { productReview } ) => {
   return (
     <>
       {/* 리뷰목록 */}
-      <div class="container">
-            <div class="py-3">
+      <div className="container">
+            <div className="py-3">
                 <h5>상품리뷰</h5>
             </div>
             { productReview != null && productReview.map( (review) => (
                 <a href={review.prNo} >
-                    <div class="d-flex justify-content-between border py-4">
-                        <div class="review_imgbox border mx-2">
+                    <div className="d-flex justify-content-between border py-4">
+                        <div className="review_imgbox border mx-2 imgCenter">
                             <img src={review.prImg} />
                         </div>
-                        <div class="review_conbox">
+                        <div className="review_conbox">
                             <div>
                                 <div>
                                     <span>{review.productName}</span>

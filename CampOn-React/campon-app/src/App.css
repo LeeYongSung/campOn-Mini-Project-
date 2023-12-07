@@ -329,6 +329,9 @@ input[type="checkbox"] {
 
 /* 대여상품 상세 */
 .productdetailInfo {height: 300px; overflow: hidden;}
+.productsaveBtn {position: fixed; top: 100px; z-index: 100; margin-left: 420px; width: 60px; height: 60px;}
+.productsaveBtn>button {width: 60px; height: 60px;}
+.product_more {border: none; background-color: inherit;}
 
 /* 찜 */
 .wishlistImg {height: 200px; overflow: hidden;}
@@ -489,3 +492,9 @@ input[type="radio"]:checked + label span {
 .tdd {border-bottom : 1px solid #444444; padding: 8px 6px;}
 .theadd {font-weight: bold; border-bottom : 1px solid #444444;}
 .hoverr:hover { background-color: #FFDF6C;}
+
+
+/* 이미지 중앙 정렬 */
+.imgCenter { display: flex; align-items: center; justify-content: center; }
+
+.c_pointer {cursor: pointer;}

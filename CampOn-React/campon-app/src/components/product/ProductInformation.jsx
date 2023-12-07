@@ -1,20 +1,21 @@
 import React from 'react'
 
-const ProductInformation = () => {
+const ProductInformation = ( { rentInfoClick, rentInfo, productInfoClick, productInfo } ) => {
+  console.log(rentInfo);
   return (
     <>
       <div>
-          <div class="d-flex justify-content-between py-4 my-3 border-top border-bottom">
-              <div class="ps-2">대여안내</div>
-              <div class="pe-2"><span class="material-symbols-outlined">chevron_right</span></div>
+          <div className="d-flex justify-content-between py-4 my-3 border-top border-bottom c_pointer" onClick={ () => rentInfoClick() }>
+              <div className="ps-2">대여안내</div>
+              <div className="pe-2"><span className="material-symbols-outlined">chevron_right</span></div>
           </div>
-          <div class="d-flex justify-content-between py-4 my-3 border-top border-bottom">
-              <div class="ps-2">상품 정보 공시</div>
-              <div class="pe-2"><span class="material-symbols-outlined">chevron_right</span></div>
+          <div className="d-flex justify-content-between py-4 my-3 border-top border-bottom c_pointer" onClick={ () => productInfoClick() } >
+              <div className="ps-2">상품 정보 공시</div>
+              <div className="pe-2"><span className="material-symbols-outlined">chevron_right</span></div>
           </div>
       </div>
         {/* <!-- 대여안내 --> */}
-        <div class="none">
+        <div className={rentInfo ? "block" : "none"}>
             대여서비스는 "캠핑온"을 통해 캠핑장을 예약한 당사의 고객만 이용가능합니다.
             1. 캠핑장을 예약하셔야 정상적인 서비스 이용이 가능합니다.
             2. 렌탈기간은 예약하신 캠핑이용 기간과 동일하게 이용가능합니다.
@@ -25,7 +26,7 @@ const ProductInformation = () => {
         </div>
 
         {/* <!-- 상품 정보 고시 --> */}
-        <div class="none">
+        <div className={productInfo ? "block" : "none"} >
             상품명: 상세페이지 참조
             제조국: 상세페이지 참조
             인증번호: 상세페이지 참조

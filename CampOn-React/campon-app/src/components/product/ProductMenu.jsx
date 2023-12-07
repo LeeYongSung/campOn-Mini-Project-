@@ -4,10 +4,10 @@ import { Link } from 'react-router-dom'
 const ProductMenu = ( { onCategoryClick } ) => {
   return (
     <>
-      <div class="container w-100">
+      <div className="container w-100">
         {/* <!--카테고리--> */}
-        <div class="container-sm w-100 py-4 my-3">
-            <div class="d-flex justify-content-between text-center product_menu">
+        <div className="container-sm w-100 py-4 my-3">
+            <div className="d-flex justify-content-between text-center product_menu">
                 <div>
                     <Link to={{ pathname: "/product/productList", state: {category: '텐트'}}} onClick={() => onCategoryClick('텐트')}>
                         <div>
@@ -59,7 +59,7 @@ const ProductMenu = ( { onCategoryClick } ) => {
                     </Link>
                 </div>
             </div>
-            <div class="d-flex justify-content-between text-center product_menu mt-3">
+            <div className="d-flex justify-content-between text-center product_menu mt-3">
                 <div>
                     <Link to={{ pathname: "/product/productList", state: {category: '화로대'}}} onClick={() => onCategoryClick('화로대')}> 
                         <div>
