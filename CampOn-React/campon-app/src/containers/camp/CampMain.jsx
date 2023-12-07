@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import * as camps from '../../apis/camp'
-import {Link} from 'react-router-dom'
+import {Link, useNavigate} from 'react-router-dom'
 import CampHotList from '../../components/camp/CampHotList'
 import CampnewList from '../../components/camp/CampnewList'
 import CampReviewList from '../../components/camp/CampReviewList'
@@ -13,6 +13,7 @@ import OpenSearchHeader from '../../components/header/OpenSearchHeader'
 import UserFooter from '../../components/menu/UserFooter'
 
 const CampMain = () => {
+    const navigate = useNavigate()
     const [camptype, setCamptype] = useState([])
     const [newList, setNewList] = useState([])
     const [hotList, setHotList] = useState([])
@@ -34,12 +35,16 @@ const CampMain = () => {
         getCampMain();
     },[])
 
+    const onSearch = (keyword, searchDate, regionNo, camptypeNos) => {
+        navigate(`/api/camp/CampProducts?keword=${keyword}&searchDate=${searchDate}&regionNo=${regionNo}&campTypeNos=${camptypeNos}`)
+    }
+
     return(
         <div>
             <OpenSearchHeader />
             <HeadAd />
             <CamptypeList camptypeList={camptype} />
-            <CampSearch camptypeList={camptype} />
+            <CampSearch onSearch={onSearch}/>
             <MiddelAd />
             <div className='w-100 info_btn'>
             <Link to="#" className='btn btn-warning btn-lg w-100 py-3'>캠프온이 처음이신가요? 캠프온 이용안내</Link>

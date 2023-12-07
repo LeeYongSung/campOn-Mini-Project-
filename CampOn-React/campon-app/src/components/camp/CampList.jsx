@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom'
 const CampList = ({campList}) => {
   return (
     <div id="camplist">
-        {/* {campList.map((camp) => (
+        {campList.map((camp) => (
             <div className="camp_box pb-3"> 
                 <Link to={`/api/camp/campproduct/${camp.campNo}`}>
                     <div>
@@ -24,7 +24,7 @@ const CampList = ({campList}) => {
                     </div>
                 </Link>
             </div>
-        ))} */}
+        ))}
     </div>
   )
 }
