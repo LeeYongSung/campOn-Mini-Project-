@@ -287,6 +287,12 @@ input[type="checkbox"] {
 .campdetailProductUpdateTitle h6 {font-size: 0.7em;}
 .campdetailProductUpdateCon textarea {height: 400px!important;}
 
+/* 관리자 상품 수정 */
+.imgfile {
+  width: 200px;
+  height: 200px;
+  object-fit: cover;
+}
 /* 상품 메인 */
 .product_menu>div {width: 60px; height: 60px;}
 .product_menu span {font-size: 0.8em;}
@@ -340,7 +346,7 @@ input[type="checkbox"] {
 
 /* 회원리스트 */
 .tab_btn {width: 200px; height: 50px; border: 1px solid #f2f2f2;}
-.tab_btn>a {width: 100%; height: auto; display: block; padding-top: 0.8rem; padding-bottom: 0.8rem;}
+.tab_btn> a {width: 100%; height: auto; display: block; padding-top: 0.8rem; padding-bottom: 0.8rem;}
 .memberlist_more_box a {font-size: 0.8em;}
 .memberlist_more_box span {font-size: 1.5em;}
 input::-webkit-outer-spin-button,
@@ -348,6 +354,24 @@ input::-webkit-inner-spin-button {
   -webkit-appearance: none;
   margin: 0;
 }
+
+.commemberlist_detail {
+  /* transform: translateY(-100%); */
+  transition: all 0.4s;
+  z-index: 0;
+  height: 0;
+}
+
+.commemberlist_detail.active {
+  /* transform: translateY(0); */
+  transition: all 0.4s;
+  height: 120px;
+}
+.tab_btn > input:hover {
+  background-color: orange;
+}
+
+
 
 /* 관리자 상품 목록 */
 .AdminProduct span {font-size: 0.8em;}
