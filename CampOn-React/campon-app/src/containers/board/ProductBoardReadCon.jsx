@@ -1,7 +1,10 @@
 import React, { useState, useEffect } from 'react';
-import { useParams, useNavigate  } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
 import * as boardApi from '../../apis/board';
 import ProductBoardRead from '../../components/board/ProductBoardRead';
+import UserFooter from '../../components/menu/UserFooter'
+import CampOnFooter from '../../components/footer/CampOnFooter';
+import OpenSearchHeader from '../../components/header/OpenSearchHeader';
 
 const ProductBoardReadCon = () => {
   const { prNo } = useParams();
@@ -23,10 +26,16 @@ const ProductBoardReadCon = () => {
     getPrread();
   }, []);
 
-  return (<ProductBoardRead
-      boardData={boardData}
-      navigate={navigate}
-    />
+  return (
+    <>
+      <OpenSearchHeader />
+      <ProductBoardRead
+        boardData={boardData}
+        navigate={navigate}
+      />
+      <CampOnFooter />
+      <UserFooter />
+    </>
   );
 };
 
