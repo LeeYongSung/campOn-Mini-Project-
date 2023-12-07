@@ -357,10 +357,18 @@ public class CampAPIController {
     }
 
     //캠핑장 검색창
-    @ResponseBody
-    @GetMapping(value="/campSearch")
-    public ResponseEntity<?> campSearch(Camp camp) throws Exception {
+    // @ResponseBody
+    // @GetMapping(value="/campSearch")
+    @PostMapping(value="/campSearch")
+    public ResponseEntity<?> campSearch( Camp camp) throws Exception {
+        log.info("테스트 : " + camp);
         try{
+            log.info("keywordValue : " + camp.getKeyword());
+            log.info("dateValue : " + camp.getSearchDate());
+            log.info("regionNoValue : " + camp.getRegionNo());
+            log.info("checkBoxList : " + camp.getCheckBoxList());
+
+            log.info(""+camp);
             List<String> checkBoxList = camp.getCheckBoxList();
 
             if( checkBoxList == null )  {

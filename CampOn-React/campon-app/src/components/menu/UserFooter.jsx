@@ -23,7 +23,7 @@ const UserFooter = () => {
           </Link>
         </li>
         <li>
-          <Link to={"/board/index"}>
+          <Link to={"/api/board/index"}>
             <ul className="sub_menu">
               <li><i className="material-symbols-outlined">dashboard</i></li>
               <li>게시판</li>

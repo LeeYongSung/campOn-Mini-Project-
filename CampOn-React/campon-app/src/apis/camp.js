@@ -30,4 +30,6 @@ export const reservationdelete = (no) => axios.delete(`/api/camp/reservation/${n
 //캠핑오픈일정
 export const campSchedule = () => axios.get("/api/camp/schedule")
 //캠핑장검색
-export const campSearch = (keyword, searchDate, regionNo, campTypeNos ) => axios.get("api/camp/campSearch")
+export const campSearch = (formData, headers) => axios.post("/api/camp/campSearch", formData, headers)
+// export const campSearch = (keyword, searchDate, regionNo, checkBoxList) => axios.get(`/api/camp/campSearch?keyword=${keyword}&searchDate=${searchDate}&`)
+// export const campSearch = (keyword, searchDate, regionNo, checkBoxList) => axios.get("/api/camp/campSearch", {params:{keyword, searchDate, regionNo, checkBoxList}})

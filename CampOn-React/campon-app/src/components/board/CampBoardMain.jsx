@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 const CampBoardMain = ({ newReviewList, crlist, newprlist, currentTab, onTabChange, prlist }) => {
 
@@ -6,7 +7,7 @@ const CampBoardMain = ({ newReviewList, crlist, newprlist, currentTab, onTabChan
   const renderCampNewReviews = (list) => {
     return list != null && list.map((item) => (
       <div className="container my-2" key={item.reviewNo}>
-        <a href={`/api/board/crread/${item.reviewNo}`} className="d-flex justify-content-between border-bottom">
+        <Link to={`/api/board/crread/${item.reviewNo}`} className="d-flex justify-content-between border-bottom">
           <div className="review_imgbox py-2 px-2">
             <img src={`/img?file=${item.reviewImg}`} className="rounded" alt="review" />
           </div>
@@ -26,7 +27,7 @@ const CampBoardMain = ({ newReviewList, crlist, newprlist, currentTab, onTabChan
               </div>
             </div>
           </div>
-        </a>
+        </Link>
       </div>
     ));
   };
@@ -36,7 +37,7 @@ const CampBoardMain = ({ newReviewList, crlist, newprlist, currentTab, onTabChan
     return list != null && list.map((item) => (
       <tr key={item.reviewNo} className="hoverr">
         <td className="tdd">{item.reviewNo}</td>
-        <td className="tdd"><a href={`/api/board/crread/${item.reviewNo}`}>{item.reviewTitle}</a></td>
+        <td className="tdd"><Link to={`/api/board/crread/${item.reviewNo}`}>{item.reviewTitle}</Link></td>
         <td className="tdd">{item.userId}</td>
         <td className="tdd">{new Date(item.regDate).toLocaleDateString()}</td>
       </tr>
@@ -47,7 +48,7 @@ const CampBoardMain = ({ newReviewList, crlist, newprlist, currentTab, onTabChan
   const renderProductNewReviews = (list) => {
     return list != null && list.map((item) => (
       <div className="container my-2" key={item.prNo}>
-        <a href={`/api/board/prread/${item.prNo}`} className="d-flex justify-content-between border-bottom">
+        <Link to={`/api/board/prread/${item.prNo}`} className="d-flex justify-content-between border-bottom">
           <div className="review_imgbox py-2 px-2">
             <img src={`/img?file=${item.prImg}`} className="rounded" alt="review" />
           </div>
@@ -67,7 +68,7 @@ const CampBoardMain = ({ newReviewList, crlist, newprlist, currentTab, onTabChan
               </div>
             </div>
           </div>
-        </a>
+        </Link>
       </div>
     ));
   };
@@ -77,7 +78,7 @@ const CampBoardMain = ({ newReviewList, crlist, newprlist, currentTab, onTabChan
     return list != null && list.map((item) => (
       <tr key={item.prNo} className="hoverr">
         <td className="tdd">{item.prNo}</td>
-        <td className="tdd"><a href={`/api/board/prread/${item.prNo}`}>{item.prTitle}</a></td>
+        <td className="tdd"><Link to={`/api/board/prread/${item.prNo}`}>{item.prTitle}</Link></td>
         <td className="tdd">{item.userId}</td>
         <td className="tdd">{new Date(item.regDate).toLocaleDateString()}</td>
       </tr>
@@ -90,8 +91,8 @@ const CampBoardMain = ({ newReviewList, crlist, newprlist, currentTab, onTabChan
     // 캠핑&스토어 스위칭
     <div>
       <div className="tabnav d-flex justify-content-center py-3 text-center border-bottom">
-        <div className={`tab_btn campbtn ${currentTab === 'camp' ? 'point' : ''}`} onClick={() => onTabChange('camp')}><a href="#camp">캠핑</a></div>
-        <div className={`tab_btn storebtn ${currentTab === 'store' ? 'point' : ''}`} onClick={() => onTabChange('store')}><a href="#store">스토어</a></div>
+        <div className={`tab_btn campbtn ${currentTab === 'camp' ? 'point' : ''}`} onClick={() => onTabChange('camp')}><Link to="#camp">캠핑</Link></div>
+        <div className={`tab_btn storebtn ${currentTab === 'store' ? 'point' : ''}`} onClick={() => onTabChange('store')}><Link to="#store">스토어</Link></div>
       </div>
 
       {/* 캠핑 리뷰 리스트 출력 */}
