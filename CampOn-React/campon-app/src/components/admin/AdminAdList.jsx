@@ -29,7 +29,6 @@ const AdminAdList = () => {
             console.error(error)
         }
     }
-
     useEffect(()=>{
         getList()
     }, [])

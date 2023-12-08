@@ -24,7 +24,8 @@ const UserMyypage = ({sets}) => {
             </div>
             <div className="container">
                 {
-                    (userAuth === 'ROLE_USER' && <div className="w-100 text-center mypage_user">
+                    // (userAuth === 'ROLE_USER' && 
+                    <div className="w-100 text-center mypage_user">
                         <ul className="d-flex justify-content-around w-100">
                             <li>
                                 <Link to="/user/update">내정보 관리</Link>
@@ -47,10 +48,12 @@ const UserMyypage = ({sets}) => {
                                 <Link to="/product/cart">장바구니</Link>
                             </li>
                         </ul>
-                    </div>)
+                    </div>
+                    // )
                 }
                 {
-                    (userAuth === 'ROLE_SELL' && <div className="w-100 text-center mypage_sell">
+                    // (userAuth === 'ROLE_SELL' && 
+                    <div className="w-100 text-center mypage_sell">
                         <ul className="d-flex justify-content-around w-100">
                             <li>
                                 <Link to="/user/update">내정보 관리</Link>
@@ -65,10 +68,12 @@ const UserMyypage = ({sets}) => {
                                 <Link to="/board/boardlist">내 캠핑장 후기</Link>
                             </li>
                         </ul>
-                    </div>)
+                    </div>
+                    // )
                 }
                 {
-                    (userAuth === 'ROLE_ADMIN' && <div className="w-100 text-center mypage_admin">
+                    // (userAuth === 'ROLE_ADMIN' && 
+                    <div className="w-100 text-center mypage_admin">
                         <ul className="d-flex justify-content-around w-100">
                             <li>
                                 <Link to="/admin/memberList">회원 관리</Link>
@@ -88,7 +93,8 @@ const UserMyypage = ({sets}) => {
                                 <Link to="/admin/productlist">스토어상품 관리</Link>
                             </li>
                         </ul>
-                    </div>)
+                    </div>
+                    // )
                 }
 
 
