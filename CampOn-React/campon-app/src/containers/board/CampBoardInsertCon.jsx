@@ -7,12 +7,12 @@ import BackHeader from '../../components/header/BackHeader';
 import { useParams } from 'react-router-dom';
 
 const CampBoardInsertCon = () => {
-  const [reservation, setReservation] = useState({});
   const { reservationNo } = useParams();
+  const [reservation, setReservation] = useState({});
   const [reviewTitle, setReviewTitle] = useState('');
   const [reviewImgfile, setReviewImgfile] = useState(null);
   const [reviewCon, setReviewCon] = useState('');
-  
+
   const handle = (e) => {
     switch (e.target.name) {
       case "reviewTitle": setReviewTitle(e.target.value)
@@ -23,6 +23,7 @@ const CampBoardInsertCon = () => {
         break;
     }
   }
+
   const fetchReservation = async () => {
     try {
       const response = await getReservation(reservationNo);
@@ -39,10 +40,10 @@ const CampBoardInsertCon = () => {
 
   const handleSubmit = async () => {
     const formData = new FormData();
-    formData.append("reviewTitle", reviewTitle)
     if (reviewImgfile) {
       formData.append("reviewImgfile", reviewImgfile[0]);
     }
+    formData.append("reviewTitle", reviewTitle)
     formData.append("reviewCon", reviewCon)
     formData.append("reservationNo", reservation.reservationNo)
     formData.append("campNo", reservation.campNo)
@@ -51,7 +52,7 @@ const CampBoardInsertCon = () => {
     const headers = {
       headers: { 'Content-Type': 'multipart/form-data' },
     };
-  
+
     try {
       const response = await postCrinsert(formData, headers);
       if (response.status === 201) {
@@ -66,17 +67,17 @@ const CampBoardInsertCon = () => {
     fetchReservation();
   }, []);
 
-    return (
-      <>
-        <BackHeader />
-        <CampBoardInsert
-          reservation={reservation}
-          handleSubmit={handleSubmit}
-          handle={handle}
-        />
-        <CampOnFooter />
-        <UserFooter />
-      </>
-    );
-  };
+  return (
+    <>
+      <BackHeader />
+      <CampBoardInsert
+        reservation={reservation}
+        handleSubmit={handleSubmit}
+        handle={handle}
+      />
+      <CampOnFooter />
+      <UserFooter />
+    </>
+  );
+};
 export default CampBoardInsertCon;

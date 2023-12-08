@@ -88,6 +88,7 @@ public class BoardApiController {
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
+
     @PostMapping(value = "/crinsert")
     public ResponseEntity<?> crinsertPro(Board board) throws Exception {
         log.info(board + "board는?");
@@ -95,7 +96,8 @@ public class BoardApiController {
         result = boardService.crinsert(board);
         if (result > 0)
             return new ResponseEntity<>("게시글 등록 완료", HttpStatus.CREATED);
-            else  return new ResponseEntity<>("게시글 등록 실패", HttpStatus.BAD_REQUEST);
+        else
+            return new ResponseEntity<>("게시글 등록 실패", HttpStatus.BAD_REQUEST);
     }
 
     // ---------------------------------------------------------------------------
@@ -129,15 +131,15 @@ public class BoardApiController {
 
     @PostMapping(value = "/crupdate")
     public ResponseEntity<?> crupdatePro(@RequestBody Board board) throws Exception {
-      try {
-        int result = boardService.crupdate(board);
-        if (result > 0)
-          return new ResponseEntity<>("게시글 수정 완료", HttpStatus.OK);
-        else
-          return new ResponseEntity<>("게시글 수정 실패", HttpStatus.OK);
-      } catch (Exception e) {
-        return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
-      }
+        try {
+            int result = boardService.crupdate(board);
+            if (result > 0)
+                return new ResponseEntity<>("게시글 수정 완료", HttpStatus.OK);
+            else
+                return new ResponseEntity<>("게시글 수정 실패", HttpStatus.OK);
+        } catch (Exception e) {
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
     }
 
     // ---------------------------------------------------------------------------
@@ -169,23 +171,16 @@ public class BoardApiController {
         }
     }
 
-    @PostMapping(value = "/prinsert", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
-    public ResponseEntity<?> prinsertPro(@RequestPart("board") String boardStr,
-            @RequestPart("prImgfile") MultipartFile file) throws Exception {
-        try {
-            ObjectMapper mapper = new ObjectMapper();
-            Board board = mapper.readValue(boardStr, Board.class);
-            board.setPrImgfile(file);
-            int result = boardService.prinsert(board);
-            if (result > 0)
-                return new ResponseEntity<>("게시글 등록 완료", HttpStatus.CREATED);
-            else
-                return new ResponseEntity<>("게시글 등록 실패", HttpStatus.OK);
-        } catch (Exception e) {
-            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
-        }
+    @PostMapping(value = "/prinsert")
+    public ResponseEntity<?> prinsertPro(Board board) throws Exception {
+        log.info(board + "board는?");
+        int result = 0;
+        result = boardService.prinsert(board);
+        if (result > 0)
+            return new ResponseEntity<>("게시글 등록 완료", HttpStatus.CREATED);
+        else
+            return new ResponseEntity<>("게시글 등록 실패", HttpStatus.BAD_REQUEST);
     }
-
     // ---------------------------------------------------------------------------
 
     // 상품 리뷰 삭제
