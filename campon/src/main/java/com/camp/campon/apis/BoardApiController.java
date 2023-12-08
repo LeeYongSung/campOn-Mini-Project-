@@ -88,22 +88,14 @@ public class BoardApiController {
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
-
-    @PostMapping(value = "/crinsert", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
-    public ResponseEntity<?> crinsertPro(@RequestPart("board") String boardStr,
-            @RequestPart("reviewImgfile") MultipartFile file) throws Exception {
-        try {
-            ObjectMapper mapper = new ObjectMapper();
-            Board board = mapper.readValue(boardStr, Board.class);
-            board.setReviewImgfile(file);
-            int result = boardService.crinsert(board);
-            if (result > 0)
-                return new ResponseEntity<>("게시글 등록 완료", HttpStatus.CREATED);
-            else
-                return new ResponseEntity<>("게시글 등록 실패", HttpStatus.OK);
-        } catch (Exception e) {
-            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
-        }
+    @PostMapping(value = "/crinsert")
+    public ResponseEntity<?> crinsertPro(Board board) throws Exception {
+        log.info(board + "board는?");
+        int result = 0;
+        result = boardService.crinsert(board);
+        if (result > 0)
+            return new ResponseEntity<>("게시글 등록 완료", HttpStatus.CREATED);
+            else  return new ResponseEntity<>("게시글 등록 실패", HttpStatus.BAD_REQUEST);
     }
 
     // ---------------------------------------------------------------------------
