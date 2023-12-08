@@ -360,25 +360,36 @@ public class CampAPIController {
     // @ResponseBody
     // @GetMapping(value="/campSearch")
     @PostMapping(value="/campSearch")
-    public ResponseEntity<?> campSearch( Camp camp) throws Exception {
-        log.info("테스트 : " + camp);
+    public ResponseEntity<?> campSearch(@RequestBody Camp camp) throws Exception {
+        // log.info("테스트 : " + camp);
         try{
             log.info("keywordValue : " + camp.getKeyword());
             log.info("dateValue : " + camp.getSearchDate());
             log.info("regionNoValue : " + camp.getRegionNo());
             log.info("checkBoxList : " + camp.getCheckBoxList());
-
-            log.info(""+camp);
+            
+            // log.info(""+camp);
             List<String> checkBoxList = camp.getCheckBoxList();
+            
+            log.info("checkBoxList : " + checkBoxList);
 
-            if( checkBoxList == null )  {
+            if( checkBoxList != null )
+            for(int i = 0; i < checkBoxList.size(); i++) {
+                // Integer[] campTypeNo = checkBoxList.get(i).split(',');
+                log.info("캠프타입번호 : " + checkBoxList.get(i));
+            }
+
+            if( checkBoxList.isEmpty() )  {
+                // log.info("들어옴");
                 camp.setCampTypeNo(-1);
                 camp.setCheckBoxList(new ArrayList<>());
             }
-
+            
             camp.setSearchDate(new Date());
+            log.info("camp : "+camp);
             List<Camp> campList = campService.campSearch(camp);
-
+            
+            log.info("campList : "+campList);
             return new ResponseEntity<>(campList, HttpStatus.OK);
         }catch(Exception e){
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
