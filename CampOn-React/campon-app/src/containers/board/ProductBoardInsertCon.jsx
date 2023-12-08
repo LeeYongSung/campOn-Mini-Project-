@@ -1,45 +1,41 @@
 import React, { useState, useEffect } from 'react';
-import { getReservation, postCrinsert } from '../../apis/board';
-import CampBoardInsert from '../../components/board/CampBoardInsert';
+import { getOrder, postPrinsert } from '../../apis/board';
+import ProductBoardInsert from '../../components/board/ProductBoardInsert';
 import UserFooter from '../../components/menu/UserFooter';
 import CampOnFooter from '../../components/footer/CampOnFooter';
 import { useParams } from 'react-router-dom';
 import BackHeader from '../../components/header/BackHeader';
 
-const CampBoardInsertCon = () => {
-  const { reservationNo } = useParams(); 
+const ProductBoardInsertCon = () => {
+  const { orderNo } = useParams(); 
   const [formValues, setFormValues] = useState({
-    reservationNo: reservationNo,
-    campNo: '',
-    cpdtNo: '',
+    orderNo: orderNo,
+    productNo: '',
     userNo: '',
-    reviewTitle: '',
-    reviewCon: '',
-    reviewImgfile: null,
+    prTitle: '',
+    prCon: '',
+    prImgfile: null,
   });
 
   useEffect(() => {
-    const fetchReservation = async () => {
+    const fetchOrder = async () => {
       try {
-        const response = await getReservation(reservationNo);
+        const response = await getOrder(orderNo);
         if (response.status === 200) {
           setFormValues({
-            ...formValues,
-            campNo: response.data.campNo,
-            cpdtNo: response.data.cpdtNo,
+            ...formValues, 
+            productNo: response.data.productNo, 
             userNo: response.data.userNo,
-            campName: response.data.campName,
-            cpdtName: response.data.cpdtName,
           });
         } else {
-          alert('예약 정보를 찾을 수 없습니다');
+          alert('주문 정보를 찾을 수 없습니다');
         }
       } catch (error) {
         console.error(error);
       }
     };
-    fetchReservation();
-  }, [reservationNo]);
+    fetchOrder();
+  }, [orderNo]);
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -49,17 +45,17 @@ const CampBoardInsertCon = () => {
     formData.append('board', JSON.stringify(formValues)); // 'board' 파트 추가
     
     Object.entries(formValues).forEach(([key, value]) => {
-      if (value !== null && key !== 'reviewImgfile') { // 'reviewImgfile'은 별도로 처리
+      if (value !== null && key !== 'prImgfile') { // 'prImgfile'은 별도로 처리
         formData.append(key, value);
       }
     });
 
-    if (formValues.reviewImgfile) { // 'reviewImgfile' 파트 추가
-      formData.append('reviewImgfile', formValues.reviewImgfile);
+    if (formValues.prImgfile) { // 'prImgfile' 파트 추가
+      formData.append('prImgfile', formValues.prImgfile);
     }
   
     try {
-      const response = await postCrinsert(formData);
+      const response = await postPrinsert(formData);
   
       if (response.status === 201) {
         alert('게시글 등록 완료');
@@ -75,8 +71,8 @@ const CampBoardInsertCon = () => {
   return (
     <>
       <BackHeader />
-      <CampBoardInsert
-        reservationNo={reservationNo} 
+      <ProductBoardInsert
+        orderNo={orderNo} 
         onSubmit={handleSubmit} 
         formValues={formValues} 
         setFormValues={setFormValues}
@@ -87,4 +83,4 @@ const CampBoardInsertCon = () => {
   );
 };
 
-export default CampBoardInsertCon;
+export default ProductBoardInsertCon;

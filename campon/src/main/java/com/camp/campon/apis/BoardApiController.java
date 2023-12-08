@@ -25,6 +25,7 @@ import com.camp.campon.service.UserService;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.web.bind.annotation.RequestParam;
 
 @Slf4j
 @RestController
@@ -59,6 +60,8 @@ public class BoardApiController {
         }
     }
 
+    // ---------------------------------------------------------------------------
+
     // 캠핑 리뷰 읽기
     @GetMapping(value = "/crread/{reviewNo}")
     public ResponseEntity<?> crread(@PathVariable int reviewNo) throws Exception {
@@ -70,7 +73,22 @@ public class BoardApiController {
         }
     }
 
+    // ---------------------------------------------------------------------------
+
     // 캠핑 리뷰 등록
+    @GetMapping(value = "/crinsert/{reservationNo}")
+    public ResponseEntity<?> crinsert(@PathVariable int reservationNo) throws Exception {
+        try {
+            Camp reservation = boardService.reservation(reservationNo);
+            if (reservation != null)
+                return new ResponseEntity<>(reservation, HttpStatus.OK);
+            else
+                return new ResponseEntity<>("예약 정보를 찾을 수 없습니다", HttpStatus.NOT_FOUND);
+        } catch (Exception e) {
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
     @PostMapping(value = "/crinsert", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
     public ResponseEntity<?> crinsertPro(@RequestPart("board") String boardStr,
             @RequestPart("reviewImgfile") MultipartFile file) throws Exception {
@@ -88,18 +106,7 @@ public class BoardApiController {
         }
     }
 
-    @GetMapping(value = "/crinsert/{reservationNo}")
-    public ResponseEntity<?> crinsert(@PathVariable int reservationNo) throws Exception {
-        try {
-            Camp reservation = boardService.reservation(reservationNo);
-            if (reservation != null)
-                return new ResponseEntity<>(reservation, HttpStatus.OK);
-            else
-                return new ResponseEntity<>("예약 정보를 찾을 수 없습니다", HttpStatus.NOT_FOUND);
-        } catch (Exception e) {
-            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
-        }
-    }
+    // ---------------------------------------------------------------------------
 
     // 캠핑 리뷰 삭제
     @DeleteMapping(value = "/crdelete/{reviewNo}")
@@ -115,19 +122,33 @@ public class BoardApiController {
         }
     }
 
+    // ---------------------------------------------------------------------------
+
     // 캠핑 리뷰 수정
-    @PostMapping(value = "/crupdate")
-    public ResponseEntity<?> crupdatePro(@RequestBody Board board) throws Exception {
+    @GetMapping(value = "/crupdate/{reviewNo}")
+    public ResponseEntity<?> crupdate(@PathVariable int reviewNo) throws Exception {
         try {
-            int result = boardService.crupdate(board);
-            if (result > 0)
-                return new ResponseEntity<>("게시글 수정 완료", HttpStatus.OK);
-            else
-                return new ResponseEntity<>("게시글 수정 실패", HttpStatus.OK);
+            Board crread = boardService.crread(reviewNo);
+            return new ResponseEntity<>(crread, HttpStatus.OK);
         } catch (Exception e) {
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
+
+    @PostMapping(value = "/crupdate")
+    public ResponseEntity<?> crupdatePro(@RequestBody Board board) throws Exception {
+      try {
+        int result = boardService.crupdate(board);
+        if (result > 0)
+          return new ResponseEntity<>("게시글 수정 완료", HttpStatus.OK);
+        else
+          return new ResponseEntity<>("게시글 수정 실패", HttpStatus.OK);
+      } catch (Exception e) {
+        return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+      }
+    }
+
+    // ---------------------------------------------------------------------------
 
     // 상품 리뷰 읽기
     @GetMapping(value = "/prread/{prNo}")
@@ -140,10 +161,29 @@ public class BoardApiController {
         }
     }
 
+    // ---------------------------------------------------------------------------
+
     // 상품 리뷰 등록
-    @PostMapping(value = "/prinsert")
-    public ResponseEntity<?> prinsertPro(@RequestBody Board board) throws Exception {
+    @GetMapping(value = "/prinsert/{orderNo}")
+    public ResponseEntity<?> prinsert(@PathVariable int orderNo) throws Exception {
         try {
+            Board order = boardService.order(orderNo);
+            if (order != null)
+                return new ResponseEntity<>(order, HttpStatus.OK);
+            else
+                return new ResponseEntity<>("예약 정보를 찾을 수 없습니다", HttpStatus.NOT_FOUND);
+        } catch (Exception e) {
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
+    @PostMapping(value = "/prinsert", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
+    public ResponseEntity<?> prinsertPro(@RequestPart("board") String boardStr,
+            @RequestPart("prImgfile") MultipartFile file) throws Exception {
+        try {
+            ObjectMapper mapper = new ObjectMapper();
+            Board board = mapper.readValue(boardStr, Board.class);
+            board.setPrImgfile(file);
             int result = boardService.prinsert(board);
             if (result > 0)
                 return new ResponseEntity<>("게시글 등록 완료", HttpStatus.CREATED);
@@ -153,6 +193,8 @@ public class BoardApiController {
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
+
+    // ---------------------------------------------------------------------------
 
     // 상품 리뷰 삭제
     @DeleteMapping(value = "/prdelete/{prNo}")
@@ -168,7 +210,19 @@ public class BoardApiController {
         }
     }
 
+    // ---------------------------------------------------------------------------
+
     // 상품 리뷰 수정
+    @GetMapping(value = "/prupdate/{prNo}")
+    public ResponseEntity<?> prupdate(@PathVariable int prNo) throws Exception {
+        try {
+            Board pr = boardService.prread(prNo);
+            return new ResponseEntity<>(pr, HttpStatus.OK);
+        } catch (Exception e) {
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
     @PostMapping(value = "/prupdate")
     public ResponseEntity<?> prupdatePro(@RequestBody Board board) throws Exception {
         try {
