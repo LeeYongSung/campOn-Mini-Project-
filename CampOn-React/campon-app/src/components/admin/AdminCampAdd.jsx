@@ -2,6 +2,8 @@ import React, { useState } from 'react'
 import { Link, useParams, useNavigate } from 'react-router-dom'
 import * as admins from '../../apis/admin'
 import { useEffect } from 'react';
+import { Map, MapMarker } from "react-kakao-maps-sdk"
+
 const AdminCampAdd = () => {
     const navigate = useNavigate();
     const userNo = 3; //하드코딩
@@ -20,6 +22,58 @@ const AdminCampAdd = () => {
     const [campIntroduction, setcampIntroduction] = useState('')
     const [layoutFile, setlayoutFile] = useState(null)
     const [campCaution, setcampCaution] = useState('')
+
+    // 카카오 맵 start
+    let map;
+    const [state, setState] = useState({
+
+        center: { lat: 37.49676871972202, lng: 127.02474726969814 },
+        isPanto: true,
+        
+      });
+
+    const [searchAddress, SetSearchAddress] = useState();
+
+    
+    const SearchMap = () => {
+        console.log('들어옴')
+        const geocoder = new kakao.maps.services.Geocoder();
+        
+        let callback = function(result, status) {
+            if (status === kakao.maps.services.Status.OK) {
+                const newSearch = result[0]
+                console.log(newSearch.x)
+                console.log(newSearch.y)
+                setState({
+                    center: { lat: newSearch.y, lng: newSearch.x }
+                })
+            }
+        };
+        geocoder.addressSearch(`${searchAddress}`, callback);
+    }
+    
+    const handleSearchAddress = (e) => {
+        SetSearchAddress(e.target.value)
+    }
+
+    useEffect(() => {
+        const container = document.getElementById('map');
+        const options = {
+            center: new kakao.maps.LatLng(33.450701, 126.570667),
+            level: 3
+        };
+
+        map = new kakao.maps.Map(container, options);
+    }, []); 
+
+    useEffect(() => {
+        if (!map) return;
+    
+        const newCenter = new kakao.maps.LatLng(state.center.lat, state.center.lng);
+    
+        map.setCenter(newCenter);
+    }, [state.center, map]);
+    // 카카오 맵 end
 
     const handleset = function (e) {
         switch (e.target.name) {
@@ -58,6 +112,8 @@ const AdminCampAdd = () => {
 
     //등록 버튼
     const formSubmit = async () => {
+        console.log(state.center.lat);
+        console.log(state.center.lng);
         const formData = new FormData();
         formData.append("campName", campName)
         if (file) {
@@ -76,6 +132,8 @@ const AdminCampAdd = () => {
         formData.append("campCaution", campCaution)
         formData.append("userNo", userNo)
         formData.append("facilityTypeNoList", facilityTypeNoList)
+        formData.append("campLatitude", state.center.lat)
+        formData.append("campLongitude", state.center.lng)
         if (layoutFile) {
             for (let i = 0; i < layoutFile.length; i++) {
                 formData.append(`layoutFile`, layoutFile[i])
@@ -97,7 +155,9 @@ const AdminCampAdd = () => {
             campIntroduction: campIntroduction, 
             userNo: userNo, 
             facilityTypeNoList : facilityTypeNoList, 
-            campCaution : campCaution
+            campCaution : campCaution,
+            campLatitude : state.center.lat,
+            campLongitude : state.center.lng
         };
         console.log(camp, 'camp는?')
         try {
@@ -110,12 +170,6 @@ const AdminCampAdd = () => {
         }
 
     }
-    //지도
-    const search = () => { }
-
-    useEffect(()=>{
-        
-    }, [])
 
     return (
         <>
@@ -149,14 +203,21 @@ const AdminCampAdd = () => {
                     <label htmlFor="placeName">장소명을 입력해 주세요</label>
                 </div>
                 <div className="form-floating my-2 d-flex">
-                    <input type="text" name="campLocation" id="campLocation" className="form-control" />
+                    <input type="text" name="campLocation" id="campLocation" className="form-control" onChange={handleSearchAddress} />
                     <label htmlFor="campLocation">지도검색을 위한 주소를 입력해주세요</label>
-                    <button type="button" onClick={search}>검색</button>
+                    <button type="button" onClick={SearchMap}>검색</button>
                 </div>
                 <input type="hidden" id="campLatitude" name="campLatitude" placeholder="위도(latitude)" />
                 <input type="hidden" id="campLongitude" name="campLongitude" placeholder="경도(longitude)" />
-                <div id="map" style={{ width: "100%", height: "600px" }}>
-                </div>
+                {/* <div id="map" style={{ width: "100%", height: "600px" }}> */}
+
+                {/* 지도 표시 */}
+                <Map id="map" center={state.center} style={{ width: "100%", height: "600px", }} level={3}>
+                    {/* 마커표시 */}
+                    <MapMarker position={{ lat: state.center.lat, lng: state.center.lng, }} />
+                </Map>
+                
+                {/* </div> */}
                 <div className="form-floating my-2">
                     <input type="text" id="campTel" name="campTel" className="form-control" onChange={handleset} />
                     <label htmlFor="campTel">캠핑장 연락처</label>
@@ -222,15 +283,15 @@ const AdminCampAdd = () => {
                     <input type="checkbox" id="7" name="facilityTypeNo" value="7" onChange={handlefac} />
                     <label htmlFor="7"><span></span>주차장</label>
                 </div>
-                <div className="form-floating">
+                <div className="form-floating py-2">
                     <input type="date" className="form-control" id="campOpen" name="campOpen" onChange={handleset} />
                     <label htmlFor="campOpen">오픈날짜</label>
                 </div>
-                <div className="form-floating">
+                <div className="form-floating py-2">
                     <input type="date" className="form-control" id="campClose" name="campClose" onChange={handleset} />
                     <label htmlFor="campClose">클로즈날짜</label>
                 </div>
-                <div className="form-floating">
+                <div className="form-floating py-2">
                     <textarea name="campIntroduction" id="campIntroduction" className="form-control" onChange={handleset}>
 
                     </textarea>
