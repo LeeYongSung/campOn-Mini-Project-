@@ -1,103 +1,42 @@
-import React, { useEffect } from 'react'
-import { Navigation, Pagination, A11y } from 'swiper/modules';
+import React, { useEffect, useState } from 'react'
+import { Navigation, Pagination, A11y, Zoom } from 'swiper/modules';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/css';
 import 'swiper/css/navigation';
 import 'swiper/css/pagination';
 import $ from 'jquery'
+import { CustomOverlayMap, Map, MapMarker, MapTypeControl, ZoomControl } from "react-kakao-maps-sdk"
+
 
 const CampProductintro = ({productsimg,productsenvironment,productsreserve,productsfacility,productsproducts}) => {
     $('#camp_info_more').on('click', function(){
         $('.camp_info').css('height', 'auto')
     })
+    const campLatitude = productsproducts.campLatitude;
+    const campLongitude = productsproducts.campLongitude;
+    const campName = productsproducts.campName;
 
-    const Kakao = ((campLatitude, campLongitude) => {
-        if(window.kakao){
-        const lat = campLatitude     // 위도
-        const lon = campLongitude    // 경도
-        console.log("위도 : " + lat);
-        console.log("경도 : " + lon);
-            
-        const container = document.getElementById('map'); //지도를 담을 영역의 DOM 레퍼런스
-        const options = { //지도를 생성할 때 필요한 기본 옵션
-            center: new window.kakao.maps.LatLng(lat, lon), //지도의 중심좌표.
-            level: 3 //지도의 레벨(확대, 축소 정도)
-        };
-            
-        // 지도를 생성한다
-        const map = new window.kakao.maps.Map(container, options); 
-            
-        // 지도 타입 변경 컨트롤을 생성한다
-        const mapTypeControl = new window.kakao.maps.MapTypeControl();
-            
-        // 지도 상단 우측에 타입 변경 컨트롤을 추가한다
-        map.addControl(mapTypeControl, window.kakao.maps.ControlPosition.TOPRIGHT)
-            
-        // 지도에 확대/축소 컨트롤을 생성한다
-        const zoomControl = new window.kakao.maps.ZoomControl();
-            
-        // 지도의 우측에 확대/축소 컨트롤을 추가한다
-        map.addControl(zoomControl, window.kakao.maps.ControlPosition.RIGHT)
-            
-        // 지도에 마커를 생성하고 표시한다
-        const marker = new window.kakao.maps.Marker({
-            position: new window.kakao.maps.LatLng(lat, lon), // 마커의 좌표
-            map: map                                    // 마커를 표시할 지도 객체
-        });
-                
-        // 지도 클릭 이벤트를 등록한다 (좌클릭 : click, 우클릭 : rightclick, 더블클릭 : dblclick)
-        window.kakao.maps.event.addListener(map, 'click', function (mouseEvent) {
-            console.log('지도에서 클릭한 위치의 좌표는 ' + mouseEvent.latLng.toString() + ' 입니다.');
-                    
-            let position = document.getElementById('position')            
-            // 위도,경도 정보
-            let latlng = mouseEvent.latLng
-            let lat = latlng.getLat()       // 위도
-            let lng = latlng.getLng()       // 경도
-            let msg = `위도 : ${lat}, 경도 : ${lng}`
-                   
-            position.innerHTML = msg
-        });	
-                    
-                    
-        // 커스텀 오버레이를 생성하고 지도에 표시한다
-        const campName = "[[${productsproducts.campName}]]"
-        const customOverlay = new window.kakao.maps.CustomOverlay({
-            map: map,
-            content: `<div class="my-place">${campName}</div>`, 
-            position: new window.kakao.maps.LatLng(lat, lon), // 커스텀 오버레이를 표시할 좌표
-            xAnchor: 0.5, // 컨텐츠의 x 위치
-            yAnchor: 0 // 컨텐츠의 y 위치
-        });
-                        
-                        
-        //로드뷰를 표시할 div
-        var roadviewContainer = document.getElementById('roadview'); 
-                        
-        var roadviewClient = new window.kakao.maps.RoadviewClient()
-        var roadview = new window.kakao.maps.Roadview(roadviewContainer)
-        var position = new window.kakao.maps.LatLng(lat, lon)
-                            
-        // 로드뷰 파노라마 ID 변화 이벤트를 등록한다
-        window.kakao.maps.event.addListener(roadview, 'panoid_changed', function() {
-            console.log(roadview.getPanoId());
-        });
-                                
-        roadviewClient.getNearestPanoId(position, 50, function(panoId) {
-            roadview.setPanoId(panoId, position);
-        });
-        }else{
-            console.log('안되뮤ㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠ')
+    const load = () => {
+        const check = window.confirm('가는법 알아보기')
+        const url = `https://map.kakao.com/link/to/${campName},${campLatitude},${campLongitude}`;
+        if(check){
+            window.open(url, '_blank', 'width=800,height=600,noopener,noreferrer');
         }
-    })
+    }
 
+    const KakaoMap = () => {
+        return (
+            <Map id="map" center={{lat: campLatitude, lng: campLongitude  }} style={{width:"100%", height:"400px"}} level={3}>
+                <MapMarker position={{lat: campLatitude, lng: campLongitude}} onClick={load} />
+                <CustomOverlayMap position={{lat: campLatitude, lng: campLongitude}} onClick={load}>
+                <button style={{width:"100%", height:"100%" ,padding: 0, border: "none", background: "transparent"}} onClick={load} >{campName}</button>
+                </CustomOverlayMap>
+                <MapTypeControl position={"TOPRIGHT"} />
+                <ZoomControl position={"RIGHT"} />
+            </Map>
+        )
 
-    useEffect(() => {
-        console.log(productsproducts)
-        console.log(productsproducts.campLatitude)
-        Kakao(productsproducts.campLatitude, productsproducts.campLongitude);
-        }, [])
-            
+    }
     return (
         <div>
             <Swiper
@@ -179,11 +118,11 @@ const CampProductintro = ({productsimg,productsenvironment,productsreserve,produ
             <div className="container-sm w-100 py-2 border-bottom">
                 <div className="pt-2"><h5>캠핑장 위치</h5></div>
 
-                <input type="text" id="latitude" value={productsproducts.campLatitude}/>
-                <input type="text" id="longitude" value={productsproducts.campLongitude}/>
-                <div id="map" style={{width:"100%", height:"400px"}}>
-                    {/*api 지도 출력 부분*/}
-                </div>
+                <input type="hidden" id="latitude" value={campLatitude}/>
+                <input type="hidden" id="longitude" value={campLongitude}/>
+                {/* <div> */}
+                    <KakaoMap />
+                {/* </div> */}
             </div>
             <div className="container-sm w-100 py-2 border-bottom">
                 <div><h5>캠핑장배치도</h5></div>
