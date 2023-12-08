@@ -23,7 +23,7 @@ const AdminCampAdd = () => {
     const [campCaution, setcampCaution] = useState('')
 
     const [loading, error] = useKakaoLoader({
-        appkey: "4d9c4ccd55af22e749af292453ba1fa9",
+        appkey: "66c31d7d2fe00c73f61774f2c881769e",
     })
 
     const handleset = function (e) {
@@ -183,14 +183,14 @@ const AdminCampAdd = () => {
                 <input type="hidden" id="campLongitude" name="campLongitude" placeholder="경도(longitude)" value={campLongitude} />
                 {/* api 지도 출력 부분 */}
                 <div id="map" style={{ width: "100%", height: "600px" }}>
-                    <Map
+                    {/* <Map
                         center={{ lat: 33.5563, lng: 126.79581 }}
                         style={{ width: "100%", height: "360px" }}
                     >
-                        {/* <MapMarker position={{ lat: 33.55635, lng: 126.795841 }}>
+                        <MapMarker position={{ lat: 33.55635, lng: 126.795841 }}>
                             <div style={{ color: "#000" }}>Hello World!</div>
-                        </MapMarker> */}
-                    </Map>
+                        </MapMarker>
+                    </Map> */}
                 </div>
                 <div className="form-floating my-2">
                     <input type="text" id="campTel" name="campTel" className="form-control" onChange={handleset} />
