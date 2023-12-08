@@ -9,52 +9,57 @@ import UserFooter from '../../components/menu/UserFooter'
 
 const CampProducts = () => {
 
-    
-
     // const { keyword, searchDate, regionNo, campTypeNos } = useParams()
     // const { campTypeNo } = useParams()
 
-    
     // campTypeNos = ctn[1];
     const params = new URLSearchParams(window.location.search);
     console.log(params);
+    let campTypeNos = [];
     // console.log('a');
     let keyword = params.get('keyword');
     let searchDate = params.get('searchDate');
     let regionNo = params.get('regionNo');
     let campTypeNosString = params.get('campTypeNos');
-    let campTypeNos = JSON.parse(decodeURIComponent(campTypeNosString));
+    console.log("campTypeNosString : " + campTypeNosString);
+
+    if(campTypeNosString.length === 0) {
+      campTypeNos = [];
+    } else {
+      campTypeNos = JSON.parse(decodeURIComponent(campTypeNosString));
+    }
+
     let campTypeNo = params.get('campTypeNo');
     // console.log("campTypeNo : " + campTypeNo);
-    console.log("campTypeNo : " + campTypeNo);
+    // console.log("campTypeNo : " + campTypeNo);
     const [campList, setCampList] = useState([])
 
 
     console.log(keyword);
     console.log(searchDate);
     console.log(regionNo);
-    console.log(campTypeNos);
+    // console.log(campTypeNos);
     // Array.from(campTypeNos).forEach(campTypeNo => {
     //   console.log('campTypeNos', campTypeNo);
     // });
 
     const getCampList = async () => {
         console.log(campTypeNo)
-        // if(campTypeNo != null) {
-        //   const response = await camps.campproducts(campTypeNo);
-        //   const data = await response.data;
-        //   console.log(data);
-        //   setCampList(data);
-        // } else {
-        //   if(Array.isArray(campTypeNos) && campTypeNos.length === 0) {
-        //     campTypeNos = 0;
-        //   } 
-        //   onSearch(keyword, searchDate, regionNo, camptypeNos);
-        // }
-        const response = await camps.campproducts(campTypeNo);
-        const data = await response.data;
-        console.log(data);
-        setCampList(data);
+        if(campTypeNo != null) {
+          const response = await camps.campproducts(campTypeNo);
+          const data = await response.data;
+          console.log(data);
+          setCampList(data);
+        } else {
+          if(campTypeNos.length === 0) {
+            campTypeNos = [];
+            onSearch(keyword, searchDate, regionNo, campTypeNos);
+          } 
+        }
+        // const response = await camps.campproducts(campTypeNo);
+        // const data = await response.data;
+        // console.log(data);
+        // setCampList(data);
       }
       
       useEffect(() => {
