@@ -1,17 +1,10 @@
 import React, {useEffect, useState} from 'react'
 import AdminProductUpd from '../../components/admin/AdminProductUpd'
-<<<<<<< HEAD
 import {useParams, useNavigate} from 'react-router-dom'
 import BackHeader from '../../components/header/BackHeader'
 import CampOnFooter from '../../components/footer/CampOnFooter'
 import AdminFooter from '../../components/menu/AdminFooter'
 import * as admins from '../../apis/admin'
-=======
-import {useParams} from 'react-router-dom'
-import BackHeader from '../../components/header/BackHeader'
-import CampOnFooter from '../../components/footer/CampOnFooter'
-import UserFooter from '../../components/menu/UserFooter'
->>>>>>> main
 
 //완
 const AdminProductUpdCon = () => {
@@ -146,15 +139,9 @@ const AdminProductUpdCon = () => {
   return (
     <>
     <BackHeader />
-<<<<<<< HEAD
     <AdminProductUpd productNo={productNo} sets={sets}/>
     <CampOnFooter />
     <AdminFooter />
-=======
-    <AdminProductUpd productNo={productNo}/>
-    <CampOnFooter />
-    <UserFooter />
->>>>>>> main
     </>
   )
 }

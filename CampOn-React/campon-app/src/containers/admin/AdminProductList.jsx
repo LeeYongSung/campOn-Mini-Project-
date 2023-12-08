@@ -2,7 +2,6 @@ import React, { useEffect, useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import AdminFooter from '../../components/menu/AdminFooter'
 import * as admins from '../../apis/admin'
-import { Link } from 'react-router-dom'
 import CampOnFooter from '../../components/footer/CampOnFooter';
 import BackHeader from '../../components/header/BackHeader';
 const AdminProductList = () => {

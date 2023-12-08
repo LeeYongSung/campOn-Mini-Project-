@@ -8,8 +8,6 @@ import AdminFooter from '../../components/menu/AdminFooter'
 import { useEffect } from 'react'
 import * as admins from '../../apis/admin'
 import { useNavigate } from 'react-router-dom'
-import BackHeader from '../../components/header/BackHeader'
-import CampOnFooter from '../../components/footer/CampOnFooter'
 import UserFooter from '../../components/menu/UserFooter'
 
 const AdminMemberListCon = () => {
