@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import { Link, useParams, useNavigate } from 'react-router-dom'
 import * as admins from '../../apis/admin'
 import { useEffect } from 'react';
+import { Map, MapMarker } from 'react-kakao-maps-sdk'
 
 const AdminCampAdd = () => {
     const navigate = useNavigate();
@@ -119,7 +120,7 @@ const AdminCampAdd = () => {
     const [campLatitude, setCampLatitude] = useState()
     const [campLongitude, setCampLongitude] = useState()
 
-   
+
 
     const search = () => {
 
@@ -127,16 +128,16 @@ const AdminCampAdd = () => {
 
     }
 
-    useEffect(() => {
-        var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
-        mapOption = {
-            center: new window.kakao.maps.LatLng(33.450701, 126.570667), // 지도의 중심좌표
-            level: 3 // 지도의 확대 레벨
-        };
+    // useEffect(() => {
+    //     var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
+    //     mapOption = {
+    //         center: new window.kakao.maps.LatLng(33.450701, 126.570667), // 지도의 중심좌표
+    //         level: 3 // 지도의 확대 레벨
+    //     };
 
-    // 지도를 생성합니다    
-    var map = new window.kakao.maps.Map(mapContainer, mapOption);
-    }, [])
+    // // 지도를 생성합니다    
+    // var map = new window.kakao.maps.Map(mapContainer, mapOption);
+    // }, [])
 
     return (
         <>
@@ -177,6 +178,12 @@ const AdminCampAdd = () => {
                 <input type="hidden" id="campLongitude" name="campLongitude" placeholder="경도(longitude)" value={campLongitude} />
                 {/* api 지도 출력 부분 */}
                 <div id="map" style={{ width: "100%", height: "600px" }}>
+                    <Map>
+                        center={{ lat: 33.5563, lng: 126.79581 }}
+                        style={{ width: '800px', height: '600px' }}
+                        level={3}
+                        <MapMarker position={{lat: 33.5563, lng: 126.79581 }}></MapMarker>
+                    </Map>
                 </div>
                 <div className="form-floating my-2">
                     <input type="text" id="campTel" name="campTel" className="form-control" onChange={handleset} />
@@ -260,7 +267,7 @@ const AdminCampAdd = () => {
                 <div>
                     <input type="button" value="캠핑장등록" className="btn btn-warning btn-lg w-100 my-3 py-3" onClick={formSubmit} />
                 </div>
-            </div>
+            </div >
 
 
 
