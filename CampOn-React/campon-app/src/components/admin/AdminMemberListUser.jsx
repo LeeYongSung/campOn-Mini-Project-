@@ -19,6 +19,17 @@ const AdminMemberListUser = ({ userList, deleteBtn }) => {
     setMore(false)
   }
 
+  const formatData = (inputDate) =>{
+    const date = new Date(inputDate);
+    //포맷 형식 지정하기
+    const year = date.getFullYear()
+    const month = String(date.getMonth()+1).padStart(2,'0');
+    const day= String(date.getDate()).padStart(2,'0');
+    const hours= String(date.getHours()).padStart(2,'0');
+    const minutes= String(date.getMinutes()).padStart(2,'0');
+    const seconds= String(date.getSeconds()).padStart(2,'0');
+    return `${year}/${month}/${day} ${hours}:${minutes}:${seconds}`
+}
 
 
   return (
@@ -52,7 +63,7 @@ const AdminMemberListUser = ({ userList, deleteBtn }) => {
                     <span>가입일자</span>
                   </div>
                   <div className="pe-3">
-                    <span>{user.regDate}</span>
+                    <span>{formatData(user.regDate)}</span>
                   </div>
                 </div>
                 <div className="position-absolute top-0 end-0 pe-1 pt-1">
