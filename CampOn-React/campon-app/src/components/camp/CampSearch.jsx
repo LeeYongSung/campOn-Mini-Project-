@@ -50,28 +50,51 @@ const CampSearch = ({onSearch}) => {
         }
     }
 
+    // const onSubmit = () => {
+    //     const formData = new FormData();
+    //     formData.append('keyword', keyword);
+    //     formData.append('searchDate', searchDate);
+    //     formData.append('regionNo', regionNo);
+    //     formData.append('campTypeNos', campTypeNos);
+
+    //     console.log(formData)
+    //     // onSearch(keyword, searchDate, regionNo, campTypeNos)
+
+    //     const headers = {
+    //         headers : {
+    //             'Content-Type' : 'application/json'
+    //         }
+    //     };
+
+    //     onSearch(formData, headers)
+    // }
     const onSubmit = () => {
         const formData = new FormData();
         formData.append('keyword', keyword);
         formData.append('searchDate', searchDate);
         formData.append('regionNo', regionNo);
-        formData.append('campTypeNos', campTypeNos);
+        Array.from(campTypeNos).forEach(campTypeNo => {
+            formData.append('campTypeNos', campTypeNo);
+        });
+    
+        // console.log(formData)
         // onSearch(keyword, searchDate, regionNo, campTypeNos)
-
-        const headers = {
-            headers : {
-                'Content-Type' : 'application/json'
-            }
-        };
-
-        onSearch(formData, headers)
+    
+        // const headers = {
+        //     headers : {
+        //         'Content-Type' : 'application/json'
+        //     }
+        // };
+    
+        // onSearch(formData, headers)
+        onSearch(keyword, searchDate, regionNo, campTypeNos)
     }
 
 
-    console.log("keyword : " + keyword)
-    console.log("searchDate : " + searchDate)
-    console.log("regionNo : " + regionNo)
-    console.log("campTypeNos : " + campTypeNos)
+    // console.log("keyword : " + keyword)
+    // console.log("searchDate : " + searchDate)
+    // console.log("regionNo : " + regionNo)
+    // console.log("campTypeNos : " + campTypeNos)
 
     
   return (
@@ -109,7 +132,7 @@ const CampSearch = ({onSearch}) => {
                 <label for="campnik"><span></span>캠프닉</label>
             </div>
             <div className="form-floating mb-3">
-                <button type="text"  className="btn btn-outline-secondary btn-lg w-100 py-3 rounded-0" onClick={onSubmit} >검색</button>
+                <button type="text"  className="btn btn-outline-secondary btn-lg w-100 py-3 rounded-0" onClick={() => onSubmit()} >검색</button>
             </div>
     </div>
         <div className="regionBox none position-fixed">

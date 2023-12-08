@@ -36,7 +36,37 @@ const CampMain = () => {
     },[])
 
     const onSearch = (keyword, searchDate, regionNo, camptypeNos) => {
-        navigate(`/api/camp/CampProducts?keword=${keyword}&searchDate=${searchDate}&regionNo=${regionNo}&campTypeNos=${camptypeNos}`)
+        // console.log(camptypeNos);
+        const today = new Date();
+        let year = today.getFullYear();
+        let month = today.getMonth() + 1;
+        let day = today.getDate();
+        let campTypeList = [];
+        if(day < 10) {
+            day = '0'+day;
+        }
+        const formattedDate = `${year}-${month}-${day}`;
+
+        Array.from(camptypeNos).forEach(campTypeNo => {
+            // formData.append('campTypeNos', campTypeNo);
+            console.log("camptypeNo : " + campTypeNo)
+            campTypeList.push(campTypeNo);
+        });
+        console.log(campTypeList)
+
+        // if(keyword === '') keyword = 'keyword=';
+        // if(regionNo === '') regionNo = 'regionNo=';
+        // if(camptypeNos === '') camptypeNos = 'camptypeNos=';
+
+        if(searchDate === '') {
+            searchDate = formattedDate;
+            // console.log(searchDate);
+        }
+        // console.log(formattedDate);
+        // console.log(searchDate);
+        // console.log(regionNo);
+        // console.log(camptypeNos);
+        navigate(`/api/camp/CampProducts?keyword=${keyword}&searchDate=${searchDate}&regionNo=${regionNo}&campTypeNos=${JSON.stringify(campTypeList)}`)
     }
 
     return(
