@@ -1,7 +1,10 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 
-const ProductCart = ( { cartList, removeCart, onProductClick } ) => {
+const ProductCart = ( { cartList, removeCart, onProductClick, productCheckout } ) => {
+
+    let listLength = cartList.length;
+
   return (
     <>
         <div className="text-center w-100 py-4">
@@ -11,7 +14,7 @@ const ProductCart = ( { cartList, removeCart, onProductClick } ) => {
         <div className="container mb-3">
             <div className="border rounded position-relative pb-4">
                 {/* 썸네일 */}
-                <div className="cartImg border-bottom w-100">
+                <div className="cartImg border-bottom w-100 imgCenter">
                     <img src={cart.productThumnail} className="w-100" />
                 </div>
                 <div className="w-100 d-flex justify-content-between cartCon py-4">
@@ -49,7 +52,7 @@ const ProductCart = ( { cartList, removeCart, onProductClick } ) => {
     ))}
     <div>
         <div className="cartTotal position-fixed">
-            <Link to={"/product/payment"} className="w-100 d-block btn btn-warning rounded-0 py-3">대여하기</Link>
+            <button className="w-100 d-block btn btn-warning rounded-0 py-3" onClick={ () => productCheckout(listLength) }>대여하기</button>
         </div>
     </div>
 

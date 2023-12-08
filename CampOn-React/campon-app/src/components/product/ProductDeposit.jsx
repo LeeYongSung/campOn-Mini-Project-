@@ -1,4 +1,5 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
 
 const ProductDeposit = ( {order, productList, campList, pmType, userName, paytotal} ) => {
     if(campList == null) {
@@ -6,8 +7,8 @@ const ProductDeposit = ( {order, productList, campList, pmType, userName, paytot
     }
   return (
     <>
-        <div class="container">
-            <div class="w-100 text-center py-4">
+        <div className="container">
+            <div className="w-100 text-center py-4">
                 <h5>대여 신청 완료</h5>
             </div>
 
@@ -16,24 +17,24 @@ const ProductDeposit = ( {order, productList, campList, pmType, userName, paytot
             </div>
             {/* 상품 목록 출력 */}
             {productList != null && productList.map( (product) => (
-                <div class="border px-1 rounded">
+                <div className="border px-1 rounded">
                     <div>
-                        <img src={product.productThumnail} alt="상품썸네일" class="w-100 rounded-top" />
+                        <img src={product.productThumnail} alt="상품썸네일" className="w-100 rounded-top" />
                     </div>
                     <div>
                         <div>
-                            <div class="py-2">
+                            <div className="py-2">
                                 <h4>{product.productName}</h4>
                             </div>
                             <div>
                                 <span>product.productIntro</span>
                             </div>
                         </div>
-                        <div class="d-flex justify-content-between py-2">
-                            <div class="ps-2">
-                                <h5>{product.productPrice}원</h5>
+                        <div className="d-flex justify-content-between py-2">
+                            <div className="ps-2">
+                                <h5>{product.productPrice.toLocaleString()}원</h5>
                             </div>
-                            <div class="pe-2">
+                            <div className="pe-2">
                                 <h5>{product.orderCnt}개</h5>
                             </div>
                         </div>
@@ -44,32 +45,32 @@ const ProductDeposit = ( {order, productList, campList, pmType, userName, paytot
         <hr />
         
         {/* 배송받을 캠핑장 정보 완료 */}
-        <div class="container">
-            <div class="w-100 text-start pt-4 pb-2">
+        <div className="container">
+            <div className="w-100 text-start pt-4 pb-2">
                 <h5>배송받을 캠핑장</h5>
             </div>
-            <div class="w-100 border rounded">
+            <div className="w-100 border rounded">
                 <div>
                     <div>
-                        <img src={campList.cpdiUrl} alt="캠핑상품 이미지" class="w-100 rounded-top" />
+                        <img src={campList.cpdiUrl} alt="캠핑상품 이미지" className="w-100 rounded-top" />
                     </div>
                     <div>
-                        <div class="pt-3">
-                            <div class="py-1 ps-2"><h4>{campList.campName}</h4></div>
-                            <div class="py-1 ps-2"><span>{campList.cpdtName}</span></div>
-                            <div class="d-flex justify-content-between py-1">
-                                <div class="ps-2">
+                        <div className="pt-3">
+                            <div className="py-1 ps-2"><h4>{campList.campName}</h4></div>
+                            <div className="py-1 ps-2"><span>{campList.cpdtName}</span></div>
+                            <div className="d-flex justify-content-between py-1">
+                                <div className="ps-2">
                                     <span>예약날짜</span>
                                 </div>
-                                <div class="pe-2">
+                                <div className="pe-2">
                                     <span>{order.startDate} ~ {order.endDate}</span>
                                 </div>
                             </div>
-                            <div class="d-flex justify-content-between">
-                                <div class="ps-2">
+                            <div className="d-flex justify-content-between">
+                                <div className="ps-2">
                                     <span>예약번호</span>
                                 </div>
-                                <div class="pe-2">
+                                <div className="pe-2">
                                     <span>{order.reservationNo}</span>
                                 </div>
                             </div>
@@ -92,7 +93,7 @@ const ProductDeposit = ( {order, productList, campList, pmType, userName, paytot
                 <h5>입금 정보</h5>
                 <p>입금자명: <span>{userName}</span></p> 
                 <p>은행(예금주): <strong>농협(캠핑온) 3031030200000000</strong></p> 
-                <p>총 입금 금액 : <span>{paytotal}원</span></p>
+                <p>총 입금 금액 : <span>{paytotal.toLocaleString()}원</span></p>
             </div>
             </>
         )}
@@ -100,7 +101,7 @@ const ProductDeposit = ( {order, productList, campList, pmType, userName, paytot
             <div>
             <h5>결제 정보</h5>
             <p>주문번호: <span>{order.orderNumber}</span></p> 
-            <p>총 결제 금액 : <span>{paytotal}</span></p>
+            <p>총 결제 금액 : <span>{paytotal.toLocaleString()}</span></p>
             </div>
         )}
 
@@ -111,9 +112,9 @@ const ProductDeposit = ( {order, productList, campList, pmType, userName, paytot
         </div>
 
         {/* 버튼 */}
-        <div class="d-flex justify-content-center py-4">
-                <a href="/camp/reservation" class="btn btn-success me-1">내 예약으로</a>
-                <a href="/" class="btn btn-warning ms-1">홈으로</a>
+        <div className="d-flex justify-content-center py-4">
+                <Link to={"/camp/reservation"} className="btn btn-success me-1">내 예약으로</Link>
+                <Link to={"/"} className="btn btn-warning ms-1">홈으로</Link>
         </div>
         </div>
     </>

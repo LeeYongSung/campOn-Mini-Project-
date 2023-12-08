@@ -1,8 +1,11 @@
 import React from 'react'
+import CampMain from '../containers/camp/CampMain'
 
 const Index = () => {
   return (
-    <div>index</div>
+    <>
+      <CampMain />
+    </>
   )
 }
 

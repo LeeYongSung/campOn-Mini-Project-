@@ -305,8 +305,10 @@ public class ProductApiController {
      * 결제 폼 제출
      */
     @PostMapping("/paymentpro")
-    public ResponseEntity<?> paymentpro(Order order) {
+    public ResponseEntity<?> paymentpro(@RequestBody Order order) {
         try {
+            
+            log.info("order : " + order);
             int userNo = 0;
             String userTel = "01000000000";
             String userName = "이용자";
@@ -318,7 +320,7 @@ public class ProductApiController {
             userName = users.getUserName();
             
             order.setUserNo(userNo);
-            log.info("order 객체에 어떻게 담겨있는지 확인 : "+order);   
+            // log.info("order 객체에 어떻게 담겨있는지 확인 : "+order);
             //(reservationNo=2, pmType=카드,cartCnts=[2, 3, 4, 5], productNos=[1, 2, 11, 1])
             //카트 업뎃
             int[] cartCnts = order.getCartCnts();
@@ -331,7 +333,7 @@ public class ProductApiController {
 
                 product.setUserNo(userNo);
                 int result = productService.cartUpdate(product);
-                log.info("카트업뎃여부 : "+result);
+                log.info("카트업뎃여부 : "+ result);
             }
             //orderNumber 생성
             int createNum = 0;
@@ -345,6 +347,7 @@ public class ProductApiController {
             } 
             System.out.println(orderNumber); //order_number에 넣어줄 거임
             order.setOrderNumber(orderNumber);
+            log.info("order 객체에 어떻게 담겨있는지 확인 : "+ order);
             int result2 = orderService.addOrder(order);
             log.info("order 테이블에 주문정보 등록여부 : " +result2);
             Long pmPrice = orderService.payAmount(order);
@@ -357,35 +360,36 @@ public class ProductApiController {
 
             
             //상품 결제 문자 보내기
-            SimpleDateFormat sdt = new SimpleDateFormat("yy년 MM월 dd일");
-            SimpleDateFormat sdtt = new SimpleDateFormat("MM월 dd일");
-            List<Order> orderList = orderService.toUserMsg(orderNumber);
-            String cpDtName = orderList.get(0).getCpDtName();
-            String productmsg = "";
-            for (int i = 0; i < orderList.size(); i++) {
-                Order order2 = orderList.get(i);
-                int orderCnt = order2.getOrderCnt();
-                String productName = order2.getProductName();
-                String mmm ="";
-                if (i == orderList.size()-1){ mmm =  productName + " : "+orderCnt + "개";}
-                else { mmm = productName + " : "+orderCnt + "개, "; }
-                productmsg += mmm;
-            }
-            String stDate = sdt.format(orderList.get(0).getStartDate());
-            String sttDate = sdtt.format(orderList.get(0).getStartDate());
-            String edDate = sdt.format(orderList.get(0).getEndDate());
-            String msg = "안녕하세요 "+ userName+"님 캠프온입니다. \n"+ stDate +"~"+ edDate+ " 예약된 " +cpDtName+" 캠핑장에 대여상품 "+productmsg+"를 대여하셨습니다. \n"+sttDate +"에 캠핑장으로 배송될 예정입니다. \n이용해주셔서 감사합니다. ";
-            MultiValueMap<String, String> param =  new LinkedMultiValueMap<String, String>(); 
-            param.add("msg", msg);
-            param.add("receiver", userTel);
-            param.add("rdate", "");
-            param.add("rtime", "");
-            param.add("testmode_yn", "N");
+            // SimpleDateFormat sdt = new SimpleDateFormat("yy년 MM월 dd일");
+            // SimpleDateFormat sdtt = new SimpleDateFormat("MM월 dd일");
+            // List<Order> orderList = orderService.toUserMsg(orderNumber);
+            // String cpDtName = orderList.get(0).getCpDtName();
+            // String productmsg = "";
+            // for (int i = 0; i < orderList.size(); i++) {
+            //     Order order2 = orderList.get(i);
+            //     int orderCnt = order2.getOrderCnt();
+            //     String productName = order2.getProductName();
+            //     String mmm ="";
+            //     if (i == orderList.size()-1){ mmm =  productName + " : "+orderCnt + "개";}
+            //     else { mmm = productName + " : "+orderCnt + "개, "; }
+            //     productmsg += mmm;
+            // }
+            // String stDate = sdt.format(orderList.get(0).getStartDate());
+            // String sttDate = sdtt.format(orderList.get(0).getStartDate());
+            // String edDate = sdt.format(orderList.get(0).getEndDate());
+            // String msg = "안녕하세요 "+ userName+"님 캠프온입니다. \n"+ stDate +"~"+ edDate+ " 예약된 " +cpDtName+" 캠핑장에 대여상품 "+productmsg+"를 대여하셨습니다. \n"+sttDate +"에 캠핑장으로 배송될 예정입니다. \n이용해주셔서 감사합니다. ";
+            // MultiValueMap<String, String> param =  new LinkedMultiValueMap<String, String>(); 
+            // param.add("msg", msg);
+            // param.add("receiver", userTel);
+            // param.add("rdate", "");
+            // param.add("rtime", "");
+            // param.add("testmode_yn", "N");
+            
             // 문자 전송 요청
-            Map<String, Object> resultMap = smsService.send(param);
-            Object resultCode = resultMap.get("result_code");
-            Integer result_code = Integer.valueOf( resultCode != null ? resultCode.toString() : "-1" );
-            String message = (String) resultMap.get("message");
+            // Map<String, Object> resultMap = smsService.send(param);
+            // Object resultCode = resultMap.get("result_code");
+            // Integer result_code = Integer.valueOf( resultCode != null ? resultCode.toString() : "-1" );
+            // String message = (String) resultMap.get("message");
 
 
             //장바구니와 찜에 있는 상품들 모두 삭제

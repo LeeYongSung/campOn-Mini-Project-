@@ -1,4 +1,5 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
 
 const ProductReview = ( { productReview } ) => {
   return (
@@ -9,7 +10,7 @@ const ProductReview = ( { productReview } ) => {
             </div>
             {productReview !=null && productReview.map((review) => (
                   <div className="border mb-3">
-                      <a href={review.productNo} className="d-flex justify-content-between">
+                      <Link to={`/api/board/prread/${review.prNo}`} className="d-flex justify-content-between">
                           <div className="review_imgbox my-2 mx-2 px-2 py-2">
                               <img src={review.prImg} />
                           </div>
@@ -32,7 +33,7 @@ const ProductReview = ( { productReview } ) => {
                                   </div>
                               </div>
                           </div>
-                      </a>
+                      </Link>
                   </div>
             ))}
         </div>

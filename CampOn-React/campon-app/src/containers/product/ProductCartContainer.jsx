@@ -5,11 +5,23 @@ import UserFooter from '../../components/menu/UserFooter'
 import ProductCart from '../../components/product/ProductCart'
 import * as Products from '../../apis/product'
 import { CategoryContext } from '../../apis/CategoryContext';
+import { useNavigate } from 'react-router-dom';
 
 const ProductCartContainer = () => {
 
     const [ cartList, setCartList ] = useState([]);
     const { setProductNo } = useContext(CategoryContext);
+
+    const navigate = useNavigate();
+
+    const productCheckout = (cartLength) => {
+      console.log(cartLength);
+      if (cartLength === 0) {
+        alert('대여 상품이 없습니다.');
+      } else {
+        navigate("/product/payment");
+      }
+    }
 
     const getCartList = ( async () => {
         const response = await Products.cartList();
@@ -43,7 +55,8 @@ const ProductCartContainer = () => {
     <>
         <BackCartHeader />
 
-        <ProductCart cartList={cartList} removeCart={removeCart} onProductClick={handleProductClick} />
+        <ProductCart cartList={cartList} removeCart={removeCart} 
+                     onProductClick={handleProductClick} productCheckout={productCheckout} />
 
         <CampOnFooter />
 

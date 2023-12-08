@@ -42,7 +42,7 @@ const CampBoardRead = ({ boardData, navigate }) => {
                 <div>
                     <span>{reviewCon}</span>
                 </div>
-                <div>
+                <div className='w-100'>
                     <img src={`/img?file=${reviewImg}`} className="w-100" />
                 </div>
             </div>

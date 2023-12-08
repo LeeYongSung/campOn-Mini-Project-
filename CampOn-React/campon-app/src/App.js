@@ -28,6 +28,7 @@ import UserUpdateCon from './containers/user/UserUpdateCon';
 import CampBoardMainCon from './containers/board/CampBoardMainCon';
 import CampBoardReadCon from './containers/board/CampBoardReadCon';
 import ProductBoardReadCon from './containers/board/ProductBoardReadCon';
+import CampBoardInsertCon from './containers/board/CampBoardInsertCon';
 // 캠프
 import CampMain from './containers/camp/CampMain';
 import CampProduct from './containers/camp/CampProduct';
@@ -62,10 +63,10 @@ function App() {
           <Route path="/product/cart" element={<ProductCartContainer />} />
           <Route path="/product/wishlist" element={<ProductWishListContainer />} />
           <Route path="/product/payment" element={<ProductPaymentContainer />} />
-          <Route path="/product/complete" element={<ProductDepositCompContainer />} />
+          <Route path="/product/complete/:orderNumber" element={<ProductDepositCompContainer />} />
           {/* 캠핑 */}
           <Route path="/api/camp/index" element={<CampMain />} />
-          <Route path="/api/camp/campproducts/:campTypeNo" element={<CampProducts />} />
+          <Route path="/api/camp/campproducts/" element={<CampProducts />} />
           <Route path="/api/camp/campproduct/:no" element={<CampProduct />} />
           <Route path="/api/camp/campdetail/:no" element={<CampDetail />} />
           <Route path="/api/camp/favorites" element={<Favorites />} />
@@ -96,6 +97,7 @@ function App() {
           <Route path="/api/board/index" element={<CampBoardMainCon />} />
           <Route path="/api/board/crread/:reviewNo" element={<CampBoardReadCon />} />
           <Route path="/api/board/prread/:prNo" element={<ProductBoardReadCon />} />
+          <Route path="/api/board/crinsert/:reservationNo" element={<CampBoardInsertCon />} />
           {/* 유저넘버 넘기는건 확인해봐야 함  */}
           <Route path="/admin/campdetailupdate/:cpdtNo" element={<AdminDCampUpdCon />} />
         </Routes>

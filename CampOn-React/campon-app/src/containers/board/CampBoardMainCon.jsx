@@ -2,6 +2,9 @@ import React, { useState, useEffect } from 'react';
 import CampBoardMain from '../../components/board/CampBoardMain';
 import * as boardApi from '../../apis/board'
 import { useLocation } from 'react-router-dom';
+import UserFooter from '../../components/menu/UserFooter'
+import CampOnFooter from '../../components/footer/CampOnFooter';
+import BackHeader from '../../components/header/BackHeader';
 
 const CampBoardMainCon = () => {
   const [currentTab, setCurrentTab] = useState('camp');
@@ -30,14 +33,19 @@ const CampBoardMainCon = () => {
   }, [location]);
 
   return (
-    <CampBoardMain
-    newReviewList={newReviewList}
-    crlist={crlist}
-    newprlist={newprlist}
-    prlist={prlist}
-    currentTab={currentTab}
-    onTabChange={setCurrentTab}
-    />
+    <>
+      <BackHeader />
+      <CampBoardMain
+        newReviewList={newReviewList}
+        crlist={crlist}
+        newprlist={newprlist}
+        prlist={prlist}
+        currentTab={currentTab}
+        onTabChange={setCurrentTab}
+      />
+      <CampOnFooter />
+      <UserFooter />
+    </>
   );
 };
 
