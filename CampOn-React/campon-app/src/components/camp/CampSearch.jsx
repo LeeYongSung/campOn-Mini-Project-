@@ -75,6 +75,7 @@ const CampSearch = ({onSearch}) => {
 
     
   return (
+    <>
     <div className="container-sm search_box">
             <div className="form-floating my-2">
                 <input type="text" id="keyword" name="keyword" className="form-control" placeholder="검색명" onChange={handleKeyword}/>
@@ -110,6 +111,7 @@ const CampSearch = ({onSearch}) => {
             <div className="form-floating mb-3">
                 <button type="text"  className="btn btn-outline-secondary btn-lg w-100 py-3 rounded-0" onClick={onSubmit} >검색</button>
             </div>
+    </div>
         <div className="regionBox none position-fixed">
             <div>
                 <a href="javascript:;" className="reginon_close w-100 d-block text-center px-3 py-1 bg-danger">닫기</a>
@@ -139,7 +141,7 @@ const CampSearch = ({onSearch}) => {
                 <button className="w-100 region_btn w-100 py-3 text-center d-block border my-2" value="제주도" onClick={regionClick} > 제주도 </button>
             </div>
         </div>  
-    </div>
+    </>
   )
 }
 

@@ -4,7 +4,7 @@ import * as boardApi from '../../apis/board'
 import { useLocation } from 'react-router-dom';
 import UserFooter from '../../components/menu/UserFooter'
 import CampOnFooter from '../../components/footer/CampOnFooter';
-import OpenSearchHeader from '../../components/header/OpenSearchHeader';
+import BackHeader from '../../components/header/BackHeader';
 
 const CampBoardMainCon = () => {
   const [currentTab, setCurrentTab] = useState('camp');
@@ -34,7 +34,7 @@ const CampBoardMainCon = () => {
 
   return (
     <>
-      <OpenSearchHeader />
+      <BackHeader />
       <CampBoardMain
         newReviewList={newReviewList}
         crlist={crlist}

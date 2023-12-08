@@ -63,9 +63,9 @@ const ProductPaymentContainer = () => {
     };
     
       const processPayment = (paymentType, camp, totalPrice) => {
-        // if(camp === '') {
-        //   alert('배송받을 캠핑장을 선택해 주세요.')
-        // } else {
+        if(camp === '') {
+          alert('배송받을 캠핑장을 선택해 주세요.')
+        } else {
           if (paymentType === "카드") {
               console.log(paymentType);
               console.log(totalPrice);
@@ -86,7 +86,7 @@ const ProductPaymentContainer = () => {
           } else {
               console.log("결제 방법을 선택해주세요.");
           }
-        // }
+        }
     }    
 
     const requestPay = (totalPrice, paymentType, camp) => {

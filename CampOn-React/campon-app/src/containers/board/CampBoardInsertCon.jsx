@@ -3,8 +3,8 @@ import { getReservation, postCrinsert } from '../../apis/board';
 import CampBoardInsert from '../../components/board/CampBoardInsert';
 import UserFooter from '../../components/menu/UserFooter';
 import CampOnFooter from '../../components/footer/CampOnFooter';
-import OpenSearchHeader from '../../components/header/OpenSearchHeader';
 import { useParams } from 'react-router-dom';
+import BackHeader from '../../components/header/BackHeader';
 
 const CampBoardInsertCon = () => {
   const { reservationNo } = useParams(); // useParams를 사용하여 reservationNo 추출
@@ -73,7 +73,7 @@ const CampBoardInsertCon = () => {
 
   return (
     <>
-      <OpenSearchHeader />
+      <BackHeader />
       <CampBoardInsert
         reservationNo={reservationNo} // reservationNo props 전달
         onSubmit={handleSubmit} // handleSubmit 함수 props 전달

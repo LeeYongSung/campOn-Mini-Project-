@@ -1,5 +1,8 @@
 import React, { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
+import CampOnFooter from '../../components/footer/CampOnFooter';
+import UserFooter from '../../components/menu/UserFooter';
+import BackHeader from '../../components/header/BackHeader';
 const AdminProductList = () => {
     const [productList, setProductList] = useState([]);
 
@@ -13,6 +16,8 @@ const AdminProductList = () => {
 
 
     return (
+        <>
+        <BackHeader />
         <div className='container'>
             <div className="w-100 text-center py-3">
                 <h5>렌탈샵 상품 관리</h5>
@@ -61,6 +66,9 @@ const AdminProductList = () => {
             )
             )}
         </div>
+        <CampOnFooter />
+        <UserFooter />
+        </>
     )
 }
 

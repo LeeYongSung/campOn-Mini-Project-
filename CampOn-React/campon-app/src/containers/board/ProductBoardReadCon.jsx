@@ -4,7 +4,7 @@ import * as boardApi from '../../apis/board';
 import ProductBoardRead from '../../components/board/ProductBoardRead';
 import UserFooter from '../../components/menu/UserFooter'
 import CampOnFooter from '../../components/footer/CampOnFooter';
-import OpenSearchHeader from '../../components/header/OpenSearchHeader';
+import BackHeader from '../../components/header/BackHeader';
 
 const ProductBoardReadCon = () => {
   const { prNo } = useParams();
@@ -28,7 +28,7 @@ const ProductBoardReadCon = () => {
 
   return (
     <>
-      <OpenSearchHeader />
+      <BackHeader />
       <ProductBoardRead
         boardData={boardData}
         navigate={navigate}

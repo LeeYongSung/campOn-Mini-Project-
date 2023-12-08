@@ -1,11 +1,12 @@
 import React from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 
 const CampOnFooter = () => {
+  let navigate = useNavigate();
   return (
     <>
       <footer>
-        <p className="footer_logo"><a href="#"><img src="/img/footer_logo.png" alt="하단로고" /></a></p>
+        <p className="footer_logo"><Link to="#" onClick={ (e) => { e.preventDefault(); navigate("/"); } }><img src="/img/footer_logo.png" alt="하단로고" /></Link></p>
         <div className="footer_company_box">
           <ul className="footer_company">
             <li><Link to={"#"}>회사소개</Link></li>
