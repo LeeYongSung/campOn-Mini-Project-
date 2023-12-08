@@ -2,10 +2,10 @@ import React, { useState } from 'react'
 import { Link, useParams, useNavigate } from 'react-router-dom'
 import * as admins from '../../apis/admin'
 import { useEffect } from 'react';
+
 const AdminCampAdd = () => {
     const navigate = useNavigate();
     const userNo = 3; //하드코딩
-
     const [campName, setcampName] = useState('')
     const [file, setfile] = useState(null)
     const [campAddress, setcampAddress] = useState('')
@@ -60,9 +60,9 @@ const AdminCampAdd = () => {
     const formSubmit = async () => {
         const formData = new FormData();
         console.log(campAddress)
-    console.log(campTel)
-    console.log(placeName)
-    console.log(regionNo)
+        console.log(campTel)
+        console.log(placeName)
+        console.log(regionNo)
         formData.append("campName", campName)
         if (file) {
             for (let i = 0; i < file.length; i++) {
@@ -118,12 +118,24 @@ const AdminCampAdd = () => {
     const [campLocation, setCampLocation] = useState()
     const [campLatitude, setCampLatitude] = useState()
     const [campLongitude, setCampLongitude] = useState()
-    
-    const search = () => { 
+
+   
+
+    const search = () => {
+
+
+
     }
 
     useEffect(() => {
+        var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
+        mapOption = {
+            center: new window.kakao.maps.LatLng(33.450701, 126.570667), // 지도의 중심좌표
+            level: 3 // 지도의 확대 레벨
+        };
 
+    // 지도를 생성합니다    
+    var map = new window.kakao.maps.Map(mapContainer, mapOption);
     }, [])
 
     return (
@@ -161,8 +173,8 @@ const AdminCampAdd = () => {
                     <label htmlFor="campLocation">지도검색을 위한 주소를 입력해주세요</label>
                     <button type="button" onClick={search}>검색</button>
                 </div>
-                <input type="hidden" id="campLatitude" name="campLatitude" placeholder="위도(latitude)" value={campLatitude}/>
-                <input type="hidden" id="campLongitude" name="campLongitude" placeholder="경도(longitude)"  value={campLongitude}/>
+                <input type="hidden" id="campLatitude" name="campLatitude" placeholder="위도(latitude)" value={campLatitude} />
+                <input type="hidden" id="campLongitude" name="campLongitude" placeholder="경도(longitude)" value={campLongitude} />
                 {/* api 지도 출력 부분 */}
                 <div id="map" style={{ width: "100%", height: "600px" }}>
                 </div>
