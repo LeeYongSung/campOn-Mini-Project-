@@ -36,12 +36,11 @@ const AdminCampAdd = () => {
 
     
     const SearchMap = () => {
-        console.log('들어옴')
         const geocoder = new kakao.maps.services.Geocoder();
         
-        let callback = function(result, status) {
+        let callback = function(result, status) {                       
             if (status === kakao.maps.services.Status.OK) {
-                const newSearch = result[0]
+                const newSearch = result[0]                             
                 console.log(newSearch.x)
                 console.log(newSearch.y)
                 setState({
