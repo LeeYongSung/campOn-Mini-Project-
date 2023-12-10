@@ -23,11 +23,11 @@ const CampProducts = () => {
     let campTypeNosString = params.get('campTypeNos');
     console.log("campTypeNosString : " + campTypeNosString);
 
-    if(campTypeNosString.length === 0) {
-      campTypeNos = [];
-    } else {
+    // if(campTypeNosString.length === 0) {
+    //   campTypeNos = [];
+    // } else {
       campTypeNos = JSON.parse(decodeURIComponent(campTypeNosString));
-    }
+    // }
 
     let campTypeNo = params.get('campTypeNo');
     // console.log("campTypeNo : " + campTypeNo);
