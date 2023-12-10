@@ -10,7 +10,7 @@ export const getReservation = (reservationNo) => axios.get(`/api/board/crinsert/
 // 캠핑 리뷰 등록
 export const postCrinsert = (formData, headers) => axios.post('/api/board/crinsert', formData, headers);
 // 캠핑 리뷰 수정
-export const postCrupdate = (board) => axios.post('/api/board/crupdate', board);
+export const postCrupdate = (formData, headers) => axios.post('/api/board/crupdate', formData, headers);
 // 캠핑 리뷰 삭제
 export const deleteCrdelete = (reviewNo) => axios.delete(`/api/board/crdelete/${reviewNo}`);
 
@@ -22,7 +22,7 @@ export const getOrder = (orderNo) => axios.get(`/api/board/prinsert/${orderNo}`)
 // 상품 리뷰 등록
 export const postPrinsert = (formData, headers) => axios.post('/api/board/prinsert', formData, headers);
 // 상품 리뷰 수정
-export const postPrupdate = (board) => axios.post('/api/board/prupdate', board);
+export const postPrupdate = (formData, headers) => axios.post('/api/board/prupdate', formData, headers);
 // 상품 리뷰 삭제
 export const deletePrdelete = (prNo) => axios.delete(`/api/board/prdelete/${prNo}`);
 

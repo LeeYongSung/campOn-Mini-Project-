@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { useParams } from 'react-router-dom';
+import { useParams, useNavigate  } from 'react-router-dom';
 import { getCrread, postCrupdate, deleteCrdelete } from '../../apis/board';
 import CampBoardUpdate from '../../components/board/CampBoardUpdate';
 import UserFooter from '../../components/menu/UserFooter';
@@ -7,54 +7,67 @@ import CampOnFooter from '../../components/footer/CampOnFooter';
 import BackHeader from '../../components/header/BackHeader';
 
 const CampBoardUpdateCon = () => {
+  const navigate = useNavigate();
   const { reviewNo } = useParams();
-  const [formValues, setFormValues] = useState({
-    reviewNo: reviewNo,
-    reviewTitle: '',
-    reviewCon: '',
-    reviewImgfile: null,
-  });
+  const [reservation, setReservation] = useState({});
+  const [reviewTitle, setReviewTitle] = useState('');
+  const [reviewImgfile, setReviewImgfile] = useState(null);
+  const [reviewCon, setReviewCon] = useState('');
 
-  useEffect(() => {
-    const fetchReview = async () => {
-      try {
-        const response = await getCrread(reviewNo);
-        if (response.status === 200) {
-          setFormValues(prevFormValues => ({
-            ...prevFormValues,
-            reviewTitle: response.data.reviewTitle,
-            reviewCon: response.data.reviewCon,
-            campName: response.data.campName,
-            cpdtName: response.data.cpdtName,
-          }));
-        } else {
-          alert('리뷰 정보를 찾을 수 없습니다');
-        }
-      } catch (error) {
-        console.error(error);
-      }
-    };
-    fetchReview();
-  }, [reviewNo, setFormValues]);
+  const handle = (e) => {
+    switch (e.target.name) {
+      case "reviewTitle":
+        setReviewTitle(e.target.value);
+        break;
+      case "reviewImgfile":
+        setReviewImgfile(e.target.files);
+        break;
+      case "reviewCon":
+        setReviewCon(e.target.value);
+        break;
+      default:
+        break;
+    }
+  };
 
-  const handleSubmit = async (event) => {
-    event.preventDefault();
-    const updatedFormValues = {
-      ...formValues,
-      reviewTitle: event.target.reviewTitle.value,
-      reviewCon: event.target.reviewCon.value,
-    };
+  const fetchReservation = async () => {
     try {
-      const response = await postCrupdate(updatedFormValues);
+      const response = await getCrread(reviewNo);
       if (response.status === 200) {
-        alert('게시글 수정 완료');
+        setReservation(response.data);
+        setReviewTitle(response.data.reviewTitle);
+        setReviewCon(response.data.reviewCon);
+        console.log(response.data)
       } else {
-        alert('게시글 수정 실패');
+        alert('예약 정보를 찾을 수 없습니다');
       }
     } catch (error) {
       console.error(error);
     }
-    setFormValues(updatedFormValues);
+  };
+
+  const handleSubmit = async () => {
+    console.log("수정 버튼 클릭됨");
+    const formData = new FormData();
+    if (reviewImgfile) {
+      formData.append("reviewImgfile", reviewImgfile[0]);
+    }
+    formData.append("reviewTitle", reviewTitle)
+    formData.append("reviewCon", reviewCon)
+    formData.append("reviewNo", reservation.reviewNo)
+    const headers = {
+      headers: { 'Content-Type': 'multipart/form-data' },
+    };
+
+    try {
+      const response = await postCrupdate(formData, headers);
+      if (response.status === 201) {
+        alert('게시글 수정완료');
+        navigate('/api/board/index');  // 원하는 경로로 변경하세요.
+      }
+    } catch (error) {
+      console.error(error);
+    }
   };
 
   const handleDelete = async () => {
@@ -72,20 +85,23 @@ const CampBoardUpdateCon = () => {
       }
     }
   };
-  
+
+  useEffect(() => {
+    fetchReservation();
+  }, []);
+
   return (
     <>
       <BackHeader />
       <CampBoardUpdate
-      onSubmit={handleSubmit}
-      onDelete={handleDelete}
-      formValues={formValues}
-      setFormValues={setFormValues}
-    />
+        onDelete={handleDelete}
+        reservation={reservation}
+        handleSubmit={handleSubmit}
+        handle={handle}
+      />
       <CampOnFooter />
       <UserFooter />
     </>
   );
 };
-
 export default CampBoardUpdateCon;

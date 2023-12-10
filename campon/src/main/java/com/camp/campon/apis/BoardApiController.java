@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestPart;
@@ -20,6 +21,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.camp.campon.dto.Board;
 import com.camp.campon.dto.Camp;
+import com.camp.campon.dto.Product;
 import com.camp.campon.service.BoardService;
 import com.camp.campon.service.UserService;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -130,16 +132,13 @@ public class BoardApiController {
     }
 
     @PostMapping(value = "/crupdate")
-    public ResponseEntity<?> crupdatePro(@RequestBody Board board) throws Exception {
-        try {
-            int result = boardService.crupdate(board);
-            if (result > 0)
-                return new ResponseEntity<>("게시글 수정 완료", HttpStatus.OK);
-            else
-                return new ResponseEntity<>("게시글 수정 실패", HttpStatus.OK);
-        } catch (Exception e) {
-            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
-        }
+    public ResponseEntity<?> crupdatePro(Board board) throws Exception {
+        int result = boardService.crupdate(board);
+        log.info("상품수정 성공여부 : " + result);
+        if (result > 0)
+            return new ResponseEntity<>("게시글 수정 완료", HttpStatus.OK);
+        else
+            return new ResponseEntity<>("게시글 수정 실패", HttpStatus.OK);
     }
 
     // ---------------------------------------------------------------------------
@@ -211,15 +210,13 @@ public class BoardApiController {
     }
 
     @PostMapping(value = "/prupdate")
-    public ResponseEntity<?> prupdatePro(@RequestBody Board board) throws Exception {
-        try {
-            int result = boardService.prupdate(board);
-            if (result > 0)
-                return new ResponseEntity<>("게시글 수정 완료", HttpStatus.OK);
-            else
-                return new ResponseEntity<>("게시글 수정 실패", HttpStatus.OK);
-        } catch (Exception e) {
-            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
-        }
+    public ResponseEntity<?> prupdatePro(Board board) throws Exception {
+        int result = 0;
+        log.info("상품수정 성공여부 : " + result);
+        result = boardService.prupdate(board);
+        if (result > 0)
+            return new ResponseEntity<>("게시글 수정 완료", HttpStatus.CREATED);
+        else
+            return new ResponseEntity<>("게시글 수정 실패", HttpStatus.BAD_REQUEST);
     }
 }
