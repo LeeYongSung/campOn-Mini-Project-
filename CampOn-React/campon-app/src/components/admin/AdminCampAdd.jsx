@@ -2,11 +2,7 @@ import React, { useState } from 'react'
 import { Link, useParams, useNavigate } from 'react-router-dom'
 import * as admins from '../../apis/admin'
 import { useEffect } from 'react';
-<<<<<<< HEAD
-import { Map, MapMarker, useKakaoLoader } from 'react-kakao-maps-sdk'
-=======
 import { Map, MapMarker } from "react-kakao-maps-sdk"
->>>>>>> e106488c6071bf6551029d5bf82c3a63ad657400
 
 const AdminCampAdd = () => {
     const navigate = useNavigate();
@@ -26,11 +22,6 @@ const AdminCampAdd = () => {
     const [layoutFile, setlayoutFile] = useState(null)
     const [campCaution, setcampCaution] = useState('')
 
-<<<<<<< HEAD
-    const [loading, error] = useKakaoLoader({
-        appkey: "66c31d7d2fe00c73f61774f2c881769e",
-    })
-=======
     // 카카오 맵 start
     let map;
     const [state, setState] = useState({
@@ -81,7 +72,6 @@ const AdminCampAdd = () => {
         map.setCenter(newCenter);
     }, [state.center, map]);
     // 카카오 맵 end
->>>>>>> e106488c6071bf6551029d5bf82c3a63ad657400
 
     const handleset = function (e) {
         switch (e.target.name) {
@@ -164,19 +154,12 @@ const AdminCampAdd = () => {
             campTel: campTel,
             campOpen: campOpen,
             campClose: campClose,
-<<<<<<< HEAD
-            campIntroduction: campIntroduction,
-            userNo: userNo,
-            facilityTypeNoList: facilityTypeNoList,
-            campCaution: campCaution
-=======
             campIntroduction: campIntroduction, 
             userNo: userNo, 
             facilityTypeNoList : facilityTypeNoList, 
             campCaution : campCaution,
             campLatitude : state.center.lat,
             campLongitude : state.center.lng
->>>>>>> e106488c6071bf6551029d5bf82c3a63ad657400
         };
         console.log(camp, 'camp는?')
         try {
@@ -189,33 +172,6 @@ const AdminCampAdd = () => {
         }
 
     }
-<<<<<<< HEAD
-    //지도
-    const [campLocation, setCampLocation] = useState()
-    const [campLatitude, setCampLatitude] = useState()
-    const [campLongitude, setCampLongitude] = useState()
-
-
-
-    const search = () => {
-
-
-
-    }
-
-    // useEffect(() => {
-
-    //     var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
-    //         mapOption = {
-    //             center: new window.kakao.maps.LatLng(33.450701, 126.570667), // 지도의 중심좌표
-    //             level: 3 // 지도의 확대 레벨
-    //         };
-
-    //     // 지도를 생성합니다    
-    //     var map = new window.kakao.maps.Map(mapContainer, mapOption);
-    // }, [])
-=======
->>>>>>> e106488c6071bf6551029d5bf82c3a63ad657400
 
     return (
         <>
@@ -248,29 +204,10 @@ const AdminCampAdd = () => {
                     <label htmlFor="placeName">장소명을 입력해 주세요</label>
                 </div>
                 <div className="form-floating my-2 d-flex">
-<<<<<<< HEAD
-                    <input type="text" name="campLocation" id="campLocation" className="form-control" onChange={(e) => { setCampLocation(e.target.value) }} />
-=======
                     <input type="text" name="campLocation" id="campLocation" className="form-control" onChange={handleSearchAddress} />
->>>>>>> e106488c6071bf6551029d5bf82c3a63ad657400
                     <label htmlFor="campLocation">지도검색을 위한 주소를 입력해주세요</label>
                     <button type="button" onClick={SearchMap}>검색</button>
                 </div>
-<<<<<<< HEAD
-                <input type="hidden" id="campLatitude" name="campLatitude" placeholder="위도(latitude)" value={campLatitude} />
-                <input type="hidden" id="campLongitude" name="campLongitude" placeholder="경도(longitude)" value={campLongitude} />
-                {/* api 지도 출력 부분 */}
-                <div id="map" style={{ width: "100%", height: "600px" }}>
-                    {/* <Map
-                        center={{ lat: 33.5563, lng: 126.79581 }}
-                        style={{ width: "100%", height: "360px" }}
-                    >
-                        <MapMarker position={{ lat: 33.55635, lng: 126.795841 }}>
-                            <div style={{ color: "#000" }}>Hello World!</div>
-                        </MapMarker>
-                    </Map> */}
-                </div>
-=======
                 <input type="hidden" id="campLatitude" name="campLatitude" placeholder="위도(latitude)" />
                 <input type="hidden" id="campLongitude" name="campLongitude" placeholder="경도(longitude)" />
                 {/* <div id="map" style={{ width: "100%", height: "600px" }}> */}
@@ -282,7 +219,6 @@ const AdminCampAdd = () => {
                 </Map>
                 
                 {/* </div> */}
->>>>>>> e106488c6071bf6551029d5bf82c3a63ad657400
                 <div className="form-floating my-2">
                     <input type="text" id="campTel" name="campTel" className="form-control" onChange={handleset} />
                     <label htmlFor="campTel">캠핑장 연락처</label>
