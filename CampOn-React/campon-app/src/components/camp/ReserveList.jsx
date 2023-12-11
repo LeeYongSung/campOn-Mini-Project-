@@ -24,7 +24,7 @@ const ReserveList = ({reserve, onDelete}) => {
     
   return (
     <div>
-        <div class="w-100 text-center py-3">
+        <div className="w-100 text-center py-3">
         <h4>캠핑장 예약 현황</h4>
         </div>
         {reserve.map((reservation) => (

@@ -36,10 +36,10 @@ const AdminCampAdd = () => {
 
     
     const SearchMap = () => {
-        const geocoder = new kakao.maps.services.Geocoder();
+        const geocoder = new window.kakao.maps.services.Geocoder();
         
         let callback = function(result, status) {                       
-            if (status === kakao.maps.services.Status.OK) {
+            if (status === window.kakao.maps.services.Status.OK) {
                 const newSearch = result[0]                             
                 console.log(newSearch.x)
                 console.log(newSearch.y)
@@ -58,17 +58,17 @@ const AdminCampAdd = () => {
     useEffect(() => {
         const container = document.getElementById('map');
         const options = {
-            center: new kakao.maps.LatLng(33.450701, 126.570667),
+            center: new window.kakao.maps.LatLng(33.450701, 126.570667),
             level: 3
         };
 
-        map = new kakao.maps.Map(container, options);
+        map = new window.kakao.maps.Map(container, options);
     }, []); 
 
     useEffect(() => {
         if (!map) return;
     
-        const newCenter = new kakao.maps.LatLng(state.center.lat, state.center.lng);
+        const newCenter = new window.kakao.maps.LatLng(state.center.lat, state.center.lng);
     
         map.setCenter(newCenter);
     }, [state.center, map]);
