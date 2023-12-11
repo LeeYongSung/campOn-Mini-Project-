@@ -20,48 +20,32 @@ const UserMyypage = ({sets}) => {
                         </li>
                     </ul>
                 </div>
-
-  return (
-    <>
-      <div class="mypage_banner">
-        <div class="mypage_banner_header"><h4>마이페이지</h4></div>
-        <div class="mypage_banner_back"></div>
-        <div class="mypage_banner_con">
-            <ul class="w-100 text-center">
-                    <li><img src="/img/user/test_user.png" alt="프로필이미지"/></li>
-                    {/* <li><img src="/img/user/test_sell.png" alt="프로필이미지"></li> */}
-                    {/* <li><img src="/img/user/test_admin.png" alt="프로필이미지"></li> */}
-                <li>
-                    <h4>아이디 : {userId}</h4>
-                </li>
-            </ul>
-        </div>
-
-    </div>
-    <div class="container">
-            <div class="w-100 text-center mypage_user">
-                <ul class="d-flex justify-content-around w-100">
-                    <li>
-                        <Link to="/user/update">내정보 관리</Link>
-                    </li>
-                    <li>
-                        <Link to="/api/camp/reservation">내 예약 현황</Link>
-                    </li>
-                    <li>
-                        <Link to="/board/boardlist">구매 후기</Link>
-                    </li>
-                </ul>
-                <ul class="d-flex justify-content-around w-100">
-                    <li>
-                        <Link to="/camp/favorites">찜한 캠핑장</Link>
-                    </li>
-                    <li>
-                        <Link to="/product/wishlist">찜한 상품</Link>
-                    </li>
-                    <li>
-                        <Link to="/product/cart">장바구니</Link>
-                    </li>
-                </ul>
+            </div>
+            <div class="container">
+                <div class="w-100 text-center mypage_user">
+                    <ul class="d-flex justify-content-around w-100">
+                        <li>
+                            <Link to="/user/update">내정보 관리</Link>
+                        </li>
+                        <li>
+                            <Link to="/api/camp/reservation">내 예약 현황</Link>
+                        </li>
+                        <li>
+                            <Link to="/board/boardlist">구매 후기</Link>
+                        </li>
+                    </ul>
+                    <ul class="d-flex justify-content-around w-100">
+                        <li>
+                            <Link to="/camp/favorites">찜한 캠핑장</Link>
+                        </li>
+                        <li>
+                            <Link to="/product/wishlist">찜한 상품</Link>
+                        </li>
+                        <li>
+                            <Link to="/product/cart">장바구니</Link>
+                        </li>
+                    </ul>
+                </div>
             </div>
             <div className="container">
                 {
@@ -146,7 +130,6 @@ const UserMyypage = ({sets}) => {
             {/* <form action="/logout" method="post"> */}
             <button type="button" onClick={logout} className="btn btn-warning btn-lg w-100 mypage_logout_btn">로그아웃</button>
             {/* </form> */}
-
         </>
     )
 }
