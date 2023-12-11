@@ -28,7 +28,7 @@ const UserMyypage = () => {
                         <Link to="/user/update">내정보 관리</Link>
                     </li>
                     <li>
-                        <Link to="/camp/reservation">내 예약 현황</Link>
+                        <Link to="/api/camp/reservation">내 예약 현황</Link>
                     </li>
                     <li>
                         <Link to="/board/boardlist">구매 후기</Link>

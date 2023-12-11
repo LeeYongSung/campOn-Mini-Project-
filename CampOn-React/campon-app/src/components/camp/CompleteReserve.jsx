@@ -6,7 +6,7 @@ import $ from 'jquery'
 const CompleteReserve = ({complete}) => {
 
     const payType = `${complete.campPaymentType}`;
-    const txt = '(신한)110-328-214257 예금주:이용성';
+    const txt = '(신한)110-123-456789 예금주:이용성';
     if(payType == 'bankbook') {
         $('.payType_end').text(txt)
     }

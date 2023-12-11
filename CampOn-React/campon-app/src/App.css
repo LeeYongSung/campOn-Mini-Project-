@@ -214,6 +214,8 @@ input[type="checkbox"] {
 .reservate_box>div:nth-of-type(1) {width: 30%;}
 .reservate_box>div:nth-of-type(2) {width: 70%;}
 .reservation_date>input{border: none;  text-align: center;}
+.reservate_img_box {width: 100px; height: 100px; overflow: hidden;}
+.reservate_img_box>img {width: 100%; object-fit: cover;}
 .checkinBox {width: 40%;}
 .checkoutBox {width: 40%;}
 .daycount {width: 20%;}

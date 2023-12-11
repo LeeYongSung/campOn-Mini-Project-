@@ -127,9 +127,9 @@ const ReservatePro = ({camp, user, reserve}) => {
   return (
     <div>
             <div className="container w-100">
-                <div className="container-sm reservate_box d-flex justify-content-between">
-                    <div className="rounded">
-                        <img src={camp.cpdiUrl} alt="캠핑상품이미지" className="w-100 px-2 rounded"/>
+                <div className="container-sm reservate_box d-flex justify-content-between py-4">
+                    <div className="rounded reservate_img_box">
+                        <img src={camp.cpdiUrl} alt="캠핑상품이미지" className="px-2 rounded"/>
                     </div>
                     <div>
                         <p>{camp.campName}</p>

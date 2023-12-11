@@ -1,4 +1,5 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
 
 const OpenSearchHeader = () => {
   return (
@@ -6,9 +7,9 @@ const OpenSearchHeader = () => {
       <header>
           <nav>
               <ul className="main_header">
-                  <li><a href="/camp/schedule"><i className="material-symbols-outlined">schedule</i></a></li>
-                  <li><a href="/"><img src="/img/header_logo.png" alt="로고" /></a> </li>
-                  <li><a href="/camp/campproducts?keyword=&searchDate=&regionNo=0&campTypeNos=" className="serch_btn"><i className="material-symbols-outlined">search</i></a></li>
+                  <li><Link to={"/api/camp/schedule"}><i className="material-symbols-outlined">schedule</i></Link></li>
+                  <li><Link to={"/"}><img src="/img/header_logo.png" alt="로고" /></Link> </li>
+                  <li><Link to={"/api/camp/campproducts?keyword=&searchDate=&regionNo=0&campTypeNos=[]"} className="serch_btn"><i className="material-symbols-outlined">search</i></Link></li>
               </ul>
           </nav>
       </header>
