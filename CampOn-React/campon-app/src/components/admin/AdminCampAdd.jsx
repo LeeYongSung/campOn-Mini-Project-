@@ -2,7 +2,16 @@ import React, { useState } from 'react'
 import { Link, useParams, useNavigate } from 'react-router-dom'
 import * as admins from '../../apis/admin'
 import { useEffect } from 'react';
+<<<<<<< HEAD
+import { Map, MapMarker, useKakaoLoader } from 'react-kakao-maps-sdk'
+<<<<<<< HEAD
+const { kakao } = window
+
+=======
+=======
 import { Map, MapMarker } from "react-kakao-maps-sdk"
+>>>>>>> e106488c6071bf6551029d5bf82c3a63ad657400
+>>>>>>> main
 
 const AdminCampAdd = () => {
     const navigate = useNavigate();
@@ -21,7 +30,17 @@ const AdminCampAdd = () => {
     const [campIntroduction, setcampIntroduction] = useState('')
     const [layoutFile, setlayoutFile] = useState(null)
     const [campCaution, setcampCaution] = useState('')
+<<<<<<< HEAD
+    //지도
+=======
 
+<<<<<<< HEAD
+>>>>>>> main
+    const [loading, error] = useKakaoLoader({
+        appkey: "66c31d7d2fe00c73f61774f2c881769e",
+        libraries: ["clusterer", "drawing", "services"],
+    })
+=======
     // 카카오 맵 start
     let map;
     const [state, setState] = useState({
@@ -101,6 +120,8 @@ const AdminCampAdd = () => {
                 break;
         }
     }
+
+
     const handlefac = (e) => {
         // const updateFacList = 
         //     e.target.checked ? [...facilityTypeNoList, value] : facilityTypeNoList.filter((facility)=>{facility !== e.target.value}) 
@@ -172,6 +193,56 @@ const AdminCampAdd = () => {
         }
 
     }
+<<<<<<< HEAD
+    //지도
+    const [state, setState] = useState({
+        // 지도의 초기 위치
+        center: { lat: 37.49676871972202, lng: 127.02474726969814 },
+        // 지도 위치 변경시 panto를 이용할지(부드럽게 이동)
+        isPanto: true,
+      });
+    const [campLocation, setCampLocation] = useState()
+    const [campLatitude, setCampLatitude] = useState()
+    const [campLongitude, setCampLongitude] = useState()
+    const [mapContainer, setmapContainer] = useState()
+    const [mapOption, setmapOption] = useState()
+
+    const search = () => {
+        const geocoder = new kakao.maps.services.Geocoder();
+  
+        let callback = function(result, status) {
+          if (status === kakao.maps.services.Status.OK) {
+            const newSearch = result[0]
+            setState({
+              center: { lat: newSearch.y, lng: newSearch.x }
+            })
+          }
+        };
+          geocoder.addressSearch(`${campLocation}`, callback);
+        }
+      
+
+    const onClickAddr = () => {
+    }
+<<<<<<< HEAD
+    useEffect(() => {
+    }, [])
+=======
+
+    // useEffect(() => {
+
+    //     var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
+    //         mapOption = {
+    //             center: new window.kakao.maps.LatLng(33.450701, 126.570667), // 지도의 중심좌표
+    //             level: 3 // 지도의 확대 레벨
+    //         };
+
+    //     // 지도를 생성합니다    
+    //     var map = new window.kakao.maps.Map(mapContainer, mapOption);
+    // }, [])
+=======
+>>>>>>> e106488c6071bf6551029d5bf82c3a63ad657400
+>>>>>>> main
 
     return (
         <>
@@ -208,6 +279,32 @@ const AdminCampAdd = () => {
                     <label htmlFor="campLocation">지도검색을 위한 주소를 입력해주세요</label>
                     <button type="button" onClick={SearchMap}>검색</button>
                 </div>
+<<<<<<< HEAD
+                <input type="hidden" id="campLatitude" name="campLatitude" placeholder="위도(latitude)" value={campLatitude} />
+                <input type="hidden" id="campLongitude" name="campLongitude" placeholder="경도(longitude)" value={campLongitude} />
+                {/* api 지도 출력 부분 */}
+                <div id="map" style={{ width: "100%", height: "600px" }}>
+                    {/* <Map
+                        center={{ lat: 33.5563, lng: 126.79581 }}
+                        style={{ width: "100%", height: "360px" }}
+                    >
+                        <MapMarker position={{ lat: 33.55635, lng: 126.795841 }}>
+                            <div style={{ color: "#000" }}>Hello World!</div>
+                        </MapMarker>
+                    </Map> */}
+
+                    <Map // 지도를 표시할 Container
+                        center={state.center}
+                        isPanto={state.isPanto}
+                        style={{
+                            // 지도의 크기
+                            width: "100%",
+                            height: "450px",
+                        }}
+                        level={3} // 지도의 확대 레벨
+                    ></Map>
+                </div>
+=======
                 <input type="hidden" id="campLatitude" name="campLatitude" placeholder="위도(latitude)" />
                 <input type="hidden" id="campLongitude" name="campLongitude" placeholder="경도(longitude)" />
                 {/* <div id="map" style={{ width: "100%", height: "600px" }}> */}

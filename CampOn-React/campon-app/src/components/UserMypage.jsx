@@ -12,7 +12,7 @@ const UserMyypage = ({sets}) => {
                 <div className="mypage_banner_back"></div>
                 <div className="mypage_banner_con">
                     <ul className="w-100 text-center">
-                        { (userAuth == 'ROLE_USER') && <li><img src="/img/user/test_user.png" alt="프로필이미지" /></li>}
+                        { (userAuth == 'ROLE_USER') && <li><img src="/img/user/test_user.png" alt="프로필이미지입니다. " /></li>}
                         { (userAuth == 'ROLE_SELL') && <li><img src="/img/user/test_sell.png" alt="프로필이미지" /></li>}
                         { (userAuth == 'ROLE_ADMIN') && <li><img src="/img/user/test_admin.png" alt="프로필이미지" /></li>}
                         <li>
