@@ -17,7 +17,7 @@ const CampBoardMain = ({ newReviewList, crlist, newprlist, currentTab, onTabChan
                 <p>{item.reviewTitle}</p>
               </div>
               <div>
-                <span>{new Date(item.regDate).toLocaleDateString()}</span>
+                <span>{new Date(item.regDate).toLocaleDateString().replace(/\.+$/, '')}</span>
               </div>
               <div>
                 <span>{item.cpdtName}</span>
@@ -39,7 +39,7 @@ const CampBoardMain = ({ newReviewList, crlist, newprlist, currentTab, onTabChan
         <td className="tdd">{item.reviewNo}</td>
         <td className="tdd"><Link to={`/api/board/crread/${item.reviewNo}`}>{item.reviewTitle}</Link></td>
         <td className="tdd">{item.userId}</td>
-        <td className="tdd">{new Date(item.regDate).toLocaleDateString()}</td>
+        <td className="tdd">{new Date(item.regDate).toLocaleDateString().replace(/\.+$/, '')}</td>
       </tr>
     ));
   };
@@ -58,7 +58,7 @@ const CampBoardMain = ({ newReviewList, crlist, newprlist, currentTab, onTabChan
                 <p>{item.prTitle}</p>
               </div>
               <div>
-                <span>{new Date(item.regDate).toLocaleDateString()}</span>
+                <span>{new Date(item.regDate).toLocaleDateString().replace(/\.+$/, '')}</span>
               </div>
               <div>
                 <span>{item.productName}</span>
@@ -80,7 +80,7 @@ const CampBoardMain = ({ newReviewList, crlist, newprlist, currentTab, onTabChan
         <td className="tdd">{item.prNo}</td>
         <td className="tdd"><Link to={`/api/board/prread/${item.prNo}`}>{item.prTitle}</Link></td>
         <td className="tdd">{item.userId}</td>
-        <td className="tdd">{new Date(item.regDate).toLocaleDateString()}</td>
+        <td className="tdd">{new Date(item.regDate).toLocaleDateString().replace(/\.+$/, '')}</td>
       </tr>
     ));
   };
@@ -109,9 +109,9 @@ const CampBoardMain = ({ newReviewList, crlist, newprlist, currentTab, onTabChan
             <thead>
               <tr className="theadd">
                 <th className="num tdd" width="100">번호</th>
-                <th className="title tdd" width="200">제목</th>
+                <th className="title tdd" width="190">제목</th>
                 <th className="writer tdd" width="100">작성자</th>
-                <th className="date tdd" width="100">작성일</th>
+                <th className="date tdd" width="110">작성일</th>
               </tr>
             </thead>
             <tbody id="cr-data">
@@ -135,9 +135,9 @@ const CampBoardMain = ({ newReviewList, crlist, newprlist, currentTab, onTabChan
             <thead className="theadd">
               <tr>
                 <th className="tdd" width="100">번호</th>
-                <th className="tdd" width="200">제목</th>
+                <th className="tdd" width="190">제목</th>
                 <th className="tdd" width="100">작성자</th>
-                <th className="tdd" width="100">작성일</th>
+                <th className="tdd" width="110">작성일</th>
               </tr>
             </thead>
             <tbody id="pr-data">
