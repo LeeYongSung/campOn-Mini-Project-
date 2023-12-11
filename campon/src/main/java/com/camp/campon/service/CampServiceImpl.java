@@ -34,8 +34,8 @@ public class CampServiceImpl implements CampService{
     }
 
     @Override
-    public List<Camp> favoritesList() throws Exception {
-        List<Camp> favoritesList = campMapper.favoritesList();
+    public List<Camp> favoritesList(int userNo) throws Exception {
+        List<Camp> favoritesList = campMapper.favoritesList(userNo);
         return favoritesList;
     }
 
@@ -521,6 +521,12 @@ public class CampServiceImpl implements CampService{
     @Override
     public int campEnvironmentDelete(int campNo) throws Exception {
         int result = campMapper.campEnvironmentDelete(campNo);
+        return result;
+    }
+
+    @Override
+    public int favoriteInsert(Camp camp) throws Exception {
+        int result = campMapper.favoriteInsert(camp);
         return result;
     }
 
