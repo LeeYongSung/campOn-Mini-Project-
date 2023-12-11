@@ -43,33 +43,33 @@ const CampProduct = () => {
         <CampProductintro productsimg={productsimg} productsenvironment={productsenvironment} productsreserve={productsreserve} productsfacility={productsfacility} productsproducts={productsproducts} />
         <CampDetailList productsproductlist={productsproductlist} />
         <CampReview productsreview={productsreview} />
-        <div class="container-sm w-100 py-3 mt-3 border-bottom border-top">
-            <a href="javascript:;" class="d-flex w-100">
-                <div class="d-flex justify-content-between">
+        <div className="container-sm w-100 py-3 mt-3 border-bottom border-top">
+            <a href="javascript:;" className="d-flex w-100">
+                <div className="d-flex justify-content-between">
                     <div><h6>캠핑장 운영정책</h6></div>
-                    <div><span class="material-symbols-outlined">chevron_right</span></div>
+                    <div><span className="material-symbols-outlined">chevron_right</span></div>
                 </div>
             </a>
         </div>
-        <div class="none">캠핑장 운영정책 모달창</div>
-        <div class="container-sm w-100 py-3 mt-3 border-bottom border-top">
-            <a href="javascript:;" class="d-flex w-100">
-                <div class="d-flex justify-content-between">
+        <div className="none">캠핑장 운영정책 모달창</div>
+        <div className="container-sm w-100 py-3 mt-3 border-bottom border-top">
+            <a href="javascript:;" className="d-flex w-100">
+                <div className="d-flex justify-content-between">
                     <div><h6>취소 환불 규정</h6></div>
-                    <div><span class="material-symbols-outlined">chevron_right</span></div>
+                    <div><span className="material-symbols-outlined">chevron_right</span></div>
                 </div>
             </a>
         </div>
-        <div class="none">취소 환불 규정 모달창</div>
-        <div class="container-sm w-100 py-3 mt-3 border-bottom border-top">
-            <a href="javascript:;" class="d-flex w-100">
-                <div class="d-flex justify-content-between">
+        <div className="none">취소 환불 규정 모달창</div>
+        <div className="container-sm w-100 py-3 mt-3 border-bottom border-top">
+            <a href="javascript:;" className="d-flex w-100">
+                <div className="d-flex justify-content-between">
                     <div><h6>사업자정보</h6></div>
-                    <div><span class="material-symbols-outlined">chevron_right</span></div>
+                    <div><span className="material-symbols-outlined">chevron_right</span></div>
                 </div>
             </a>
         </div>
-        <div class="none">
+        <div className="none">
             <li>업체명 : <span>{productsseller.companyName}</span></li>
             <li>사업자번호 : <span>{productsseller.companyNumber}</span></li>
             <li>사업주 : <span>{productsseller.userName}</span></li>
