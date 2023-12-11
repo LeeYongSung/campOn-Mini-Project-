@@ -21,7 +21,7 @@ const FavoritesList = ({list, onDelete}) => {
                                 <span>{camp.campAddress}</span>
                                 <span> / </span>
                                 <span>{camp.campOpen}</span>
-                            </div>
+                            </div>w
                         </div>
                     </Link>
                     <div className="pe-3">

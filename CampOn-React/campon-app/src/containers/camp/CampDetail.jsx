@@ -15,6 +15,7 @@ const CampDetail = () => {
         const response = await camps.campdetail(no);
         const data = response.data;
         const {productimg, productintro} = data;
+        console.log(productintro)
         setDetailimg(productimg);
         setDetail(productintro);
     }
@@ -25,7 +26,7 @@ const CampDetail = () => {
 
   return (
     <div>
-        <BackPickHeader />
+        <BackPickHeader no={detail.campNo} />
         <CampDetailintro detailimg={detailimg} detail={detail} />
         <CampOnFooter />
         <UserFooter />

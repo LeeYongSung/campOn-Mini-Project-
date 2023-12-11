@@ -10,6 +10,8 @@ export const campMain = () => axios.get("/api/camp/index")
 export const information = () => axios.get("/api/camp/information")
 //즐겨찾기페이지
 export const favorites = () => axios.get("/api/camp/favorites")
+//즐겨찾기등록
+export const favoriteInsert = (campNo) => axios.post("/api/camp/favorites",{campNo})
 //즐겨찾기 삭제
 export const favoriteDelete = (no) => axios.delete(`/api/camp/favorites/${no}`)
 //캠핑장목록

@@ -178,8 +178,12 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     ]]>
     </select>
     <!-- 찜 상품 목록 -->
+    <insert id="favoriteInsert">
+        INSERT INTO favorites (camp_no, user_no)
+        VALUES (#{campNo}, #{userNo})
+    </insert>
     <select id="favoritesList" resultType="Camp">
-        SELECT * FROM favorites f join campproduct c on f.camp_no = c.camp_no ORDER BY favorites_no DESC
+        SELECT * FROM favorites f join campproduct c on f.camp_no = c.camp_no where f.user_no = #{userNo} ORDER BY favorites_no DESC
     </select>
     <!-- 찜 상품 삭제 -->
     <delete id="favoriteDelete">

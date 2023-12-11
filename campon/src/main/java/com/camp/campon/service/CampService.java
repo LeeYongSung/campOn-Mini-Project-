@@ -15,7 +15,8 @@ public interface CampService {
     public List<Camp> hotList() throws Exception;    
 
     // 즐겨찾기 목록
-    public List<Camp> favoritesList() throws Exception;
+    public int favoriteInsert(Camp camp) throws Exception;
+    public List<Camp> favoritesList(int userNo) throws Exception;
     public int favoriteDelete(int favoritesNo) throws Exception;
 
     // 캠핑장 목록

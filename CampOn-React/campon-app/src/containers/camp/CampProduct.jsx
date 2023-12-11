@@ -39,7 +39,7 @@ const CampProduct = () => {
 
   return (
     <div>
-        <BackPickHeader />
+        <BackPickHeader no={no}/>
         <CampProductintro productsimg={productsimg} productsenvironment={productsenvironment} productsreserve={productsreserve} productsfacility={productsfacility} productsproducts={productsproducts} />
         <CampDetailList productsproductlist={productsproductlist} />
         <CampReview productsreview={productsreview} />

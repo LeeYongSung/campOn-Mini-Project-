@@ -96,7 +96,11 @@ public class CampAPIController {
     @GetMapping(value="/favorites")
     public ResponseEntity<?> favorites() {
         try{
-            List<Camp> favoritesList = campService.favoritesList();
+            Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+
+            int userNo = 2;
+            // String userId = auth.getName();
+            List<Camp> favoritesList = campService.favoritesList(userNo);
             return new ResponseEntity<>(favoritesList, HttpStatus.OK);
         }catch(Exception e){
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
@@ -395,6 +399,25 @@ public class CampAPIController {
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
+    //찜 등록
+    @PostMapping(value="/favorites")
+    public ResponseEntity<?> favoriteInsert(@RequestBody Camp camp) {
+        try{
+            Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 
+            int userNo = 2;
+            // String userId = auth.getName();
+            camp.setUserNo(userNo);
+
+            int result = campService.favoriteInsert(camp);
+            
+            if( result > 0 )
+                return new ResponseEntity<>("찜 완료", HttpStatus.CREATED);  // 201
+            else
+                return new ResponseEntity<>("찜 실패", HttpStatus.OK);  
+        }catch(Exception e){
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
 
 }

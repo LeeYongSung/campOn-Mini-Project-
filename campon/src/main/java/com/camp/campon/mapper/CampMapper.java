@@ -15,8 +15,10 @@ public interface CampMapper {
     //상품 추천목록
     public List<Camp> hotList() throws Exception;
 
+    // 찜 등록
+    public int favoriteInsert(Camp camp) throws Exception;
     // 찜 목록
-    public List<Camp> favoritesList() throws Exception;
+    public List<Camp> favoritesList(int userNo) throws Exception;
     // 찜 목록 삭제
     public int favoriteDelete(int favoritesNo) throws Exception;
     

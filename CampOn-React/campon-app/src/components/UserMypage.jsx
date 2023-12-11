@@ -36,7 +36,7 @@ const UserMyypage = ({sets}) => {
                     </ul>
                     <ul class="d-flex justify-content-around w-100">
                         <li>
-                            <Link to="/camp/favorites">찜한 캠핑장</Link>
+                            <Link to="/api/camp/favorites">찜한 캠핑장</Link>
                         </li>
                         <li>
                             <Link to="/product/wishlist">찜한 상품</Link>

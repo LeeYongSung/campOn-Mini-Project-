@@ -97,8 +97,16 @@ public class CampController {
      * @throws Exception
      */
     @GetMapping(value="/favorites")
-    public String favoritesList(Model model) throws Exception {
-        List<Camp> favoritesList = campService.favoritesList();
+    public String favoritesList(Model model, Principal principal) throws Exception {
+        int userNo = 0;
+        if (principal == null){ userNo = 1000;}
+        else {
+            String userId = principal.getName();
+            Users users = userService.selectById(userId);
+            userNo = users.getUserNo();
+            log.info(userNo + "");
+        }
+        List<Camp> favoritesList = campService.favoritesList(userNo);
         model.addAttribute("favoritesList", favoritesList);
         return "camp/favorites";
     }
