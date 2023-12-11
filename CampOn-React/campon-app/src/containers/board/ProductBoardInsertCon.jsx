@@ -7,75 +7,73 @@ import { useParams } from 'react-router-dom';
 import BackHeader from '../../components/header/BackHeader';
 
 const ProductBoardInsertCon = () => {
-  const { orderNo } = useParams(); 
-  const [formValues, setFormValues] = useState({
-    orderNo: orderNo,
-    productNo: '',
-    userNo: '',
-    prTitle: '',
-    prCon: '',
-    prImgfile: null,
-  });
+  const { orderNo } = useParams();
+  const [order, setOrder] = useState({});
+  const [prTitle, setPrTitle] = useState('');
+  const [prImgfile, setPrImgfile] = useState(null);
+  const [prCon, setPrCon] = useState('');
 
-  useEffect(() => {
-    const fetchOrder = async () => {
-      try {
-        const response = await getOrder(orderNo);
-        if (response.status === 200) {
-          setFormValues({
-            ...formValues, 
-            productNo: response.data.productNo, 
-            userNo: response.data.userNo,
-          });
-        } else {
-          alert('주문 정보를 찾을 수 없습니다');
-        }
-      } catch (error) {
-        console.error(error);
-      }
-    };
-    fetchOrder();
-  }, [orderNo]);
-
-  const handleSubmit = async (event) => {
-    event.preventDefault();
-  
-    const formData = new FormData();
-  
-    formData.append('board', JSON.stringify(formValues)); // 'board' 파트 추가
-    
-    Object.entries(formValues).forEach(([key, value]) => {
-      if (value !== null && key !== 'prImgfile') { // 'prImgfile'은 별도로 처리
-        formData.append(key, value);
-      }
-    });
-
-    if (formValues.prImgfile) { // 'prImgfile' 파트 추가
-      formData.append('prImgfile', formValues.prImgfile);
+  const handle = (e) => {
+    switch (e.target.name) {
+      case "prTitle": setPrTitle(e.target.value)
+        break;
+      case "prImgfile": setPrImgfile(e.target.files)
+        break;
+      case "prCon": setPrCon(e.target.value)
+        break;
     }
-  
+  }
+
+  const fetchOrder = async () => {
     try {
-      const response = await postPrinsert(formData);
-  
-      if (response.status === 201) {
-        alert('게시글 등록 완료');
-      }
-      else {
-        alert('게시글 등록 실패');
+      const response = await getOrder(orderNo);
+      if (response.status === 200) {
+        setOrder(response.data);
+        console.log(response.data)
+      } else {
+        alert('주문 정보를 찾을 수 없습니다');
       }
     } catch (error) {
       console.error(error);
     }
   };
 
+
+  const handleSubmit = async () => {
+    const formData = new FormData();
+    if (prImgfile) {
+      formData.append("prImgfile", prImgfile[0]);
+    }
+    formData.append("orderNo", order.orderNo)
+    formData.append("userNo", order.userNo)
+    formData.append("productNo", order.productNo)
+    formData.append("prTitle", prTitle)
+    formData.append("prCon", prCon)
+    const headers = {
+      headers: { 'Content-Type': 'multipart/form-data' },
+    };
+    
+    try {
+      const response = await postPrinsert(formData, headers);
+      if (response.status === 201) {
+        alert('게시글 등록 완료');
+      }
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+  useEffect(() => {
+    fetchOrder();
+  }, []);
+
   return (
     <>
       <BackHeader />
       <ProductBoardInsert
-        orderNo={orderNo} 
-        onSubmit={handleSubmit} 
-        formValues={formValues} 
-        setFormValues={setFormValues}
+        order={order}
+        handleSubmit={handleSubmit}
+        handle={handle}
       />
       <CampOnFooter />
       <UserFooter />

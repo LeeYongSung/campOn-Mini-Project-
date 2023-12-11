@@ -15,19 +15,18 @@ const CampProducts = () => {
     // campTypeNos = ctn[1];
     const params = new URLSearchParams(window.location.search);
     console.log(params);
-    let campTypeNos = [];
     // console.log('a');
     let keyword = params.get('keyword');
     let searchDate = params.get('searchDate');
     let regionNo = params.get('regionNo');
     let campTypeNosString = params.get('campTypeNos');
+    let campTypeNos = JSON.parse(decodeURIComponent(campTypeNosString));
     console.log("campTypeNosString : " + campTypeNosString);
 
-    if(campTypeNosString.length === 0) {
-      campTypeNos = [];
-    } else {
-      campTypeNos = JSON.parse(decodeURIComponent(campTypeNosString));
-    }
+    // if(campTypeNosString.length === 0) {
+    //   campTypeNos = [];
+    // } else {
+    // }
 
     let campTypeNo = params.get('campTypeNo');
     // console.log("campTypeNo : " + campTypeNo);
@@ -44,7 +43,7 @@ const CampProducts = () => {
     // });
 
     const getCampList = async () => {
-        console.log(campTypeNo)
+        console.log("campTypeNo :" + campTypeNo)
         if(campTypeNo != null) {
           const response = await camps.campproducts(campTypeNo);
           const data = await response.data;
@@ -54,7 +53,9 @@ const CampProducts = () => {
           if(campTypeNos.length === 0) {
             campTypeNos = [];
             onSearch(keyword, searchDate, regionNo, campTypeNos);
-          } 
+          } else {
+            onSearch(keyword, searchDate, regionNo, campTypeNos);
+          }
         }
         // const response = await camps.campproducts(campTypeNo);
         // const data = await response.data;

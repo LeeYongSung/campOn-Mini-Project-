@@ -15,7 +15,7 @@ header {width: 100%; background-color: white;}
 header>nav {border-bottom: 1px solid black;}
 .campproduct_header>nav {border: none;}
 .serch_btn {border: none; background-color: none;}
-.menu {width: 500px; position: fixed; bottom: 0; background-color: white; border-top: 0.5px solid black;}
+.menu {width: 500px; position: fixed; bottom: 0; background-color: white; border-top: 0.5px solid black; z-index: 10;}
 .main_menu {display: flex; justify-content: space-around; padding-left: 0!important; padding-top: 10px;}
 .main_menu>li {width: 100px;}
 .sub_menu {text-align: center; padding-left: 0!important;}
