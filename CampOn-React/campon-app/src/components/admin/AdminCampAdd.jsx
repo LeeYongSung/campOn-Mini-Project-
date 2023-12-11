@@ -216,8 +216,10 @@ const AdminCampAdd = () => {
                     <button type="button" onClick={SearchMap}>검색</button>
                 </div>
 
-                <input type="hidden" id="campLatitude" name="campLatitude" placeholder="위도(latitude)" value={campLatitude} />
-                <input type="hidden" id="campLongitude" name="campLongitude" placeholder="경도(longitude)" value={campLongitude} />
+                {/*
+                    <input type="hidden" id="campLatitude" name="campLatitude" placeholder="위도(latitude)" value={campLatitude} />
+                    <input type="hidden" id="campLongitude" name="campLongitude" placeholder="경도(longitude)" value={campLongitude} />
+                */}
                 {/* api 지도 출력 부분 */}
                 <div id="map" style={{ width: "100%", height: "600px" }}>
                     {/* <Map
