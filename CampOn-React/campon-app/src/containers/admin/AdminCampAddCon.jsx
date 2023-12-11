@@ -1,16 +1,16 @@
 import React from 'react'
 import AdminCampAdd from '../../components/admin/AdminCampAdd'
 import BackHeader from '../../components/header/BackHeader'
+import SellerFooter from '../../components/menu/SellerFooter'
 import CampOnFooter from '../../components/footer/CampOnFooter'
-import UserFooter from '../../components/menu/UserFooter'
 
 const AdminCampAddCon = () => {
   return (
     <>
-    <BackHeader />
+     <BackHeader />
     <AdminCampAdd/>
     <CampOnFooter />
-    <UserFooter />
+    <SellerFooter />
     </>
   )
 }

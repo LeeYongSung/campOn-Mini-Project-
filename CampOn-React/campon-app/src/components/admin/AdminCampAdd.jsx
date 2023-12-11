@@ -7,7 +7,6 @@ import { Map, MapMarker } from "react-kakao-maps-sdk"
 const AdminCampAdd = () => {
     const navigate = useNavigate();
     const userNo = 3; //하드코딩
-
     const [campName, setcampName] = useState('')
     const [file, setfile] = useState(null)
     const [campAddress, setcampAddress] = useState('')
@@ -15,7 +14,7 @@ const AdminCampAdd = () => {
     const [regionNo, setregionNo] = useState('')
     const [environmentTypeNo, setenvironmentTypeNo] = useState('')
     const [campTel, setcampTel] = useState('')
-   // const [facilityTypeNo, setfacilityTypeNo] = useState('')
+    // const [facilityTypeNo, setfacilityTypeNo] = useState('')
     const [facilityTypeNoList, setfacilityTypeNoList] = useState([])
     const [campOpen, setcampOpen] = useState('')
     const [campClose, setcampClose] = useState('')
@@ -102,11 +101,11 @@ const AdminCampAdd = () => {
                 break;
         }
     }
-    const handlefac = (e)=>{
+    const handlefac = (e) => {
         // const updateFacList = 
         //     e.target.checked ? [...facilityTypeNoList, value] : facilityTypeNoList.filter((facility)=>{facility !== e.target.value}) 
-        setfacilityTypeNoList(e.target.checked ? [...facilityTypeNoList, e.target.value] : facilityTypeNoList.filter((facility)=>facility !== e.target.value))
-       //이렇게 하면 안됨 setfacilityTypeNoList(e.target.checked ? [...facilityTypeNoList, e.target.value] : facilityTypeNoList.filter((facility)=>{facility !== e.target.value}))
+        setfacilityTypeNoList(e.target.checked ? [...facilityTypeNoList, e.target.value] : facilityTypeNoList.filter((facility) => facility !== e.target.value))
+        //이렇게 하면 안됨 setfacilityTypeNoList(e.target.checked ? [...facilityTypeNoList, e.target.value] : facilityTypeNoList.filter((facility)=>{facility !== e.target.value}))
     }
 
     //등록 버튼
@@ -114,6 +113,10 @@ const AdminCampAdd = () => {
         console.log(state.center.lat);
         console.log(state.center.lng);
         const formData = new FormData();
+        console.log(campAddress)
+        console.log(campTel)
+        console.log(placeName)
+        console.log(regionNo)
         formData.append("campName", campName)
         if (file) {
             for (let i = 0; i < file.length; i++) {
@@ -148,7 +151,7 @@ const AdminCampAdd = () => {
             placeName: placeName,
             regionNo: regionNo,
             environmentTypeNo: environmentTypeNo,
-            campTel : campTel, 
+            campTel: campTel,
             campOpen: campOpen,
             campClose: campClose,
             campIntroduction: campIntroduction, 
@@ -176,7 +179,6 @@ const AdminCampAdd = () => {
                 <div className="w-100 text-center my-3">
                     <h5>캠핑장 등록</h5>
                 </div>
-                {/* <form th: action="|/admin/campproductadd?${_csrf.parameterName}=${_csrf.token}|" method="post" enctype="multipart/form-data"> */}
                 <input type="hidden" name="userNo" id="userNo" value={userNo} />
                 <div className="form-floating my-2">
                     <input type="text" id="campName" name="campName" className="form-control" onChange={handleset} />
@@ -299,8 +301,7 @@ const AdminCampAdd = () => {
                 <div>
                     <input type="button" value="캠핑장등록" className="btn btn-warning btn-lg w-100 my-3 py-3" onClick={formSubmit} />
                 </div>
-                {/* </form> */}
-            </div>
+            </div >
 
 
 

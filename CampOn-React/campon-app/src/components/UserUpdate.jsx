@@ -2,81 +2,46 @@ import React, { useEffect, useState } from 'react'
 import * as users from '../apis/user'
 import { useNavigate } from 'react-router-dom'
 
-const UserUpdate = () => {
-
-    const navigate = useNavigate()
-    const [userId, setUserId] = useState('')
-    const [userName, setUserName] = useState('')
-    const [userEmail, setUserEmail] = useState('')
-    const [userTel, setUserTel] = useState('')
-    const [userAddress, setUserAddress] = useState('')
-    const [userPw, setUserPw] = useState('')
-    const [passwordCheck, setPasswordCheck] = useState('')
-    const [companyName, setCompanyName] = useState('')
-    const [companyNumber, setCompanyNumber] = useState(0)
-    const handlesetId = (event) => {
-        setUserId(event.target.value);
-    }
-    const handlesetUserName = (event) => {
-        setUserName(event.target.value);
-    }
-    const handlesetUserEmail = (event) => {
-        setUserEmail(event.target.value);
-    }
-    const handlesetUserTel = (event) => {
-        setUserTel(event.target.value);
-    }
-    const handlesetUserAddress = (event) => {
-        setUserAddress(event.target.value);
-    }
-    const handlesetPassword = (event) => {
-        setUserPw(event.target.value);
-    }
-    const handlesetPasswordCheck = (event) => {
-        setPasswordCheck(event.target.value);
-    }
-    const handlesetCompanyName = (event) => {
-        setCompanyName(event.target.value);
-    }
-    const handlesetCompanyNumber = (event) => {
-        setCompanyNumber(event.target.value);
-    }
-
-    const handleSubmit = async () => {
-        try {
-            console.log(userId);
-            const response = await users.update(userId, userName, userEmail, userTel, userAddress, userPw, companyName, companyNumber)
-            alert('회원정보 수정 성공')
-            console.log(response.data)
-            navigate('')
-        } catch (error) {
-            console.log(error)
-        }
-    }
-    const handleDel = async () => {
-        try {
-            const response = await users.deletee(userId)
-            alert('회원탈퇴 성공')
-            console.log(response.data)
-            navigate('')
-        } catch (error) {
-            console.log(error)
-        }
-    }
-
-    useEffect(() => {
-    
-    }, [])
+const UserUpdate = ({sets}) => {
+   
+    const userId = sets.userId;
+    const userName = sets.userName;
+    const setUserName = sets.setUserName;
+    const userEmail = sets.userEmail;
+    const setUserEmail = sets.setUserEmail;
+    const userTel = sets.userTel;
+    const setUserTel = sets.setUserTel;
+    const userAddress = sets.userAddress;
+    const setUserAddress = sets.setUserAddress;
+    const userPw = sets.userPw;
+    const setUserPw = sets.setUserPw;
+    const passwordCheck = sets.passwordCheck;
+    const setPasswordCheck = sets.setPasswordCheck;
+    const companyName = sets.companyName;
+    const setCompanyName = sets.setCompanyName;
+    const companyNumber = sets.companyNumber;
+    const setCompanyNumber = sets.setCompanyNumber;
+    const handlesetUserName = sets.handlesetUserName;
+    const handlesetUserEmail = sets.handlesetUserEmail;
+    const handlesetUserTel = sets.handlesetUserTel;
+    const handlesetUserAddress = sets.handlesetUserAddress;
+    const handlesetPassword = sets.handlesetPassword;
+    const handlesetPasswordCheck = sets.handlesetPasswordCheck;
+    const handlesetCompanyName = sets.handlesetCompanyName;
+    const handlesetCompanyNumber = sets.handlesetCompanyNumber;
+    const getUpd = sets.getUpd;
+    const handleSubmit = sets.handleSubmit;
+    const handleDel = sets.handleDel;
 
 
     return (
         <>
-            <div className="container-sm">
+            <div className="container-sm" style={{marginBottom : '100px'}}>
                 <div id="joinForm">
                     <h3>회원정보를 수정해주세요.</h3>
                     <form name="joinForm">
                         <div className="form-floating">
-                            <input type="text" id="id" name="userId" placeholder="" className="form-control my-3" value={userId} onChange={handlesetId} />
+                            <input type="text" id="id" name="userId" placeholder="" className="form-control my-3" value={userId} readOnly/>
                             <label htmlFor="id">아이디</label>
                         </div>
                         <div className="form-floating">

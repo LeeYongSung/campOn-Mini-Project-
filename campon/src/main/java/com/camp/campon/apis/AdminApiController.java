@@ -1,5 +1,6 @@
 package com.camp.campon.apis;
 
+import java.security.Principal;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -17,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.camp.campon.dto.Ad;
 import com.camp.campon.dto.Camp;
 import com.camp.campon.dto.Product;
 import com.camp.campon.dto.Users;
@@ -241,6 +243,57 @@ public class AdminApiController {
                 + ", " + result5;
         // return "redirect:/admin/campproductlist";
         return new ResponseEntity<>(result, HttpStatus.OK);
+    }
+
+
+    /*
+     * 광고
+     */
+
+    // 광고 등록 페이지 (필요없음)
+    // @GetMapping("/adinsert/{campNo}")
+    // public ResponseEntity<?> adinsert(@PathVariable int campNo) {
+    //     model.addAttribute("campNo", campNo);
+    //     //return "admin/adinsert";
+    //     return new ResponseEntity<>(result, HttpStatus.OK);
+    // }
+    // 광고 등록 실행 (판매자)
+    @PostMapping(value = "/adinsertpro")
+    public ResponseEntity<?> adinsertpro(@ModelAttribute Ad ad) throws Exception {
+        int result = adService.adinsert(ad);
+        return new ResponseEntity<>(result, HttpStatus.OK);
+    }
+    // admin 광고리스트
+    @GetMapping(value = "/adlist")
+    public ResponseEntity<?> adlist() throws Exception {
+        List<Ad> adlist = adService.adlist();
+        // log.info("광고는? "+adlist);
+        return new ResponseEntity<>(adlist, HttpStatus.OK);
+    }
+
+    // 승인처리
+    // @PreAuthorize("hasRole('ROLE_ADMIN')")
+    @GetMapping(value = "/adcheck/{adNo}")
+    public ResponseEntity<?> adcheck(@PathVariable int adNo) throws Exception {
+        int result = adService.adcheck(adNo);
+        //return "redirect:/admin/adlist";
+        return new ResponseEntity<>(result, HttpStatus.OK);
+    }
+
+    // seller 광고리스트
+    @GetMapping(value = "/adlistseller")
+    public ResponseEntity<?> adlistseller(Principal principal) throws Exception {
+        int userNo = 0;
+        if (principal == null) {
+            userNo = 3; //하드코딩
+        } else {
+            String userId = principal.getName();
+            Users users = userService.selectById(userId);
+            userNo = users.getUserNo();
+        }
+        List<Ad> adlistseller = adService.adlistseller(userNo);
+        //return "admin/adlistseller";
+        return new ResponseEntity<>(adlistseller, HttpStatus.OK);
     }
 
 }

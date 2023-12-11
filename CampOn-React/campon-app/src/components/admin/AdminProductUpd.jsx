@@ -2,131 +2,31 @@ import React, { useEffect, useState } from 'react'
 import * as admins from '../../apis/admin'
 import { useNavigate } from 'react-router-dom';
 
-const AdminProductUpd = ({ productNo }) => {
-    const navigate = useNavigate()
-    const [productName, setProductName] = useState('');
-    const [productThmFile, setProductThmFile] = useState(null);
-    const [productCategory, setProductCategory] = useState('');
-    const [productPrice, setProductPrice] = useState('');
-    const [productIntro, setProductIntro] = useState('');
-    const [productConFile, setProductConFile] = useState(null);
-    const [productImgs, setProductImgs] = useState(null);
-    const handleChange = (event) => {
-        const { name, value } = event.target;
-        switch (name) {
-            case 'productName':
-                setProductName(value);
-                break;
-            case 'productThmFile':
-                setProductThmFile(event.target.files);
-                break;
-            case 'productCategory':
-                setProductCategory(value);
-                break;
-            case 'productPrice':
-                setProductPrice(value);
-                break;
-            case 'productIntro':
-                setProductIntro(value);
-                break;
-            case 'productConFile':
-                setProductConFile(event.target.files);
-                break;
-            case 'productImgs':
-                setProductImgs(event.target.files);
-                break;
-            default:
-                break;
-        }
-    };
-
-    const [productThmFilee, setproductThmFilee] = useState('');
-    const [productConFilee, setproductConFilee] = useState('');
-    const [productImgse, setproductImgse] = useState([]);
-
-    //기존 상품 가져오기
-    const productinf = async () => {
-        try {
-            const response = await admins.productSelect(productNo)
-            console.log(response.data)
-            // {productNo: 1, productName: '너무좋은텐트111', productThumnail: 'C:/upload/b74eb80c-91e2-4c5c-8ad8-ef50bf167e6a_1.png', productCon: 'C:/upload/8680c785-3f13-447b-8a7d-d41657dfbd4b_2.png', productIntro: '이 상품은 텐트입니다. 111', …}
-            setProductName(response.data.productName)
-            //setProductThmFile(response.data.productThmFile)
-            setproductThmFilee(response.data.productThumnail)
-            setProductCategory(response.data.productCategory)
-            setProductPrice(response.data.productPrice)
-            setProductIntro(response.data.productIntro)
-            //setProductConFile(response.data.productConFile)
-            setproductConFilee(response.data.productCon)
-            //setProductImgs(response.data.productImgs)
-            setproductImgse(response.data.productImgsUrlList)
-
-        } catch (error) {
-            console.error(error.response.data);
-        }
-    }
-
-
-    //수정버튼
-    const handleSubmit = async () => {
-        const formData = new FormData();
-        formData.append('productNo', productNo);
-        formData.append('productName', productName);
-        formData.append('productCategory', productCategory);
-        formData.append('productPrice', productPrice);
-        formData.append('productIntro', productIntro);
-
-        const headers = {
-            headers: { 'Content-Type': 'multipart/form-data' }
-        };
-
-        if (productThmFile) {
-            for (let i = 0; i < productThmFile.length; i++) {
-                formData.append(`productThmFile[${i}]`, productThmFile[i])
-            }
-        }
-        if (productConFile) {
-            for (let i = 0; i < productConFile.length; i++) {
-                formData.append(`productConFile[${i}]`, productConFile[i])
-            }
-        }
-        if (productImgs) {
-            for (let i = 0; i < productImgs.length; i++) {
-                formData.append(`productImgs[${i}]`, productImgs[i])
-            }
-        }
-        // let product = {
-        //     productName: productName,
-        //     productThmFile: productThmFile,
-        //     productCategory: productCategory,
-        //     productPrice: productPrice,
-        //     productIntro: productIntro,
-        //     productConFile: productConFile,
-        //     productImgs: productImgs
-        // }
-        // console.log(product, 'product는?')
-        try {
-            const response = await admins.productUpd(formData, headers)
-            alert('수정 완료');
-            console.log(response.data);
-            navigate('/admin/productlist')
-        } catch (error) {
-            console.error(error.response.data);
-            console.log(error)
-        }
-    }
-
-    const handleDel = async () => {
-        const response = await admins.productDel(productNo)
-        console.log(response.data)
-        alert('삭제 완료!')
-        navigate('/admin/productlist')
-    }
-    useEffect(() => {
-        productinf()
-    }, [])
-
-
+const AdminProductUpd = ({ productNo, sets }) => {
+    const handleDel = sets.handleDel;
+    const handleSubmit = sets.handleSubmit;
+    const productinf = sets.productinf;
+    const handleChange = sets.handleChange;
+    const productThmFilee = sets.productThmFilee;
+    const setProductThmFilee = sets.setProductThmFilee;
+    const productConFilee = sets.productConFilee;
+    const setProductConFilee = sets.setProductConFilee;
+    const productImgse = sets.productImgse;
+    const setProductImgse = sets.setProductImgse;
+    const productName = sets.productName;
+    const setProductName = sets.setProductName;
+    const productThmFile = sets.productThmFile;
+    const setProductThmFile = sets.setProductThmFile;
+    const productCategory = sets.productCategory;
+    const setProductCategory = sets.setProductCategory;
+    const productPrice = sets.productPrice;
+    const setProductPrice = sets.setProductPrice;
+    const productIntro = sets.productIntro;
+    const setProductIntro = sets.setProductIntro;
+    const productConFile = sets.productConFile;
+    const setProductConFile = sets.setProductConFile;
+    const productImgs = sets.productImgs;
+    const setProductImgs = sets.setProductImgs;
     return (
         <>
 
@@ -136,7 +36,7 @@ const AdminProductUpd = ({ productNo }) => {
 
             <div className="container">
                 <form name="product" >
-                    <input type="hidden" field="*{productNo}" />
+                    <input type="hidden" field="{productNo}" />
                     <div className="form-floating my-2">
                         <input type="text" className="form-control" field="*{productName}" id="productName" name="productName" value={productName} onChange={handleChange} />
                         <label className="col-md-4 col-form-label" htmlFor="productName">상품 이름</label>
@@ -231,8 +131,10 @@ const AdminProductUpd = ({ productNo }) => {
                         <div>
                             <input type="button" className="btn btn-warning px-3" value="상품수정" onClick={handleSubmit} />
                         </div>
+                        <div>
+                            <button type='button' onClick={() => { handleDel(productNo) }} className="btn btn-danger px-3">상품 삭제</button>
+                        </div>
                     </div>
-                    <button onClick={() => { handleDel(productNo) }} className="btn btn-danger px-3">상품 삭제</button>
                     <div>
                     </div>
                 </form>

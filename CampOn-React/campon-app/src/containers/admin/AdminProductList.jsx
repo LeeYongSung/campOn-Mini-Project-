@@ -1,23 +1,36 @@
 import React, { useEffect, useState } from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
+import AdminFooter from '../../components/menu/AdminFooter'
+import * as admins from '../../apis/admin'
 import CampOnFooter from '../../components/footer/CampOnFooter';
-import UserFooter from '../../components/menu/UserFooter';
 import BackHeader from '../../components/header/BackHeader';
 const AdminProductList = () => {
     const [productList, setProductList] = useState([]);
-
+const nav = useNavigate()
     useEffect(() => {
-        fetch('/admin/productlist')
+        fetch('/api/admin/productlist')
             .then((res) => res.json())
             .then((data) => setProductList(data))
             .catch((e) => console.error('에러는?', e))
     }, [])
     console.log(productList, '프로덕트리스트 찍어보기')
 
+const productDel = async (productNo)=>{
+    try {
+        const response = await admins.productDel(productNo)
+        console.log(response.data)
+        fetch('/api/admin/productlist')
+            .then((res) => res.json())
+            .then((data) => setProductList(data))
+            .catch((e) => console.error('에러는?', e))
+        nav('/admin/productlist')
+    } catch (error) {
+        console.log(error)
+    }
+}
+
 
     return (
-        <>
-        <BackHeader />
         <div className='container'>
             <div className="w-100 text-center py-3">
                 <h5>렌탈샵 상품 관리</h5>
@@ -56,7 +69,8 @@ const AdminProductList = () => {
                                     </div>
                                     <div className="position-absolute bottom-0 end-0 py-1 px-1">
                                         <Link to={`/admin/productupdate/${product.productNo}`} className="btn btn-warning" productNo={product.productNo}>상품 수정</Link>
-                                        <a href={`/admin/delete/${product.productNo}`} className="btn btn-danger">상품 삭제</a>
+                                        <a onClick={()=>{productDel(product.productNo)}} className="btn btn-danger">상품 삭제</a>
+
                                     </div>
                                 </div>
                             </div>
@@ -66,9 +80,6 @@ const AdminProductList = () => {
             )
             )}
         </div>
-        <CampOnFooter />
-        <UserFooter />
-        </>
     )
 }
 

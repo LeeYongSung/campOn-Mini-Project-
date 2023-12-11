@@ -17,6 +17,8 @@ import AdminCampUpdCon from './containers/admin/AdminCampUpdCon';
 import AdminCampDAddCon from './containers/admin/AdminCampDAddCon';
 import AdminDCampUpdCon from './containers/admin/AdminDCampUpdCon';
 import AdminAdApplyCon from './containers/admin/AdminAdApplyCon';
+import AdminAdListCon from './containers/admin/AdminAdListCon';
+import AdminSAdListCon from './containers/admin/AdminSAdListCon';
 // 유저
 import UserJoinCon from './containers/user/UserJoinCon';
 import UserLoginCon from './containers/user/UserLoginCon';
@@ -91,7 +93,10 @@ function App() {
           <Route path="/admin/campproductadd" element={<AdminCampAddCon />} />
           <Route path="/admin/campproductupdate/:campNo" element={<AdminCampUpdCon />} />
           <Route path="/admin/campdetailinsert/:campNo/:userNo" element={<AdminCampDAddCon />} />
+          {/* 광고 */}
           <Route path="/admin/adinsert/:campNo" element={<AdminAdApplyCon />} />
+          <Route path="/admin/adlist" element={<AdminAdListCon />} />
+          <Route path="/admin/adlistseller" element={<AdminSAdListCon />} />
           {/* 게시판 */}
           <Route path="/api/board/index" element={<CampBoardMainCon />} />
           <Route path="/api/board/crread/:reviewNo" element={<CampBoardReadCon />} />

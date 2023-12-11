@@ -362,18 +362,16 @@ input::-webkit-inner-spin-button {
   margin: 0;
 }
 
-.commemberlist_detail {
-  /* transform: translateY(-100%); */
+/* .commemberlist_detail {
   transition: all 0.4s;
   z-index: 0;
   height: 0;
 }
 
 .commemberlist_detail.active {
-  /* transform: translateY(0); */
   transition: all 0.4s;
   height: 120px;
-}
+} */
 .tab_btn > input:hover {
   background-color: orange;
 }

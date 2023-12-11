@@ -78,7 +78,7 @@ const AdminMemberListUser = ({ userList, deleteBtn }) => {
               </div>
             </div>
             {
-              moreList[index] ? <AdminMemberUser user={user}  active={'active'}  /> : <AdminMemberUser user={user} /> 
+              moreList[index] ? <AdminMemberUser user={user}  /> : <></> 
             }
           </div>
         ))}
