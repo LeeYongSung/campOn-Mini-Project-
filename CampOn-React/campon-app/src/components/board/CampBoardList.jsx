@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
-const CampBoardMain = ({ onDeleteCr, onDeletePr, crlist, currentTab, onTabChange, prlist }) => {
+const CampBoardList = ({ onDeleteCr, onDeletePr, crlist, currentTab, onTabChange, prlist }) => {
 
   // 캠핑 리뷰
   const renderCampReviews = (list) => {
@@ -10,7 +10,7 @@ const CampBoardMain = ({ onDeleteCr, onDeletePr, crlist, currentTab, onTabChange
         <td className="tdd">{item.reviewNo}</td>
         <td className="tdd"><Link to={`/api/board/crread/${item.reviewNo}`}>{item.reviewTitle}</Link></td>
         <td className="tdd">{item.userId}</td>
-        <td className="tdd">{new Date(item.regDate).toLocaleDateString()}</td>
+        <td className="tdd">{new Date(item.regDate).toLocaleDateString().replace(/\.+$/, '')}</td>
         <Link to={`/api/board/crupdate/${item.reviewNo}`}>수정</Link>
         <button type="button" onClick={() => onDeleteCr(item.reviewNo)}>삭제</button>
       </tr>
@@ -24,7 +24,7 @@ const CampBoardMain = ({ onDeleteCr, onDeletePr, crlist, currentTab, onTabChange
         <td className="tdd">{item.prNo}</td>
         <td className="tdd"><Link to={`/api/board/prread/${item.prNo}`}>{item.prTitle}</Link></td>
         <td className="tdd">{item.userId}</td>
-        <td className="tdd">{new Date(item.regDate).toLocaleDateString()}</td>
+        <td className="tdd">{new Date(item.regDate).toLocaleDateString().replace(/\.+$/, '')}</td>
         <Link to={`/api/board/prupdate/${item.prNo}`}>수정</Link>
         <button type="button" onClick={() => onDeletePr(item.prNo)}>삭제</button>
       </tr>
@@ -49,9 +49,9 @@ const CampBoardMain = ({ onDeleteCr, onDeletePr, crlist, currentTab, onTabChange
             <thead className="theadd">
               <tr>
                 <th className="tdd" width="60">번호</th>
-                <th className="tdd" width="300">제목</th>
+                <th className="tdd" width="200">제목</th>
                 <th className="tdd" width="100">작성자</th>
-                <th className="tdd" width="200">작성일</th>
+                <th className="tdd" width="150">작성일</th>
                 <th className="tdd" width="120">비고</th>
               </tr>
             </thead>
@@ -86,4 +86,4 @@ const CampBoardMain = ({ onDeleteCr, onDeletePr, crlist, currentTab, onTabChange
   );
 };
 
-export default CampBoardMain;
+export default CampBoardList;
