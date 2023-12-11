@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom'
 const CamptypeList = ({camptypeList}) => {
   return (
     <div>
-        <ul class="camping_type d-flex justify-content-around py-3 my-5">
+        <ul className="camping_type d-flex justify-content-around py-3 my-5">
             {camptypeList.map((camp) => (
                 <Link to={`/api/camp/campproducts?campTypeNo=${camp.campTypeNo}`} >
                     <ul>

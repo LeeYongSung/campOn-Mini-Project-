@@ -116,8 +116,8 @@ const CampProducts = () => {
     <div>
         <BackHeader />
         <CampSearch onSearch={onSearch} />
-        <div class="w-100 my-3">
-        <img src="/img/camp/wide_banner.jpg" alt="와이드배너" class="w-100"/>
+        <div className="w-100 my-3">
+        <img src="/img/camp/wide_banner.jpg" alt="와이드배너" className="w-100"/>
         </div>
         <CampList campList={campList} />
         <CampOnFooter />

@@ -9,7 +9,7 @@ const CampDetailList = ({productsproductlist}) => {
     })
 
   return (
-    <div class="campdetail container-sm w-100 py-2 position-relative mb-2">
+    <div className="campdetail container-sm w-100 py-2 position-relative mb-2">
         <div><h5>캠핑상품</h5></div>
         {productsproductlist.map((detail) => (
             <div className="campdetail_box w-100 mb-3 py-5">

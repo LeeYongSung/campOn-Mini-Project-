@@ -12,10 +12,10 @@ const CampReviewList = ({newReviewList}) => {
         <div className='w-100 border rounded py-2 my-2'>
             {newReviewList.map((board) => (
                 <Link to={`/api/board/crread/${board.reviewNo}`} className='d-flex justify-content-between'>
-                <div class="review_imgbox px-2 py-2">
+                <div className="review_imgbox px-2 py-2">
                     <img src={board.reviewImg} />
                 </div>
-                <div class="review_conbox py-2">
+                <div className="review_conbox py-2">
                     <div>
                         <div>
                             <p>{board.reviewTitle}</p>
