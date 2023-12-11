@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { useParams } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
 import { getPrread, postPrupdate, deletePrdelete } from '../../apis/board';
 import ProductBoardUpdate from '../../components/board/ProductBoardUpdate';
 import UserFooter from '../../components/menu/UserFooter';
@@ -7,44 +7,63 @@ import CampOnFooter from '../../components/footer/CampOnFooter';
 import BackHeader from '../../components/header/BackHeader';
 
 const ProductBoardUpdateCon = () => {
+  const navigate = useNavigate();
   const { prNo } = useParams();
-  const [formValues, setFormValues] = useState({
-    prNo: prNo,
-    prTitle: '',
-    prCon: '',
-    prImgfile: null,
-  });
+  const [reservation, setReservation] = useState({});
+  const [prTitle, setPrTitle] = useState('');
+  const [prImgfile, setPrImgfile] = useState(null);
+  const [prCon, setPrcon] = useState('');
 
-  useEffect(() => {
-    const fetchPr = async () => {
-      try {
-        const response = await getPrread(prNo);
-        if (response.status === 200) {
-          setFormValues({
-            ...formValues,
-            prTitle: response.data.prTitle,
-            prCon: response.data.prCon,
-            productName: response.data.productName,
-            productCategory: response.data.productCategory,
-          });
-        } else {
-          alert('리뷰 정보를 찾을 수 없습니다');
-        }
-      } catch (error) {
-        console.error(error);
-      }
-    };
-    fetchPr();
-  }, [prNo]);
+  const handle = (e) => {
+    switch (e.target.name) {
+      case "prTitle":
+        setPrTitle(e.target.value);
+        break;
+      case "prImgfile":
+        setPrImgfile(e.target.files);
+        break;
+      case "prCon":
+        setPrcon(e.target.value);
+        break;
+      default:
+        break;
+    }
+  };
 
-  const handleSubmit = async (event) => {
-    event.preventDefault();
+  const fetchReservation = async () => {
     try {
-      const response = await postPrupdate(formValues);
+      const response = await getPrread(prNo);
       if (response.status === 200) {
-        alert('게시글 수정 완료');
+        setReservation(response.data);
+        setPrTitle(response.data.prTitle);
+        setPrcon(response.data.prCon);
+        console.log(response.data)
       } else {
-        alert('게시글 수정 실패');
+        alert('예약 정보를 찾을 수 없습니다');
+      }
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+  const handleSubmit = async () => {
+    console.log("수정 버튼 클릭됨");
+    const formData = new FormData();
+    if (prImgfile) {
+      formData.append("prImgfile", prImgfile[0]);
+    }
+    formData.append("prTitle", prTitle)
+    formData.append("prCon", prCon)
+    formData.append("prNo", reservation.prNo)
+    const headers = {
+      headers: { 'Content-Type': 'multipart/form-data' },
+    };
+
+    try {
+      const response = await postPrupdate(formData, headers);
+      if (response.status === 201) {
+        alert('게시글 수정완료');
+        navigate('/api/board/index');  // 원하는 경로로 변경하세요.
       }
     } catch (error) {
       console.error(error);
@@ -67,14 +86,18 @@ const ProductBoardUpdateCon = () => {
     }
   };
 
+  useEffect(() => {
+    fetchReservation();
+  }, []);
+
   return (
     <>
       <BackHeader />
       <ProductBoardUpdate
-      onSubmit={handleSubmit}
-      onDelete={handleDelete}
-      formValues={formValues}
-      setFormValues={setFormValues}
+        onDelete={handleDelete}
+        reservation={reservation}
+        handleSubmit={handleSubmit}
+        handle={handle}
     />
       <CampOnFooter />
       <UserFooter />
