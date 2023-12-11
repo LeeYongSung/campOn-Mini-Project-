@@ -7,9 +7,12 @@ import CampOnFooter from '../../components/footer/CampOnFooter'
 import UserFooter from '../../components/menu/UserFooter'
 import * as products from '../../apis/product';
 import { CategoryContext } from '../../apis/CategoryContext';
+import { useNavigate } from 'react-router-dom'
 
 const ProductDetailContainer = () => {
 
+    let navigate = useNavigate();
+    let confirm = '';
     
     const contextValue = useContext(CategoryContext);
     const productNo = contextValue.productNo;
@@ -36,12 +39,33 @@ const ProductDetailContainer = () => {
         serReviewCount(reviewCount)
     }
 
+    const addCart = ( async (productNo) => {
+      let userNo = 2;
+      let pNo = productNo;
+      const response = await products.addProductsave(pNo, userNo);
+      const data = response.data;
+      if( data === 'SUCCESS') {
+        alert('장바구니에 등록되었습니다.');
+        confirm = window.confirm('장바구니로 이동하시겠습니까?')
+        if(confirm) {
+          navigate('/product/cart');
+        }
+      }
+      else alert('이미 장바구니에 등록된 상품 입니다.')
+    })
+
     const addProductsave = ( async (productNo) => {
       console.log(productNo);
       const response = await products.wishListAdd(productNo);
       const data = await response.data;
       // console.log(data);
-      if(data === 'SUCCESS') alert('찜에 등록되었습니다.')
+      if(data === 'SUCCESS') {
+        alert('찜에 등록되었습니다.')
+        confirm = window.confirm('찜 목록으로 이동하시겠습니까?');
+        if(confirm) {
+          navigate('/product/wishlist');
+        } 
+      }
       else alert('이미 찜에 등록된 상품입니다.')
     })
 
@@ -68,7 +92,7 @@ const ProductDetailContainer = () => {
   return (
     <>
         <BackCartHeader />
-        <ProductDetail product={product} reviewCount={reviewCount} addProductsave={addProductsave} moreBtn={moreBtn} moreState={moreState}/>
+        <ProductDetail product={product} reviewCount={reviewCount} addProductsave={addProductsave} moreBtn={moreBtn} moreState={moreState} addCart={addCart}/>
         <ProductDetailReview productReview={productReview} />
         <ProductInformation rentInfo={rentInfo} rentInfoClick={rentInfoClick} 
                             productInfoClick={productInfoClick} productInfo={productInfo} 

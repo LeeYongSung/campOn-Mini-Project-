@@ -1,6 +1,6 @@
 import React from 'react'
 
-const ProductDetail = ( { product, reviewCount, addProductsave, moreBtn, moreState } ) => {
+const ProductDetail = ( { product, reviewCount, addProductsave, moreBtn, moreState, addCart } ) => {
   if (!product) {
     return null;  
   }
@@ -8,6 +8,10 @@ const ProductDetail = ( { product, reviewCount, addProductsave, moreBtn, moreSta
     <>
       <div className='productsaveBtn'>
         <button type="button" className='btn btn-lg btn-warning rounded-5 py-2 px-3' onClick={() => addProductsave(product.productNo)}>찜</button>
+      </div>
+
+      <div className='productCartSave'>
+        <button type='button' className='btn btn-lg btn-success w-100 rounded-5 py-2 px-3' onClick={ () => addCart(product.productNo)}><span class="material-symbols-outlined">add_shopping_cart</span></button>
       </div>
     
       <div>
