@@ -24,11 +24,18 @@ const Reservation = () => {
         getList();
     }, [])
 
+    let confirm = '';
+
     const onDelete = async (no) => {
-      const response = await camps.reservationdelete(no);
-      alert('삭제완료')
+      confirm = window.confirm('목록에서 삭제하시겠습니까?')
+      if(confirm){
+        const response = await camps.reservationdelete(no);
+        alert('삭제완료')
+        getList();
+      } else {
+        return
+      }
       // navigate('/api/camp/reservation')
-      getList();
     }
 
   return (

@@ -113,7 +113,7 @@ const ProductDeposit = ( {order, productList, campList, pmType, userName, paytot
 
         {/* 버튼 */}
         <div className="d-flex justify-content-center py-4">
-                <Link to={"/camp/reservation"} className="btn btn-success me-1">내 예약으로</Link>
+                <Link to={"/api/camp/reservation"} className="btn btn-success me-1">내 예약으로</Link>
                 <Link to={"/"} className="btn btn-warning ms-1">홈으로</Link>
         </div>
         </div>
