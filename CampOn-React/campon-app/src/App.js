@@ -51,6 +51,9 @@ import ProductCartContainer from './containers/product/ProductCartContainer';
 import ProductWishListContainer from './containers/product/ProductWishListContainer';
 import ProductPaymentContainer from './containers/product/ProductPaymentContainer';
 import ProductDepositCompContainer from './containers/product/ProductDepositCompContainer';
+import NotFound from './containers/error/NotFound';
+import ServerError from './containers/error/ServerError';
+import Test from './containers/error/Test';
 
 
 function App() {
@@ -108,6 +111,13 @@ function App() {
           <Route path="/api/board/boardlist" element={<CampBoardListCon />} />
           {/* 유저넘버 넘기는건 확인해봐야 함  */}
           <Route path="/admin/campdetailupdate/:cpdtNo" element={<AdminDCampUpdCon />} />
+
+          {/* Error */}
+          <Route path="/error/404" element={ <NotFound /> } />      {/* TODO : 404 페이지 꾸미기 */}
+          <Route path="/error/500" element={ <ServerError /> } />  {/* TODO : 500 페이지 꾸미기 */}
+          <Route path="/error/test" element={ <Test /> } />  {/* TODO : 500 페이지 꾸미기 */}
+          <Route path="/*" element={ <NotFound /> } />             {/* Info : 맨 마지막에 있어야합니다. */}
+
         </Routes>
       </BrowserRouter>
     </CategoryProvider>
