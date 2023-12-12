@@ -13,7 +13,7 @@ const NotFound = () => {
         {/* FIXME: 여기 꾸며줘 
         */}
         <div className=''>
-            <div>
+            <div className='errorImg_404 pt-5'>
               <img src="/img/error(404).png" alt="404페이지" />
             </div>
             <div className='text-center py-3 border-bottom my-3'>
