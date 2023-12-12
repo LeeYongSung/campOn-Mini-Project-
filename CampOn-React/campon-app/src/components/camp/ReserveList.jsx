@@ -45,7 +45,7 @@ const ReserveList = ({reserve, onDelete}) => {
                         </div>
                     </div>
                     <div>
-                        <Link to={`/api/board/crinsert?reservationNo=${reservation.reservationNo}`}>리뷰쓰러가기</Link>
+                        <Link to={`/api/board/crinsert/${reservation.reservationNo}`}>리뷰쓰러가기</Link>
                     </div>
                 </div>
                 <div className="reservation_cancle">

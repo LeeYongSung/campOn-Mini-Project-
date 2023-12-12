@@ -136,7 +136,7 @@ public class SecuriryConfig extends WebSecurityConfigurerAdapter {
 
 
         // CSRF 방지 기능 비활성화 설정
-      http.csrf().disable(); // 기본값 enable();
+    //   http.csrf().disable(); // 기본값 enable();
     }
 
     
