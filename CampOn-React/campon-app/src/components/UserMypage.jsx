@@ -31,7 +31,7 @@ const UserMyypage = ({sets}) => {
                             <Link to="/api/camp/reservation">내 예약 현황</Link>
                         </li>
                         <li>
-                            <Link to="/board/boardlist">구매 후기</Link>
+                            <Link to="/api/board/boardlist">구매 후기</Link>
                         </li>
                     </ul>
                     <ul class="d-flex justify-content-around w-100">
@@ -59,7 +59,7 @@ const UserMyypage = ({sets}) => {
                                 <Link to="/camp/reservation">내 예약 현황</Link>
                             </li>
                             <li>
-                                <Link to="/board/boardlist">구매 후기</Link>
+                                <Link to="/api/board/boardlist">구매 후기</Link>
                             </li>
                         </ul>
                         <ul className="d-flex justify-content-around w-100">
@@ -90,7 +90,7 @@ const UserMyypage = ({sets}) => {
                                 <Link to="/admin/campproductlist">캠핑장 관리</Link>
                             </li>
                             <li>
-                                <Link to="/board/boardlist">내 캠핑장 후기</Link>
+                                <Link to="/api/board/boardlist">내 캠핑장 후기</Link>
                             </li>
                         </ul>
                     </div>
@@ -110,7 +110,7 @@ const UserMyypage = ({sets}) => {
                                 <Link to="/admin/adlist">광고 관리</Link>
                             </li>
                             <li>
-                                <Link to="/board/boardlist">후기 관리</Link>
+                                <Link to="/api/board/boardlist">후기 관리</Link>
                             </li>
                         </ul>
                         <ul className="d-flex justify-content-around w-100">

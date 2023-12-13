@@ -532,3 +532,13 @@ input[type="radio"]:checked + label span {
 .pagination a:hover {
   background-color: #ddd;
 }
+
+/* error 페이지 */
+.errorImg_404 {
+  width: 100%;
+  text-align: center;
+}
+
+.errorImg_404>img {
+  width: 60%;
+}

@@ -77,8 +77,8 @@ const AdminAdApply = ({campNo}) => {
             onChange={handle} />
             <p>파일형식 .PNG, .JPG / 가로세로 비율 1000*1500px / 용량 20MB</p>
         </div>
-        <div>
-            <img id="preview"/>
+        <div className='w-100'>
+            <img id="preview" className='w-100' />
         </div>
         <div className="form-floating">
             <input type="date" className="form-control" id="adStart" name="adStart" onChange={handle}/>
