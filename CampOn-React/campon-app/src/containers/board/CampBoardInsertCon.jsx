@@ -4,9 +4,10 @@ import CampBoardInsert from '../../components/board/CampBoardInsert';
 import UserFooter from '../../components/menu/UserFooter';
 import CampOnFooter from '../../components/footer/CampOnFooter';
 import BackHeader from '../../components/header/BackHeader';
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 
 const CampBoardInsertCon = () => {
+  const navigate = useNavigate();
   const { reservationNo } = useParams();
   const [reservation, setReservation] = useState({});
   const [reviewTitle, setReviewTitle] = useState('');
@@ -57,6 +58,7 @@ const CampBoardInsertCon = () => {
       const response = await postCrinsert(formData, headers);
       if (response.status === 201) {
         alert('게시글 등록 완료');
+        navigate('/api/camp/reservation')
       }
     } catch (error) {
       console.error(error);

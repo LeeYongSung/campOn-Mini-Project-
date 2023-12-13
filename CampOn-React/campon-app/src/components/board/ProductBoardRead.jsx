@@ -44,8 +44,8 @@ const ProductBoardRead = ({ boardData, navigate }) => {
         <div>
           <p>{prCon}</p>
         </div>
-        <div className='w-100'>
-          <img src={`/img?file=${prImg}`} alt="review" className='w-100' />
+        <div className='w-70 m-5'>
+          <img src={`/img?file=${prImg}`} alt="review" className='w-100 reviewImg' />
         </div>
       </div>
     </div>

@@ -5,6 +5,7 @@ import CampBoardRead from '../../components/board/CampBoardRead';
 import UserFooter from '../../components/menu/UserFooter'
 import CampOnFooter from '../../components/footer/CampOnFooter';
 import BackHeader from '../../components/header/BackHeader';
+import * as format from '../../apis/format'
 
 const CampBoardReadCon = () => {
   const { reviewNo } = useParams();
@@ -32,6 +33,7 @@ const CampBoardReadCon = () => {
       <CampBoardRead
         boardData={boardData}
         navigate={navigate}
+        format={format}
       />
       <CampOnFooter />
       <UserFooter />

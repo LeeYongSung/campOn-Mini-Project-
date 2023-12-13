@@ -11,8 +11,10 @@ const CampBoardList = ({ onDeleteCr, onDeletePr, crlist, currentTab, onTabChange
         <td className="tdd"><Link to={`/api/board/crread/${item.reviewNo}`}>{item.reviewTitle}</Link></td>
         <td className="tdd">{item.userId}</td>
         <td className="tdd">{new Date(item.regDate).toLocaleDateString().replace(/\.+$/, '')}</td>
-        <Link to={`/api/board/crupdate/${item.reviewNo}`}>수정</Link>
-        <button type="button" onClick={() => onDeleteCr(item.reviewNo)}>삭제</button>
+        <td className="tdd">
+        <Link to={`/api/board/crupdate/${item.reviewNo}`} className='updatebtn'>수정</Link>
+        <button type="button" onClick={() => onDeleteCr(item.reviewNo)} className='deletebtn'>삭제</button>
+        </td>
       </tr>
     ));
   };
@@ -25,8 +27,10 @@ const CampBoardList = ({ onDeleteCr, onDeletePr, crlist, currentTab, onTabChange
         <td className="tdd"><Link to={`/api/board/prread/${item.prNo}`}>{item.prTitle}</Link></td>
         <td className="tdd">{item.userId}</td>
         <td className="tdd">{new Date(item.regDate).toLocaleDateString().replace(/\.+$/, '')}</td>
-        <Link to={`/api/board/prupdate/${item.prNo}`}>수정</Link>
-        <button type="button" onClick={() => onDeletePr(item.prNo)}>삭제</button>
+        <td className="tdd">
+        <Link to={`/api/board/prupdate/${item.prNo}`} className='updatebtn'>수정</Link>
+        <button type="button" onClick={() => onDeletePr(item.prNo)} className='deletebtn'>삭제</button>
+        </td>
       </tr>
     ));
   };

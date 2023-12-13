@@ -61,7 +61,7 @@ const CampBoardUpdateCon = () => {
 
     try {
       const response = await postCrupdate(formData, headers);
-      if (response.status === 201) {
+      if (response.status === 200) {
         alert('게시글 수정완료');
         navigate('/api/board/index');  // 원하는 경로로 변경하세요.
       }

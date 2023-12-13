@@ -1,5 +1,9 @@
+@import url('https://fonts.googleapis.com/css2?family=Black+Han+Sans&family=Nanum+Gothic:wght@700&family=Noto+Sans+KR:wght@100;200;300;400;500;600;700;800;900&display=swap');
+
 * { margin: 0; padding: 0; vertical-align: top; box-sizing: border-box; }
-body { width: 100%; -ms-overflow-style: none; scrollbar-width: none; user-select: none; background-image: url("../img/main_backgroun.jpg"); background-attachment: fixed; background-size: cover;}
+body { 
+  font-family: 'Noto Sans KR', sans-serif;
+  width: 100%; -ms-overflow-style: none; scrollbar-width: none; user-select: none; background-image: url("../img/main_backgroun.jpg"); background-attachment: fixed; background-size: cover;}
 body::-webkit-scrollbar {display: none;}
 .section { width: 500px; margin: 0 auto; background-color: white; height: auto; position: relative; overflow: hidden;}
 a { color: inherit; text-decoration: none; }
@@ -542,3 +546,46 @@ input[type="radio"]:checked + label span {
 .errorImg_404>img {
   width: 60%;
 }
+
+/* 리뷰 페이지 */
+.reviewImg {box-shadow: 9px 8px 10px 0px rgb(0,0,0,0.5);object-fit: contain;
+  
+  border-radius: 10%; }
+
+  /* 광고 페이지 */
+  /* AdminSAdList */
+.campImg {
+  margin: auto; object-fit: contain;
+  width: 100%; height: 100px;
+}
+.adlist {
+  border: 1px solid #000;
+}
+.adlist > ul {
+  padding: 0;
+}
+.aduncheck {
+  color: blue;
+}
+
+.adcheck {
+  color: red;
+}
+
+/* CampBoardList */
+.updatebtn {
+  color: green; margin-right: 5px;
+}
+.deletebtn {
+color : red; background: inherit ; border:none; box-shadow:none; border-radius:0; padding:0; overflow:visible; cursor:pointer;
+}
+
+
+
+
+
+
+
+
+
+
