@@ -37,7 +37,7 @@ public class BoardApiController {
     @Autowired
     private UserService userService;
 
-    // 메인페이지
+    // 메인페이지 //TODO : 수정중
     @GetMapping(value = "/index")
     // public ResponseEntity<?> index(@AuthenticationPrincipal CustomUser customUser) throws Exception {
     // public ResponseEntity<?> index(Authentication authentication) throws Exception {
@@ -50,24 +50,26 @@ public class BoardApiController {
         String auth = user.getAuth();
         log.info("auth는? ", auth);
         int userNo = user.getUserNo();
-        List<Board> newReviewList = new ArrayList<>();
-        List<Board> crlist = new ArrayList<>();
-        if (auth == "ROLE_ADMIN") {
-            newReviewList = boardService.newReviewList();
-            crlist = boardService.crlist();
-            log.info("뉴리뷰리스트"+newReviewList.toString());
-        }
-        if (auth == "ROLE_USER") {
-            newReviewList = boardService.userprlist(userNo);
-            log.info("뉴리뷰리스트"+newReviewList.toString());
-            crlist = boardService.usercrlist(userNo);
-        }
-        if (auth == "ROLE_SELL") {
-            newReviewList = boardService.newReviewList();
-            crlist = boardService.campreviewlist(userNo);
-            log.info("뉴리뷰리스트"+newReviewList.toString());
-        }
+        // List<Board> newReviewList = new ArrayList<>();
+        // List<Board> crlist = new ArrayList<>();
+        // if (auth == "ROLE_ADMIN") {
+        //     newReviewList = boardService.newReviewList();
+        //     crlist = boardService.crlist();
+        //     log.info("뉴리뷰리스트"+newReviewList.toString());
+        // }
+        // if (auth == "ROLE_USER") {
+        //     newReviewList = boardService.userprlist(userNo);
+        //     log.info("뉴리뷰리스트"+newReviewList.toString());
+        //     crlist = boardService.usercrlist(userNo);
+        // }
+        // if (auth == "ROLE_SELL") {
+        //     newReviewList = boardService.newReviewList();
+        //     crlist = boardService.campreviewlist(userNo);
+        //     log.info("뉴리뷰리스트"+newReviewList.toString());
+        // }
         try {
+            List<Board> newReviewList = boardService.newReviewList();
+            List<Board> crlist = boardService.crlist();
             List<Board> newprlist = boardService.newprlist();
             List<Board> prlist = boardService.prlist();
 
