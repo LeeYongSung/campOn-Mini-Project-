@@ -6,11 +6,12 @@ import CampOnFooter from '../../components/footer/CampOnFooter';
 import UserFooter from '../../components/menu/UserFooter';
 import * as products from '../../apis/product';
 import { CategoryContext } from '../../apis/CategoryContext';
+import { useNavigate } from 'react-router-dom';
 
 const ProductListContainer = () => {
-
+  const { isLogin, userInfo } = useContext(CategoryContext);
   const [ productNo ] = useState();
-
+  const navigate = useNavigate();
   const { category, setCategory } = useContext(CategoryContext);
   const { setProductNo } = useContext(CategoryContext);
   const prevCategoryRef = useRef();
@@ -34,7 +35,12 @@ const ProductListContainer = () => {
   }
 
   const addCart = ( async (productNo) => {
-    let userNo = 2;
+    if (!isLogin){
+      alert('로그인하고 이용 가능합니다.')
+        navigate(`/user/login`)
+        return
+    }
+    let userNo = userInfo?.userNo
     let pNo = productNo;
     const response = await products.addProductsave(pNo, userNo);
     const data = response.data;

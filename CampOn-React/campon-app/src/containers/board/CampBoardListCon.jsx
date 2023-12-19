@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import CampBoardList from '../../components/board/CampBoardList';
 import * as boardApi from '../../apis/board'
 import { useLocation } from 'react-router-dom';
@@ -6,22 +6,31 @@ import UserFooter from '../../components/menu/UserFooter'
 import CampOnFooter from '../../components/footer/CampOnFooter';
 import BackHeader from '../../components/header/BackHeader';
 import ReactPaginate from 'react-paginate'; 
+import { CategoryContext } from '../../apis/CategoryContext';
+import AdminFooter from '../../components/menu/AdminFooter';
+import SellerFooter from '../../components/menu/SellerFooter';
 
 const CampBoardListCon = () => {
+  const { isLogin, userInfo, roles } = useContext(CategoryContext);
   const [currentTab, setCurrentTab] = useState('camp');
   const [crlist, setCrlist] = useState([]);
   const [prlist, setPrlist] = useState([]);
+  const [newReviewList, setNewReviewList] = useState([]);
+  const [newprlist, setNewprlist] = useState([]);
   const location = useLocation();
   const [currentPage, setCurrentPage] = useState(0);
   const [itemsPerPage] = useState(5);
 
   const fetchData = async () => {
     try {
+      
       const response = await boardApi.getBoardlist();
       const data = response.data;
       console.log(data);
       setCrlist(data.crlist);
       setPrlist(data.prlist);
+      setNewReviewList(data.newReviewList);
+      setNewprlist(data.newprlist);
     } catch (e) {
       console.log(e);
     }
@@ -69,8 +78,9 @@ const CampBoardListCon = () => {
   };
 
   useEffect(() => {
-    fetchData();
-  }, [location]);
+
+      fetchData();
+  }, []);
 
   const indexOfLastItem = (currentPage + 1) * itemsPerPage;
   const indexOfFirstItem = indexOfLastItem - itemsPerPage;
@@ -84,6 +94,8 @@ const CampBoardListCon = () => {
       <CampBoardList
         crlist={currentItems}
         prlist={currentItems}
+        newReviewList={newReviewList}
+        newprlist={newprlist}
         currentTab={currentTab}
         onTabChange={handleTabChange}
         onDeleteCr={handleDeleteCr}
@@ -101,7 +113,9 @@ const CampBoardListCon = () => {
         activeClassName={'active'}
       />
       <CampOnFooter />
-      <UserFooter />
+      { roles?.isUser && <UserFooter />}
+      { roles?.isSell && <SellerFooter />}
+      { roles?.isAdmin && <AdminFooter />}
     </>
   );
 };

@@ -1,5 +1,6 @@
 package com.camp.campon.apis;
 
+import java.security.Principal;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
@@ -13,6 +14,7 @@ import org.apache.ibatis.annotations.Delete;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -93,13 +95,15 @@ public class CampAPIController {
     }
     
     //즐겨찾기 페이지
+    @PreAuthorize("hasRole('ROLE_USER')")
     @GetMapping(value="/favorites")
     public ResponseEntity<?> favorites() {
+        int userNo = 0;
         try{
             Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-
-            int userNo = 2;
-            // String userId = auth.getName();
+            String userId = auth.getName();
+            Users users = userService.selectById(userId);
+            userNo = users.getUserNo();
             List<Camp> favoritesList = campService.favoritesList(userNo);
             return new ResponseEntity<>(favoritesList, HttpStatus.OK);
         }catch(Exception e){
@@ -107,6 +111,7 @@ public class CampAPIController {
         }
     }
     //즐겨찾기 항목 삭제
+    @PreAuthorize("hasRole('ROLE_USER')")
     @DeleteMapping(value="/favorites/{no}")
     public ResponseEntity<?> favoriteDelete(@PathVariable Integer no) throws Exception {
         try{
@@ -197,13 +202,14 @@ public class CampAPIController {
     }
 
     //캠핑 예약 페이지
+    @PreAuthorize("hasRole('ROLE_USER')")
     @GetMapping(value="/reservate/{no}")
     public ResponseEntity<?> campReservate(@PathVariable Integer no){
         try{
             Camp camp = campService.reservate(no);
             Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-            // String userId = auth.getName();
-            String userId = "user";
+            String userId = auth.getName();
+            // String userId = "user";
             // if(userId.equals("anonymousUser")) return "redirect:/user/login";
             Users user = userService.selectById(userId);
 
@@ -217,6 +223,7 @@ public class CampAPIController {
         }
     }
     //캠핑 예약 처리
+    @PreAuthorize("hasRole('ROLE_USER')")
     @PostMapping(value="/reservate")
     public ResponseEntity<?> campReservatePay(@RequestBody Camp camp) {
         try{
@@ -267,6 +274,7 @@ public class CampAPIController {
         }
     }
     //예약완료 페이지
+    @PreAuthorize("hasRole('ROLE_USER')")
     @GetMapping(value="/complete")
     public ResponseEntity<?> complete(){
         try{
@@ -274,8 +282,8 @@ public class CampAPIController {
         
             Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 
-            String userId = "user";
-            // String userId = auth.getName();
+            // String userId = "user";
+            String userId = auth.getName();
 
             Users user = userService.selectById(userId);
 
@@ -291,16 +299,17 @@ public class CampAPIController {
         }
     }
     //예약현황 페이지
+    @PreAuthorize("hasRole('ROLE_USER')")
     @GetMapping(value="/reservation")
-    public ResponseEntity<?> campReservation(){
+    public ResponseEntity<?> campReservation( Principal principal){
         try{
             int userNo = 2;
-            // if (principal == null){ userNo = 1000;}
-            // else {
-            //     String userId = principal.getName();
-            //     Users users = userService.selectById(userId);
-            //     userNo = users.getUserNo();
-            // }
+            if (principal == null){ userNo = 1000;}
+            else {
+                String userId = principal.getName();
+                Users users = userService.selectById(userId);
+                userNo = users.getUserNo();
+            }
             List<Product> productList = productService.reservedProduct(userNo);
             List<Camp> reservationList = campService.reservation(userNo);
             
@@ -314,6 +323,7 @@ public class CampAPIController {
         }
     }
     //예약현황 삭제
+    @PreAuthorize("hasRole('ROLE_USER')")
     @DeleteMapping("/reservation/{no}")
     public ResponseEntity<?> reservationdelete(@PathVariable Integer no) {
         log.info("주소 : /reservation/{no}");
@@ -400,6 +410,7 @@ public class CampAPIController {
         }
     }
     //찜 등록
+    @PreAuthorize("hasRole('ROLE_USER')")
     @PostMapping(value="/favorites")
     public ResponseEntity<?> favoriteInsert(@RequestBody Camp camp) {
         try{

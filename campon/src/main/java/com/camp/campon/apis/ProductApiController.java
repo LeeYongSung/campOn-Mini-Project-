@@ -1,5 +1,6 @@
 package com.camp.campon.apis;
 
+import java.security.Principal;
 import java.text.SimpleDateFormat;
 import java.util.HashMap;
 import java.util.List;
@@ -10,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.ui.Model;
 import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
@@ -37,8 +39,6 @@ import com.camp.campon.service.UserService;
 
 import lombok.extern.slf4j.Slf4j;
 
-
-
 @Slf4j
 @RestController
 @RequestMapping("/api/product")
@@ -56,18 +56,17 @@ public class ProductApiController {
     private CampService campService;
 
     @Autowired
-        private SMSService smsService;
-    
+    private SMSService smsService;
+
     @Value("${upload.path}")
     private String uploadPath;
 
-    
     @GetMapping("/index")
     public ResponseEntity<?> productMain() {
         log.info("/api/product/index");
         try {
-            //상품 후기 불러오기
-            List<Productreview> proReviewList =  productService.getReviewListLimit();
+            // 상품 후기 불러오기
+            List<Productreview> proReviewList = productService.getReviewListLimit();
             // 추천상품 리스트
             List<Product> productHotList = productService.hotList();
 
@@ -81,8 +80,8 @@ public class ProductApiController {
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
-    
-    @GetMapping(value={"/productList"})
+
+    @GetMapping(value = { "/productList" })
     public ResponseEntity<?> getCategoryList(String category) {
         log.info(category);
         try {
@@ -95,14 +94,14 @@ public class ProductApiController {
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
-    
+
     @GetMapping(value = "/productdetail")
     public ResponseEntity<?> productDetail(Integer productNo) {
         try {
             Product product = productService.select(productNo);
             List<Productreview> proReviewList = productService.getReviewListByNoLim(productNo);
             for (Productreview productreview : proReviewList) {
-                log.info(productreview.getPrNo() +"리뷰넘버"); 
+                log.info(productreview.getPrNo() + "리뷰넘버");
             }
             int reviewCount = productService.reviewCount(productNo);
             log.info("리뷰카운트 : " + reviewCount + "");
@@ -118,6 +117,7 @@ public class ProductApiController {
         }
     }
 
+    @PreAuthorize("hasRole('ROLE_USER')")
     @GetMapping("/wishlist")
     public ResponseEntity<?> wishlist() {
         try {
@@ -131,7 +131,8 @@ public class ProductApiController {
         }
     }
 
-    @GetMapping(value="/addProductsave")
+    @PreAuthorize("hasRole('ROLE_USER')")
+    @GetMapping(value = "/addProductsave")
     public ResponseEntity<?> addProductsave(int productNo) {
         try {
             String userId = "user";
@@ -143,16 +144,18 @@ public class ProductApiController {
             product.setUserNo(userNo);
             int result = productService.addProductsave(product);
 
-            if(result == 1) state = "SUCCESS";
-            else state = "FAIL";
-
+            if (result == 1)
+                state = "SUCCESS";
+            else
+                state = "FAIL";
 
             return new ResponseEntity<>(state, HttpStatus.OK);
         } catch (Exception e) {
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
-    
+
+    @PreAuthorize("hasRole('ROLE_USER')")
     @DeleteMapping(value = "/wishlistDelete")
     public ResponseEntity<?> wishlistDelete(int productsaveNo) {
         try {
@@ -165,10 +168,11 @@ public class ProductApiController {
         }
     }
 
+    @PreAuthorize("hasRole('ROLE_USER')")
     @GetMapping("/cart")
-    public ResponseEntity<?> cartlist() {
+    public ResponseEntity<?> cartlist(Principal principal) {
+        String userId = principal.getName();
         try {
-            String userId = "user";
             Users users = userService.selectById(userId);
             int userNo = users.getUserNo();
             List<Product> cartList = productService.cartList(userNo);
@@ -179,7 +183,7 @@ public class ProductApiController {
         }
     }
 
-    @GetMapping(value="/addProductsaveAjax")
+    @GetMapping(value = "/addProductsaveAjax")
     public ResponseEntity<?> addCart(Product product) {
         try {
             String state = "";
@@ -187,12 +191,12 @@ public class ProductApiController {
             int productNo = product.getProductNo();
             log.info(productNo + "");
             int cnt = productService.dupliCateTest(productNo);
-            if(cnt == 0) {
+            if (cnt == 0) {
                 result = productService.addCart(product);
-                log.info("장바구니에 넣기 성공여부 : "+ result);
+                log.info("장바구니에 넣기 성공여부 : " + result);
                 state = "SUCCESS";
             } else {
-                log.info("장바구니에 넣기 성공여부 : "+ result);
+                log.info("장바구니에 넣기 성공여부 : " + result);
                 state = "FAIL";
             }
             return new ResponseEntity<>(state, HttpStatus.OK);
@@ -201,11 +205,12 @@ public class ProductApiController {
         }
     }
 
-    @GetMapping(value="/addcart")
+    @PreAuthorize("hasRole('ROLE_USER')")
+    @GetMapping(value = "/addcart")
     public ResponseEntity<?> addcart(Product product) {
         try {
             int result = productService.addCart(product);
-            log.info("장바구니에 넣기 성공여부 : "+ result);
+            log.info("장바구니에 넣기 성공여부 : " + result);
 
             return new ResponseEntity<>(result, HttpStatus.OK);
         } catch (Exception e) {
@@ -213,7 +218,8 @@ public class ProductApiController {
         }
     }
 
-    @GetMapping(value="/addcartAll")
+    @PreAuthorize("hasRole('ROLE_USER')")
+    @GetMapping(value = "/addcartAll")
     public ResponseEntity<?> addcartAll() {
         try {
             String userId = "user";
@@ -227,7 +233,8 @@ public class ProductApiController {
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
-    
+
+    @PreAuthorize("hasRole('ROLE_USER')")
     @DeleteMapping("/cartDelete")
     public ResponseEntity<?> cartListDelete(Product product) {
         try {
@@ -243,11 +250,12 @@ public class ProductApiController {
     /**
      * 결제
      */
-    @GetMapping(value="/payment")
-    public ResponseEntity<?> payMent() {
+    @GetMapping(value = "/payment")
+    public ResponseEntity<?> payMent(Principal principal) {
         try {
-            // 임시값
-            int userNo = 2;
+            String userId = principal.getName();
+            Users users = userService.selectById(userId);
+            int userNo = users.getUserNo();
 
             List<Product> cartList = productService.cartList(userNo);
             List<Camp> reservationList = campService.reservationNow(userNo);
@@ -266,8 +274,8 @@ public class ProductApiController {
     /**
      * 결제완료
      */
-    
-    @GetMapping(value="/depositcomp")
+
+    @GetMapping(value = "/depositcomp")
     public ResponseEntity<?> depositcomp(@RequestParam String orderNumber) {
         try {
             log.info(orderNumber);
@@ -283,17 +291,16 @@ public class ProductApiController {
                 log.info(order.toString());
                 log.info(paytotal);
                 deposit = new HashMap<>();
-    
+
                 deposit.put("order", order);
                 deposit.put("paytotal", paytotal);
                 deposit.put("userName", userName);
                 deposit.put("pmType", pmType);
-                
+
             } catch (Exception e) {
                 System.err.println("에러발생");
                 e.printStackTrace();
             }
-
 
             return new ResponseEntity<>(deposit, HttpStatus.OK);
         } catch (Exception e) {
@@ -307,7 +314,7 @@ public class ProductApiController {
     @PostMapping("/paymentpro")
     public ResponseEntity<?> paymentpro(@RequestBody Order order) {
         try {
-            
+
             log.info("order : " + order);
             int userNo = 0;
             String userTel = "01000000000";
@@ -318,83 +325,85 @@ public class ProductApiController {
             userTel = users.getUserTel();
             userNo = users.getUserNo();
             userName = users.getUserName();
-            
+
             order.setUserNo(userNo);
             // log.info("order 객체에 어떻게 담겨있는지 확인 : "+order);
-            //(reservationNo=2, pmType=카드,cartCnts=[2, 3, 4, 5], productNos=[1, 2, 11, 1])
-            //카트 업뎃
+            // (reservationNo=2, pmType=카드,cartCnts=[2, 3, 4, 5], productNos=[1, 2, 11, 1])
+            // 카트 업뎃
             int[] cartCnts = order.getCartCnts();
             int[] productNos = order.getProductNos();
-            
-            for (int i=0; i< cartCnts.length ; i++) {
+
+            for (int i = 0; i < cartCnts.length; i++) {
                 Product product = new Product();
                 product.setCartCnt(cartCnts[i]);
                 product.setProductNo(productNos[i]);
 
                 product.setUserNo(userNo);
                 int result = productService.cartUpdate(product);
-                log.info("카트업뎃여부 : "+ result);
+                log.info("카트업뎃여부 : " + result);
             }
-            //orderNumber 생성
+            // orderNumber 생성
             int createNum = 0;
             String ranNum = "";
             String orderNumber = "";
             Random random = new Random();
-            for (int j=0; j<6; j++){
+            for (int j = 0; j < 6; j++) {
                 createNum = random.nextInt(9);
-                ranNum =  Integer.toString(createNum);
+                ranNum = Integer.toString(createNum);
                 orderNumber += ranNum;
-            } 
-            System.out.println(orderNumber); //order_number에 넣어줄 거임
+            }
+            System.out.println(orderNumber); // order_number에 넣어줄 거임
             order.setOrderNumber(orderNumber);
-            log.info("order 객체에 어떻게 담겨있는지 확인 : "+ order);
+            log.info("order 객체에 어떻게 담겨있는지 확인 : " + order);
             int result2 = orderService.addOrder(order);
-            log.info("order 테이블에 주문정보 등록여부 : " +result2);
+            log.info("order 테이블에 주문정보 등록여부 : " + result2);
             Long pmPrice = orderService.payAmount(order);
-            log.info("결제합계금액 : "+pmPrice);
-            order.setPmPrice(pmPrice+"");
+            log.info("결제합계금액 : " + pmPrice);
+            order.setPmPrice(pmPrice + "");
             int result3 = orderService.addPayments(order);
-            log.info("payments테이블에 등록 : "+ result3);
+            log.info("payments테이블에 등록 : " + result3);
             int result4 = orderService.addDelivery(orderNumber);
-            log.info("delivery 테이블에 등록 : "+result4);
+            log.info("delivery 테이블에 등록 : " + result4);
 
-            
-            //상품 결제 문자 보내기
+            // 상품 결제 문자 보내기
             // SimpleDateFormat sdt = new SimpleDateFormat("yy년 MM월 dd일");
             // SimpleDateFormat sdtt = new SimpleDateFormat("MM월 dd일");
             // List<Order> orderList = orderService.toUserMsg(orderNumber);
             // String cpDtName = orderList.get(0).getCpDtName();
             // String productmsg = "";
             // for (int i = 0; i < orderList.size(); i++) {
-            //     Order order2 = orderList.get(i);
-            //     int orderCnt = order2.getOrderCnt();
-            //     String productName = order2.getProductName();
-            //     String mmm ="";
-            //     if (i == orderList.size()-1){ mmm =  productName + " : "+orderCnt + "개";}
-            //     else { mmm = productName + " : "+orderCnt + "개, "; }
-            //     productmsg += mmm;
+            // Order order2 = orderList.get(i);
+            // int orderCnt = order2.getOrderCnt();
+            // String productName = order2.getProductName();
+            // String mmm ="";
+            // if (i == orderList.size()-1){ mmm = productName + " : "+orderCnt + "개";}
+            // else { mmm = productName + " : "+orderCnt + "개, "; }
+            // productmsg += mmm;
             // }
             // String stDate = sdt.format(orderList.get(0).getStartDate());
             // String sttDate = sdtt.format(orderList.get(0).getStartDate());
             // String edDate = sdt.format(orderList.get(0).getEndDate());
-            // String msg = "안녕하세요 "+ userName+"님 캠프온입니다. \n"+ stDate +"~"+ edDate+ " 예약된 " +cpDtName+" 캠핑장에 대여상품 "+productmsg+"를 대여하셨습니다. \n"+sttDate +"에 캠핑장으로 배송될 예정입니다. \n이용해주셔서 감사합니다. ";
-            // MultiValueMap<String, String> param =  new LinkedMultiValueMap<String, String>(); 
+            // String msg = "안녕하세요 "+ userName+"님 캠프온입니다. \n"+ stDate +"~"+ edDate+ " 예약된 "
+            // +cpDtName+" 캠핑장에 대여상품 "+productmsg+"를 대여하셨습니다. \n"+sttDate +"에 캠핑장으로 배송될
+            // 예정입니다. \n이용해주셔서 감사합니다. ";
+            // MultiValueMap<String, String> param = new LinkedMultiValueMap<String,
+            // String>();
             // param.add("msg", msg);
             // param.add("receiver", userTel);
             // param.add("rdate", "");
             // param.add("rtime", "");
             // param.add("testmode_yn", "N");
-            
+
             // 문자 전송 요청
             // Map<String, Object> resultMap = smsService.send(param);
             // Object resultCode = resultMap.get("result_code");
-            // Integer result_code = Integer.valueOf( resultCode != null ? resultCode.toString() : "-1" );
+            // Integer result_code = Integer.valueOf( resultCode != null ?
+            // resultCode.toString() : "-1" );
             // String message = (String) resultMap.get("message");
 
-
-            //장바구니와 찜에 있는 상품들 모두 삭제
+            // 장바구니와 찜에 있는 상품들 모두 삭제
             int result5 = orderService.saveCartDel(userNo);
-            log.info("장바구니와 찜에 있는 목록들 삭제여부 : "+result5);
+            log.info("장바구니와 찜에 있는 목록들 삭제여부 : " + result5);
 
             return new ResponseEntity<>(orderNumber, HttpStatus.OK);
         } catch (Exception e) {

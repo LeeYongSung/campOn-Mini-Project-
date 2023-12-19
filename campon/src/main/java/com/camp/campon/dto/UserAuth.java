@@ -10,4 +10,13 @@ public class UserAuth {
     private String userId;
     private String auth;
 
+    public UserAuth() {
+
+    }
+
+    public UserAuth(String userId, String auth) {
+        this.userId = userId;
+        this.auth = auth;
+    }
+
 }

@@ -103,6 +103,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
               ,user_name = #{userName}
               ,user_email = #{userEmail}
               ,user_address = #{userAddress}
+              ,user_tel = #{userTel}
               ,company_name = #{companyName}
               ,company_number = #{companyNumber}
               ,upd_date = now()

@@ -58,8 +58,8 @@ import Test from './containers/error/Test';
 
 function App() {
   return (
-    <CategoryProvider>
-      <BrowserRouter>
+    <BrowserRouter>
+      <CategoryProvider>
         <Routes>
           {/* 캠프온 메인 (추후 캠프 index랑 연결) */}
           <Route path="/" element={<Index />} />
@@ -113,14 +113,14 @@ function App() {
           <Route path="/admin/campdetailupdate/:cpdtNo" element={<AdminDCampUpdCon />} />
 
           {/* Error */}
-          <Route path="/error/404" element={ <NotFound /> } />      {/* TODO : 404 페이지 꾸미기 */}
-          <Route path="/error/500" element={ <ServerError /> } />  {/* TODO : 500 페이지 꾸미기 */}
-          <Route path="/error/test" element={ <Test /> } />  {/* TODO : 500 페이지 꾸미기 */}
-          <Route path="/*" element={ <NotFound /> } />             {/* Info : 맨 마지막에 있어야합니다. */}
+          <Route path="/error/404" element={<NotFound />} />      {/* TODO : 404 페이지 꾸미기 */}
+          <Route path="/error/500" element={<ServerError />} />  {/* TODO : 500 페이지 꾸미기 */}
+          <Route path="/error/test" element={<Test />} />  {/* TODO : 500 페이지 꾸미기 */}
+          <Route path="/*" element={<NotFound />} />             {/* Info : 맨 마지막에 있어야합니다. */}
 
         </Routes>
-      </BrowserRouter>
-    </CategoryProvider>
+      </CategoryProvider>
+    </BrowserRouter>
 
   )
 }

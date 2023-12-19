@@ -1,13 +1,14 @@
-import React, { useEffect, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import * as admins from '../../apis/admin'
 import { useNavigate, useParams, Link } from 'react-router-dom'
+import { CategoryContext } from '../../apis/CategoryContext'
 
 const AdminDCampUpd = () => {
     const nav = useNavigate()
     const { cpdtNo } = useParams()
     console.log(cpdtNo)
-
-    const userNo = 3; //하드코딩
+    const {userInfo} = useContext(CategoryContext)
+    const userNo = userInfo?.userNo; 
     const [cpdtName, setcpdtName] = useState('')
     const [cpdtIntroduction, setcpdtIntroduction] = useState('')
     const [cpdtNop, setcpdtNop] = useState('')

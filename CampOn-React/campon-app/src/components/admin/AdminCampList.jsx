@@ -1,9 +1,12 @@
-import React, { useEffect, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import * as admins from '../../apis/admin'
 import { useNavigate, Link } from 'react-router-dom';
 import AdminDCampList from './AdminDCampList';
+import { CategoryContext } from '../../apis/CategoryContext';
 const AdminCampList = () => {
-    const userAuth = 'ROLE_ADMIN'
+    // const userAuth = 'ROLE_ADMIN' 
+    const {roles} = useContext(CategoryContext)
+
     const navigate = useNavigate()
     const [campList, setCampList] = useState([])
     const [campListadmin, setCampListadmin] = useState([])
@@ -84,7 +87,7 @@ const AdminCampList = () => {
                 </div>
                 {
                     // campList.map((camp, index) => (          ----seller인 경우
-                    campListadmin.map((camp, index) => (
+                  roles.isAdmin?  campListadmin.map((camp, index) => (
                         <>
                             <div className="campproductList w-100 d-flex justify-content-between position-relative py-5 mt-3 border-bottom border-top">
                                 <input type="hidden" className="campNo" id="campNo" name="campNo" value={camp.campNo} />
@@ -141,7 +144,69 @@ const AdminCampList = () => {
                                     : <></>
                             }
                         </>
-                    ))
+                    )) : <></>
+                }
+
+{
+                    // campList.map((camp, index) => (          ----seller인 경우
+                  roles.isSell?  campList.map((camp, index) => (
+                        <>
+                            <div className="campproductList w-100 d-flex justify-content-between position-relative py-5 mt-3 border-bottom border-top">
+                                <input type="hidden" className="campNo" id="campNo" name="campNo" value={camp.campNo} />
+                                <div className="campproductListImg ps-2">
+                                    <img src={`/api/img?file=${camp.cpiUrl}`} alt="캠핑장 이미지" />
+                                </div>
+                                <div className="campproductListCon">
+                                    <div className="pt-3">
+                                        <div><h5>{camp.campName}</h5></div>
+                                        <div className="campproductListCon_txt"><span>{camp.campAddress}</span></div>
+                                        <div className="w-100 d-flex justify-content-between pt-3">
+                                            <div className="campproductListCon_txt">
+                                                <p>등록일자</p>
+                                                <p className="pt-1">수정일자</p>
+                                            </div>
+                                            <div className="pe-2">
+                                                <div className="campproductListCon_txt"><span>{formatData(camp.regDate)}</span></div>
+                                                <div className="campproductListCon_txt pt-1"><span>{formatData(camp.updDate)}</span></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div className="campproductListBtn position-absolute top-0 end-0 d-flex pt-2">
+                                    <div><Link to={`/admin/adinsert/${camp.campNo}`} className="btn btn-primary me-1">광고신청</Link></div>
+                                    <div><Link to={`/admin/campdetailinsert/${camp.campNo}/${camp.userNo}`} className="btn btn-success">상품등록</Link></div>
+                                    <div><Link to={`/admin/campproductupdate/${camp.campNo}`} className="btn btn-warning mx-1">캠핑장수정</Link></div>
+                                    <div><button onClick={() => { campDel(camp.campNo) }} className="btn btn-danger mx-1">캠핑장삭제</button></div>
+                                </div>
+                                <div className="position-absolute bottom-0 end-0 me-2 pb-2">
+                                    {
+                                        down[index] ? <a className="down" value={camp.campNo} onClick={() => { toggle(index) }}>
+                                            상세보기
+                                            <span className="material-symbols-outlined">
+                                                expand_more
+                                            </span>
+                                        </a>
+                                            : <a className="up" value={camp.campNo} onClick={() => { untoggle(index) }}>
+                                                접기
+                                                <span className="material-symbols-outlined">
+                                                    expand_less
+                                                </span>
+                                            </a>
+                                    }
+                                </div>
+                            </div>
+                            {
+                                tog[index] ? <div className="campdetail_active">
+                                    {camp.detailsList.map((detail) => (
+                                        <>
+                                            <AdminDCampList detail={detail} dacmpDel={dacmpDel} />
+                                        </>
+                                    ))}
+                                </div>
+                                    : <></>
+                            }
+                        </>
+                    )) : <></>
                 }
             </div>
         </>

@@ -1,22 +1,24 @@
-import React, { useEffect, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import * as user from '../../apis/user'
 import UserLogin from '../../components/UserLogin';
 import CampOnFooter from '../../components/footer/CampOnFooter';
 import UserFooter from '../../components/menu/UserFooter';
 import BackHeader from '../../components/header/BackHeader';
-//(로그인, 아이디저장, 자동로그인 기능 추가 예정)
+import { CategoryContext } from '../../apis/CategoryContext';
+//(아이디저장, 자동로그인 기능 추가 예정)
 const UserLoginCon = () => {
-       // {"rememberId":false,"userId":""}
+    const { login } = useContext(CategoryContext)
        const [rememberId, setRememberId] = useState('');
        const [userId, setUserId] = useState('');
-       const getLogin = async () => {
-           const response = await response.data;
-           console.log(response, 'response는?');
-           setRememberId(response.rememberId)
-           setUserId(response.userId)
-       }
+       const onLogin = (e) => {
+        e.preventDefault()
+        const form = e.target
+        const username = form.userId.value
+        const password = form.userPw.value
+        login( username, password )
+    }
+
        
-       // const [userId, setUserId] = useState('')
        const [userPw, setUserPw] = useState('')
        const handleUserId = (e) => {
            setUserId(e.target.value)
@@ -24,11 +26,10 @@ const UserLoginCon = () => {
        const handleUserPw = (e) => {
            setUserPw(e.target.value)
        }
-   
        const sets = {
            rememberId, setRememberId,
            userId, setUserId,
-           getLogin,
+           onLogin,
            userPw, setUserPw,
            handleUserId,
            handleUserPw

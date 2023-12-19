@@ -2,6 +2,7 @@ package com.camp.campon.dto;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
 
 import lombok.Data;
 
@@ -28,6 +29,6 @@ public class Users implements Serializable {
     private String auth;
 
     // 권한 목록
-   // List<UserAuth> authList;
+   List<UserAuth> authList;
 
 }

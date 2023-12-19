@@ -10,7 +10,7 @@ import { CategoryContext } from '../../apis/CategoryContext';
 import { useNavigate } from 'react-router-dom'
 
 const ProductDetailContainer = () => {
-
+  const { isLogin, userInfo } = useContext(CategoryContext);
     let navigate = useNavigate();
     let confirm = '';
     
@@ -40,7 +40,12 @@ const ProductDetailContainer = () => {
     }
 
     const addCart = ( async (productNo) => {
-      let userNo = 2;
+      if (!isLogin) {
+          alert('로그인하고 이용 가능합니다.')
+          navigate(`/user/login`)
+          return
+      }
+      let userNo = userInfo?.userNo; 
       let pNo = productNo;
       const response = await products.addProductsave(pNo, userNo);
       const data = response.data;
@@ -55,6 +60,11 @@ const ProductDetailContainer = () => {
     })
 
     const addProductsave = ( async (productNo) => {
+      if (!isLogin) {
+        alert('로그인하고 이용 가능합니다.')
+        navigate(`/user/login`)
+        return
+    }
       console.log(productNo);
       const response = await products.wishListAdd(productNo);
       const data = await response.data;

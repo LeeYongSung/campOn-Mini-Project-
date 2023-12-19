@@ -1,11 +1,13 @@
-import React, { useEffect, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import * as admins from '../../apis/admin'
 import { useNavigate, useParams } from 'react-router-dom'
+import { CategoryContext } from '../../apis/CategoryContext'
 const AdminCampUpd = () => {
   const navigate = useNavigate()
   const { campNo } = useParams()
+  const {userInfo} = useContext(CategoryContext)
   console.log(campNo)
-  const userNo = 3; //하드코딩
+  const userNo = userInfo?.userNo;
   const [campName, setcampName] = useState('')
   const [file, setfile] = useState(null)
   const [campAddress, setcampAddress] = useState('')
@@ -238,17 +240,17 @@ const AdminCampUpd = () => {
           <label htmlFor="facillity">기본시설</label>
           <input type="checkbox" id="1" name="facilityTypeNo" value="1" onChange={handlefac} />
           <label htmlFor="1"><span></span>화장실</label>
-          <input type="checkbox" id="2" name="facilityTypeNo" value="2" onChange={handlefac} />
+          <input type="checkbox" id="2" name="facilityTypeNo" value="2"  onChange={handlefac} />
           <label htmlFor="2"><span></span>샤워실</label>
-          <input type="checkbox" id="3" name="facilityTypeNo" value="3" onChange={handlefac} />
+          <input type="checkbox" id="3" name="facilityTypeNo" value="3"  onChange={handlefac} />
           <label htmlFor="3"><span></span>개수대</label>
-          <input type="checkbox" id="4" name="facilityTypeNo" value="4" onChange={handlefac} />
+          <input type="checkbox" id="4" name="facilityTypeNo" value="4"  onChange={handlefac} />
           <label htmlFor="4"><span></span>매정</label>
-          <input type="checkbox" id="5" name="facilityTypeNo" value="5" onChange={handlefac} />
+          <input type="checkbox" id="5" name="facilityTypeNo" value="5"  onChange={handlefac} />
           <label htmlFor="5"><span></span>바베큐장</label>
-          <input type="checkbox" id="6" name="facilityTypeNo" value="6" onChange={handlefac} />
+          <input type="checkbox" id="6" name="facilityTypeNo" value="6"  onChange={handlefac} />
           <label htmlFor="6"><span></span>전기차충전소</label>
-          <input type="checkbox" id="7" name="facilityTypeNo" value="7" onChange={handlefac} />
+          <input type="checkbox" id="7" name="facilityTypeNo" value="7"  onChange={handlefac} />
           <label htmlFor="7"><span></span>주차장</label>
         </div>
         <div className="form-floating">

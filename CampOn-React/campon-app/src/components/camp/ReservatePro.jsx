@@ -192,10 +192,10 @@ const ReservatePro = ({camp, user, reserve}) => {
                     </div>
                     <div className="text-center border-bottom py-3 campPayment_type">
                         <input type="radio" id="card" name="campPaymentType" value="card" onChange={handleChangePay}/>
-                        <label for="card" className="me-5"><span></span>카드</label>
+                        <label htmlFor="card" className="me-5"><span></span>카드</label>
 
                         <input type="radio" id="bank" name="campPaymentType" value="bankbook" onChange={handleChangePay}/>
-                        <label for="bank"><span></span>무통장입금</label>
+                        <label htmlFor="bank"><span></span>무통장입금</label>
                     </div>
                 </div>
                 <div className="w-100 text-end">

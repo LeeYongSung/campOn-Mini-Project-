@@ -205,7 +205,8 @@ public class AdminController {
                 // }
                 // model.addAttribute("campdetailList", campdetailList);
                 CustomUser customuser = (CustomUser) auth.getPrincipal();
-                Users user1 = customuser.getUsers();
+                //Users user1 = customuser.getUsers();
+                Users user1 = customuser.getUser();
                 String role = user1.getAuth();
                 model.addAttribute("auth", role);
                 model.addAttribute("campList", camp);

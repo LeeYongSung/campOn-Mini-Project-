@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
-const CampBoardList = ({ onDeleteCr, onDeletePr, crlist, currentTab, onTabChange, prlist }) => {
+const CampBoardList = ({ onDeleteCr, onDeletePr, crlist, currentTab, onTabChange, prlist, newReviewList, newprlist  }) => {
 
   // 캠핑 리뷰
   const renderCampReviews = (list) => {
@@ -60,7 +60,8 @@ const CampBoardList = ({ onDeleteCr, onDeletePr, crlist, currentTab, onTabChange
               </tr>
             </thead>
             <tbody id="cr-data">
-              {renderCampReviews(crlist)}
+              {/* {renderCampReviews(crlist)} */}
+              {renderCampReviews(newReviewList)}
             </tbody>
           </table>
         </div>
@@ -81,6 +82,7 @@ const CampBoardList = ({ onDeleteCr, onDeletePr, crlist, currentTab, onTabChange
               </tr>
             </thead>
             <tbody id="pr-data">
+              {/* {renderProductReviews(prlist)} */}
               {renderProductReviews(prlist)}
             </tbody>
           </table>

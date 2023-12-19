@@ -52,7 +52,7 @@ const ProductPayment = ( { cartList, campList, onPayment, onIncrease, onDecrease
                                 </div>
                                 <div className="py-2 paymentCount me-5">
                                     <h6 id="productPrice">{product.productPrice.toLocaleString()}원</h6>
-                                    <label for="cartCnt"><span></span></label>
+                                    <label htmlFor="cartCnt"><span></span></label>
                                     <div className="reservationNop_box d-flex form-floating ms-2">
                                         <button className="countDown form-control" onClick={ () => onDecrease(product.productNo) }>-</button>
                                         <input type="text" name="cartCnts" id="cartCnt" value={quantities[product.productNo]} 
@@ -97,7 +97,7 @@ const ProductPayment = ( { cartList, campList, onPayment, onIncrease, onDecrease
                             <input type="radio" id="campSelect" value={campList.reservationNo}
                                 data-res={campList.reservationDate} name="reservationNo" className="selectCamp" 
                                 onChange={(e) => setCamp(e.target.value)} />
-                            <label for="campSelect"><span></span>캠핑장 선택</label>
+                            <label htmlFor="campSelect"><span></span>캠핑장 선택</label>
                         </div>
                     </div>
                 </div>
@@ -111,11 +111,11 @@ const ProductPayment = ( { cartList, campList, onPayment, onIncrease, onDecrease
                 <div className="w-100 text-center bg-body-secondary py-3 d-flex justify-content-center">
                     <div className="px-2">
                         <input type="radio" id="card" value="카드" name="pmType" className="pmType" onChange={(e) => setPaymentType(e.target.value)} />
-                        <label for="card"><span></span>카드 결제</label>
+                        <label htmlFor="card"><span></span>카드 결제</label>
                     </div>
                     <div className="px-2">
                         <input type="radio" id="bankPay" value="무통장입금" name="pmType" className="pmType" onChange={(e) => setPaymentType(e.target.value)} />
-                        <label for="bankPay"><span></span>무통장 입금</label>
+                        <label htmlFor="bankPay"><span></span>무통장 입금</label>
                     </div>
                 </div>
             </div>

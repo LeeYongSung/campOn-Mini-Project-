@@ -224,7 +224,8 @@ public class BoardController {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 
         CustomUser customuser = (CustomUser) auth.getPrincipal();
-        Users user = customuser.getUsers();
+        // Users user = customuser.getUsers();
+        Users user = customuser.getUser();
         String role = user.getAuth();
         model.addAttribute("auth", role);
 

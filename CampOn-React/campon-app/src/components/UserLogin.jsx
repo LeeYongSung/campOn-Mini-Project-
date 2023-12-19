@@ -5,7 +5,7 @@ const UserLogin = ({sets}) => {
     const setRememberId = sets.setRememberId;
     const userId = sets.userId;
     const setUserId = sets.setUserId;
-    const getLogin = sets.getLogin;
+    const onLogin = sets.onLogin;
     const userPw = sets.userPw;
     const setUserPw = sets.setUserPw;
     const handleUserId = sets.handleUserId;
@@ -20,13 +20,13 @@ const UserLogin = ({sets}) => {
             </div>
 
             <div className="container-sm">
-                {/* <form method="POST"> */}
+                <form  onSubmit={ (e) => onLogin(e) }>
                     <div className="form-floating my-3">
-                        <input type="text" id="userId" name="userId" placeholder="아이디" value={userId} onChange={handleUserId} className="form-control" />
+                        <input type="text" id="userId" name="userId" placeholder="아이디" value={userId} onChange={handleUserId} className="form-control" autoComplete='userId' required/>
                         <label htmlFor="userId">아이디</label>
                     </div>
                     <div className="form-floating">
-                        <input type="password" id="userPw" name="userPw" placeholder="비밀번호" value={userPw} onChange={handleUserPw} className="form-control" />
+                        <input type="password" id="userPw" name="userPw" placeholder="비밀번호" value={userPw} onChange={handleUserPw} className="form-control" autoComplete='userPw' required/>
                         <label htmlFor="userPw">비밀번호</label>
                     </div>
                     <div className="d-flex justify-content-center">
@@ -46,11 +46,11 @@ const UserLogin = ({sets}) => {
                             <label htmlFor="remember-me"><span></span>자동 로그인</label>
                         </div>
                     </div>
-                    <input type="button" value="로그인" className="btn btn-warning w-100 py-3" />
+                    <input type="submit" value="로그인" className="btn btn-warning w-100 py-3" />
                     <div className="w-100 text-center py-3">
                         <a href="/user/join" className="w-100 text-center">회원가입하기</a>
                     </div>
-                {/* </form> */}
+                </form>
             </div>
         </>
     )

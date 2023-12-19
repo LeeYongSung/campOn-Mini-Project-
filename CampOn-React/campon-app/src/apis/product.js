@@ -1,27 +1,27 @@
 import axios from 'axios';
+import api from './api'
+export const Index = () => api.get("/api/product/index");
 
-export const Index = () => axios.get("/api/product/index");
+export const category = (category) => api.get(`/api/product/productList?category=${category}`)
 
-export const category = (category) => axios.get(`/api/product/productList?category=${category}`)
+export const productDetaile = (productNo) => api.get(`/api/product/productdetail?productNo=${productNo}`)
 
-export const productDetaile = (productNo) => axios.get(`/api/product/productdetail?productNo=${productNo}`)
+export const cartList = () => api.get("/api/product/cart")
 
-export const cartList = () => axios.get("/api/product/cart")
+export const wishList = () => api.get("/api/product/wishlist")
 
-export const wishList = () => axios.get("/api/product/wishlist")
+export const payment = () => api.get("/api/product/payment")
 
-export const payment = () => axios.get("/api/product/payment")
+export const deposit = (orderNumber) => api.get(`/api/product/depositcomp?orderNumber=${orderNumber}`)
 
-export const deposit = (orderNumber) => axios.get(`/api/product/depositcomp?orderNumber=${orderNumber}`)
+export const addProductsave = (productNo, userNo) => api.get(`/api/product/addProductsaveAjax?productNo=${productNo}&userNo=${userNo}`)
 
-export const addProductsave = (productNo, userNo) => axios.get(`/api/product/addProductsaveAjax?productNo=${productNo}&userNo=${userNo}`)
+export const addCartAll = () => api.get("/api/product/addcartAll")
 
-export const addCartAll = () => axios.get("/api/product/addcartAll")
+export const wishListAdd = (productNo) => api.get(`/api/product/addProductsave?productNo=${productNo}`)
 
-export const wishListAdd = (productNo) => axios.get(`/api/product/addProductsave?productNo=${productNo}`)
+export const removeCart = (cartNo) => api.delete(`/api/product/cartDelete?cartNo=${cartNo}`)
 
-export const removeCart = (cartNo) => axios.delete(`/api/product/cartDelete?cartNo=${cartNo}`)
+export const removeWishList = (productSaveNo) => api.delete(`/api/product/wishlistDelete?productsaveNo=${productSaveNo}`)
 
-export const removeWishList = (productSaveNo) => axios.delete(`/api/product/wishlistDelete?productsaveNo=${productSaveNo}`)
-
-export const payMentPro = (Cnt, No, pt, tp, cp) => axios.post("/api/product/paymentpro", { cartCnts: Cnt, productNos: No, pmType: pt, pmPrice: tp, reservationNo: cp })
+export const payMentPro = (Cnt, No, pt, tp, cp) => api.post("/api/product/paymentpro", { cartCnts: Cnt, productNos: No, pmType: pt, pmPrice: tp, reservationNo: cp })

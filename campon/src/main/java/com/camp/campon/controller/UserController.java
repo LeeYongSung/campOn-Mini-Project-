@@ -37,8 +37,8 @@ public class UserController {
     @Autowired
     private UserService userService;
 
-    @Autowired
-    private PersistentTokenRepository persistentTokenRepository;
+    // @Autowired
+    // private PersistentTokenRepository persistentTokenRepository;
 
     // @GetMapping(value={"", "/"})
     // public String home(Model model, Principal principal) {
@@ -123,7 +123,7 @@ public class UserController {
         cookie.setPath("/");
         response.addCookie(cookie);
         // 토큰 삭제
-        persistentTokenRepository.removeUserTokens(user.getUserId());
+        // persistentTokenRepository.removeUserTokens(user.getUserId());
         // 로그아웃 후 ➡ 로그인 페이지
         return "redirect:/user/login";
     }
@@ -144,7 +144,7 @@ public class UserController {
             cookie.setPath("/");        
             response.addCookie(cookie);
             // 토큰 삭제
-            persistentTokenRepository.removeUserTokens(userId);
+            // persistentTokenRepository.removeUserTokens(userId);
             return "redirect:/";
         } else {
             return "redirect:/user/update";
@@ -165,7 +165,8 @@ public class UserController {
             return "redirect:/user/login";
         } else {
             CustomUser customuser = (CustomUser) auth.getPrincipal();
-            Users user = customuser.getUsers();
+            // Users user = customuser.getUsers();
+            Users user = customuser.getUser();
             String role = user.getAuth();
             model.addAttribute("auth", role);
             return "user/mypage";

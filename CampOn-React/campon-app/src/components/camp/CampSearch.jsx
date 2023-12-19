@@ -102,7 +102,7 @@ const CampSearch = ({onSearch}) => {
     <div className="container-sm search_box">
             <div className="form-floating my-2">
                 <input type="text" id="keyword" name="keyword" className="form-control" placeholder="검색명" onChange={handleKeyword}/>
-                <label for="keyword">검색명</label>
+                <label htmlFor="keyword">검색명</label>
             </div>
             <div className="w-100 d-flex justify-content-between">
                 <div className="form-floating w-100 me-1">
@@ -117,19 +117,19 @@ const CampSearch = ({onSearch}) => {
                 <span>캠핑종류</span>
                 <input type="hidden" name="campTypeNos" />
                 <input type="checkbox" id="autocamping" name="campTypeNos" className="form-control" value="1" onChange={typeAdd}/>
-                <label for="autocamping"><span></span>오토캠핑</label>
+                <label htmlFor="autocamping"><span></span>오토캠핑</label>
 
                 <input type="checkbox" id="glamping" name="campTypeNos" className="form-control" value="2" onChange={typeAdd}/>
-                <label for="glamping"><span></span>글램핑</label>
+                <label htmlFor="glamping"><span></span>글램핑</label>
 
                 <input type="checkbox" id="caravan" name="campTypeNos" className="form-control" value="3" onChange={typeAdd}/>
-                <label for="caravan"><span></span>카라반</label>
+                <label htmlFor="caravan"><span></span>카라반</label>
 
                 <input type="checkbox" id="pension" name="campTypeNos" className="form-control" value="4" onChange={typeAdd}/>
-                <label for="pension"><span></span>펜션</label>
+                <label htmlFor="pension"><span></span>펜션</label>
 
                 <input type="checkbox" id="campnik" name="campTypeNos" className="form-control" value="5" onChange={typeAdd}/>
-                <label for="campnik"><span></span>캠프닉</label>
+                <label htmlFor="campnik"><span></span>캠프닉</label>
             </div>
             <div className="form-floating mb-3">
                 <button type="text"  className="btn btn-outline-secondary btn-lg w-100 py-3 rounded-0" onClick={() => onSubmit()} >검색</button>

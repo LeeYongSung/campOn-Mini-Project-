@@ -1,12 +1,13 @@
-import React, { useState } from 'react'
+import React, { useContext, useState } from 'react'
 import { Link, useParams, useNavigate } from 'react-router-dom'
 import * as admins from '../../apis/admin'
 import { useEffect } from 'react';
 import { Map, MapMarker, useKakaoLoader } from 'react-kakao-maps-sdk'
+import { CategoryContext } from '../../apis/CategoryContext';
 
 const AdminCampAdd = () => {
+    const {userInfo} = useContext(CategoryContext)
     const navigate = useNavigate();
-    const userNo = 3; //하드코딩
     const [campName, setcampName] = useState('')
     const [file, setfile] = useState(null)
     const [campAddress, setcampAddress] = useState('')
@@ -67,7 +68,9 @@ const AdminCampAdd = () => {
         };
 
         map = new window.kakao.maps.Map(container, options);
-    }, []); 
+
+        console.log(userInfo);
+    }, [userInfo]); 
 
     useEffect(() => {
         if (!map) return;
@@ -119,7 +122,9 @@ const AdminCampAdd = () => {
     const formSubmit = async () => {
         console.log(state.center.lat);
         console.log(state.center.lng);
+
         const formData = new FormData();
+        
         console.log(campAddress)
         console.log(campTel)
         console.log(placeName)
@@ -139,7 +144,7 @@ const AdminCampAdd = () => {
         formData.append("campClose", campClose)
         formData.append("campIntroduction", campIntroduction)
         formData.append("campCaution", campCaution)
-        formData.append("userNo", userNo)
+        formData.append("userNo", userInfo.userNo)
         formData.append("facilityTypeNoList", facilityTypeNoList)
         formData.append("campLatitude", state.center.lat)
         formData.append("campLongitude", state.center.lng)
@@ -162,13 +167,14 @@ const AdminCampAdd = () => {
             campOpen: campOpen,
             campClose: campClose,
             campIntroduction: campIntroduction, 
-            userNo: userNo, 
+            userNo: userInfo?.userNo, 
             facilityTypeNoList : facilityTypeNoList, 
             campCaution : campCaution,
             campLatitude : state.center.lat,
             campLongitude : state.center.lng
         };
         console.log(camp, 'camp는?')
+        console.log(userInfo?.userNo, 'userNo는?')
         try {
             const response = await admins.campAdd(formData, headers)
             alert('캠핑장 등록 완료');
@@ -179,14 +185,14 @@ const AdminCampAdd = () => {
         }
 
     }
-      
+
     return (
         <>
             <div className="container-sm">
                 <div className="w-100 text-center my-3">
                     <h5>캠핑장 등록</h5>
                 </div>
-                <input type="hidden" name="userNo" id="userNo" value={userNo} />
+                <input type="hidden" name="userNo" id="userNo" value={userInfo?.userNo} />
                 <div className="form-floating my-2">
                     <input type="text" id="campName" name="campName" className="form-control" onChange={handleset} />
                     <label htmlFor="campName">캠핑장명</label>

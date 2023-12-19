@@ -8,6 +8,8 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -20,6 +22,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.camp.campon.dto.Ad;
 import com.camp.campon.dto.Camp;
+import com.camp.campon.dto.CustomUser;
 import com.camp.campon.dto.Product;
 import com.camp.campon.dto.Users;
 import com.camp.campon.service.AdService;
@@ -46,6 +49,7 @@ public class AdminApiController {
     @Autowired
     private AdService adService;
 
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     @GetMapping(value = "/productlist")
     public ResponseEntity<?> productList() throws Exception {
         List<Product> productList = productService.getProductList();
@@ -56,6 +60,7 @@ public class AdminApiController {
     }
 
     // 상품등록 실행
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     @PostMapping("/productInsert")
     public ResponseEntity<?> productInsert(Product product) throws Exception {
         int result = productService.productInsert(product);
@@ -64,6 +69,7 @@ public class AdminApiController {
     }
 
     // 상품 수정 페이지
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     @GetMapping(value = "/productupdate/{productNo}")
     public ResponseEntity<?> productUpdate(@PathVariable String productNo) throws Exception {
         log.info(productNo);
@@ -74,6 +80,7 @@ public class AdminApiController {
     }
 
     // 상품 수정 pro
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     @PostMapping(value = "/productUpdate")
     public ResponseEntity<?> productUpdate(Product product) throws Exception {
         int result = productService.productUpdate(product);
@@ -82,6 +89,7 @@ public class AdminApiController {
     }
 
     // 상품 삭제 pro
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     @DeleteMapping(value = "/delete/{productNo}")
     public ResponseEntity<?> productDelete(@PathVariable String productNo) throws NumberFormatException, Exception {
         int result = productService.deleteProduct(Integer.parseInt(productNo));
@@ -89,6 +97,7 @@ public class AdminApiController {
     }
 
     // 멤버 관리 페이지
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     @GetMapping(value = "/memberList")
     public ResponseEntity<?> memberList() throws Exception {
         List<Users> userList = userService.memberList("ROLE_USER");
@@ -99,6 +108,7 @@ public class AdminApiController {
         return new ResponseEntity<>(map, HttpStatus.OK);
     }
 
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     @DeleteMapping(value = "/memberDelete/{userId}")
     public ResponseEntity<?> memberDelete(@PathVariable String userId) throws Exception {
         int result = userService.delete(userId);
@@ -107,11 +117,12 @@ public class AdminApiController {
     }
 
     /* 캠핑장 crud */
-    // 하는중
+    @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_SELL')")
     @GetMapping(value = "/campproductlist")
-    public ResponseEntity<?> campList() throws Exception {
-        int userNo = 3; // 하드코딩
-        List<Camp> camp = campService.campproductUser(userNo);
+    public ResponseEntity<?> campList(@AuthenticationPrincipal CustomUser customUser) throws Exception {
+        Users user = customUser.getUser();
+        log.info("user찍히는지", user);
+        List<Camp> camp = campService.campproductUser(user.getUserNo());
         List<Camp> camp1 = campService.campproductadmin();
         log.info(camp.toString());
         log.info(camp1.toString());
@@ -136,6 +147,7 @@ public class AdminApiController {
     // return new ResponseEntity<>(HttpStatus.OK);
     // }
 
+    @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_SELL')")
     @PostMapping(value = "/campproductadd")
     public ResponseEntity<?> campInsertPro(Camp camp) throws Exception {
         List<String> facilityTypeNo = camp.getFacilityTypeNoList();
@@ -147,6 +159,7 @@ public class AdminApiController {
         return new ResponseEntity<>(result, HttpStatus.OK);
     }
 
+    @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_SELL')")
     @GetMapping(value = "/campproductupdate/{campNo}")
     public ResponseEntity<?> campUpdate(@PathVariable String campNo) throws Exception {
         Camp camp = campService.productsproducts(Integer.parseInt(campNo));
@@ -157,6 +170,7 @@ public class AdminApiController {
         return new ResponseEntity<>(map, HttpStatus.OK);
     }
 
+    @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_SELL')")
     @PostMapping(value = "/campproductupdatePro")
     public ResponseEntity<?> campUpdatePro(@ModelAttribute Camp camp)
             throws Exception {
@@ -171,6 +185,7 @@ public class AdminApiController {
     }
 
     // 캠핑상품 등록처리
+    @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_SELL')")
     @PostMapping(value = "/campdetailinsert")
     public ResponseEntity<?> campdetailinsertPro(@ModelAttribute Camp camp) throws Exception {
         int result = campService.detailinsert(camp);
@@ -181,6 +196,7 @@ public class AdminApiController {
     }
 
     // 캠핑상품 수정
+    @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_SELL')")
     @GetMapping(value = "/campdetailupdate/{cpdtNo}")
     public ResponseEntity<?> campdetailupdate(@PathVariable int cpdtNo) throws Exception {
         Camp camp = campService.productintro(cpdtNo);
@@ -188,6 +204,7 @@ public class AdminApiController {
     }
 
     // 캠핑상품 수정처리
+    @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_SELL')")
     @PostMapping(value = "/campdetailupdate")
     public ResponseEntity<?> campdetailupdatePro(Camp camp) throws Exception {
         log.info("cpdtPrice : " + camp.getCpdtPrice());
@@ -203,6 +220,7 @@ public class AdminApiController {
     }
 
     // 캠핑상품 삭제처리
+    @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_SELL')")
     @DeleteMapping(value = "/campdetaildelete/{cpdtNo}")
     public ResponseEntity<?> campdetaildelete(@PathVariable int cpdtNo) throws Exception {
         log.info("숫자 : " + cpdtNo);
@@ -230,6 +248,7 @@ public class AdminApiController {
     // }
 
     // 캠핑장 삭제
+    @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_SELL')")
     @DeleteMapping(value = "/campdelete/{campNo}")
     public ResponseEntity<?> campdelete(@PathVariable int campNo) throws Exception {
         int result1 = campService.cpdeletecdi(campNo);
@@ -258,12 +277,14 @@ public class AdminApiController {
     //     return new ResponseEntity<>(result, HttpStatus.OK);
     // }
     // 광고 등록 실행 (판매자)
+    @PreAuthorize("hasRole('ROLE_SELL')")
     @PostMapping(value = "/adinsertpro")
     public ResponseEntity<?> adinsertpro(@ModelAttribute Ad ad) throws Exception {
         int result = adService.adinsert(ad);
         return new ResponseEntity<>(result, HttpStatus.OK);
     }
     // admin 광고리스트
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     @GetMapping(value = "/adlist")
     public ResponseEntity<?> adlist() throws Exception {
         List<Ad> adlist = adService.adlist();
@@ -272,7 +293,7 @@ public class AdminApiController {
     }
 
     // 승인처리
-    // @PreAuthorize("hasRole('ROLE_ADMIN')")
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     @GetMapping(value = "/adcheck/{adNo}")
     public ResponseEntity<?> adcheck(@PathVariable int adNo) throws Exception {
         int result = adService.adcheck(adNo);
@@ -281,6 +302,7 @@ public class AdminApiController {
     }
 
     // seller 광고리스트
+    @PreAuthorize("hasRole('ROLE_SELL')")
     @GetMapping(value = "/adlistseller")
     public ResponseEntity<?> adlistseller(Principal principal) throws Exception {
         int userNo = 0;
