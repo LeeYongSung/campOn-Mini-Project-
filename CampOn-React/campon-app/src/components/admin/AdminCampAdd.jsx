@@ -227,7 +227,7 @@ const AdminCampAdd = () => {
                     <input type="hidden" id="campLongitude" name="campLongitude" placeholder="경도(longitude)" value={campLongitude} />
                 */}
                 {/* api 지도 출력 부분 */}
-                <div id="map" style={{ width: "100%", height: "600px" }}>
+                {/* <div id="map" style={{ width: "100%", height: "600px" }}> */}
                     {/* <Map
                         center={{ lat: 33.5563, lng: 126.79581 }}
                         style={{ width: "100%", height: "360px" }}
@@ -237,7 +237,7 @@ const AdminCampAdd = () => {
                         </MapMarker>
                     </Map> */}
 
-                    <Map // 지도를 표시할 Container
+                    {/* <Map id="map" // 지도를 표시할 Container
                         center={state.center}
                         isPanto={state.isPanto}
                         style={{
@@ -246,11 +246,11 @@ const AdminCampAdd = () => {
                             height: "450px",
                         }}
                         level={3} // 지도의 확대 레벨
-                    ></Map>
-                </div>
+                    ></Map> */}
+                {/* </div> */}
 
-                <input type="hidden" id="campLatitude" name="campLatitude" placeholder="위도(latitude)" />
-                <input type="hidden" id="campLongitude" name="campLongitude" placeholder="경도(longitude)" />
+                {/* <input type="hidden" id="campLatitude" name="campLatitude" placeholder="위도(latitude)" />
+                <input type="hidden" id="campLongitude" name="campLongitude" placeholder="경도(longitude)" /> */}
                 {/* <div id="map" style={{ width: "100%", height: "600px" }}> */}
 
                 {/* 지도 표시 */}
