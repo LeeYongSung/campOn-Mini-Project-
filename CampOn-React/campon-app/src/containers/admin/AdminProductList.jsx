@@ -39,8 +39,8 @@ const AdminProductList = () => {
             <div className="text-end">
                 <a href="/admin/productadd" value="상품 등록" className="btn btn-warning py-2 px-3 ">렌탈샵 상품 등록</a>
             </div>
-            {productList.map((product) => (
                 <>
+            {productList.map((product) => (
                     <div className="container w-100">
                         <div className="border rounded my-2 position-relative AdminProduct">
                             <div className="AdminProductImg w-100 border-bottom">
@@ -77,12 +77,12 @@ const AdminProductList = () => {
                             </div>
                         </div>
                     </div>
+                    )
+                    )}
 
                     <CampOnFooter />
                     <AdminFooter />
                 </>
-            )
-            )}
         </div>
     </>
 

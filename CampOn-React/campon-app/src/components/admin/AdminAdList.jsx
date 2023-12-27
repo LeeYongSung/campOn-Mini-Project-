@@ -51,7 +51,7 @@ const AdminAdList = () => {
 
                             <ul key={ad.adNo}>
                                 <li>
-                                    <img className='campImg' src={`/api/img/file?=${ad.adImg}`} alt="캠핑장 이미지" />
+                                    <img className='campImg' src={`/api/img?file=${ad.adImg}`} alt="캠핑장 이미지" />
                                 {/* <img className='campImg' src='/api/img?file=D:/cyj/UPLOAD/4.jpg' alt="캠핑장 이미지" /> */}
 
                                 </li>

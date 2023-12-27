@@ -50,10 +50,11 @@ public class AdServiceImple implements AdService {
     public int adinsert(Ad ad) throws Exception {
         MultipartFile adimg = ad.getAdImgFile();
 
-        String newPath = "/img/camp";
+        // String newPath = "/img/camp";
         String OriginName = adimg.getOriginalFilename();
         String FileName = UUID.randomUUID().toString() + "_" + OriginName;
-        String FilePath = newPath + "/" + FileName;
+        // String FilePath = newPath + "/" + FileName;
+        String FilePath = uploadPath + "/" + FileName;
         byte[] FileData = adimg.getBytes();
         
         File UploadFile = new File(uploadPath, FileName);
@@ -78,7 +79,8 @@ public class AdServiceImple implements AdService {
         String newPath = "/img/camp";
         String OriginName = adimg.getOriginalFilename();
         String FileName = UUID.randomUUID().toString() + "_" + OriginName;
-        String FilePath = newPath + "/" + FileName;
+        // String FilePath = newPath + "/" + FileName;
+        String FilePath = uploadPath + "/" + FileName;
         byte[] FileData = adimg.getBytes();
         
         File UploadFile = new File(uploadPath, FileName);

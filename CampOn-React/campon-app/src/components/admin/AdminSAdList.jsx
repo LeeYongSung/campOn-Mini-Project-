@@ -4,21 +4,33 @@ import * as admins from '../../apis/admin'
 import * as format from '../../apis/format'
 import { CategoryContext } from '../../apis/CategoryContext'
 const AdminSAdList = () => {
-    const {isLogin} = useContext(CategoryContext);
+    const {isLogin, roles} = useContext(CategoryContext);
     const [adlist, setAdlist] = useState([])
     const [isLoading, setLoading] = useState(false)
     const nav = useNavigate()
     const getList = async () => {
         try {
             setLoading(true)
-            // const response = await admins.getAdSeller()
-            const response = await admins.getAd()
-            const data = await response.data
-            const adlist = await response.data.adlist
-            console.log(data)
-            // setAdlist(response.data)
-            setAdlist(adlist)
-            setLoading(false)
+            if (roles.isAdmin){
+                const response = await admins.getAd()
+                const data = await response.data
+                const adlist = await data.adlist
+                console.log(data)
+                console.log(adlist)
+                // setAdlist(data)
+                setAdlist(adlist)
+                setLoading(false)
+            }
+            if (roles.isSell){
+                const response = await admins.getAdSeller()
+                const data = await response.data
+                const adlist = await data.adlist
+                console.log(data)
+                console.log(adlist)
+                setAdlist(data)
+                // setAdlist(adlist)
+                setLoading(false)
+            }
         } catch (error) {
             console.error("Error fetching ad list:", error);
         }
@@ -38,11 +50,8 @@ const AdminSAdList = () => {
                         <div><h3>요청한 광고 리스트</h3></div>
                     </div>
                 </div>
-
-
                 {isLoading && <p>로딩중입니다...</p>}
                 {!isLoading &&
-
                     adlist.map((ad) => (
                         <div className='adlist'>
                             <ul key={ad.adNo} className=''>

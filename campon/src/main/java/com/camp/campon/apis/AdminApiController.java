@@ -277,7 +277,7 @@ public class AdminApiController {
     //     return new ResponseEntity<>(result, HttpStatus.OK);
     // }
     // 광고 등록 실행 (판매자)
-    @PreAuthorize("hasRole('ROLE_SELL')")
+    @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_SELL')")
     @PostMapping(value = "/adinsertpro")
     public ResponseEntity<?> adinsertpro(@ModelAttribute Ad ad) throws Exception {
         int result = adService.adinsert(ad);
@@ -303,9 +303,10 @@ public class AdminApiController {
     }
 
     // seller 광고리스트
-    @PreAuthorize("hasRole('ROLE_SELL')")
+    @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_SELL')")
     @GetMapping(value = "/adlistseller")
     public ResponseEntity<?> adlistseller(Principal principal) throws Exception {
+        log.info("principal 출력"+principal);
         int userNo = 0;
         if (principal == null) {
             userNo = 3; //하드코딩

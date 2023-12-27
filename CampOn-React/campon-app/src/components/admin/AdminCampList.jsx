@@ -10,22 +10,32 @@ const AdminCampList = () => {
     const navigate = useNavigate()
     const [campList, setCampList] = useState([])
     const [campListadmin, setCampListadmin] = useState([])
+    const [down, setdown] = useState([])
+    const [tog, settog] = useState([])
     const getList = async () => {
         try {
             const response = await admins.getCampList()
-            setCampList(response.data.campList)
-            setCampListadmin(response.data.campListadmin)
-            settog(Array(response.data.campList.length).fill(false));
-            setdown(Array(response.data.campList.length).fill(true));
-            console.log(response.data)
-            console.log(response.data.campList)
-            console.log(response.data.campListadmin)
+            const data = await response.data
+            if (roles.isAdmin){
+                settog(Array(data.campListadmin.length).fill(false));
+                setdown(Array(data.campListadmin.length).fill(true));
+            }
+            if (roles.isSell){
+                settog(Array(data.campList.length).fill(false));
+                setdown(Array(data.campList.length).fill(true));
+            }
+            setCampList(data.campList)
+            setCampListadmin(data.campListadmin)
+            // settog(Array(response.data.campList.length).fill(true));
+            console.log(tog, `tog`)
+            console.log(down, `down`)
+            console.log(data, `data`)
+            console.log(data.campList)
+            console.log(data.campListadmin)
         } catch (error) {
             console.log(error)
         }
     }
-    const [down, setdown] = useState([])
-    const [tog, settog] = useState([])
     const toggle = (index) => {
         settog((prevTog) => prevTog.map((value, i) => (i === index ? true : value)));
         setdown((prevTog) => prevTog.map((value, i) => (i === index ? false : value)));
@@ -71,7 +81,8 @@ const AdminCampList = () => {
         
     useEffect(() => {
         getList()
-        console.log(tog)
+        console.log(tog, `tog`)
+        console.log(down, `down`)
     }, [])
     return (
         <>
@@ -118,8 +129,10 @@ const AdminCampList = () => {
                                 </div>
                                 <div className="position-absolute bottom-0 end-0 me-2 pb-2">
                                     {
+                                        down.length > 0 && 
                                         down[index] ? <a className="down" value={camp.campNo} onClick={() => { toggle(index) }}>
                                             상세보기
+
                                             <span className="material-symbols-outlined">
                                                 expand_more
                                             </span>
@@ -134,7 +147,8 @@ const AdminCampList = () => {
                                 </div>
                             </div>
                             {
-                                tog[index] ? <div className="campdetail_active">
+                                tog[index] ? 
+                                <div className="campdetail_active">
                                     {camp.detailsList.map((detail) => (
                                         <>
                                             <AdminDCampList detail={detail} dacmpDel={dacmpDel} />
