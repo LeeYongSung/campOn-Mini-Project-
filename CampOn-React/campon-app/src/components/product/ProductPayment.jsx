@@ -34,7 +34,7 @@ const ProductPayment = ( { cartList, campList, onPayment, onIncrease, onDecrease
                         <div className="border my-2">
                             <input type="hidden" value={product.productNo} name="productNos" />
                             <div className="paymentImg">
-                                <img src={product.productThumnail} alt="상품썸네일" className="w-100" />
+                                <img src={`/api/img?file=${product.productThumnail}`} alt="상품썸네일" className="w-100" />
                             </div>
                             <div className="d-flex justify-content-between py-2 paymentBox">
                                 <div className="d-flex justify-content-center paymentCon">

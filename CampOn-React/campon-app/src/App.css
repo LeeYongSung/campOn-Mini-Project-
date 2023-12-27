@@ -580,8 +580,25 @@ input[type="radio"]:checked + label span {
 color : red; background: inherit ; border:none; box-shadow:none; border-radius:0; padding:0; overflow:visible; cursor:pointer;
 }
 
-
-
+/* 대여상품 광고(하드코딩) */
+.middle_ads > .a1 {
+  background-image: url(/img/product/0c70cff3-6b93-4600-b010-a99a69183bd1_20231115_120700.png); background-size: cover;
+}
+.middle_ads > .a2 {
+  background-image: url(/img/product/00bc602f-588b-45d4-82de-e520b1aa0c23_20231115_120644.png); background-size: cover;
+}
+.middle_ads > .a3 {
+  background-image: url(/img/product/1ff52b84-0e12-47db-951d-6b9eef28c10d_20231115_103537.png); background-size: cover;
+}
+.middle_ads > .a4 {
+  background-image: url(/img/product/3d5486f7-470c-496f-a5ef-707ff8d29c1a_20231115_103134.png); background-size: cover;
+}
+.middle_ads > .a5 {
+  background-image: url(/img/product/02ed793f-8bd9-461f-aee5-e7b884ba59c9_20231115_130418.png); background-size: cover;
+}
+.middle_ads > .a6 {
+  background-image: url(/img/product/6a6c692b-0675-4994-b0f3-c0186de455f1_20231115_130111.png); background-size: cover;
+}
 
 
 

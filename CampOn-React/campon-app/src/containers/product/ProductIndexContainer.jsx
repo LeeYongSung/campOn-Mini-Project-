@@ -25,7 +25,7 @@ const ProductIndexContainer = () => {
   const getProductReview = async () => {
     const response = await products.Index();
     const proReview = await response.data.proReviewList;
-    console.log(proReview);
+    console.log(`프로덕트 리뷰는?`, proReview);
     setProductReview(proReview);
   };
 

@@ -8,7 +8,7 @@ const ProductList = ( { category, onProductClick, addCart } ) => {
         {category != null && category.map( (product) => (
           <div className="border rounded position-relative mb-3 pb-4 mt-2">
               <div className="productListImg imgCenter">
-                  <img src={product.productThumnail} alt="상품썸네일" className="w-100" />
+                  <img src={`/api/img?file=${product.productThumnail}`} alt="상품썸네일" className="w-100" />
               </div>
               <div className="">
                   <div className="productList_Con ps-2 pt-3">

@@ -17,7 +17,7 @@ const ProductDetail = ( { product, reviewCount, addProductsave, moreBtn, moreSta
       <div>
         <div className="swiper mySwiper">
             <div className="swiper-wrapper">
-                <div className="swiper-slide product_slide_image imgCenter"><img src={product.productThumnail} alt="썸네일이미지" /></div>
+                <div className="swiper-slide product_slide_image imgCenter"><img src={`/api/img?file=${product.productThumnail}`} alt="썸네일이미지" /></div>
             </div>
             <div className="swiper-button-next"></div>
             <div className="swiper-button-prev"></div>
@@ -43,7 +43,7 @@ const ProductDetail = ( { product, reviewCount, addProductsave, moreBtn, moreSta
             </div>
             <div className="position-relative productdetailInfo border-bottom" style={{ height: moreState ? 'auto' : '300px' }}>
                 <div className="py-2 w-100 productdetailImg">
-                    <img src={product.productCon} alt="상세설명이미지" className="w-100 pb-3" />
+                    <img src={`/api/img?file=${product.productCon}`} alt="상세설명이미지" className="w-100 pb-3" />
                 </div>
                 <div className="position-absolute bottom-0 w-100 text-center bg-white py-2">
                     <button className="product_more" onClick={() => moreBtn()}>더보기<span className="material-symbols-outlined">expand_more</span></button>

@@ -16,7 +16,7 @@ const CampDetailList = ({productsproductlist}) => {
                 <Link to={`/api/camp/campdetail/${detail.cpdtNo}`}>
                     <div className="campdetail_product d-flex justify-content-between">
                         <div className="rounded px-2">
-                            <img src={detail.cpdiUrl} className="w-100"/>
+                            <img src={`api/img?file=${detail.cpdiUrl}`} className="w-100"/>
                         </div>
                         <div>
                             <div><span>{detail.campTypeName}</span></div>

@@ -12,7 +12,7 @@ const CartList = ({product}) => {
         <div className="container border">
                 <div className="border position-relative">
                     <div className="campProductImg w-100">
-                        <img src={product.productThumnail} alt="상품썸네일" className="py-2 px-2 w-100" />
+                        <img src={`/api/img?file=${product.productThumnail}`} alt="상품썸네일" className="py-2 px-2 w-100" />
                     </div>
                     <div className="container-sm py-3  my-2">
                         <div className="campProductCon">

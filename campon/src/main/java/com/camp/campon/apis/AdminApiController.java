@@ -284,11 +284,12 @@ public class AdminApiController {
         return new ResponseEntity<>(result, HttpStatus.OK);
     }
     // admin 광고리스트
-    @PreAuthorize("hasRole('ROLE_ADMIN')")
+    // @PreAuthorize("hasRole('ROLE_ADMIN')")
     @GetMapping(value = "/adlist")
     public ResponseEntity<?> adlist() throws Exception {
+        log.info("들어오는가");
         List<Ad> adlist = adService.adlist();
-        // log.info("광고는? "+adlist);
+        log.info("광고는? "+adlist);
         return new ResponseEntity<>(adlist, HttpStatus.OK);
     }
 

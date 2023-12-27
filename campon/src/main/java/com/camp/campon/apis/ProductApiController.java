@@ -12,6 +12,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.ui.Model;
 import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
@@ -27,6 +28,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.camp.campon.dto.Camp;
+import com.camp.campon.dto.CustomUser;
 import com.camp.campon.dto.Order;
 import com.camp.campon.dto.Product;
 import com.camp.campon.dto.Productreview;
@@ -62,8 +64,14 @@ public class ProductApiController {
     private String uploadPath;
 
     @GetMapping("/index")
-    public ResponseEntity<?> productMain() {
+    public ResponseEntity<?> productMain(@AuthenticationPrincipal CustomUser customUser) {
         log.info("/api/product/index");
+        log.info("customUser는?", customUser);
+
+        Users user = customUser.getUser();
+        log.info("user는?", user);
+        String auth = user.getAuth();
+        log.info("auth는? ", auth);
         try {
             // 상품 후기 불러오기
             List<Productreview> proReviewList = productService.getReviewListLimit();
@@ -71,7 +79,7 @@ public class ProductApiController {
             List<Product> productHotList = productService.hotList();
 
             Map<String, Object> response = new HashMap<>();
-
+            log.info("프로덕트리스트"+proReviewList);
             response.put("proReviewList", proReviewList);
             response.put("productHotList", productHotList);
             return new ResponseEntity<>(response, HttpStatus.OK);
@@ -82,7 +90,13 @@ public class ProductApiController {
     }
 
     @GetMapping(value = { "/productList" })
-    public ResponseEntity<?> getCategoryList(String category) {
+    public ResponseEntity<?> getCategoryList(String category, @AuthenticationPrincipal CustomUser customUser) {
+        log.info("customUser는?", customUser);
+
+        Users user = customUser.getUser();
+        log.info("user는?", user);
+        String auth = user.getAuth();
+        log.info("auth는? ", auth);
         log.info(category);
         try {
             List<Product> productList = productService.getCategoryList(category);

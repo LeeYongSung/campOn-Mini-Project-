@@ -18,7 +18,7 @@ const Recommendedproducts = ( { productHotList, onProductClick } ) => {
                     <Link to={{ pathname: "/product/productDetaile", state: {productNo: product.productNo}}} onClick={() => onProductClick(product.productNo)}>
                         <div className="product_suggestion">
                             <div className="product_suggestionImg border-bottom imgCenter">
-                                <img src={product.productThumnail} alt='#' />
+                                <img src={`/api/img?file=${product.productThumnail}`} alt='#' />
                             </div>
                             <div className="product_suggestionCon px-3">
                                 <div><span>{product.productName}</span></div>

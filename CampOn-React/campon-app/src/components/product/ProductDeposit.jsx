@@ -19,7 +19,7 @@ const ProductDeposit = ( {order, productList, campList, pmType, userName, paytot
             {productList != null && productList.map( (product) => (
                 <div className="border px-1 rounded">
                     <div>
-                        <img src={product.productThumnail} alt="상품썸네일" className="w-100 rounded-top" />
+                        <img src={`/api/img?file=${product.productThumnail}`} alt="상품썸네일" className="w-100 rounded-top" />
                     </div>
                     <div>
                         <div>

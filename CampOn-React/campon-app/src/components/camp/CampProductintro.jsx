@@ -126,7 +126,7 @@ const CampProductintro = ({productsimg,productsenvironment,productsreserve,produ
             </div>
             <div className="container-sm w-100 py-2 border-bottom">
                 <div><h5>캠핑장배치도</h5></div>
-                <div><img src={productsproducts.campLayout} className="w-100"/></div>
+                <div><img src={`/api/img?file=${productsproducts.campLayout}`} className="w-100"/></div>
             </div>
         </div>
     )

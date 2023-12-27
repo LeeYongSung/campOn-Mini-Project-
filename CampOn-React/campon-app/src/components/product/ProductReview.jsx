@@ -12,7 +12,7 @@ const ProductReview = ( { productReview } ) => {
                   <div className="border mb-3">
                       <Link to={`/api/board/prread/${review.prNo}`} className="d-flex justify-content-between">
                           <div className="review_imgbox my-2 mx-2 px-2 py-2">
-                              <img src={review.prImg} />
+                              <img src={`api/img?file=${review.prImg}`} />
                           </div>
                           <div className="review_conbox">
                               <div className="pt-4">
